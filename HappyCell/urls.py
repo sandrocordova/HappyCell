@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from HappyCell.view import menu
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('menu/',include(('apps.transaccion.urls', 'app_name'), namespace='transaccion')),
+    path('', menu, name="menu"),
 ]
