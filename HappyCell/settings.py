@@ -77,23 +77,13 @@ DATABASES = {
 	'default':{
 		'ENGINE': 'sql_server.pyodbc',
 		'NAME': 'SEGURIDAD_APP',
-<<<<<<< HEAD
 	        'USER': 'sa',
         	'PASSWORD': 'EsanSql019283',
-       		'HOST': 'localhost',
+       		'HOST': '192.168.88.117\WIN-OCIUP500OPT',
         	'PORT': '1433',
 		'OPTIONS': {
-            	'driver': 'ODBC Driver 17 for SQL server',
+            	'driver': 'ODBC Driver 17 for SQL Server',
         	},
-=======
-        'USER': 'sa',
-        'PASSWORD': 'EsanSql019283',	
-        'HOST': 'WIN-OCIUP500OPT',
-        'PORT': '',
-        'OPTIONS': {
-            'driver': 'OBDC Driver 17 for SQL server',
-        },
->>>>>>> 28d52ce226834cc18747da44eca6ff63c7c78a4c
 	}
 }
 
