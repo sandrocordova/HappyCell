@@ -21,9 +21,11 @@ root.render(
                     <label>Cedula:
                     <input type="Cedula" />
                         </label>
-                
-                    <input type="Nombre" />
+               
                 </redondeado>
+            </div>
+             <div class="redondeado">
+                <input type="Nombre" />
             </div>
             <App />
         </form>
