@@ -1,10 +1,13 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 
 function App() {
     return (
-        <h1>HappyCell</h1>
-  );
+        <div className="container">
+            <h1>HappyCell</h1>
+            <p>I am writing JSX</p>
+        </div>
+    )
 }
 
 export default App;
