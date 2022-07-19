@@ -1,6 +1,21 @@
 import React from 'react'; // importamos react
-import ReactDOM from 'react-dom'; // nos permite renderizar en el DOM
-const HolaMundo = <h1>Hola Mundo</h1>
+//import ReactDOM from 'react-dom'; // nos permite renderizar en el DOM
+import './index.css';
+import './App.js';
+
+function VistaInicial(){
+        return (
+            <form>
+                <label>Cedula:
+                    <input type="Cedula" />
+                    <input type="Nombre" />
+                </label>
+            </form>
+            
+            )
+}
+
+
 //selecionamos el id donde se renderizara el componente
 const root = document.getElementById('root'); // hay un div con id root en index.html
-ReactDOM.render(HolaMundo, root); // pinta en la pantalla la constante HolaMundo en el div con id root
+root.render(<VistaInicial />)
