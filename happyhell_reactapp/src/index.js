@@ -7,6 +7,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <form>
+            <div class="h2">
                 <h2>
                     SISTEMA DE ADMINISTRACION DE CARTERA
                 </h2>
@@ -14,6 +15,7 @@ root.render(
                     Ciudad:Quito
                     AGENCIA VILLAFLORA-COSTOS CAJA
                 </h2>
+            </div>
                 <label>Cedula:
                 <input type="Cedula" />
                 </label>       
