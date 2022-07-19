@@ -79,11 +79,11 @@ DATABASES = {
 		'ENGINE': 'sql_server.pyodbc',
 		'NAME': 'SEGURIDAD_APP',
         'USER': 'sa',
-        'PASSWORD': '',	
+        'PASSWORD': 'EsanSql019283',	
         'HOST': 'WIN-OCIUP500OPT',
         'PORT': '',
         'OPTIONS': {
-            'driver': 'OBDC Driver 13 for SQL server',
+            'driver': 'OBDC Driver 17 for SQL server',
         },
 	}
 }
