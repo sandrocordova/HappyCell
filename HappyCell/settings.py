@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'apps.transaccion',
 ]
 
 MIDDLEWARE = [
@@ -75,8 +76,15 @@ WSGI_APPLICATION = 'HappyCell.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 DATABASES = {
 	'default':{
-		'ENGINE': 'django.db.backends.sqlite3',
-		'NAME': BASE_DIR / 'db.sqlite3',	
+		'ENGINE': 'sql_server.pyodbc',
+		'NAME': 'SEGURIDAD_APP',
+        'USER': 'sa',
+        'PASSWORD': '',	
+        'HOST': 'WIN-OCIUP500OPT',
+        'PORT': '',
+        'OPTIONS': {
+            'driver': 'OBDC Driver 13 for SQL server',
+        },
 	}
 }
 
