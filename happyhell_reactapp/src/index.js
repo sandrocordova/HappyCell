@@ -1,6 +1,5 @@
 import React, { Component } from 'react'; // importamos react
 import ReactDOM from 'react-dom'; // nos permite renderizar en el DOM
-import React { Component } from 'reac
 import './index.css';
 
 
