@@ -12,7 +12,6 @@ root.render(
                     SISTEMA DE ADMINISTRACION DE CARTERA Ciudad:Quito
                 </cabecera>
                 <cabecera>
-
                     AGENCIA VILLAFLORA-COSTOS CAJA
                 </cabecera>
             </div>
