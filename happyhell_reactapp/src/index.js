@@ -1,7 +1,7 @@
 import React from 'react'; // importamos react
 //import ReactDOM from 'react-dom'; // nos permite renderizar en el DOM
 import './index.css';
-
+import './App.js';
 
 function VistaInicial(){
         return (
@@ -10,7 +10,6 @@ function VistaInicial(){
                     <input type="Cedula" />
                     <input type="Nombre" />
                 </label>
-
             </form>
             
             )
