@@ -7,13 +7,13 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <form>
+            HAPPY
             <div class="cabecera">
-                HAPPY
                 <cabecera>
-                    \tSISTEMA DE ADMINISTRACION DE CARTERA
+                    SISTEMA DE ADMINISTRACION DE CARTERA
                 </cabecera>
                 <cabecera>
-                    \tCiudad:Quito\nAgencia Villaflora
+                    Ciudad:Quito Agencia Villaflora
 
                 </cabecera>
 
