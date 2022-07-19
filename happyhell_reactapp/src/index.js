@@ -12,19 +12,25 @@ root.render(
                     SISTEMA DE ADMINISTRACION DE CARTERA Ciudad:Quito
                 </cabecera>
                 <cabecera>
-                    
+
                     AGENCIA VILLAFLORA-COSTOS CAJA
                 </cabecera>
             </div>
-            <div class="redondeado">
-                <redondeado>
-                    <label>Cedula:
-                    <input type="Cedula" />
-                    </label>
-                </redondeado>
+            <div class="sizeLetra">
+                <div class="redondeado">
+                    <redondeado>
+                        <sizeLetra>
+                            <label>Cedula:
+                                <input type="Cedula" />
+                            </label>
+                        </sizeLetra>
+                    </redondeado>
+                </div>
             </div>
-             <div class="redondeado">
-                <input type="Nombre" />
+            <div class="sizeLetra">
+                <div class="redondeado">
+                    <input type="Nombre" />
+                </div>
             </div>
             <App />
         </form>

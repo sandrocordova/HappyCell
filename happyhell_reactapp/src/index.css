@@ -11,9 +11,11 @@
     background-color: blue;
     color: white;
     font-family: Calibri;
-    font-size: 4px;
+    font-size: 12px;
 }
-
+.sizeLetra{
+    font-size: 10px;
+}
 .span {
     background-color: rgba(255,255,255,.5);
 }
