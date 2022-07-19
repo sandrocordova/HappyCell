@@ -7,4 +7,3 @@ import reportWebVitals from './reportWebVitals';
 
 //selecionamos el id donde se renderizara el componente
 const root = document.getElementById('root'); // hay un div con id root en index.html
-ReactDOM.render(HolaMundo, root); // pinta en la pantalla la constante HolaMundo en el div con id root
