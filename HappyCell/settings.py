@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.transaccion',
 ]
 
 MIDDLEWARE = [
@@ -78,13 +77,13 @@ DATABASES = {
 	'default':{
 		'ENGINE': 'sql_server.pyodbc',
 		'NAME': 'SEGURIDAD_APP',
-        'USER': 'sa',
-        'PASSWORD': '',	
-        'HOST': 'WIN-OCIUP500OPT',
-        'PORT': '',
-        'OPTIONS': {
-            'driver': 'OBDC Driver 13 for SQL server',
-        },
+	        'USER': 'sa',
+        	'PASSWORD': 'EsanSql019283',
+       		'HOST': 'localhost',
+        	'PORT': '1433',
+		'OPTIONS': {
+            	'driver': 'ODBC Driver 17 for SQL server',
+        	},
 	}
 }
 
