@@ -7,13 +7,14 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <form>
-            <label>Cedula:
-                <input type="Cedula" class="redondeado"/>
-            </label>
-            <br>
-                <input type="Nombre" class="redondeado"/>
-            </br>
-           
+            <div style="border-radius: 10px;">
+                <label>Cedula:
+                    <input type="Cedula" />
+                </label>
+                <br>
+                    <input type="Nombre" />
+                </br>
+           </div>
             <App />
         </form>
     </React.StrictMode>
