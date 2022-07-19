@@ -9,8 +9,8 @@ root.render(
         <form>
             <label>Cedula:
                 <input type="Cedula" />
-                <input type="Nombre" />
             </label>
+            <input type="Nombre"/>
             <App />
         </form>
     </React.StrictMode>
