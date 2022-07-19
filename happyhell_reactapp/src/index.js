@@ -8,9 +8,12 @@ root.render(
     <React.StrictMode>
         <form>
             <label>Cedula:
-                <input type="Cedula" />
+                <input type="Cedula" class="redondeado"/>
             </label>
-            <input type="Nombre"/>
+            <br>
+                <input type="Nombre" class="redondeado"/>
+            </br>
+           
             <App />
         </form>
     </React.StrictMode>
