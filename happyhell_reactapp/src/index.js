@@ -16,13 +16,15 @@ root.render(
                     AGENCIA VILLAFLORA-COSTOS CAJA
                 </h2>
             </div>
-                <label>Cedula:
-                <input type="Cedula" />
-                </label>       
-              
-                <input type="Nombre" />
-                    
-          
+            <div class="redondeado">
+                <redondeado>
+                    <label>Cedula:
+                    <input type="Cedula" />
+                        </label>
+                
+                    <input type="Nombre" />
+                </redondeado>
+            </div>
             <App />
         </form>
     </React.StrictMode>
