@@ -1,8 +1,8 @@
 import React from 'react'; // importamos react
 //import ReactDOM from 'react-dom'; // nos permite renderizar en el DOM
 import './index.css';
-import './App.js';
-
+import App from './App';
+const root = document.getElementById('root'); // hay un div con id root en index.html
 function VistaInicial(){
         return (
             <form>
@@ -10,6 +10,7 @@ function VistaInicial(){
                     <input type="Cedula" />
                     <input type="Nombre" />
                 </label>
+                <App />
             </form>
             
             )
@@ -17,5 +18,4 @@ function VistaInicial(){
 
 
 //selecionamos el id donde se renderizara el componente
-const root = document.getElementById('root'); // hay un div con id root en index.html
-root.render(<VistaInicial />)
+
