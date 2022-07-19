@@ -1,15 +1,17 @@
 
 
 .redondeado {
-    border-radius: 10px;
+    border-radius: 1em;
 }
 .box {
     background-color: #567895;
 }
 
-.h2 {
+.cabecera {
     background-color: blue;
     color: white;
+    font-family: Calibri;
+    font-size: 4px;
 }
 
 .span {
