@@ -9,9 +9,9 @@ root.render(
         <form>
                 <label>Cedula:
                 <input type="Cedula" />
-                <input type="Nombre" />
-                </label>
                 
+                </label>
+                <input type="Nombre" />
                     
           
             <App />
