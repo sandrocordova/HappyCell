@@ -8,12 +8,15 @@ root.render(
     <React.StrictMode>
         <form>
             <div class="cabecera">
+                HAPPY
                 <cabecera>
-                    SISTEMA DE ADMINISTRACION DE CARTERA Ciudad:Quito
+                    \tSISTEMA DE ADMINISTRACION DE CARTERA
                 </cabecera>
                 <cabecera>
-                    AGENCIA VILLAFLORA-COSTOS CAJA
+                    \tCiudad:Quito\nAgencia Villaflora
+
                 </cabecera>
+
             </div>
             <div class="sizeLetra">
                 <div class="redondeado">
