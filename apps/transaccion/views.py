@@ -9,5 +9,5 @@ from apps.transaccion.models import AGENCIA
 def menu(request):
     agencia = AGENCIA.objects.all()
     context = {'agencias': agencia}
-    
+    print("HIZO LA CONSULTA ----------------------------")
     return render(request, 'menu.html', context)
