@@ -19,6 +19,6 @@ from HappyCell.view import menu
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('transaccion/', include(('apps.transaccion.urls', 'app_name'), namespace='transaccion')),
+    path('agencia/', include(('apps.agencia.urls', 'app_name'), namespace='agencia')),
     path('', menu, name="menu"),
 ]
