@@ -13,4 +13,7 @@ def menu(request):
     context = {'agencias': AGENCIA}
     print("HIZO LA CONSULTA ----------------------------")
     print(AGENCIA)
+    print(context)
+    
+    print("HIZO LA CONSULTA ---------------------------- FIN")
     return render(request, 'menu.html', context)
