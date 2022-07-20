@@ -34,23 +34,25 @@
 <body>
   <body>
     <table>
+      <title>Empresas registradas</title>
         <tr>
-            <td>
-              <tr> Código de empresa </tr>
-              <tr> Nombre de empresa </tr>
-              <tr> Identificación de empresa </tr>
-            </td>
-            <td>
-              {% for i in agencias %}
-              <td>
-              <tr>{{ i.empr_codigo }}</tr>
-              <tr>{{ i.empr_nombre }}</tr>
-              <tr>{{ i.empr_identificacion }}</tr>
-            </td>
-              {% endfor %}
-            </td>
+              <td> Código de empresa </td>
+              <td> Nombre de empresa </td>
+              <td> Identificación de empresa </td>
+        
         </tr>
-        <h1>No se encontró Agencias</h1>
+        
+              {% for i in agencias %}
+              <tr>
+              <td>{{ i.empr_codigo }}</td>
+              <td>{{ i.empr_nombre }}</td>
+              <td>{{ i.empr_identificacion }}</td>
+              
+            </tr>
+              {% endfor %}
+            
+        
+        
     </table>
 </body>
 </body>
