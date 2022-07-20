@@ -12,10 +12,6 @@ const Navbar = () => {
     return (
         <>
             <Nav>
-                <NavLink to="/">
-
-                </NavLink>
-                <Bars />
                 <NavMenu>
                     <NavLink to="/Administracion" activeStyle>
                         Administracion
