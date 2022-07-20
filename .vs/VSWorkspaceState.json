@@ -1,10 +1,14 @@
 {
   "ExpandedNodes": [
     "",
+    "\\HappyCell",
     "\\happyhell_reactapp",
     "\\happyhell_reactapp\\public",
-    "\\happyhell_reactapp\\src"
+    "\\happyhell_reactapp\\src",
+    "\\happyhell_reactapp\\src\\components",
+    "\\happyhell_reactapp\\src\\components\\navbar-menu",
+    "\\happyhell_reactapp\\src\\models"
   ],
-  "SelectedNode": "\\happyhell_reactapp\\src\\App.js",
+  "SelectedNode": "\\happyhell_reactapp\\src\\components\\navbar-menu\\index.js",
   "PreviewInSolutionExplorer": false
 }
