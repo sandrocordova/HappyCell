@@ -40,7 +40,9 @@
             </td>
             <td>
               {% for i in agencias %}
-              <tr>{{i.EMPR_NOMBRE}}</tr>
+              <tr>{{ i.empr_codigo }}</tr>
+              <tr>{{ i.empr_nombre }}</tr>
+              <tr>{{ i.empr_identificacion }}</tr>
               {% endfor %}
             </td>
         </tr>
