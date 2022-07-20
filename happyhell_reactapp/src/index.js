@@ -6,36 +6,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
     <React.StrictMode>
-        <form>
-            HAPPY
-            <div class="cabecera">
-                <cabecera>
-                    SISTEMA DE ADMINISTRACION DE CARTERA
-                </cabecera>
-                <cabecera>
-                    Ciudad:Quito Agencia Villaflora
-
-                </cabecera>
-
-            </div>
-            <div class="sizeLetra">
-                <div class="redondeado">
-                    <redondeado>
-                        <sizeLetra>
-                            <label>Cedula:
-                                <input type="Cedula" />
-                            </label>
-                        </sizeLetra>
-                    </redondeado>
-                </div>
-            </div>
-            <div class="sizeLetra">
-                <div class="redondeado">
-                    <input type="Nombre" />
-                </div>
-            </div>
             <App />
-        </form>
+       
     </React.StrictMode>
 );
 
