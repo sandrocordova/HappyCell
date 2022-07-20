@@ -39,7 +39,9 @@
                 {}
             </td>
             <td>
-              <tr>{{agencias}}</tr>
+              {% for i in agencias %}
+              <tr>{{i.AGEN_DESCRIPCION}}</tr>
+              {% end for %}
             </td>
         </tr>
         <h1>No se encontró Agencias</h1>
