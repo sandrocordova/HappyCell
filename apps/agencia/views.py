@@ -8,7 +8,7 @@ from apps.agencia.models import Agencia
 
 def menu(request):
     #AGENCIA = Agencia.objects.raw("SELECT * FROM AGENCIA")
-    AGENCIA = Agencia.objects.raw("SELECT AGEN_CODIGO, AGEN_DESCRIPCION, AGEN_DIRECCION, AGEN_RESPONSABLE, AGEN_TELEFONO, AGEN_CODIGO_SUPER, CIUD_CODIGO FROM [SEGURIDAD_APP].[dbo].[AGENCIA]")[0]
+    AGENCIA = Agencia.objects.raw("SELECT 1 as id AGEN_CODIGO, AGEN_DESCRIPCION, AGEN_DIRECCION, AGEN_RESPONSABLE, AGEN_TELEFONO, AGEN_CODIGO_SUPER, CIUD_CODIGO FROM [SEGURIDAD_APP].[dbo].[AGENCIA]")[0]
     
     context = {'agencias': AGENCIA}
     print("HIZO LA CONSULTA ----------------------------")
