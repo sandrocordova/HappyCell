@@ -10,4 +10,5 @@ def menu(request):
     agencia = AGENCIA.objects.all()
     context = {'agencias': agencia}
     print("HIZO LA CONSULTA ----------------------------")
+    print(agencia)
     return render(request, 'menu.html', context)
