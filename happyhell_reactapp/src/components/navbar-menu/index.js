@@ -12,6 +12,7 @@ const Navbar = () => {
     return (
         <>
             <Nav>
+                <Bars />
                 <NavMenu>
                     <NavLink to="/Administracion" activeStyle>
                         Administracion
@@ -31,7 +32,7 @@ const Navbar = () => {
                     <NavLink to="/FabricaDCRE" activeStyle>
                         Fabrica de Credito
                     </NavLink>
-                    <NavLink to="/Motor Mensajeria" activeStyle>
+                    <NavLink to="/MotorMensajeria" activeStyle>
                         Motor Mensajeria
                     </NavLink>
                     <NavLink to="/Consultas" activeStyle>

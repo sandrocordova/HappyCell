@@ -1,4 +1,4 @@
-import react from 'react'
+import React from 'react';
 import './App.css';
 import Navbar from './components/navbar-menu';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -11,21 +11,24 @@ import Paymen from './pages/paymen';
 import Polit from './pages/polit';
 import Process from './pages/process';
 import Support from './pages/support';
+import Processm from './pages/processm';
+import Consultas from './pages/consultas';
 
 function App() {
     return (
         <Router>
             <Navbar />
             <switch>
-                <Route path='/admin' component={Admin} />
-                <Route path='/documents' component={Documents} />
-                <Route path='/fabrica' component={Fabrica} />
-                <Route path='/massive' component={Massive} />
-                <Route path='/messages' component={Messages} />
-                <Route path='/paymen' component={Paymen} />
-                <Route path='/polit' component={Polit} />
-                <Route path='/process' component={Process} />
-                <Route path='/support' component={Support} />
+                <Route path='/Administracion' component={Admin} />
+                <Route path='/Politicas' component={Polit} />
+                <Route path='/Pagos' component={Paymen} />
+                <Route path='/ProcesosECRE' component={Process} />
+                <Route path='/DocumentosC' component={Documents} />
+                <Route path='/FabricaDCRE' component={Fabrica} />
+                <Route path='/MotorMensajeria' component={Messages} />
+                <Route path='/Consultas' component={Consultas} />
+                <Route path='/ProcesosMA' component={Processm} />
+                <Route path='/Soporte' component={Support} />
             </switch>
         </Router>
     );

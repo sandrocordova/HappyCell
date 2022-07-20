@@ -1,16 +1,8 @@
-import React from 'react'; // importamos react
-import ReactDOM from 'react-dom'; // nos permite renderizar en el DOM
-import './index.css';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import App from './App';
-const root = ReactDOM.createRoot(document.getElementById('root'));
 
-root.render(
-    <React.StrictMode>
-            <App />
-       
-    </React.StrictMode>
-);
-
+ReactDOM.render(<App />, document.getElementById('root'));
 
 
 //selecionamos el id donde se renderizara el componente
