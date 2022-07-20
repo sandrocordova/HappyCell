@@ -18,5 +18,5 @@ from django.urls import path, include
 from apps.transaccion.views import menu
 
 urlpatterns = [
-    path('', menu, name = 'transaccion'),
+    path('', menu, name = 'menu'),
 ]
