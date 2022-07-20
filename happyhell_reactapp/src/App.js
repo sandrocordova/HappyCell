@@ -1,9 +1,11 @@
 import './App.css';
+import NavBarHeader from './components/nav-menu/nav-header.component';
 
 function App() {
     return (
         <>
-            <div class="sizeLetra">
+            <NavBarHeader></NavBarHeader>
+            {/*<div class="sizeLetra">
                 <div className="table-responsive">
                     <table className="table table-hover">
                         <thead>
@@ -33,7 +35,7 @@ function App() {
                         </tbody>
                     </table>
                 </div>
-            </div>
+    </div>*/}
         </>
 
     );

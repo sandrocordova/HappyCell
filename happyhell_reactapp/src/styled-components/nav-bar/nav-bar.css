@@ -1,0 +1,66 @@
+.nav-header {
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+    background-color: RGB(20,0,237);
+    color: rgb(255, 255, 255);
+    max-height: 10rem;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: .5rem;
+}
+
+.logo {
+    padding: 1.5rem 0 0 .6rem;
+    width: 12rem;
+    height: auto;
+}
+
+.image {
+    width: 100%;
+}
+
+.title {
+    margin: 1.5rem 0 0 3rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    width: 32rem;
+}
+
+.location {
+    flex-direction: column;
+    display: flex;
+    width: 22rem;
+    margin: 1rem 0rem 0 3rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.userSession {
+    flex-direction: row;
+    display: flex;
+    width: 25rem;
+    margin: 1rem 0 0 0rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.userPicture {
+    padding: .5rem;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255);
+    margin: .2rem 1rem 1rem 3rem;
+    width: 3rem;
+    height: 3rem;
+}
+
+.userData {
+    flex-direction: column;
+    display: flex;
+}
+
+.userRole {
+    font-size: 1.7rem;
+    font-weight: 600;
+}
