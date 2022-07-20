@@ -36,13 +36,17 @@
     <table>
         <tr>
             <td>
-                {}
+              <tr> Código de empresa </tr>
+              <tr> Nombre de empresa </tr>
+              <tr> Identificación de empresa </tr>
             </td>
             <td>
               {% for i in agencias %}
+              <td>
               <tr>{{ i.empr_codigo }}</tr>
               <tr>{{ i.empr_nombre }}</tr>
               <tr>{{ i.empr_identificacion }}</tr>
+            </td>
               {% endfor %}
             </td>
         </tr>
