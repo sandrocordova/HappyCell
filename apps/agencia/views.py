@@ -7,7 +7,7 @@ from apps.agencia.models import Agencia
 
 
 def menu(request):
-    AGENCIA = Agencia.objects.all("SELECT * FROM AGENCIA")
+    AGENCIA = Agencia.objects.all()
     context = {'agencias': AGENCIA}
     print("HIZO LA CONSULTA ----------------------------")
     print(AGENCIA)
