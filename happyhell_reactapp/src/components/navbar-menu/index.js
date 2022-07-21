@@ -4,17 +4,12 @@ import {
     NavLink,
     Bars,
     NavMenu,
-    NavBtn,
-    NavBtnLink
 } from './navbar-menu.component';
 
 const Navbar = () => {
     return (
         <>
             <Nav>
-                <NavLink to="/">
-
-                </NavLink>
                 <Bars />
                 <NavMenu>
                     <NavLink to="/Administracion" activeStyle>
@@ -35,7 +30,7 @@ const Navbar = () => {
                     <NavLink to="/FabricaDCRE" activeStyle>
                         Fabrica de Credito
                     </NavLink>
-                    <NavLink to="/Motor Mensajeria" activeStyle>
+                    <NavLink to="/MotorMensajeria" activeStyle>
                         Motor Mensajeria
                     </NavLink>
                     <NavLink to="/Consultas" activeStyle>
