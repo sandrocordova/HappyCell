@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from agencia.models import Post
+from apps.agencia.models import Post
 
 
 # Create your views here.
