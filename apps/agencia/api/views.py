@@ -1,7 +1,7 @@
 from django.db import connection
 from rest_framework.viewsets import ModelViewSet
-from agencia.models import Post
-from agencia.api.serializer import PostSerializer
+from apps.agencia.models import Post
+from apps.agencia.api.serializer import PostSerializer
 
 
 # Create your views here.
