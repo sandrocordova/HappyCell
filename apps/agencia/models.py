@@ -2,9 +2,8 @@ from django.db import models
 
 
 class Post(models.Model):
-    empr_codigo = models.CharField(db_column='EMPR_CODIGO', primary_key=True, max_length=10)  # Field name made lowercase.
-    empr_nombre = models.CharField(db_column='EMPR_NOMBRE', max_length=80)  # Field name made lowercase.
-    empr_identificacion = models.CharField(db_column='EMPR_IDENTIFICACION', max_length=20) 
+    tittle = models.CharField(max_length=100)
+    content = models.CharField(max_length=200)
             
 class Agencia(models.Model):
     agen_codigo = models.DecimalField(db_column='AGEN_CODIGO', max_digits=4, decimal_places=0)  # Field name made lowercase.
