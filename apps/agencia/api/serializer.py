@@ -6,5 +6,4 @@ from apps.agencia.models import Post
 class PostSerializer(ModelSerializer):
     class Meta:
         model = Post
-        fields = ['id','tittle','content']
-    
+        fields = ['id','EMPR_CODIGO','EMPR_NOMBRE','EMPR_IDENTIFICACION']
