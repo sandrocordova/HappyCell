@@ -1,4 +1,4 @@
-from rest_framework import APIView
+from rest_framework.views import APIView
 from rest_framework.response import Response
 from apps.agencia.models import Empresa
 from apps.agencia.api.serializer import PostSerializer
