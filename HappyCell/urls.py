@@ -16,7 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from HappyCell.view import menu
-from apps.agencia.api.urls import router_posts
 
 urlpatterns = [
     path('admin/', admin.site.urls),
