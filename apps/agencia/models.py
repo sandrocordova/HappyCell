@@ -1,6 +1,10 @@
 from django.db import models
 
 
+class Post(models.Model):
+    tittle = models.CharField(max_length=100)
+    content = models.CharField(max_length=200)
+            
 class Agencia(models.Model):
     agen_codigo = models.DecimalField(db_column='AGEN_CODIGO', max_digits=4, decimal_places=0)  # Field name made lowercase.
     agen_descripcion = models.CharField(db_column='AGEN_DESCRIPCION', max_length=40)  # Field name made lowercase.

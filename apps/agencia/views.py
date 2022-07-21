@@ -5,8 +5,12 @@ from apps.agencia.models import Agencia, Empresa
 
 
 # Create your views here.
-
 def menu(request):
+    entrada = Empresa.objects.raw("SELECT EMPR_CODIGO, EMPR_NOMBRE, EMPR_IDENTIFICACION FROM [SEGURIDAD_APP].[dbo].[EMPRESA]")    
+    context = {'agencias': entrada}
+    return render(request, 'menu.html', context)
+
+def menue(request):
     entrada = Empresa.objects.raw("SELECT EMPR_CODIGO, EMPR_NOMBRE, EMPR_IDENTIFICACION FROM [SEGURIDAD_APP].[dbo].[EMPRESA]")
     for s in Empresa.objects.raw("SELECT EMPR_CODIGO, EMPR_NOMBRE, EMPR_IDENTIFICACION FROM [SEGURIDAD_APP].[dbo].[EMPRESA]"):
         print(s)
