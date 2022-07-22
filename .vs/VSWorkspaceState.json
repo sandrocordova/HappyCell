@@ -1,14 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\HappyCell",
+    "\\apps",
+    "\\apps\\agencia",
+    "\\apps\\agencia\\api",
+    "\\apps\\transaccion",
+    "\\apps\\transaccion\\__pycache__",
+    "\\apps\\__pycache__",
     "\\happyhell_reactapp",
-    "\\happyhell_reactapp\\public",
     "\\happyhell_reactapp\\src",
-    "\\happyhell_reactapp\\src\\components",
-    "\\happyhell_reactapp\\src\\components\\navbar-menu",
-    "\\happyhell_reactapp\\src\\models"
+    "\\happyhell_reactapp\\src\\contexts"
   ],
-  "SelectedNode": "\\happyhell_reactapp\\src\\components\\navbar-menu\\index.js",
+  "SelectedNode": "\\apps\\agencia\\views.py",
   "PreviewInSolutionExplorer": false
 }
