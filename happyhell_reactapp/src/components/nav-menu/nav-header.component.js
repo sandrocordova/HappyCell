@@ -54,9 +54,6 @@ const NavBarHeader = () => {
                 </div>
             </div>
         </div>
-        <br/>
-        <br/>
-        <button onClick={handleGetUser}>TEST AXIOS</button>
         </>
     )
 }
