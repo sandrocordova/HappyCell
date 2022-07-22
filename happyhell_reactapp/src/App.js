@@ -13,6 +13,7 @@ import Polit from './pages/polit';
 import Process from './pages/process';
 import Support from './pages/support';
 import Consultas from './pages/consultas';
+import *as menuServer from './menuServer'
 
 function App() {
     return (

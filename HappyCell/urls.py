@@ -16,8 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from HappyCell.view import menu
+from django.view.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', menu, name="menu"),
+    path('',TemplateView.as_views(template_name='index.html')),
+    path('api-auth/', include('rest_framework.urls'))
 ]
