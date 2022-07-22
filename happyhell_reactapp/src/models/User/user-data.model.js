@@ -1,11 +1,11 @@
 export class User {
-  constructor(id, name, lastname, picture, role, city, agency) {
-    this.id = id;
-    this.name = name;
-    this.lastname = lastname;
-    this.picture = picture;
-    this.role = role;
-    this.city = city;
-    this.agency = agency;
+  constructor(id, name, logoPicture, role, city, agency, department) {
+    this.USUA_LOGIN = id;
+    this.USUA_NOMBRE = name;
+    this.EMPR_IMAGEN = logoPicture;
+    this.TIPE_DESCRIPCION = role;
+    this.ZONA_DESCRIPCION = city;
+    this.AGEN_DESCRIPCION = agency;
+    this.CETC_CODIGO_DESCRIPCION = department;
   }
 }
