@@ -1,10 +1,46 @@
+from tkinter.filedialog import SaveFileDialog
 from django.db import models
 
 
 class Post(models.Model):
     tittle = models.CharField(max_length=100)
     content = models.CharField(max_length=200)
+    
             
+class Usernav(models.Model):
+    usua_login = models.CharField(db_column='USUA_LOGIN', max_length=40)  # Field name made lowercase.
+    usua_nombre = models.CharField(db_column='USUA_NOMBRE', max_length=40)  # Field name made lowercase.
+    empr_codigo = models.CharField(db_column='EMPR_CODIGO', max_length=40)  # Field name made lowercase.
+    empr_nombre = models.CharField(db_column='EMPR_NOMBRE', max_length=40)  # Field name made lowercase.
+    empr_imagen = models.CharField(db_column='EMPR_IMAGEN', max_length=40)  # Field name made lowercase.
+    empr_identificacion = models.CharField(db_column='EMPR_IDENTIFICACION', max_length=40)  # Field name made lowercase.
+    agen_codigo = models.CharField(db_column='AGEN_CODIGO', max_length=40)  # Field name made lowercase.
+    zona_codigo = models.CharField(db_column='ZONA_CODIGO', max_length=40)  # Field name made lowercase.
+    cetc_codigo = models.CharField(db_column='CETC_CODIGO', max_length=40)  # Field name made lowercase.
+    zona_descripcion = models.CharField(db_column='ZONA_DESCRIPCION', max_length=40)  # Field name made lowercase.
+    agen_descripcion = models.CharField(db_column='AGEN_DESCRIPCION', max_length=40)  # Field name made lowercase.
+    cetc_descripcion = models.CharField(db_column='CETC_DESCRIPCION', max_length=40)  # Field name made lowercase.
+    tipe_codigo = models.CharField(db_column='TIPE_CODIGO', max_length=40)  # Field name made lowercase.
+    tipe_descripcion = models.CharField(db_column='TIPE_DESCRIPCION', max_length=40)  # Field name made lowercase.
+    
+class Usernavdos(models.Model):
+    usua_login = models.CharField(db_column='u.USUA_LOGIN', max_length=40)  # Field name made lowercase.
+    usua_nombre = models.CharField(db_column='u.USUA_NOMBRE', max_length=40)  # Field name made lowercase.
+    empr_codigo = models.CharField(db_column='ua.EMPR_CODIGO', max_length=40)  # Field name made lowercase.
+    empr_nombre = models.CharField(db_column='e.EMPR_NOMBRE', max_length=40)  # Field name made lowercase.
+    empr_imagen = models.CharField(db_column='e.EMPR_IMAGEN', max_length=40)  # Field name made lowercase.
+    empr_identificacion = models.CharField(db_column='e.EMPR_IDENTIFICACION', max_length=40)  # Field name made lowercase.
+    agen_codigo = models.CharField(db_column='ucd.AGEN_CODIGO', max_length=40)  # Field name made lowercase.
+    zona_codigo = models.CharField(db_column='ucd.ZONA_CODIGO', max_length=40)  # Field name made lowercase.
+    cetc_codigo = models.CharField(db_column='ucd.CETC_CODIGO', max_length=40)  # Field name made lowercase.
+    zona_descripcion = models.CharField(db_column='z.ZONA_DESCRIPCION', max_length=40)  # Field name made lowercase.
+    agen_descripcion = models.CharField(db_column='a.AGEN_DESCRIPCION', max_length=40)  # Field name made lowercase.
+    cetc_descripcion = models.CharField(db_column='cdc.CETC_DESCRIPCION', max_length=40)  # Field name made lowercase.
+    tipe_codigo = models.CharField(db_column='ms.TIPE_CODIGO', max_length=40)  # Field name made lowercase.
+    tipe_descripcion = models.CharField(db_column='tp.TIPE_DESCRIPCION', max_length=40)  # Field name made lowercase.
+    
+    
+    
 class Agencia(models.Model):
     agen_codigo = models.DecimalField(db_column='AGEN_CODIGO', max_digits=4, decimal_places=0)  # Field name made lowercase.
     agen_descripcion = models.CharField(db_column='AGEN_DESCRIPCION', max_length=40)  # Field name made lowercase.
