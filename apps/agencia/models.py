@@ -8,7 +8,7 @@ class Post(models.Model):
     
             
 class Usernav(models.Model):
-    usua_login = models.CharField(db_column='USUA_LOGIN', max_length=40)  # Field name made lowercase.
+    usua_login = models.CharField(db_column='USUA_LOGIN', primary_key=True, max_length=40)  # Field name made lowercase.
     usua_nombre = models.CharField(db_column='USUA_NOMBRE', max_length=40)  # Field name made lowercase.
     empr_codigo = models.CharField(db_column='EMPR_CODIGO', max_length=40)  # Field name made lowercase.
     empr_nombre = models.CharField(db_column='EMPR_NOMBRE', max_length=40)  # Field name made lowercase.
