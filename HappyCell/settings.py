@@ -53,7 +53,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = (
-    'http://192.168.88.103:8080'
+    'http://192.168.88.103:8080',
+    'http://localhost:3000',
 )
 
 ROOT_URLCONF = 'HappyCell.urls'
