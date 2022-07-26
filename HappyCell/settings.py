@@ -49,7 +49,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+CORS_ORIGIN_WHITELIST = (
+    'http://192.168.88.103:8080',
+    'http://localhost:3000',
+)
 
 ROOT_URLCONF = 'HappyCell.urls'
 
