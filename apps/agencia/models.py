@@ -24,6 +24,17 @@ class Usernav(models.Model):
     tipe_descripcion = models.CharField(db_column='TIPE_DESCRIPCION', max_length=40)  # Field name made lowercase.
     
 class Usernavdos(models.Model):
+    usua_login = models.CharField(db_column='USUA_LOGIN', primary_key=True, max_length=40)  # Field name made lowercase.
+    tipe_codigo = models.CharField(db_column='tipe_codigo', max_length=40)  # Field name made lowercase.
+    tipe_descripcion = models.CharField(db_column='TIPE_DESCRIPCION', max_length=40)  # Field name made lowercase.
+    mosi_codigo = models.CharField(db_column='mosi_codigo', max_length=40)  # Field name made lowercase.
+    opme_descripcion = models.CharField(db_column='OPME_DESCRIPCION', max_length=40)  # Field name made lowercase.
+    opme_orden = models.CharField(db_column='OPME_ORDEN', max_length=40)  # Field name made lowercase.
+    opme_codigo = models.CharField(db_column='OPME_CODIGO', max_length=40)  # Field name made lowercase.
+    vent_codigo = models.CharField(db_column='VENT_CODIGO', max_length=40)  # Field name made lowercase.
+    vent_descripcion = models.CharField(db_column='VENT_DESCRIPCION', max_length=40)  # Field name made lowercase.
+    
+class Usernavtres(models.Model):
     usua_login = models.CharField(db_column='u.USUA_LOGIN', max_length=40)  # Field name made lowercase.
     usua_nombre = models.CharField(db_column='u.USUA_NOMBRE', max_length=40)  # Field name made lowercase.
     empr_codigo = models.CharField(db_column='ua.EMPR_CODIGO', max_length=40)  # Field name made lowercase.
