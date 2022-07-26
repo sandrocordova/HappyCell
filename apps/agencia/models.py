@@ -25,13 +25,13 @@ class Usernav(models.Model):
     
 class Usernavdos(models.Model):
     usua_login = models.CharField(db_column='USUA_LOGIN', max_length=200)  # Field name made lowercase.
-    tipe_codigo = models.CharField(db_column='tipe_codigo', max_length=200)  # Field name made lowercase.
+    tipe_codigo = models.IntegerField(db_column='tipe_codigo')  # Field name made lowercase.
     tipe_descripcion = models.CharField(db_column='TIPE_DESCRIPCION', max_length=200)  # Field name made lowercase.
-    mosi_codigo = models.CharField(db_column='mosi_codigo', max_length=200)  # Field name made lowercase.
+    mosi_codigo = models.IntegerField(db_column='mosi_codigo')  # Field name made lowercase.
     opme_descripcion = models.CharField(db_column='OPME_DESCRIPCION', max_length=200)  # Field name made lowercase.
-    opme_orden = models.CharField(db_column='OPME_ORDEN', max_length=200)  # Field name made lowercase.
-    opme_codigo = models.CharField(db_column='OPME_CODIGO', max_length=200)  # Field name made lowercase.
-    vent_codigo = models.CharField(db_column='VENT_CODIGO', primary_key=True, max_length=200)  # Field name made lowercase.
+    opme_orden = models.IntegerField(db_column='OPME_ORDEN')  # Field name made lowercase.
+    opme_codigo = models.IntegerField(db_column='OPME_CODIGO')  # Field name made lowercase.
+    vent_codigo = models.IntegerField(db_column='VENT_CODIGO', primary_key=True)  # Field name made lowercase.
     vent_descripcion = models.CharField(db_column='VENT_DESCRIPCION', max_length=200)  # Field name made lowercase.
     
 class Usernavtres(models.Model):
