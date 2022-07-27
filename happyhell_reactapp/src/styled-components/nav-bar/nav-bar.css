@@ -26,7 +26,7 @@ body {
 
 .title {
     margin: .9rem 5rem 0 5rem;
-    font-size: 1rem;
+    font-size: .8rem;
     font-weight: 600;
     width: 50rem;
 }
@@ -45,7 +45,7 @@ body {
     display: flex;
     width: 40rem;
     margin: .3rem 0 0 5rem;
-    font-size: .9rem;
+    font-size: .8rem;
     font-weight: 600;
 }
 

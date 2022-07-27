@@ -28,7 +28,7 @@ const Navopciones = () => {
             </div>
             {
                 menu.map(item => (
-                    <div className='locacion'>
+                    <div className='location'>
                         Ciudad: {item.zona_descripcion}
                         <br/>
                         Agencia: {item.agen_descripcion} - {item.cetc_descripcion}
