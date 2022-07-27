@@ -22,7 +22,7 @@ def nav_infor_api_view(request):
         serializer_empresas = UserNavSerializerDos(consulta, many = True)
         return Response(serializer_empresas.data, status = status.HTTP_200_OK)
 
-#Detalles de un elemento
+#Detalles de un elementos
 @api_view(['GET'])
 def detail_view_set(request, pk=None):
     
