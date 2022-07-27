@@ -13,8 +13,9 @@ import Polit from './pages/polit';
 import Process from './pages/process';
 import Support from './pages/support';
 import Consultas from './pages/consultas';
+<<<<<<< HEAD
 import Navopciones from './components/navopciones/navopciones'
-import Navmenopc from './components/navmenuopc/navmenuopc'
+
 function App() {
 
     return (
