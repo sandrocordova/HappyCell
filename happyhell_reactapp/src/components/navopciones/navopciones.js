@@ -17,10 +17,12 @@ const Navopciones = () => {
         <div className='nav-header'>
             {
                 menu.map(item => (
-                    <div className='logo'>
-                        <img className='image' src={item.empr_imagen}  />
+                    /*<div className='logo'>
+                       <img className='image' src={item.empr_imagen}  />
+                    </div>*/
+                    <div className="logo">
+                        <img className='image' src="./img/icon.jpeg" />
                     </div>
-
                 ))
             }
             <div className='titulo'>
@@ -30,7 +32,7 @@ const Navopciones = () => {
                 menu.map(item => (
                     <div className='locacion'>
                         Ciudad: {item.zona_descripcion}
-                        <br/>
+                        <br />
                         Agencia: {item.agen_descripcion} - {item.cetc_descripcion}
                     </div>
 
@@ -41,13 +43,13 @@ const Navopciones = () => {
                     <div className='userSession'>
                         <FontAwesomeIcon icon={faUserGear} />
                         {item.usua_nombre}
-                        <br/>
+                        <br />
                         {item.tipe_descripcion}
                     </div>
 
                 ))
             }
-           
+
         </div>
 
     )
