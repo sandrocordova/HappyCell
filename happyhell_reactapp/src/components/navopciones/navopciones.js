@@ -17,20 +17,22 @@ const Navopciones = () => {
         <div className='nav-header'>
             {
                 menu.map(item => (
-                    <div className='logo'>
-                        <img className='image' src={item.empr_imagen} alt='Happy cel logo' />
+                    /*<div className='logo'>
+                       <img className='image' src={item.empr_imagen}  />
+                    </div>*/
+                    <div className="logo">
+                        <img src="http://www.happy.ec/img/logo3.png" />
                     </div>
-
                 ))
             }
-            <div className='titulo'>
+            <div className='title'>
                 SISTEMA DE ADMINISTRACION DE CARTERA
             </div>
             {
                 menu.map(item => (
                     <div className='location'>
                         Ciudad: {item.zona_descripcion}
-                        <br/>
+                        <br />
                         Agencia: {item.agen_descripcion} - {item.cetc_descripcion}
                     </div>
 
@@ -41,13 +43,13 @@ const Navopciones = () => {
                     <div className='userSession'>
                         <FontAwesomeIcon icon={faUserGear} />
                         {item.usua_nombre}
-                        <br/>
+                        <br />
                         {item.tipe_descripcion}
                     </div>
 
                 ))
             }
-           
+
         </div>
 
     )
