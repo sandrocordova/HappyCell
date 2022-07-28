@@ -28,6 +28,7 @@ const Navmenopc = () => {
 
     return (
         <Nav>
+            <h1>Hola Mundo</h1>
             <nav class='navegacion'>
                 <ul className="menu">
                     <li>
