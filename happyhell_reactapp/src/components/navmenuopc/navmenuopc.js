@@ -28,39 +28,33 @@ const Navmenopc = () => {
 
     return (
         <Nav>
-            <nav>
-                <ul className="menus">
+            <nav class='navegacion'>
+                <ul className="menu">
+                    <li>
+                        <a href='#'> Menú </a>
+                        <ul className="submenus">
+                            <li>
+                                <a href='#'>
+                                    {
+                                    opcs.map(item => (
+                                        item.opme_descripcion
+                                        ))
+                                    }
+                                </a>
+                                <a href='#'>
+                                    {
+                                    opcs.map(item => (
 
-
-
-
-
-
-                    <Dropdown isOpen={dropdown} toggle={abrirCerrarDropdown} size='sm'>
-                        <DropdownToggle caret>
-                            {
-                                opcs.map(item => (
-
-                                    item.opme_descripcion
-                                ))
-                            }
-                        </DropdownToggle>
-                        <DropdownMenu>
-                            
-                                {
-                                opcs.map(item => (
-                                        
                                         <DropdownItem header>
                                             {item.vent_descripcion}
                                         </DropdownItem>
                                     ))
-                                }
-                           
+                                    }
+                                </a>
 
-                        </DropdownMenu>
-                    </Dropdown>
-
-
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
         </Nav>
