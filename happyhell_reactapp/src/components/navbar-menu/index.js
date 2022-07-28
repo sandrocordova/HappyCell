@@ -8,12 +8,9 @@ import {
 
 const Navbar = () => {
     return (
-        const jsonData = requiere('./')
-        var opcMenu=[requiere()]
         <>
             <Nav>
                 <Bars />
-                
                 <NavMenu>
                     <NavLink to="/Administracion" activeStyle>
                         Administracion
