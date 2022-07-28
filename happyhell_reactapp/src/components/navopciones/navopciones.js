@@ -18,7 +18,7 @@ const Navopciones = () => {
             {
                 menu.map(item => (
                     <div className='logo'>
-                        <img className='image' src={item.empr_imagen} alt='Happy cel logo' />
+                        <img className='image' src={item.empr_imagen}  />
                     </div>
 
                 ))
