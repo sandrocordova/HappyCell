@@ -1,64 +1,50 @@
-* {
-    box-sizing: border-box;
-}
 
-.App {
-    text-align: center;
-}
-
-.App-logo {
-    animation: App-logo-spin infinite 20s linear;
-    height: 80px;
-}
-
-.App-header {
-    background-color: #222;
-    height: 150px;
-    padding: 20px;
-    color: white;
-}
-
-.App-title {
-    font-size: 1.5em;
-}
-
-.App-intro {
-    font-size: large;
-}
-
-form {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
-}
-
-.menu {
+.navegacion {
     padding: 0 40px;
     width: 100%;
+    background: white;
     margin: 5px 10px;
-    user-select: none;
-    cursor: pointer;
-    border: 1px transparent solid;
 }
 
-.menu-item-wrapper {
-    border: 1px transparent solid;
+.navegacion ul{
+    list-style: none;
 }
 
-    .menu-item-wrapper.active {
-        border: 1px blue solid;
-    }
-
-.menu-item.active {
-    border: 1px green solid;
+.menu > li{
+    position: relative;
+    display: inline-block;
 }
 
-.scroll-menu-arrow {
-    padding: 20px;
-    cursor: pointer;
+.menu > li > a{
+    display: block;
+    padding: 15px 20px;
+    color: #015a9e;
+    text-decoration: none;
 }
 
-.scroll-menu-arrow--disabled {
+.menu li a:hover{
+    color: #c0f113;
+    transition: all .3s;
+}
+
+.submenu{
+    position: absolute;
+    background: black;
+    width: 120%;
     visibility: hidden;
+    opacity: 0;
+    transition: opacity 1.5s;
+}
+
+.submenu li a{
+    display: block;
+    padding: 15px;
+    color: #015a9e;
+    text-decoration: none;
+}
+
+.menu li:hover .submenu{
+    visibility: visible;
+    opacity: 1;
+    background: white;
 }

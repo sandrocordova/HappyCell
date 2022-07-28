@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import './styles.css';
 import { Link } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css'
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap'
 import {
     Bars, NavMenu,
@@ -27,12 +27,11 @@ const Navmenopc = () => {
     }
 
     return (
-        <Nav>
-            <nav class='navegacion'>
-                <ul className="menu">
+            <nav class="navegacion">
+                <ul class="menu">
                     <li>
                         <a href='#'> Menú </a>
-                        <ul className="submenus">
+                        <ul class="submenu">
                             <li>
                                 <a href='#'>
                                     {
@@ -41,13 +40,12 @@ const Navmenopc = () => {
                                         ))
                                     }
                                 </a>
+                            </li>
+                            <li>
                                 <a href='#'>
                                     {
                                     opcs.map(item => (
-
-                                        <DropdownItem header>
-                                            {item.vent_descripcion}
-                                        </DropdownItem>
+                                        item.vent_descripcion
                                     ))
                                     }
                                 </a>
@@ -55,9 +53,27 @@ const Navmenopc = () => {
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a href='#'> Menú 2 </a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href='#'>
+                                        sub menu 1
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href='#'>
+                                        sub menu 2
+                                    </a>
+
+                                </li>
+                            </ul>
+                    </li>
+                    <li>
+                        <a href='#'> Menú 3 </a>
+                    </li>
                 </ul>
             </nav>
-        </Nav>
     )
 
 };
