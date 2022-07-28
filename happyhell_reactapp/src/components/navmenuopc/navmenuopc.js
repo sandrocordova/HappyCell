@@ -27,15 +27,8 @@ const Navmenopc = () => {
     }
 
     return (
-<<<<<<< HEAD
-            <nav class="navegacion">
-                <ul class="menu">
-=======
-        <Nav>
-          
             <nav class='navegacion'>
                 <ul className="menu">
->>>>>>> 9ef5faaf1380d11d9fd059948d68cca3a7c807bd
                     <li>
                         <a href='#'> Menú </a>
                         <ul class="submenu">
