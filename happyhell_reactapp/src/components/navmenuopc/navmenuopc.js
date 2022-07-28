@@ -27,53 +27,37 @@ const Navmenopc = () => {
     }
 
     return (
-            <nav class='navegacion'>
-                <ul className="menu">
-                    <li>
-                        <a href='#'> Menú </a>
-                        <ul class="submenu">
-                            <li>
-                                <a href='#'>
-                                    {
-                                    opcs.map(item => (
-                                        item.opme_descripcion
-                                        ))
-                                    }
-                                </a>
-                            </li>
-                            <li>
-                                <a href='#'>
-                                    {
-                                    opcs.map(item => (
-                                        item.vent_descripcion
-                                    ))
-                                    }
-                                </a>
+        <nav class='navegacion'>
+            <ul className="menu">
+                {
+                opcs.map(item => (
+                <li>
+                    <a href='#'> 
+                            {item.opme_descripcion}
 
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href='#'> Menú 2 </a>
-                            <ul class="submenu">
+                    </a>
+                    <ul class="submenu">
+
+
+
+                        {
+                            opcs.map(item => (
                                 <li>
                                     <a href='#'>
-                                        sub menu 1
+                                        {item.vent_descripcion}
                                     </a>
                                 </li>
-                                <li>
-                                    <a href='#'>
-                                        sub menu 2
-                                    </a>
+                            ))
+                        }
 
-                                </li>
-                            </ul>
-                    </li>
-                    <li>
-                        <a href='#'> Menú 3 </a>
-                    </li>
-                </ul>
-            </nav>
+
+
+                    </ul>
+                </li>
+                ))
+                }
+            </ul>
+        </nav>
     )
 
 };
