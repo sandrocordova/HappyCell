@@ -18,8 +18,13 @@ import Polit from './pages/polit';
 import Process from './pages/process';
 import Support from './pages/support';
 import Consultas from './pages/consultas';
+<<<<<<< HEAD
 import *as menuServer from './menuServer'
 >>>>>>> f184da835c9aa1ffc2a4bac88446703c5765d281
+=======
+<<<<<<< HEAD
+import Navopciones from './components/navopciones/navopciones'
+>>>>>>> 0d030cad3c7e0041a9e7faea721744727c997ee9
 
 function App() {
 
