@@ -21,16 +21,16 @@ const Navopciones = () => {
                        <img className='image' src={item.empr_imagen}  />
                     </div>*/
                     <div className="logo">
-                        <img className='image' src="./img/icon.jpeg" />
+                        <img src="http://www.happy.ec/img/logo3.png" />
                     </div>
                 ))
             }
-            <div className='titulo'>
+            <div className='title'>
                 SISTEMA DE ADMINISTRACION DE CARTERA
             </div>
             {
                 menu.map(item => (
-                    <div className='locacion'>
+                    <div className='location'>
                         Ciudad: {item.zona_descripcion}
                         <br />
                         Agencia: {item.agen_descripcion} - {item.cetc_descripcion}

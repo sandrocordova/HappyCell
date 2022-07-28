@@ -15,7 +15,7 @@ body {
 
 .logo {
     padding: .35rem 0 0 .6rem;
-    width: 9rem;
+    width: 5rem;
     height: 2rem;
 }
 
@@ -28,13 +28,13 @@ body {
     margin: .9rem 5rem 0 5rem;
     font-size: .8rem;
     font-weight: 600;
-    width: 50rem;
+    width: 25rem;
 }
 
 .location {
     flex-direction: column;
     display: flex;
-    width: 20rem;
+    width: 50rem;
     margin: .6rem 0 0 10rem;
     font-size: .7rem;
     font-weight: 300;
