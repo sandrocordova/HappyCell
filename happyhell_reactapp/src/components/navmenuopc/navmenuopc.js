@@ -42,8 +42,6 @@ const Navmenopc = () => {
                                     <ul class="submenu">
 
 
-
-
                                         {
                                             opcs.map(item => (
                                                 <li>
