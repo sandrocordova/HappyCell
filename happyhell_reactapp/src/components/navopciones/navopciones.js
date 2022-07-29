@@ -42,7 +42,7 @@ const Navopciones = () => {
                 menu.map(item => (
                     <div className='userSession'>
                         <FontAwesomeIcon icon={faUserGear} />
-                        {item.usua_nombre}
+                        {item.usua_login}
                         <br />
                         {item.tipe_descripcion}
                     </div>

@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './styles.css';
-import { Link } from "react-router-dom";
-import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap'
-import {
-    Bars, NavMenu,
-    Nav,
-    NavLink,
-} from './../../components/navbar-menu/navbar-menu.component';
+
+
 const Navmenopc = () => {
     const [opcs, setOpcs] = useState([]);
     useEffect(() => {
@@ -21,10 +16,7 @@ const Navmenopc = () => {
 
     }
 
-    const [dropdown, setDropdown] = useState(false);
-    const abrirCerrarDropdown = () => {
-        setDropdown(!dropdown);
-    }
+  
 
     const validacion = Object.values(opcs.map(item => (item.opme_descripcion)))
     const validacion2 = [...new Set(validacion)]
@@ -32,39 +24,50 @@ const Navmenopc = () => {
 
 
     return (
-        <nav class='navegacion'>
-            <ul className="menu">
 
-                {
-                    validacion2.map(item => (
-                <li>
+                <nav class='navegacion'>
 
-                    <a href='#'>
-                        {item}
-
-                    </a>
-                    <ul class="submenu">
-
-
+                    <ul className="menu">
 
                         {
-                            opcs.map(item => (
+
+                            validacion2.map(item => (
                                 <li>
+
                                     <a href='#'>
-                                        {item.vent_descripcion}
+                                        {item}
+
                                     </a>
+
+                                    <ul class="submenu">
+
+
+
+
+                                        {
+                                            opcs.map(item => (
+                                                <li>
+                                                    <a href='#'>
+                                                        {item.vent_descripcion}
+                                                    </a>
+                                                </li>
+                                            ))
+                                        }
+
+
+
+                                    </ul>
                                 </li>
                             ))
+
+
                         }
 
 
-
                     </ul>
-                </li>
-                ))
-                }
-            </ul>
-        </nav>
+
+                </nav>
+        
     )
 
 };
