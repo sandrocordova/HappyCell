@@ -10,7 +10,11 @@ body {
     display: flex;
     background-color: rgb(1, 90, 158);
     color: rgb(255, 255, 255);
-    padding: 2px;
+   
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
@@ -69,4 +73,22 @@ body {
 .userRole {
     font-size: 1rem;
     font-weight: 600;
+}
+.cover {
+    padding: 0px 30px;
+    position: relative;
+}
+
+.left {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.right {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
 }
