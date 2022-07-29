@@ -22,7 +22,7 @@ const Navmenopc = () => {
 
     }
 
-  
+
 
     const validacion = Object.values(opcs.map(item => (item.opme_descripcion)))
     const validacion2 = [...new Set(validacion)]
@@ -30,70 +30,49 @@ const Navmenopc = () => {
 
 
     return (
-        <div>
+
 
         <nav class='navegacion'>
+
             <ul className="menu">
-                <li>
-                    <a href='#'>
-                        <b >{'<'}
-                        </b>
-                    </a>
-                </li>
                 {
-                opcs.map(item => (
-                <li>
-                    <a href='#'> 
-                            {item.opme_descripcion}
 
-                    </a>
-                    <ul class="submenu">
-                        {
+                    validacion2.map(item => (
+                        <li>
 
-                            validacion2.map(item => (
-                                <li>
+                            <a href='#'>
+                                {item}
 
-                                    <a href='#'>
-                                        {item}
+                            </a>
 
-                                    </a>
-
-                                    <ul class="submenu">
+                            <ul class="submenu">
 
 
-                                        {
-                                            opcs.map(item => (
-                                                <li>
-                                                    <a href='#'>
-                                                        {item.vent_descripcion}
-                                                    </a>
-                                                </li>
-                                            ))
-                                        }
+                                {
+                                    opcs.map(item => (
+                                        <li>
+                                            <a href='#'>
+                                                {item.vent_descripcion}
+                                            </a>
+                                        </li>
+                                    ))
+                                }
 
 
 
-                                    </ul>
-                                </li>
-                            ))
+                            </ul>
+                        </li>
+                    ))
 
 
-                        }
-
-
-                    </ul>
-                </li>
-                ))
                 }
-                <li>
-                    <a href='#'>
-                        <b >{'>'}
-                        </b>
-                    </a>
-                </li>
+
+
             </ul>
+
+
         </nav>
-        </div>
+
     )
 };
 
