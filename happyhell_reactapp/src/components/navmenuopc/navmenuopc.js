@@ -30,9 +30,8 @@ const Navmenopc = () => {
 
 
     return (
-<<<<<<< HEAD
         <div>
-    
+
         <nav class='navegacion'>
             <ul className="menu">
                 <li>
@@ -85,7 +84,6 @@ const Navmenopc = () => {
 
 
                     </ul>
-<<<<<<< HEAD
                 </li>
                 ))
                 }
@@ -98,14 +96,7 @@ const Navmenopc = () => {
             </ul>
         </nav>
         </div>
-
-=======
-
-                </nav>
-        
->>>>>>> a21adb55950794a79a6e3109c3b7fb5a1490b3d4
     )
-
 };
 
 export default Navmenopc;
