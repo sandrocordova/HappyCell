@@ -26,14 +26,21 @@ const Navmenopc = () => {
         setDropdown(!dropdown);
     }
 
+    const validacion = Object.values(opcs.map(item => (item.opme_descripcion)))
+    const validacion2 = [...new Set(validacion)]
+    console.log(validacion2)
+
+
     return (
         <nav class='navegacion'>
             <ul className="menu">
+
                 {
-                opcs.map(item => (
+                    validacion2.map(item => (
                 <li>
-                    <a href='#'> 
-                            {item.opme_descripcion}
+
+                    <a href='#'>
+                        {item}
 
                     </a>
                     <ul class="submenu">
