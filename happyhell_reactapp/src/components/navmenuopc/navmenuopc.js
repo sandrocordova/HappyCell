@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import './styles.css';
-
-
+import { Link } from "react-router-dom";
+import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap'
+import {
+    Bars, NavMenu,
+    Nav,
+    NavLink,
+} from './../../components/navbar-menu/navbar-menu.component';
+import { text } from '@fortawesome/fontawesome-svg-core';
 const Navmenopc = () => {
     const [opcs, setOpcs] = useState([]);
     useEffect(() => {
@@ -24,11 +30,24 @@ const Navmenopc = () => {
 
 
     return (
+        <div>
 
-                <nav class='navegacion'>
+        <nav class='navegacion'>
+            <ul className="menu">
+                <li>
+                    <a href='#'>
+                        <b >{'<'}
+                        </b>
+                    </a>
+                </li>
+                {
+                opcs.map(item => (
+                <li>
+                    <a href='#'> 
+                            {item.opme_descripcion}
 
-                    <ul className="menu">
-
+                    </a>
+                    <ul class="submenu">
                         {
 
                             validacion2.map(item => (
@@ -63,11 +82,19 @@ const Navmenopc = () => {
 
 
                     </ul>
-
-                </nav>
-        
+                </li>
+                ))
+                }
+                <li>
+                    <a href='#'>
+                        <b >{'>'}
+                        </b>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        </div>
     )
-
 };
 
 export default Navmenopc;
