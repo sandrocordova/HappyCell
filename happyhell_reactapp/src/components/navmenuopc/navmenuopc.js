@@ -7,6 +7,7 @@ import {
     Nav,
     NavLink,
 } from './../../components/navbar-menu/navbar-menu.component';
+import { text } from '@fortawesome/fontawesome-svg-core';
 const Navmenopc = () => {
     const [opcs, setOpcs] = useState([]);
     useEffect(() => {
@@ -27,8 +28,16 @@ const Navmenopc = () => {
     }
 
     return (
+        <div>
+    
         <nav class='navegacion'>
             <ul className="menu">
+                <li>
+                    <a href='#'>
+                        <b >{'<'}
+                        </b>
+                    </a>
+                </li>
                 {
                 opcs.map(item => (
                 <li>
@@ -37,9 +46,6 @@ const Navmenopc = () => {
 
                     </a>
                     <ul class="submenu">
-
-
-
                         {
                             opcs.map(item => (
                                 <li>
@@ -56,8 +62,16 @@ const Navmenopc = () => {
                 </li>
                 ))
                 }
+                <li>
+                    <a href='#'>
+                        <b >{'>'}
+                        </b>
+                    </a>
+                </li>
             </ul>
         </nav>
+        </div>
+
     )
 
 };
