@@ -1,6 +1,7 @@
 import './styles_clientes.css'
 import { Link } from 'react-router-dom';
-import Table from 'react-bootstrap/Table';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button, Table, Form, FormGroup, Label, Input, FormText, Col, Row, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
 const Clientesvista_clientes = () => {
 
 
@@ -9,23 +10,39 @@ const Clientesvista_clientes = () => {
             <div className="opcionesCuadradas">
                 <div className="headerClientes">
                     <Link to="/clientes">
-                        <button className="buttonIcon" title="Clientes" size="large" variant="contained" title="Clientes" alt="Clientes">
+                        <Button className="buttonIcon" title="Clientes" size="large" variant="contained" title="Clientes" alt="Clientes">
+                            <img className="imgIcon" src="https://cdn-icons.flaticon.com/png/128/3936/premium/3936751.png?token=exp=1659593203~hmac=4b7dd15d13b93caf41c2566c56231078" alt="Clientes" />
 
-                          
-                                Clientes
-                                <img className="imgIcon" src="https://cdn-icons.flaticon.com/png/128/3936/premium/3936751.png?token=exp=1659593203~hmac=4b7dd15d13b93caf41c2566c56231078" alt="Clientes" />
-                                
-                           
-                        </button>
+                        </Button>
                     </Link>
                 </div>
-                <Table striped bordered hover variant="dark">
+
+                <ul>
+                    Identificacion
+                    <li>
+                        <input type="text" name="identificacion"></input>
+                    </li>
+                    Nombre
+                    <li>
+
+
+                    </li>
+
+                </ul>
+
+
+                <br />
+
+                <Table striped bordered hover variant="table">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Username</th>
+                            <th>
+                                <input name="select" className="checkBoxButton" type="checkbox" />
+                            </th>
+                            <th>Codigo cliente</th>
+                            <th>Identificacion</th>
+                            <th>Nombre</th>
+                            <th>Tipo Cliente</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,12 +66,12 @@ const Clientesvista_clientes = () => {
                     </tbody>
                 </Table>
 
-               
 
 
-            </div>
 
-        </div>
+            </div >
+
+        </div >
 
     )
 };
