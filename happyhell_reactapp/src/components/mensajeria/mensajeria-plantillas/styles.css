@@ -1,0 +1,42 @@
+.contenedor-general{
+  width: 99%;
+  margin-left: 1%;
+}
+.contenedor-buscar{
+  text-align: center;
+  vertical-align: top;
+  align-items: center;
+  display:inline-block;
+  width: 33%;
+  
+  margin-right: 1%;
+}
+.contenedor-plantilla{
+  text-align: center;
+  vertical-align: top;
+  align-items: center;
+  width: 65%;
+  display:inline-block;
+}
+
+.boton-regresar Button{
+  background-color: #015a9e;
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+}
+
+.boton-primario Button:hover{
+  color: #c0f113;
+}
+
+.contenedor-botones{
+  text-align: center;
+}
+.contenedor-form {
+  margin-left: 10%;
+  width: 80%;
+}
+.contenedor-titulo{
+  text-align: center;
+  margin-bottom: 1rem;
+}
