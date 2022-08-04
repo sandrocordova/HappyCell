@@ -24,10 +24,12 @@ const Clientes = () => {
 
                     </Button>
                 </Link>
+                <Link to="/clientes/direcciones">
                 <Button className="buttonImages" title="Direcciones" size="large" variant="contained" alt="Direcciones">
                     <p>Direcciones</p>
                     <img className="imgButton" src="https://cdn-icons.flaticon.com/png/128/2500/premium/2500132.png?token=exp=1659586952~hmac=ec66b069f5beb3b424f92f487abf6305" alt="Direcciones" />
-                </Button>
+                    </Button>
+                </Link>
                 <Button className="buttonImages" title="Asesor" size="large" variant="contained" alt="Asesor">
                     <p>Asesor</p>
                     <img className="imgButton" src="https://cdn-icons-png.flaticon.com/128/3721/3721123.png" alt="Asesor" />

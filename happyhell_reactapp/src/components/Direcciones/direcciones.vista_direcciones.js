@@ -2,7 +2,7 @@ import './styles_clientes.css'
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Table, Form, FormGroup, Label, Input, FormText, Col, Row, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
-const Clientesvista_clientes = () => {
+const Direccionesvista_direcciones = () => {
 
 
     return (
@@ -19,7 +19,7 @@ const Clientesvista_clientes = () => {
 
                     </Link>
                     <Label >
-                        Clientes
+                        Direcciones
                     </Label>
 
                 </div>
@@ -29,14 +29,26 @@ const Clientesvista_clientes = () => {
 
                     </div>
                     <FormGroup row>
-                        <Col sm={3}>
-                            <Label for="Identificacion">Identificacion</Label>
+                        <Col sm={1}>
+                            <Label for="Identificacion">Codigo: </Label>
                             <Col sm={12}>
                                 <Input type="id" name="identificacion" id="identificacion" />
                             </Col>
                         </Col>
                         <Col sm={3}>
+                            <Label for="exampleEmail">Tipo de identificacion</Label>
+                            <Col sm={12}>
+                                <Input type="nombre" name="nombre" id="nombre" />
+                            </Col>
+                        </Col>
+                        <Col sm={3}>
                             <Label for="exampleEmail">Nombre</Label>
+                            <Col sm={12}>
+                                <Input type="nombre" name="nombre" id="nombre" />
+                            </Col>
+                        </Col>
+                        <Col sm={3}>
+                            <Label for="exampleEmail">Tipo</Label>
                             <Col sm={12}>
                                 <Input type="nombre" name="nombre" id="nombre" />
                             </Col>
@@ -49,10 +61,10 @@ const Clientesvista_clientes = () => {
                                 <th>
                                     <Input type="checkbox" name="checkS" id="opc" />
                                 </th>
-                                <th>Codigo Cliente</th>
-                                <th>Identificacion</th>
-                                <th>Nombre</th>
-                                <th>Tipo Cliente</th>
+                                <th>Tipo de direccion</th>
+                                <th>Secuencia</th>
+                                <th>Ciudad</th>
+                                <th>Direccion</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -60,18 +72,18 @@ const Clientesvista_clientes = () => {
                                 <td>
                                     <Input type="checkbox" name="checkSelect" id="opc" />
                                 </td>
-                                <td>001</td>
-                                <td>1709337735</td>
-                                <td>ALBERTO CASTILLO BRIONES</td>
+                                <td>Domicilio</td>
+                                <td>1</td>
+                                <td>QUITO</td>
                                 <td>Natural</td>
                             </tr>
                             <tr>
                                 <td>
                                     <Input type="checkbox" name="checkSelect" id="opc" />
                                 </td>
-                                <td>002</td>
-                                <td>1711007276</td>
-                                <td>COOPERATIVA AMAZONICA</td>
+                                <td>Trabajo</td>
+                                <td>1</td>
+                                <td>QUITO</td>
                                 <td>Juridica</td>
                             </tr>
 
@@ -92,4 +104,4 @@ const Clientesvista_clientes = () => {
 
     )
 };
-export default Clientesvista_clientes;
+export default Direccionesvista_direcciones;
