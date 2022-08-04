@@ -2,23 +2,25 @@
     padding: 0 0px;
     width: 100%;
     background: white;
-
     margin: 5px 10px;
-
     margin: 0px 0px;
-
     text-align: center;
+ 
 }
 
     .navegacion ul {
         list-style: none;
         text-align: center;
+        color: #015a9e;
+     
     }
+
 
 .menu > li {
     position: relative;
     display: inline-block;
     text-align: center;
+
 }
 
     .menu > li > a {

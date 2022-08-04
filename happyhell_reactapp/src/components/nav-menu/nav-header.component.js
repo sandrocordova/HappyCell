@@ -7,7 +7,7 @@ import { faUserGear } from '@fortawesome/free-solid-svg-icons';
 import TecnofinApi from '../../services/tecnofin.service';
 
 const NavBarHeader = () => {
-    const [user, setUser] = useState(new User);
+    const [user, setUser] = useState(new User());
 
     const defaultUser = () => {
         setUser({

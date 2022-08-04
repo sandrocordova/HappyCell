@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserGear } from '@fortawesome/free-solid-svg-icons';
+import './../../styled-components/nav-bar/nav-bar.css';
+import { Link } from 'react-router-dom';
 const Navopciones = () => {
     const [menu, setMenu] = useState([]);
     useEffect(() => {
@@ -20,9 +22,11 @@ const Navopciones = () => {
                     /*<div className='logo'>
                        <img className='image' src={item.empr_imagen}  />
                     </div>*/
-                    <div className="logo">
-                        <img src="http://www.happy.ec/img/logo3.png" />
-                    </div>
+                    <Link to="/">
+                        <div className="logo">
+                            <img src="http://www.happy.ec/img/logo3.png" />
+                        </div>
+                    </Link>
                 ))
             }
             <div className='title'>
