@@ -18,20 +18,12 @@ function App() {
 
             <Navopciones></Navopciones>
             <Navmenopc></Navmenopc>
-<<<<<<< HEAD
-            
-            <ForMensajeriaPlantillas></ForMensajeriaPlantillas>
-        </>
-=======
-
 
 
 
 
 
         </div>
-
->>>>>>> 82d8669b3539ccc562de13ad4231c6ef6a2069f8
 
     );
 }
