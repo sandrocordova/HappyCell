@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './styles.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form, Table, Label, Input, FormText, Col, Row, InputGroup, InputGroupAddon, InputGroupText, Container } from 'reactstrap';
 
 

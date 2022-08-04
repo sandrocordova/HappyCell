@@ -1,6 +1,5 @@
 import React from 'react';
 import './styles.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import FormBuscar from './mensajeria.form.buscar';
 import FormPlantilla from './mensajeria.form.plantilla';
 

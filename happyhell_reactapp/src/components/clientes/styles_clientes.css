@@ -10,11 +10,11 @@
     display: inline-block;
 }
 .buttonImages {
-    margin-right: 10px;
+    margin-right:1px;
     margin-bottom: 10px;
     height: 170px;
     width: 170px;
-    background-color: rgb(1, 90, 158);
+    background-color: blue;
     text-align: center;
     color: white;
     align-items: center;
@@ -67,22 +67,10 @@
     padding-top: 10px;
     padding-bottom: 10px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
 }
 
 .cat {
     height: 300px;
     width: 300px;
-}
-.headerClientes {
-    flex-direction: row;
-    align-items: center;
-    box-sizing: border-box;
-    display: flex;
-    background-color: rgb(1, 90, 158);
-    color: rgb(255, 255, 255);
-    padding-left: 100px;
-    padding-right: 100px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
