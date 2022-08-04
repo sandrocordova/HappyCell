@@ -13,7 +13,7 @@ const Clientes = () => {
             <div className="opcionesCuadradas">
 
                 <Link to="/clientes/vistaclientes">
-                    <button className="buttonImages" title="Clientes" size="large" variant="contained" title="Clientes" alt="Clientes">
+                    <button className="buttonImages" title="Clientes" size="large" variant="contained" alt="Clientes">
                         <p>Clientes</p>
                         <img className="imgButton" src="https://cdn-icons-png.flaticon.com/128/3126/3126589.png" alt="Clientes" />
 

@@ -74,7 +74,7 @@ function CargarJson() {
             </Row>
 
 
-            <Table hover>
+            <Table border>
                 <thead>
                     <tr>
                         <th>Nombre plantilla</th>

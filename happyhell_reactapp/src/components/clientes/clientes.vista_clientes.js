@@ -1,6 +1,6 @@
 import './styles_clientes.css'
 import { Link } from 'react-router-dom';
-import Table from 'react-bootstrap/Table';
+
 const Clientesvista_clientes = () => {
 
 
@@ -9,7 +9,7 @@ const Clientesvista_clientes = () => {
             <div className="opcionesCuadradas">
                 <div className="headerClientes">
                     <Link to="/clientes">
-                        <button className="buttonIcon" title="Clientes" size="large" variant="contained" title="Clientes" alt="Clientes">
+                        <button className="buttonIcon" title="Clientes" size="large" variant="contained" alt="Clientes">
 
                           
                                 Clientes
@@ -19,7 +19,7 @@ const Clientesvista_clientes = () => {
                         </button>
                     </Link>
                 </div>
-                <Table striped bordered hover variant="dark">
+                <table striped bordered hover variant="dark">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -47,7 +47,7 @@ const Clientesvista_clientes = () => {
                             <td>@twitter</td>
                         </tr>
                     </tbody>
-                </Table>
+                </table>
 
                
 
