@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './styles.css';
-import { Link } from "react-router-dom";
-import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap'
-import {
-    Bars, NavMenu,
-    Nav,
-    NavLink,
-} from './../../components/navbar-menu/navbar-menu.component';
-import { text } from '@fortawesome/fontawesome-svg-core';
+import { Link } from 'react-router-dom'
 const Navmenopc = () => {
     const [opcs, setOpcs] = useState([]);
     useEffect(() => {
@@ -22,12 +15,8 @@ const Navmenopc = () => {
 
     }
 
-
-
     const validacion = Object.values(opcs.map(item => (item.opme_descripcion)))
     const validacion2 = [...new Set(validacion)]
-    console.log(validacion2)
-
 
     return (
 
@@ -35,45 +24,56 @@ const Navmenopc = () => {
         <nav class='navegacion'>
 
             <ul className="menu">
-                {
 
-                    validacion2.map(item => (
-                        <li>
+                <li>
 
-                            <a href='#'>
-                                {item}
+                    <Link to ="/clientes">
+                        
+                        Clientes
+                    </Link>
+                    
+                    
 
-                            </a>
+                    <ul className="submenu">
 
-                            <ul class="submenu">
+                        < li >
 
+                            <Link to="/clientes/mantenimiento" >
+                                Mantenimiento
+                            </Link>
+                          
 
-                                {
-                                    opcs.map(item => (
-                                        <li>
-                                            <a href='#'>
-                                                {item.vent_descripcion}
-                                            </a>
-                                        </li>
-                                    ))
-                                }
-
-
-
-                            </ul>
                         </li>
-                    ))
+
+                    </ul>
+                </li>
+                <li>
+
+                    <Link to="/mensajeria">
+                        Mensajeria
+
+                    </Link>
 
 
-                }
+                    <ul className="submenu">
 
+                        < li >
 
+                            <Link to="parametros" >
+                                Parametros
+                            </Link>
+                            <Link to="ejecucion" >
+                                Ejecucion
+                            </Link>
+
+                        </li>
+
+                    </ul>
+                </li>
             </ul>
 
-
-        </nav>
+        </nav >
 
     )
 };
-
 export default Navmenopc;

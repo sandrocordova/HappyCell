@@ -1,16 +1,15 @@
 {
   "ExpandedNodes": [
     "",
-    "\\apps",
-    "\\apps\\agencia",
-    "\\apps\\agencia\\api",
     "\\happyhell_reactapp",
+    "\\happyhell_reactapp\\node_modules",
+    "\\happyhell_reactapp\\node_modules\\eslint-config-react-app",
     "\\happyhell_reactapp\\src",
     "\\happyhell_reactapp\\src\\components",
-    "\\happyhell_reactapp\\src\\components\\navmenuopc",
-    "\\happyhell_reactapp\\src\\contexts",
-    "\\happyhell_reactapp\\src\\styled-components"
+    "\\happyhell_reactapp\\src\\components\\navopciones",
+    "\\happyhell_reactapp\\src\\pages",
+    "\\happyhell_reactapp\\src\\styled-components",
+    "\\happyhell_reactapp\\src\\styled-components\\nav-bar"
   ],
-  "SelectedNode": "\\happyhell_reactapp\\src\\components\\NavOpciones\\NavOpciones.js",
   "PreviewInSolutionExplorer": false
 }
