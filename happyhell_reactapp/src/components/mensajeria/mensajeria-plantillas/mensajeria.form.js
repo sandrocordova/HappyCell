@@ -11,10 +11,10 @@ export default class SearchBar extends React.Component{
     render(){
         return (
             <div className="contenedor-general">
-                <div className="contenedor-buscar">
+                <div className="contenedor-buscar-edit">
                     <FormBuscar/>
                 </div>
-                <div className="contenedor-plantilla">
+                <div className="contenedor-plantilla-edit">
                     <FormPlantilla/>
                 </div>
             </div>

@@ -1,16 +1,14 @@
 import React from 'react';
 import Navmenopc from '../components/navmenuopc/navmenuopc';
 import Navopciones from '../components/navopciones/navopciones';
-
+import MenuMensajeria from '../components/mensajeria/mensajeria.component';
 
 function Mensajeriapage() {
     return (
         <div>
             <Navopciones></Navopciones>
             <Navmenopc></Navmenopc>
-            <h1>
-                MENSAJERIA
-            </h1>
+            <MenuMensajeria></MenuMensajeria>
 
         </div>
     );
