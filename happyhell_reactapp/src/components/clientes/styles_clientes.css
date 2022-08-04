@@ -4,7 +4,11 @@
     width: 100px;
     display: inline-block;
 }
-
+.checkBoxButton {
+    height: 15px;
+    width: 15px;
+    display: inline-block;
+}
 .buttonImages {
     margin-right: 10px;
     margin-bottom: 10px;
@@ -46,12 +50,12 @@
 }
 
     .buttonIcon:hover {
-        background-color: none;
+        background-color: transparent;
     }
 
 
     .buttonIcon:active {
-        background-color: none;
+        background-color: transparent;
         box-shadow: 0 5px #666;
         transform: translateY(4px);
     }
