@@ -1,6 +1,7 @@
 import './App.css';
 import Navopciones from './components/navopciones/navopciones'
 import Navmenopc from './components/navmenuopc/navmenuopc'
+import Formmain from './components/form-search/FormMain'
 
 
 
