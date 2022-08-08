@@ -1,4 +1,3 @@
-import './styles_clientes.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import { Button, Table, Form, FormGroup, Label, Input, FormText, Col, Row, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
@@ -9,7 +8,7 @@ const Clientesvista_clientes = () => {
     return (
         <div>
             <div className="opcionesCuadradas">
-                <div className="headerClientes">
+                <div >
                     <Link to="/clientes">
                         <Button className="buttonIcon" title="Clientes" size="large" variant="contained" alt="Clientes">
                             <img className="imgIcon" src="https://cdn-icons.flaticon.com/png/128/3936/premium/3936751.png?token=exp=1659593203~hmac=4b7dd15d13b93caf41c2566c56231078" alt="Clientes" />

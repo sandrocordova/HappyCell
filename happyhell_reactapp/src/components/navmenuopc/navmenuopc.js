@@ -21,7 +21,7 @@ const Navmenopc = () => {
 
     return (
 
-
+        <body className="body">
         <nav class='navegacion'>
 
             <ul className="menu">
@@ -73,7 +73,8 @@ const Navmenopc = () => {
                 </li>
             </ul>
 
-        </nav >
+            </nav >
+        </body>
 
     )
 };

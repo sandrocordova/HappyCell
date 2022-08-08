@@ -16,7 +16,7 @@ const Navopciones = () => {
     }
 
     return (
-
+  
         <div className='nav-header'>
             {
                 menu.map(item => (
@@ -55,8 +55,8 @@ const Navopciones = () => {
                 ))
             }
 
-        </div>
-
+            </div>
+       
     )
 
 };

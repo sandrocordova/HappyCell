@@ -1,4 +1,4 @@
-import './styles_clientes.css'
+import './../../styled-components/styles_panelandbuttons.css';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Table, Form, FormGroup, Label, Input, FormText, Col, Row, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
@@ -55,7 +55,7 @@ const Direccionesvista_direcciones = () => {
                         </Col>
 
                     </FormGroup>
-                    <Table striped bordered hover>
+                    <Table className="tab" striped bordered hover>
                         <thead>
                             <tr>
                                 <th>

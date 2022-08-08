@@ -1,14 +1,16 @@
 .navegacion {
     padding: 0 0px;
     width: 100%;
-    background: #1590e4;
-    margin: 5px 10px;
+    background: #1179c8;
+    margin: 0px 0px;
     margin: 0px 0px;
     text-align: center;
 
  
 }
-
+body{
+    background-image: linear-gradient(#ffffff,rgb(255,122,89));
+}
     .navegacion ul {
         list-style: none;
         text-align: center;
