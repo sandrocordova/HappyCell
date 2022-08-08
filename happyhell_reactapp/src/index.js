@@ -11,6 +11,7 @@ import Direccionesvistapage from './pages/Direccionesvista.page ';
 import MensajeriaEjecucionPage from './pages/Mensajeria.ejecucion.page';
 import MensajeriaParametrosPage from './pages/Mensajeria.parametros.page';
 import MensajeriaPlantillasPage from './pages/Mensajeria.plantilla.page';
+import MensajeriaPlantillasNuevaPage from './pages/Mensajeria.plantilla.nueva.page';
 
 
 
@@ -31,7 +32,7 @@ root.render(
                 <Route path="mensajeria/ejecucion" element={<MensajeriaEjecucionPage />} />
                 <Route path="mensajeria/parametros" element={<MensajeriaParametrosPage />} />
                 <Route path="mensajeria/plantillas" element={<MensajeriaPlantillasPage />} />
-
+                <Route path="mensajeria/plantillas/nueva" element={<MensajeriaPlantillasNuevaPage />} />
 
 
             </Routes>

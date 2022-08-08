@@ -82,7 +82,7 @@ export default class SearchBar extends React.Component {
                             
                             <br></br>
                             <ul>
-                                <a href="ss:">115023526</a>
+                                <a href="ss:" className='btn'>115023526</a>
                                 <br></br>
                                 <a draggable="true" href="Apellido:">Apellido</a>
                                 <br></br>
