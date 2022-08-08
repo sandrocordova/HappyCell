@@ -51,6 +51,7 @@
     ]
   },
   "name": "happyhell_reactapp",
+  
   "private": true,
   "scripts": {
     "start": "react-scripts start",
