@@ -48,41 +48,68 @@ function CargarJson() {
     return (
 
         <div>
-            <Row>
-                <Col sm={9}>
-                    <Label for="exampleEmail" hidden>Buscar Plantilla</Label>
-                    <Col sm={12}>
-                        <div className="search">
-                        <Input
-                            id="outlined-basic"
-                            onChange={handleChange}
-                            variant="outlined"
-                            value={busqueda}
-                            fullWidth
-                            label="Search"
-                            placeholder="Buscar Plantilla"
-                        />
-                    </div>
-                    </Col>
-                    
-                </Col>
-                <Col sm={3}>
-                    <Col sm={12}>
-                    <Button color='primary'>Buscar</Button>{' '}
-                    </Col>
-                </Col>
-            </Row>
 
+            <div className="contenedor-buscar-edit">
+                <Row>
+                    <Col sm={9}>
+                        <Label for="exampleEmail" hidden>Buscar Plantilla</Label>
+                        <Col sm={12}>
+                            <div className="search">
+                                <Input
+                                    id="outlined-basic"
+                                    onChange={handleChange}
+                                    variant="outlined"
+                                    value={busqueda}
+                                    fullWidth
+                                    label="Search"
+                                    placeholder="Buscar Plantilla"
+                                />
+                            </div>
+                        </Col>
 
-            <Table border>
+                    </Col>
+                    <Col sm={3}>
+                        <Col sm={12}>
+                            <Button color='primary'>Buscar</Button>{' '}
+                        </Col>
+                    </Col>
+                </Row>
+            </div>
+
+            <Table bordered>
                 <thead>
                     <tr>
                         <th>Nombre plantilla</th>
+                        <th>Descripción</th>
                         <th>Tipo</th>
                         <th>Fecha</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td>Plantilla cobrar</td>
+                        <td>Plantilla para enviar mensajes a los clientes por cobrar</td>
+                        <td>Cobror</td>
+                        <td>21/07/2021</td>
+                    </tr>
+                    <tr>
+                        <td>Plantilla pago realizado</td>
+                        <td>Plantilla para notificar a los clientes que los pagos han sido realizados</td>
+                        <td>Pagos</td>
+                        <td>21/07/2021</td>
+                    </tr>
+                    <tr>
+                        <td>Plantilla promociones</td>
+                        <td>Plantilla para enviar promociones a los clientes</td>
+                        <td>Cobror</td>
+                        <td>21/07/2021</td>
+                    </tr>
+                    <tr>
+                        <td>Plantilla retrasos</td>
+                        <td>Plantilla para notificar de retrasos a los clientes</td>
+                        <td>Cobror</td>
+                        <td>21/07/2021</td>
+                    </tr>
                     {
                         plantillas.map(item => (
                             <tr>

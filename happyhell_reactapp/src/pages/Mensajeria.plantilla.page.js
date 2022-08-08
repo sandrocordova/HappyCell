@@ -6,6 +6,7 @@ import Navopciones from '../components/navopciones/navopciones';
 
 
 import ForMensajeriaPlantillas from '../components/mensajeria/mensajeria-plantillas/mensajeria.main'
+import ForArrastrar from '../components/mensajeria/mensajeria-plantillas/mensajeria.arrastrar'
 
 function Clientespage() {
     return (

@@ -78,29 +78,69 @@ export default class SearchBar extends React.Component {
                         <Col sm={4}>
                             <Label for="exampleEmail">IMEI</Label>
                             <Col sm={12}>
-                                <Input type="number" name="email" id="exampleEmail" placeholder='47891221456614'/>
+                                <Input type="number" name="email" id="exampleEmail" />
                             </Col><br></br>
-                            
-                            <br></br>
-                            <ul>
-                                <a href="ss:">115023526</a>
-                                <br></br>
-                                <a draggable="true" href="Apellido:">Apellido</a>
-                                <br></br>
-                                <a draggable="true" href="Nombre:">Nombre</a>
-                            </ul>
-                            <br></br>
-                            <div className='contenedor-botones'>
                             <Link to=" s">
                                 <Button color='secondary'>Probar Plantilla</Button>{' '}
-                            </Link></div>
+                            </Link>
+                            <br></br>
+                            <a href='#Este es un ejemplo'> Ejemplo </a>
+                            <br></br>
+                            <a href=" https://web.whatsapp.com/"> Hola</a>
+                            <p href="#">asd</p>
+                            <ul>
+                                <li><a href="ss:">1</a></li>
+
+                                <p draggable="true">This is a draggable paragraph.</p>
+
+                                <a draggable="true">This is a draggable paragraph.</a>
+
+                                <a id='init1' key="12" draggable="true" >21231313</a>
+                                
+                            </ul>
+                            <ul>
+                                <div className="todos">
+
+                                    <div id='ejemp1'
+                                        key="1"
+                                        draggable
+                                        onDrag={(event) => this.onDrag(event)}
+                                        value="Hola"
+                                        onDragStar={(event) => this.onDragStar(event)}
+                                    >
+                                        Ejemplooooo
+                                    </div>
+                                </div>
+                                <div id="div1" onDrop={event => this.onDrop(event)} draggable onDragOver={(event => this.onDragOver(event))}>
+                                    --------<br>
+                                    </br>
+                                    <span id="drag1" onDrag={(event) => this.onDrag(event)} draggable="true"
+                                        onDragStar={(event) => this.onDragStar(event)}>drag me to the other box</span>
+                                    suelta aquí <br></br>----
+                                </div>
+                            </ul>
+                            <ul>
+                                <div id="div2" onDrop={event => this.onDrop(event)} draggable onDragOver={(event => this.onDragOver(event))}>------
+                                    <br></br>suelta aquí <br></br>------------</div>
+                                <div
+                                    onDrop={event => this.onDrop(event)}
+                                    onDragOver={(event => this.onDragOver(event))}
+                                    className="done"
+                                    id='div3'
+                                    value="Hola"
+                                >
+                                    ...
+                                    distdsa
+                                    sda
+                                </div>
+                            </ul>
                         </Col>
                         <Col sm={6}>
                             <Label for="imput1">Modelo de Plantilla</Label>
                             <Col sm={12}>
                                 <Input onDrop={event => this.onDrop(event)}
                                     onDragOver={(event => this.onDragOver(event))}
-                                    id="imput1" type="textarea" placeholder='Plantilla desarrollada' rows="10" name="email" />
+                                    id="imput1" type="textarea" placeholder='sdada' rows="10" name="email" />
                             </Col>
                         </Col>
                     </FormGroup>
