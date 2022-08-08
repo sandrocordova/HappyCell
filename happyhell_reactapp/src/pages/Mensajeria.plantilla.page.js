@@ -8,7 +8,7 @@ import Navopciones from '../components/navopciones/navopciones';
 import ForMensajeriaPlantillas from '../components/mensajeria/mensajeria-plantillas/mensajeria.main'
 import ForArrastrar from '../components/mensajeria/mensajeria-plantillas/mensajeria.arrastrar'
 
-function Clientespage() {
+function MensajeriaPlantillasPage() {
     return (
         <div>
             <Navopciones></Navopciones>
@@ -19,4 +19,4 @@ function Clientespage() {
         </div>
     );
 }
-export default Clientespage;
+export default MensajeriaPlantillasPage;

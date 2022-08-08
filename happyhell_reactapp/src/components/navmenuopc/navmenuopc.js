@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './styles.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom'
 const Navmenopc = () => {
     const [opcs, setOpcs] = useState([]);
@@ -20,7 +21,7 @@ const Navmenopc = () => {
 
     return (
 
-
+        <body className="body">
         <nav class='navegacion'>
 
             <ul className="menu">
@@ -72,7 +73,8 @@ const Navmenopc = () => {
                 </li>
             </ul>
 
-        </nav >
+            </nav >
+        </body>
 
     )
 };

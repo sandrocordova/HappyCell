@@ -6,7 +6,7 @@ import Navopciones from '../components/navopciones/navopciones';
 
 import ForMensajeriaCampos from '../components/mensajeria/mensajeria-campos/mensajeria.main'
 
-function Clientespage() {
+function MensajeriaParametrosPage() {
     return (
         <div>
             <Navopciones></Navopciones>
@@ -17,4 +17,4 @@ function Clientespage() {
         </div>
     );
 }
-export default Clientespage;
+export default MensajeriaParametrosPage;
