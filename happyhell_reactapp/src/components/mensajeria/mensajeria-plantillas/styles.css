@@ -1,8 +1,30 @@
-.contenedor-general{
+/*Table, th, td, tr, thead {
+  border: 1px solid black;
+  border-collapse: collapse;
+  border-color: black;
+}*/
+
+.contenedor-br-4{
+  border-top: 1px solid white;
+  border-bottom: 2px solid white;
+
+}
+.contenedor-br-4-int{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.contenedor-btn-crear{
+  text-align: right;
+}
+.contenedor-tabla{
   width: 80%;
   margin-left: 10%;
 }
-
+.contenedor-br-4{
+  text-align: center;
+  vertical-align: middle;
+  align-items: center;
+}
 .contenedor-buscar-edit{
   text-align: center;
   vertical-align: top;
@@ -29,10 +51,9 @@
   display:inline-block;
 }
 
-.boton-regresar Button{
-  background-color: #015a9e;
-  margin-left: 2rem;
-  margin-bottom: 1rem;
+.contenedor-br-3{
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
 }
 
 .boton-primario Button:hover{

@@ -47,14 +47,15 @@ function CargarJson() {
     return (
 
         <div>
-
+            <div className='contenedor-br-4'>
+            <div className='contenedor-br-4-int'>
                 <Row>
                     <Col sm={4}></Col>
                     <Col sm={3}>
                         <Label for="exampleEmail" hidden>Buscar Plantilla</Label>
                         <Col sm={12}>
                             <div className="search">
-                                <Input
+                                <Input size="sm"
                                     id="outlined-basic"
                                     onChange={handleChange}
                                     variant="outlined"
@@ -69,104 +70,87 @@ function CargarJson() {
                     </Col>
                     <Col sm={1}>
                         <Col sm={12}>
-                            <Button color='primary'>Buscar</Button>{' '}
+                            <Button size='sm' color='primary'>Buscar</Button>{' '}
                         </Col>
                     </Col>
                     <Col sm={2}></Col>
                     <Col sm={2}>
-                        <Col sm={12}>
-                            <Link to="nueva">
-                                <Button size="sm" color='primary'>Crear nueva plantilla</Button>
-                            </Link>
-                        </Col>
                     </Col>
                 </Row>
-            <br></br>
-            <Table hover bordered>
-                <thead>
-                    <tr>
-                        <th>Nombre plantilla</th>
-                        <th>Descripción</th>
-                        <th>Tipo</th>
-                        <th>Fecha</th>
-                        <th colSpan="2">Opciones</th>
+            </div>
+            </div>
+            <div className="contenedor-tabla">
+                <div className='contenedor-btn-crear'>
+                    <Link to="nueva">
+                        <a>Crear Plantilla</a>
+                    </Link>
+                </div>
 
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Plantilla cobrar</td>
-                        <td>Plantilla para enviar mensajes a los clientes por cobrar</td>
-                        <td>Cobros</td>
-                        <td>21/07/2021</td>
-                        <td>
-                            <Link to="/01">
-                                <Button size="sm" color='primary'>Modificar</Button>
-                            </Link>
-                            {' '}
-                            <Link to="/02">
-                                <Button size="sm" color='danger'>Eliminar</Button>
-                            </Link>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Plantilla pago realizado</td>
-                        <td>Plantilla para notificar a los clientes que los pagos han sido realizados</td>
-                        <td>Pagos</td>
-                        <td>21/07/2021</td>
-                        <td>
-                            <Link to="/01">
-                                <Button size="sm" color='primary'>Modificar</Button>
-                            </Link>
-                            {' '}
-                            <Link to="/02">
-                                <Button size="sm" color='danger'>Eliminar</Button>
-                            </Link>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Plantilla promociones</td>
-                        <td>Plantilla para enviar promociones a los clientes</td>
-                        <td>Cobros</td>
-                        <td>21/07/2021</td>
-                        <td>
-                            <Link to="/01">
-                                <Button size="sm" color='primary'>Modificar</Button>
-                            </Link>
-                            {' '}
-                            <Link to="/02">
-                                <Button size="sm" color='danger'>Eliminar</Button>
-                            </Link>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Plantilla retrasos</td>
-                        <td>Plantilla para notificar de retrasos a los clientes</td>
-                        <td>Cobros</td>
-                        <td>21/07/2021</td>
-                        <td>
-                            <Link to="/01">
-                                <Button size="sm" color='primary'>Modificar</Button>
-                            </Link>
-                            {' '}
-                            <Link to="/02">
-                                <Button size="sm" color='danger'>Eliminar</Button>
-                            </Link>
-                        </td>
-                    </tr>
-                    {
-                        plantillas.map(item => (
-                            <tr>
-                                <td>{item.vent_descripcion}</td>
-                                <td>{item.tipe_descripcion}</td>
-                                <td>{item.vent_descripcion}</td>
-                            </tr>
-                        ))
-                    }
-                </tbody>
-            </Table>
+                <Table hover bordered>
+                    <thead>
+                        <tr>
+                            <th>Check</th>
+                            <th>Nombre plantilla</th>
+                            <th>Descripción</th>
+                            <th>Tipo</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <Input type="checkbox" name="checkSelect" id="opc" />
+                            </td>
+                            <td>Plantilla cobrar</td>
+                            <td>Plantilla para enviar mensajes a los clientes por cobrar</td>
+                            <td>Cobros</td>
+                            <td>21/07/2021</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <Input type="checkbox" name="checkSelect" id="opc" />
+                            </td>
+                            <td>Plantilla pago realizado</td>
+                            <td>Plantilla para notificar a los clientes que los pagos han sido realizados</td>
+                            <td>Pagos</td>
+                            <td>21/07/2021</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <Input type="checkbox" name="checkSelect" id="opc" />
+                            </td>
+                            <td>Plantilla promociones</td>
+                            <td>Plantilla para enviar promociones a los clientes</td>
+                            <td>Cobros</td>
+                            <td>21/07/2021</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <Input type="checkbox" name="checkSelect" id="opc" />
+                            </td>
+                            <td>Plantilla retrasos</td>
+                            <td>Plantilla para notificar de retrasos a los clientes</td>
+                            <td>Cobros</td>
+                            <td>21/07/2021</td>
+                        </tr>
+                        {
+                            plantillas.map(item => (
+                                <tr>
+                                    <td>
+                                        <Input type="checkbox" name="checkSelect" id="opc" />
+                                    </td>
+                                    <td>{item.vent_descripcion}</td>
+                                    <td>{item.tipe_descripcion}</td>
+                                    <td>{item.vent_descripcion}</td>
+                                    <td>21/07/2021</td>
+                                </tr>
+                            ))
+                        }
+                    </tbody>
+                </Table>
 
 
+            </div>
         </div>
 
 

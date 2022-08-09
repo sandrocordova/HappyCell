@@ -11,7 +11,8 @@ export default class FormMain extends React.Component {
 
         return (
             <body>
-                <div class="backbutton">
+                <div class="contenedor-br-3">
+                    Mensajería/Mensajería Plantilla
                     <FormMenu/>
                 </div>
                 <div>
