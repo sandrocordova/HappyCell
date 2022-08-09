@@ -77,22 +77,25 @@ export default class SearchBar extends React.Component {
                         <Col sm={4}>
                             <Label for="exampleEmail">IMEI</Label>
                             <Col sm={12}>
-                                <Input type="number" name="email" id="exampleEmail" placeholder='47891221456614'/>
+                                <Input type="number" name="email" id="exampleEmail" placeholder='47891221456614' />
                             </Col><br></br>
-                            
+
                             <br></br>
-                            <ul>
-                                <a href="ss:" className='btn'>115023526</a>
-                                <br></br>
-                                <a draggable="true" href="Apellido:">Apellido</a>
-                                <br></br>
-                                <a draggable="true" href="Nombre:">Nombre</a>
-                            </ul>
+                            <div className='contenedor-etiquetas'>
+                                <ul>
+                                    <a href="ss:" className='btn'>115023526</a>
+                                    <br></br>
+                                    <a draggable="true" href="Apellido:">Apellido</a>
+                                    <br></br>
+                                    <a draggable="true" href="Nombre:">Nombre</a>
+                                </ul>
+                            </div>
+
                             <br></br>
                             <div className='contenedor-botones'>
-                            <Link to=" s">
-                                <Button color='secondary'>Probar Plantilla</Button>{' '}
-                            </Link></div>
+                                <Link to=" s">
+                                    <Button color='secondary'>Probar Plantilla</Button>{' '}
+                                </Link></div>
                         </Col>
                         <Col sm={6}>
                             <Label for="imput1">Modelo de Plantilla</Label>
