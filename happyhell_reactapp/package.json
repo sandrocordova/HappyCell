@@ -54,12 +54,6 @@
       "react-app/jest"
     ]
   },
-<<<<<<< HEAD
-=======
-  "name": "happyhell_reactapp",
-  
-  "private": true,
->>>>>>> 06d0690087c11cb547ce4952f58f73b21556afca
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
