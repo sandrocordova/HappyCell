@@ -1,16 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\apps",
-    "\\apps\\agencia",
-    "\\apps\\agencia\\api",
-    "\\apps\\transaccion",
-    "\\apps\\transaccion\\__pycache__",
-    "\\apps\\__pycache__",
     "\\happyhell_reactapp",
     "\\happyhell_reactapp\\src",
-    "\\happyhell_reactapp\\src\\contexts"
+    "\\happyhell_reactapp\\src\\components",
+    "\\happyhell_reactapp\\src\\components\\clientes",
+    "\\happyhell_reactapp\\src\\components\\mensajeria",
+    "\\happyhell_reactapp\\src\\components\\navmenuopc",
+    "\\happyhell_reactapp\\src\\contexts",
+    "\\happyhell_reactapp\\src\\hooks",
+    "\\happyhell_reactapp\\src\\img"
   ],
-  "SelectedNode": "\\apps\\agencia\\views.py",
+  "SelectedNode": "\\happyhell_reactapp\\src\\components\\clientes\\styles_clientes.css",
   "PreviewInSolutionExplorer": false
 }

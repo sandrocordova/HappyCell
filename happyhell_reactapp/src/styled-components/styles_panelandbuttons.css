@@ -1,0 +1,94 @@
+
+.imgButton {
+    height: 75px;
+    width: 75px;
+    display: inline-block;
+}
+.checkBoxButton {
+    height: 15px;
+    width: 15px;
+    display: inline-block;
+}
+.buttonImages {
+    margin-right:10px;
+    margin-bottom: 10px;
+    height: 150px;
+    width: 170px;
+    background-color: darkgray;
+    text-align: center;
+    color: white;
+    align-items: center;
+    cursor: pointer;
+}
+
+    .buttonImages:hover {
+        background-color: rgb(1, 90, 158)
+    }
+
+
+    .buttonImages:active {
+        background-color: rgb(1, 90, 158);
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+.imgIcon {
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+}
+.buttonIcon {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    color: white;
+    align-items: center;
+    border: none;
+    background: none;
+ 
+}
+
+    .buttonIcon:hover {
+        background-color: transparent;
+    }
+
+
+    .buttonIcon:active {
+        background-color: transparent;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+
+.opcionesCuadradas {
+    align-items: center;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+
+.cat {
+    height: 300px;
+    width: 300px;
+}
+.headerClientes {
+    margin-top:0px;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    background-color: rgb(3 126 221 / 0.55);
+    color: rgb(255, 255, 255);
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.tab {
+    flex-wrap: nowrap;
+    overflow-x: auto
+}

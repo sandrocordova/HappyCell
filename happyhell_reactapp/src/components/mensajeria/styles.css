@@ -1,0 +1,17 @@
+.boton-regresar Button{
+  background-color: #015a9e;
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+}
+
+.boton-primario Button:hover{
+  color: #c0f113;
+}
+
+.contenedor-botones{
+  text-align: center;
+}
+.contenedor-form {
+  margin-left: 10%;
+  width: 80%;
+}

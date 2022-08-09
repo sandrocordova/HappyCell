@@ -1,23 +1,25 @@
-body {
+.body {
     margin: 0;
     padding: 0;
+    background-color: rgb(1, 90, 158);
 }
 
 .nav-header {
     flex-direction: row;
+    align-items: center;
     box-sizing: border-box;
     display: flex;
-    background-color: RGB(20,0,237);
+    background-color: rgb(1, 90, 158);
     color: rgb(255, 255, 255);
-    max-height: 3rem;
+   
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.logo {
-    padding: .35rem 0 0 .6rem;
-    width: 9rem;
-    height: 2rem;
-}
+
 
 .image {
     width: 100%;
@@ -26,15 +28,15 @@ body {
 
 .title {
     margin: .9rem 5rem 0 5rem;
-    font-size: 1rem;
+    font-size: .8rem;
     font-weight: 600;
-    width: 50rem;
+    width: 40%;
 }
 
 .location {
     flex-direction: column;
     display: flex;
-    width: 20rem;
+    width: 50%;
     margin: .6rem 0 0 10rem;
     font-size: .7rem;
     font-weight: 300;
@@ -43,9 +45,9 @@ body {
 .userSession {
     flex-direction: row;
     display: flex;
-    width: 40rem;
+    width: 15%;
     margin: .3rem 0 0 5rem;
-    font-size: .9rem;
+    font-size: .8rem;
     font-weight: 600;
 }
 
@@ -60,9 +62,9 @@ body {
     border: solid 2px rgb(255, 255, 255);
 }
 
-.userIcon:hover {
-    cursor: pointer;
-}
+    .userIcon:hover {
+        cursor: pointer;
+    }
 
 .userData {
     flex-direction: column;
@@ -72,4 +74,22 @@ body {
 .userRole {
     font-size: 1rem;
     font-weight: 600;
+}
+.cover {
+    padding: 0px 30px;
+    position: relative;
+}
+
+.left {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.right {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
 }
