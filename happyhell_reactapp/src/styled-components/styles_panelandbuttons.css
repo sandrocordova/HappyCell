@@ -22,7 +22,7 @@
 }
 
     .buttonImages:hover {
-        background-color: rgb(1, 90, 158)
+        background-color: lightskyblue;
     }
 
 
@@ -46,7 +46,7 @@
     align-items: center;
     border: none;
     background: none;
- 
+    display: inline-block;
 }
 
     .buttonIcon:hover {
@@ -70,12 +70,9 @@
 
 }
 
-.cat {
-    height: 300px;
-    width: 300px;
-}
+
 .headerClientes {
-    margin-top:0px;
+    margin-top: 0px;
     flex-direction: row;
     align-items: center;
     box-sizing: border-box;
@@ -87,6 +84,24 @@
     padding-top: 0px;
     padding-bottom: 0px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border-bottom-color: white;
+    border-bottom-style: solid;
+}
+.headerClientesSub{
+    margin-top: 0px;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    background-color: red;
+    color: rgb(255, 255, 255);
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border-bottom-color: white;
+    border-bottom-style: solid;
 }
 .tab {
     flex-wrap: nowrap;

@@ -1,8 +1,4 @@
-.body {
-    margin: 0;
-    padding: 0;
-    background-color: rgb(1, 90, 158);
-}
+
 
 .nav-header {
     flex-direction: row;
@@ -11,7 +7,8 @@
     display: flex;
     background-color: rgb(1, 90, 158);
     color: rgb(255, 255, 255);
-   
+    border-bottom-color: white;
+    border-bottom-style: solid;
     padding-left: 100px;
     padding-right: 100px;
     padding-top: 10px;

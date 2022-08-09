@@ -11,10 +11,10 @@ function App() {
 
         <div className="App">
 
-
+           
             <Navopciones></Navopciones>
-            <Navmenopc></Navmenopc>
-
+                <Navmenopc></Navmenopc>
+            
 
 
 
