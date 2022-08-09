@@ -50,3 +50,8 @@
   text-align: center;
   margin-bottom: 1rem;
 }
+.contenedor-etiquetas a{
+  background-color: grey;
+  display: inline-block;
+  padding: .5em .75em;
+}
