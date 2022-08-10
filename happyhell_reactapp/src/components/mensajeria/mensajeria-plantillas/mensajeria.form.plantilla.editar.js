@@ -77,18 +77,7 @@ export default class SearchBar extends React.Component {
                                 <Label for="exampleEmail">IMEI</Label>
                                 <Col sm={12}>
                                     <Input type="number" name="email" id="exampleEmail" placeholder='47891221456614' />
-                                </Col><br></br>
-                                <div className='contenedor-etiquetas'>
-                                    <ul>
-                                        <a href="Nombre:" className='btn'>Nombre</a>
-                                        <br></br>
-                                        <a href="Dirección:" className='btn'>Dirección</a>
-                                        <br></br>
-                                        <a href="Celular:" className='btn'>Celular</a>
-                                        <br></br>
-                                    </ul>
-                                </div>
-
+                                </Col>
                             </Col>
                             <Col sm={6}>
                                 <Label for="imput1">Modelo de Plantilla</Label>
