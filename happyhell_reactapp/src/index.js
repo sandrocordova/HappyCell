@@ -12,6 +12,7 @@ import MensajeriaEjecucionPage from './pages/Mensajeria.ejecucion.page';
 import MensajeriaParametrosPage from './pages/Mensajeria.parametros.page';
 import MensajeriaPlantillasPage from './pages/Mensajeria.plantilla.page';
 import MensajeriaPlantillasNuevaPage from './pages/Mensajeria.plantilla.nueva.page';
+import MensajeriaPlantillasEditarPage from './pages/Mensajeria.plantilla.editar.page';
 
 
 
@@ -33,8 +34,7 @@ root.render(
                 <Route path="mensajeria/parametros" element={<MensajeriaParametrosPage />} />
                 <Route path="mensajeria/plantillas" element={<MensajeriaPlantillasPage />} />
                 <Route path="mensajeria/plantillas/nueva" element={<MensajeriaPlantillasNuevaPage />} />
-
-
+                <Route path="mensajeria/plantillas/editar" element={<MensajeriaPlantillasEditarPage />} />
             </Routes>
         </BrowserRouter>
     </React.StrictMode>

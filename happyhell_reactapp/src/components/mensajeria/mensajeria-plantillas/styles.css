@@ -9,7 +9,7 @@
   border-bottom: 2px solid white;
 
 }
-.contenedor-br-4-int{
+.contenedor-br-int{
   margin-top: 5px;
   margin-bottom: 5px;
 }
@@ -17,8 +17,22 @@
   text-align: right;
 }
 .contenedor-tabla{
+  background-color: gainsboro;
   width: 80%;
   margin-left: 10%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.contenedor-lista{
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.contenedor-div-tabla{
+  overflow: scroll;
+  height: 300px;
+  border: 1px solid white;
 }
 .contenedor-br-4{
   text-align: center;
@@ -34,6 +48,10 @@
   margin-left: 33%;
 }
 
+.contenedor-btn-back{
+  margin-left: 2rem;
+  display: inline;
+}
 .contenedor-buscar{
   text-align: center;
   vertical-align: top;
@@ -52,15 +70,31 @@
 }
 
 .contenedor-br-3{
-  border-top: 1px solid white;
+  
+  border-top: 2px solid white;
   border-bottom: 1px solid white;
-}
 
+}
+.contenedor-br-3-int{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 2rem;
+
+}
+.label{
+  margin: 0%;
+  border: 0ch;
+}
+.contenedor-label-br-4 Label{
+  border-width: 0ch;
+  margin: 0%;
+}
 .boton-primario Button:hover{
   color: #c0f113;
 }
 
 .contenedor-botones{
+  margin-top: 10px;
   text-align: center;
 }
 .contenedor-form {

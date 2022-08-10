@@ -33,6 +33,7 @@ class Usernavtres(models.Model):
     opme_codigo = models.IntegerField(db_column='OPME_CODIGO')  # Field name made lowercase.
     vent_codigo = models.IntegerField(db_column='VENT_CODIGO', primary_key=True)  # Field name made lowercase.
     vent_descripcion = models.CharField(db_column='VENT_DESCRIPCION', max_length=200)  # Field name made lowercase.
+    vent_ventana = models.CharField(db_column='VENT_VENTANA', max_length=200)  # Field name made lowercase.
     
 class Usernavdos(models.Model):
     usua_login = models.CharField(db_column='u.USUA_LOGIN', max_length=40)  # Field name made lowercase.
