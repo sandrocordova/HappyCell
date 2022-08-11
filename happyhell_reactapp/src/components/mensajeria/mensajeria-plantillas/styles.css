@@ -9,6 +9,18 @@
   border-bottom: 2px solid white;
 
 }
+
+.contenedor-br-3{
+  border-top: 2px solid white;
+  border-bottom: 1px solid white;
+}
+
+.contenedor-br-3-int{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 2rem;
+}
+
 .contenedor-br-int{
   margin-top: 5px;
   margin-bottom: 5px;
@@ -69,18 +81,6 @@
   display:inline-block;
 }
 
-.contenedor-br-3{
-  
-  border-top: 2px solid white;
-  border-bottom: 1px solid white;
-
-}
-.contenedor-br-3-int{
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-left: 2rem;
-
-}
 .label{
   margin: 0%;
   border: 0ch;
