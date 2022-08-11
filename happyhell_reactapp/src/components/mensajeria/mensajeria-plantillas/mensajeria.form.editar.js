@@ -1,7 +1,6 @@
 import React from 'react';
 import './styles.css';
-import FormBuscar from './mensajeria.form.buscar';
-import FormPlantilla from './mensajeria.form.plantilla.nueva';
+import FormPlantilla from './mensajeria.form.plantilla.editar';
 
 export default class SearchBar extends React.Component {
     constructor() {
@@ -9,11 +8,9 @@ export default class SearchBar extends React.Component {
     }
     render() {
         return (
-            <div>
-                    <FormBuscar />
-                
+            <div className="contenedor-plantilla-edit">
+                <FormPlantilla/>
             </div>
-
         )
     }
 

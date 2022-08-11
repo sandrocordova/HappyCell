@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles.css';
-import Formcampos from './mensajeria.form.nueva';
+import Formcampos from './mensajeria.form.editar';
 import FormMenu from '../mensajeria.menu';
 import { Link } from 'react-router-dom';
 
@@ -19,7 +19,7 @@ export default class FormMain extends React.Component {
                             </Link>/<Link to="/mensajeria/plantillas">
                                 <a>Mensajería Plantilla</a>
                             </Link>/<Link to="/mensajeria/plantillas">
-                                <a>Crear</a>
+                                <a>Editar</a>
                             </Link>
                     </div>
                 </div>

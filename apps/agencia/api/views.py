@@ -18,11 +18,20 @@ def usernav_api_view(request):
 def nav_infor_api_view(request):
     
     if request.method == 'GET':
+        consulta = Usernavtres.objects.raw("SELECT u.USUA_LOGIN, um.tipe_codigo, tp.TIPE_DESCRIPCION, um.mosi_codigo, OM.OPME_DESCRIPCION, OM.OPME_ORDEN, OM.OPME_CODIGO, pf.VENT_CODIGO, VE.VENT_DESCRIPCION, ve.vent_ventana FROM usuario_modulo um inner join usuario u on um.USUA_CODIGO=u.usua_codigo inner join tipo_perfil tp on um.TIPE_CODIGO= tp.TIPE_CODIGO inner join OPCION_MENU om on um.MOSI_CODIGO = om.MOSI_CODIGO inner join perfil_ventana pf on (om.opme_codigo = pf.OPME_CODIGO) inner join ventana ve ON (PF.VENT_CODIGO=VE.VENT_CODIGO and vent_ventana like '/%%') WHERE u.USUA_CODIGO = 'ADMINISTRADOR' and um.MOSI_CODIGO in (4,8,10) AND OM.OPME_CODIGO >= 800 order by om.opme_orden")  
+        serializer_empresas = UserNavSerializerDos(consulta, many = True)
+        return Response(serializer_empresas.data, status = status.HTTP_200_OK)
+    
+    
+"""@api_view(['GET'])
+def nav_infor_api_view(request):
+
+    if request.method == 'GET':
         consulta = Usernavtres.objects.raw("SELECT TOP 40 u.USUA_LOGIN, um.tipe_codigo, tp.TIPE_DESCRIPCION, um.mosi_codigo, OM.OPME_DESCRIPCION, OM.OPME_ORDEN, OM.OPME_CODIGO, pf.VENT_CODIGO, VE.VENT_DESCRIPCION FROM usuario_modulo um inner join usuario u on um.USUA_CODIGO=u.usua_codigo inner join tipo_perfil tp on um.TIPE_CODIGO=tp.TIPE_CODIGO inner join OPCION_MENU om on um.MOSI_CODIGO=om.MOSI_CODIGO inner join perfil_ventana pf on um.MOSI_CODIGO=pf.MOSI_CODIGO inner join ventana ve ON PF.VENT_CODIGO=VE.VENT_CODIGO WHERE u.USUA_CODIGO='ADMINISTRADOR' and um.MOSI_CODIGO in (10)")  
         serializer_empresas = UserNavSerializerDos(consulta, many = True)
         return Response(serializer_empresas.data, status = status.HTTP_200_OK)
 
-"""@api_view(['GET'])
+@api_view(['GET'])
 def nav_infor_api_view(request):
     
     if request.method == 'GET':
