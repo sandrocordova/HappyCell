@@ -12,6 +12,11 @@ import MensajeriaEjecucionPage from './pages/Mensajeria.ejecucion.page';
 import MensajeriaParametrosPage from './pages/Mensajeria.parametros.page';
 import MensajeriaPlantillasPage from './pages/Mensajeria.plantilla.page';
 import MensajeriaPlantillasNuevaPage from './pages/Mensajeria.plantilla.nueva.page';
+import Clientesnaturalespage from './pages/Clientes.naturales.page';
+import Clientesjuridicospage from './pages/Clientes.juridicos';
+import Direccionesvista2page from './pages/Direccionesvista2.page';
+import Direccionestelefonopage from './pages/Direccionestelefono.page';
+import Direccionestelefono2page from './pages/Direccionestelefono2.page';
 
 
 
@@ -33,7 +38,11 @@ root.render(
                 <Route path="mensajeria/parametros" element={<MensajeriaParametrosPage />} />
                 <Route path="mensajeria/plantillas" element={<MensajeriaPlantillasPage />} />
                 <Route path="mensajeria/plantillas/nueva" element={<MensajeriaPlantillasNuevaPage />} />
-
+                <Route path="clientes/vistaclientes/clientesnaturales" element={<Clientesnaturalespage />} />
+                <Route path="clientes/vistaclientes/clientesjuridicos" element={<Clientesjuridicospage />} />
+                <Route path="clientes/direcciones/direcciones2" element={<Direccionesvista2page />} />
+                <Route path="clientes/direcciones/direcciones2/telefono" element={<Direccionestelefonopage />} />
+                <Route path="clientes/direcciones/direcciones2/telefono/telefono2" element={<Direccionestelefono2page />} />
 
             </Routes>
         </BrowserRouter>

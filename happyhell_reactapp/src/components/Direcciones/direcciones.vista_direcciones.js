@@ -31,30 +31,42 @@ const Direccionesvista_direcciones = () => {
                     <FormGroup row>
                         <Col sm={1}>
                             <Label for="Identificacion">Codigo: </Label>
-                            <Col sm={12}>
+                            <Col sm={10}>
                                 <Input type="id" name="identificacion" id="identificacion" />
                             </Col>
                         </Col>
                         <Col sm={3}>
                             <Label for="exampleEmail">Tipo de identificacion</Label>
-                            <Col sm={12}>
+                            <Col sm={10}>
                                 <Input type="nombre" name="nombre" id="nombre" />
                             </Col>
                         </Col>
                         <Col sm={3}>
+                            <Label for="exampleEmail">Identificacion</Label>
+                            <Col sm={10}>
+                                <Input type="nombre" name="nombre" id="nombre" />
+                            </Col>
+                        </Col>
+                        <Col sm={2}>
                             <Label for="exampleEmail">Nombre</Label>
-                            <Col sm={12}>
+                            <Col sm={10}>
                                 <Input type="nombre" name="nombre" id="nombre" />
                             </Col>
                         </Col>
                         <Col sm={3}>
                             <Label for="exampleEmail">Tipo</Label>
-                            <Col sm={12}>
+                            <Col sm={10}>
                                 <Input type="nombre" name="nombre" id="nombre" />
                             </Col>
                         </Col>
 
                     </FormGroup>
+
+                    <div className='contenedor-btn-crear'>
+                        <Link to="nueva">
+                            <a>Crear</a>
+                        </Link>
+                    </div>
                     <Table className="tab" striped bordered hover>
                         <thead>
                             <tr>
@@ -89,14 +101,17 @@ const Direccionesvista_direcciones = () => {
 
                         </tbody>
                     </Table>
-                    <div className='contenedor-botones'>
-                        <Button color='primary'>Seleccionar</Button>{' '}
-                        <Button color="danger">Cerrar</Button>
 
-                    </div>
 
                 </Form>
-
+                <div className="buttomStyle">
+                    <Link to="/clientes/direcciones/direcciones2">
+                        <Button className="buttonStyle" color="success">Seleccionar</Button>
+                    </Link>
+                    <Link to="/clientes/vistaclientes/clientesjuridicos">
+                        <Button className="buttonStyle" color="danger">Cerrar</Button>
+                    </Link>
+                </div>
 
             </div >
 

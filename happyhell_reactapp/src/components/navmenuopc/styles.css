@@ -8,11 +8,10 @@
 body{
     background-color:lightskyblue;  
 }
->>>>>>> 06d0690087c11cb547ce4952f58f73b21556afca
     .navegacion ul {
         list-style: none;
         text-align: center;
-        color: #015a9e;
+        color: white;
 
 
     }
@@ -26,9 +25,8 @@ body{
 }
 
     .menu > li > a {
-        display: block;
         padding: 15px 20px;
-        color: black;
+        color: white;
         text-decoration: none;
         text-align: center;
     }
@@ -83,4 +81,55 @@ body{
     background: transparent;
     display: inline-block;
     
+}
+
+.CarouselStyle {
+    color: white;
+    font-size: 10px;
+    margin-left: 50px;
+    display: inline-flex;
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+.containerNavbar {
+    padding-left: 300px;
+    padding-right: 300px;
+    height: auto;
+    width: auto;
+}
+
+
+#container {
+    border: 1px solid #ccc;
+    overflow: scroll;
+    width: 200px;
+    #posts
+
+{
+    max-width: 300px;
+    min-height: 50px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    a
+
+{
+    border: 1px solid white;
+    padding: 5px;
+    color: white;
+    margin: 5px;
+}
+
+}
+}
+
+button {
+    background: black;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 10px;
+    cursor: pointer;
 }
