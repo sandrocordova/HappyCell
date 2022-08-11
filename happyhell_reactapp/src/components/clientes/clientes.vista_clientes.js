@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
-import './../../styled-components/styles_panelandbuttons.css';
+import './../../styled-components/styles_generales.css';
 import { Button, Table, Form, FormGroup, Label, Input, FormText, Col, Row, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
 
 const Clientesvista_clientes = () => {
@@ -96,12 +96,12 @@ const Clientesvista_clientes = () => {
 
 
                 </Form>
-                <div className="buttomStyle">
+                <div className="containerButtonStyleFooter">
                     <Link to="/clientes/vistaclientes/clientesnaturales">
-                        <Button className="buttonStyle" color="success">Seleccionar</Button>
+                        <Button className="buttonStyleFooter" color="success">Seleccionar</Button>
                     </Link>
                     <Link to="/clientes/vistaclientes/clientesjuridicos">
-                        <Button className="buttonStyle" color="danger">Cerrar</Button>
+                        <Button className="buttonStyleFooter" color="danger">Cerrar</Button>
                     </Link>
                 </div>
 

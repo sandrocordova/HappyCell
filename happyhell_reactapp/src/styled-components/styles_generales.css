@@ -1,4 +1,4 @@
-
+/*Inicia menu principal de clientes*/
 .imgButton {
     height: 75px;
     width: 75px;
@@ -34,13 +34,15 @@
         transform: translateY(4px);
     }
 
-.imgIcon {
+/*Termina menu principal de clientes*/
+/*Inicia iconos de volver al menu principal*/
+.imgIcon{
     height: 20px;
     width: 20px;
     display: inline-block;
 }
 
-.buttonIcon {
+.buttonIcon{
     margin-right: 10px;
     margin-bottom: 10px;
     height: 30px;
@@ -63,7 +65,7 @@
         box-shadow: 0 5px #666;
         transform: translateY(4px);
     }
-
+/*Termina iconos de volver al menu principal*/
 .opcionesCuadradas {
     align-items: center;
     padding-left: 100px;

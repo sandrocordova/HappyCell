@@ -1,4 +1,4 @@
-import './../../styled-components/styles_panelandbuttons.css';
+
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Table, Form, FormGroup, Label, Input, FormText, Col, Row, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
@@ -104,12 +104,12 @@ const Direccionesvista_direcciones = () => {
 
 
                 </Form>
-                <div className="buttomStyle">
+                <div className="containerButtonStyleFooter">
                     <Link to="/clientes/direcciones/direcciones2">
-                        <Button className="buttonStyle" color="success">Seleccionar</Button>
+                        <Button className="buttonStyleFooter" color="success">Seleccionar</Button>
                     </Link>
                     <Link to="/clientes/vistaclientes/clientesjuridicos">
-                        <Button className="buttonStyle" color="danger">Cerrar</Button>
+                        <Button className="buttonStyleFooter" color="danger">Cerrar</Button>
                     </Link>
                 </div>
 
