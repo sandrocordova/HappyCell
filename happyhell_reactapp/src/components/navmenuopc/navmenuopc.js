@@ -1,8 +1,7 @@
 import React, { useEffect, useState,useRef } from 'react';
-import { Component } from 'react';
 import './styles.css';
 import { Link } from 'react-router-dom'
-import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+
 
 
 const Navmenopc = () => {
