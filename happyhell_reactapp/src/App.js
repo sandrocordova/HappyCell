@@ -2,7 +2,6 @@ import './App.css';
 import React, { useState } from 'react';
 import Navopciones from './components/navopciones/navopciones'
 import Navmenopc from './components/navmenuopc/navmenuopc'
-import Carousel from 'react-bootstrap/Carousel';
 
 
 
