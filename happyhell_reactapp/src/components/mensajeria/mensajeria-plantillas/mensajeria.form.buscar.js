@@ -149,12 +149,12 @@ function CargarJson() {
                         </tbody>
                     </Table>
                 </div>
-                <div className='contenedor-botones'>
+                <div className='containerButonStyleFotter'>
                     <Link to="editar">
-                        <Button size='sm' color='primary'>Seleccionar</Button>{' '}
+                        <Button size='sm' className='butonStyleFotter' color='primary'>Seleccionar</Button>
                     </Link>
                     <Link to="/mensajeria/plantillas">
-                        <Button size='sm' color='danger'>Cancelar</Button>{' '}
+                        <Button size='sm' className='butonStyleFotter' color='danger'>Cancelar</Button>
                     </Link>
                 </div>
             </div>
