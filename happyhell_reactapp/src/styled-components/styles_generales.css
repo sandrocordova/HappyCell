@@ -1,16 +1,18 @@
-
+/*Inicia menu principal de clientes*/
 .imgButton {
     height: 75px;
     width: 75px;
     display: inline-block;
 }
+
 .checkBoxButton {
     height: 15px;
     width: 15px;
     display: inline-block;
 }
+
 .buttonImages {
-    margin-right:10px;
+    margin-right: 10px;
     margin-bottom: 10px;
     height: 150px;
     width: 170px;
@@ -31,12 +33,16 @@
         box-shadow: 0 5px #666;
         transform: translateY(4px);
     }
-.imgIcon {
+
+/*Termina menu principal de clientes*/
+/*Inicia iconos de volver al menu principal*/
+.imgIcon{
     height: 20px;
     width: 20px;
     display: inline-block;
 }
-.buttonIcon {
+
+.buttonIcon{
     margin-right: 10px;
     margin-bottom: 10px;
     height: 30px;
@@ -59,7 +65,7 @@
         box-shadow: 0 5px #666;
         transform: translateY(4px);
     }
-
+/*Termina iconos de volver al menu principal*/
 .opcionesCuadradas {
     align-items: center;
     padding-left: 100px;
@@ -67,7 +73,6 @@
     padding-top: 10px;
     padding-bottom: 10px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-
 }
 
 
@@ -86,24 +91,113 @@
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     border-bottom-color: white;
     border-bottom-style: solid;
+
 }
-.headerClientesSub{
-    margin-top: 0px;
+
+.headerClientesSub {
     flex-direction: row;
     align-items: center;
-    box-sizing: border-box;
-    display: flex;
-    background-color: red;
+    background-color: rgb(3 126 221 / 0.55);
     color: rgb(255, 255, 255);
-    padding-left: 100px;
+    padding-left: 50px;
     padding-right: 100px;
-    padding-top: 0px;
-    padding-bottom: 0px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     border-bottom-color: white;
     border-bottom-style: solid;
+    font-size:12px;
 }
+
 .tab {
     flex-wrap: nowrap;
     overflow-x: auto
+}
+
+
+
+.buttonSearch {
+    color: white;
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 10px;
+    width: auto;
+    height: auto;
+}
+
+.linkConfig {
+    font-size: 12px;
+    color: blue;
+    text-align: right;
+    white-space: normal;
+}
+
+.formSize {
+    font-size: 10px;
+    border-style: double;
+    border-color: gray;
+    padding-bottom:2px;
+    padding-top:10px;
+    padding-left:10px;
+    padding-right:10px;
+    margin-bottom:2px;
+}
+Input[type=text] {
+    
+    border: none;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 10px;
+    padding: 2px;
+}
+
+.select{
+    border: none;
+    font-size: 10px;
+    padding: 2px;
+    text-decoration: none;
+    
+    cursor: pointer;
+
+}
+
+.rowStyle {
+    font-size: 10px;
+    border-style: double;
+    border-color: gray;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left:5px;
+    margin-right:5px;
+    margin-bottom:5px;
+
+
+}
+.rowStyleDir {
+    align-content:center;
+    overflow: hidden;
+    font-size: 10px;
+    border-style: double;
+    border-color: gray;
+
+    margin-left: 400px;
+    margin-right: 400px;
+    margin-bottom: 5px;
+}
+.containerButtonStyleFooter {
+    margin-top: 10px;
+    text-align: right;
+}
+.buttonStyleFooter {
+    display: inline-block;
+    margin-left: 10px;
+    width: auto;
+    height: auto;
+    font-size: 10px;
+    color: white;
+    justify-content: right;
+}
+.space{
+    margin-left:5px;
 }

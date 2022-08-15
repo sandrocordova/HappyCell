@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
-import './../../styled-components/styles_panelandbuttons.css';
+import './../../styled-components/styles_generales.css';
 import { Button, Table, Form, FormGroup, Label, Input, FormText, Col, Row, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
 
 const Clientesvista_clientes = () => {
@@ -8,26 +8,28 @@ const Clientesvista_clientes = () => {
 
     return (
         <div>
-            <div >
-                <div className="'headerClientesSub'">
-                    <Link to="/clientes">
-                        <Button className="buttonIcon" title="Clientes" size="large" variant="contained" alt="Clientes">
-                            <img className="imgIcon" src="https://cdn-icons.flaticon.com/png/128/3936/premium/3936751.png?token=exp=1659593203~hmac=4b7dd15d13b93caf41c2566c56231078" alt="Clientes" />
+            <div className="headerClientesSub">
 
-                        </Button>
+                <Link to="/clientes">
+                    <Button className="buttonIcon" title="Clientes" size="large" variant="contained" alt="Clientes">
+                        <img className="imgIcon" src="https://cdn-icons.flaticon.com/png/128/3936/premium/3936751.png?token=exp=1659593203~hmac=4b7dd15d13b93caf41c2566c56231078" alt="Clientes" />
 
-                    </Link>
-                    <Label >
-                        Clientes
-                    </Label>
+                    </Button>
 
-                </div>
+                </Link>
+                <Label >
+                    Clientes
+                </Label>
+                <br />
+                <Label>
+                    Mantenimiento de Clientes/Clientes
+                </Label>
+            </div>
 
+            <div className="opcionesCuadradas">
                 <Form>
-                    <div className='opcionesCuadradas'>
+                    <Row>
 
-                    </div>
-                    <FormGroup row>
                         <Col sm={3}>
                             <Label for="Identificacion">Identificacion</Label>
                             <Col sm={12}>
@@ -39,9 +41,24 @@ const Clientesvista_clientes = () => {
                             <Col sm={12}>
                                 <Input type="nombre" name="nombre" id="nombre" />
                             </Col>
-                        </Col>
 
-                    </FormGroup>
+                        </Col>
+                        
+                        <Col sm={5}>
+
+                                <Button className="buttonSearch" color="secondary">Buscar</Button>
+                           
+                        </Col>
+                                
+
+
+                    </Row>
+
+                    <div className='contenedor-btn-crear'>
+                        <Link to="nueva">
+                            <a>Crear</a>
+                        </Link>
+                    </div>
                     <Table className="table" striped bordered hover>
                         <thead>
                             <tr>
@@ -76,18 +93,17 @@ const Clientesvista_clientes = () => {
 
                         </tbody>
                     </Table>
-                    <div className='contenedor-botones'>
-                        <Button color='primary'>Seleccionar</Button>{' '}
-                        <Button color="danger">Cerrar</Button>
 
-
-
-
-
-                    </div>
 
                 </Form>
-
+                <div className="containerButtonStyleFooter">
+                    <Link to="/clientes/vistaclientes/clientesnaturales">
+                        <Button className="buttonStyleFooter" color="success">Seleccionar</Button>
+                    </Link>
+                    <Link to="/clientes/vistaclientes/clientesjuridicos">
+                        <Button className="buttonStyleFooter" color="danger">Cerrar</Button>
+                    </Link>
+                </div>
 
             </div >
 

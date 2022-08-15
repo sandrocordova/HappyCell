@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useRef } from 'react';
 import './styles.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom'
 import { Button, Table, Form, FormGroup, Label, Input, FormText, Col, Row, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
+
+
 const Navmenopc = () => {
     const [opcs, setOpcs] = useState([]);
     useEffect(() => {
@@ -19,8 +20,12 @@ const Navmenopc = () => {
 
     const validacion = Object.values(opcs.map(item => (item.opme_descripcion)))
     const validacion2 = [...new Set(validacion)]
-
+    const ref = useRef(null);
+    const scroll = (scrollOffset) => {
+        ref.current.scrollLeft += scrollOffset;
+    };
     return (
+
 
         <body className="body">
 
@@ -29,14 +34,14 @@ const Navmenopc = () => {
                 <ul className="menu">
                     <Link to="/">
                         <Button className="buttonIconOpciones" title="Clientes" size="large" variant="contained" alt="Clientes">
-                            <img className="imgIcon" src="https://cdn-icons.flaticon.com/png/128/3936/premium/3936751.png?token=exp=1659593203~hmac=4b7dd15d13b93caf41c2566c56231078" alt="Clientes" align="left"/>
+                            <img className="imgIcon" src="https://cdn-icons.flaticon.com/png/128/3936/premium/3936751.png?token=exp=1659593203~hmac=4b7dd15d13b93caf41c2566c56231078" alt="Clientes" align="left" />
 
                         </Button>
                     </Link>
                     <li>
 
                         <Link to="/clientes">
-                            <img className="imgIcon" src="https://cdn-icons-png.flaticon.com/128/3126/3126649.png" alt="Clientes"/>
+                            <img className="imgIcon" src="https://cdn-icons-png.flaticon.com/128/3126/3126649.png" alt="Clientes" />
                             <label>
                                 Clientes
                             </label>

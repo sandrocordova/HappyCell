@@ -1,4 +1,3 @@
-import './../../styled-components/styles_panelandbuttons.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form, FormGroup, Label, Input, FormText, Col, Row, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
 import { Link } from 'react-router-dom';
