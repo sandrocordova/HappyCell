@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './styles.css';
 import { Link } from 'react-router-dom'
 import { Button, Table, Form, FormGroup, Label, Input, FormText, Col, Row, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
@@ -25,73 +25,58 @@ const Navmenopc = () => {
         ref.current.scrollLeft += scrollOffset;
     };
     return (
-
-
-        <body className="body">
-
-            <nav class='navegacion'>
-
-                <ul className="menu">
-                    <Link to="/">
-                        <Button className="buttonIconOpciones" title="Clientes" size="large" variant="contained" alt="Clientes">
-                            <img className="imgIcon" src="https://cdn-icons.flaticon.com/png/128/3936/premium/3936751.png?token=exp=1659593203~hmac=4b7dd15d13b93caf41c2566c56231078" alt="Clientes" align="left" />
-
-                        </Button>
+        <div class='navegacion'>
+            <ul className="containerul">
+                <li>
+                    <Link to="/clientes">
+                        <img className="imgIcon" src="https://cdn-icons-png.flaticon.com/128/3126/3126649.png" alt="Clientes" />
+                        <label>
+                            Clientes
+                        </label>
                     </Link>
-                    <li>
+                    <ul className="submenu">
 
-                        <Link to="/clientes">
-                            <img className="imgIcon" src="https://cdn-icons-png.flaticon.com/128/3126/3126649.png" alt="Clientes" />
-                            <label>
-                                Clientes
-                            </label>
-                        </Link>
+                        < li >
 
+                            <Link to="/clientes/mantenimiento" >
+                                Mantenimiento
+                            </Link>
 
 
-                        <ul className="submenu">
+                        </li>
 
-                            < li >
+                    </ul>
+                </li>
+                <li>
 
-                                <Link to="/clientes/mantenimiento" >
-                                    Mantenimiento
-                                </Link>
+                    <Link to="/mensajeria">
+                        <img className="imgIcon" src="https://cdn-icons-png.flaticon.com/128/134/134808.png" alt="Clientes" />
+                        <label>
+                            Mensajeria
+                        </label>
 
-
-                            </li>
-
-                        </ul>
-                    </li>
-                    <li>
-
-                        <Link to="/mensajeria">
-                            <img className="imgIcon" src="https://cdn-icons-png.flaticon.com/128/134/134808.png" alt="Clientes" />
-                            <label>
-                                Mensajeria
-                            </label>
-
-                        </Link>
+                    </Link>
 
 
-                        <ul className="submenu">
+                    <ul className="submenu">
 
-                            < li >
+                        < li >
 
-                                <Link to="parametros" >
-                                    Parametros
-                                </Link>
-                                <Link to="ejecucion" >
-                                    Ejecucion
-                                </Link>
+                            <Link to="parametros" >
+                                Parametros
+                            </Link>
+                            <Link to="ejecucion" >
+                                Ejecucion
+                            </Link>
 
-                            </li>
+                        </li>
 
-                        </ul>
-                    </li>
-                </ul>
+                    </ul>
+                </li>
+            </ul>
 
-            </nav >
-        </body>
+        </div >
+
 
     )
 };
