@@ -32,8 +32,7 @@ class Cliente(models.Model):
     prov_codigo	= models.CharField(max_length =	3, null = True)
     cant_codigo	= models.CharField(max_length =	5, null = True)
     parr_codigo	= models.CharField(max_length =	5, null = True)
-    class Meta:
-        db_table = "CLIENTE"
+    
             
 class Usernav(models.Model):
     usua_login = models.CharField(db_column='USUA_LOGIN', primary_key=True, max_length=40)  # Field name made lowercase.
