@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class ApihcConfig(AppConfig):
-    name = 'apihc'
+    name = 'apps.apihc'
