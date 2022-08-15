@@ -34,7 +34,7 @@ class Cliente(models.Model):
     parr_codigo	= models.CharField(db_column='parr_codigo', max_length =	5)
     
     class Meta:
-        db_table = "CLIENTE"
+        db_table = "cliente"
             
 class Usernav(models.Model):
     usua_login = models.CharField(db_column='USUA_LOGIN', primary_key=True, max_length=40)  # Field name made lowercase.
