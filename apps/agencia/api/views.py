@@ -12,7 +12,7 @@ def cliente_api_view(request):
     if request.method == 'GET':
         consulta = Cliente.objects.using('clientes').all()
         serializer_cliente = ClienteSerializer(consulta, many = True)
-        print(serializer_cliente.data)
+        print("Consulta a clientes")
         return Response(serializer_cliente.data, status = status.HTTP_200_OK)
 
 @api_view(['GET'])
