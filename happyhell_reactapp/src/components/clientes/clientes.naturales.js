@@ -9,36 +9,26 @@ const Clientesnaturales = () => {
         <div>
             <div className="headerClientesSub">
 
-                <Link to="/clientes">
-                    <Button className="buttonIcon" title="Clientes" size="large" variant="contained" alt="Clientes">
-                        <img className="imgIcon" src="https://cdn-icons.flaticon.com/png/128/3936/premium/3936751.png?token=exp=1659593203~hmac=4b7dd15d13b93caf41c2566c56231078" alt="Clientes" />
 
-                    </Button>
-
-                </Link>
-                <Label >
-                    Clientes
-                </Label>
-                <br />
-                <Label>
+                <Label style={{color:"#c7f900"}}>
                     Mantenimiento de Clientes/Clientes/ClientesNaturales
                 </Label>
             </div>
 
-            <div className="opcionesCuadradas">
+            <div className="divFormClientes">
                 <Form className="formSize">
-                    <Row className="rowStyle">
+                    <FormGroup row className="rowStyle">
 
                         <Col sm={2}>
-                            <Label for="Codigo Clientes">Codigo cliente</Label>
+                            <Label for="Codigo Clientes" className="labelInputsStyle">Codigo cliente</Label>
                             <Col sm={4}>
-                                <Input type="text" name="codigoCliente" id="codigoCliente" />
+                                <Input type="text" name="codigoCliente" id="codigoCliente" style={{ border: '1px solid #003462' }} />
                             </Col>
                         </Col>
                         <Col sm={2}>
-                            <Label for="exampleEmail">Tipo de Identificacion</Label>
+                            <Label for="exampleEmail" className="labelInputsStyle">Tipo de Identificacion</Label>
                             <Col sm={8}>
-                                <Input type="select" className="select">
+                                <Input type="select" className="select" style={{ border: '1px solid #003462' }}>
                                     <option selected>CEDULA</option>
                                     <option>RUC</option>
                                     <option>PASAPORTE</option>
@@ -46,24 +36,24 @@ const Clientesnaturales = () => {
                             </Col>
                         </Col>
                         <Col sm={3}>
-                            <Label for="exampleEmail">Identificacion</Label>
+                            <Label for="exampleEmail" className="labelInputsStyle">Identificacion</Label>
                             <Col sm={8}>
-                                <Input type="text" name="Identificacion" id="identificacion" />
+                                <Input type="text" name="Identificacion" id="identificacion" style={{ border: '1px solid #003462' }} />
                             </Col>
 
                         </Col>
 
                         <Col sm={3}>
-                            <Label for="exampleEmail">Nombre</Label>
+                            <Label for="exampleEmail " className="labelInputsStyle">Nombre</Label>
                             <Col sm={8}>
-                                <Input type="text" name="Identificacion" id="identificacion" />
+                                <Input type="text" name="Identificacion" id="identificacion" style={{ border: '1px solid #003462' }} />
                             </Col>
 
                         </Col>
                         <Col sm={2}>
-                            <Label for="exampleEmail">Tipo de Identificacion</Label>
+                            <Label for="exampleEmail" className="labelInputsStyle">Tipo de Identificacion</Label>
                             <Col sm={8}>
-                                <Input type="select" name="select" className="select">
+                                <Input type="select" name="select" className="select" style={{ border: '1px solid #003462' }}>
                                     <option selected>NATURAL</option>
                                     <option>JURIDICO</option>
 
@@ -73,75 +63,75 @@ const Clientesnaturales = () => {
 
 
 
-                    </Row>
+                    </FormGroup>
 
                     <div className='linkConfig'>
 
-                        <Link to="/clientes/direcciones">
-                            Direcciones 
+                        <Link to="/clientes/direcciones" className="MenuEnlaces" >
+                            Direcciones
                         </Link>
 
-                        <Link to="nueva">
+                        <Link to="nueva" className="MenuEnlaces">
                             Asesor
                         </Link>
 
-                        <Link to="nueva">
+                        <Link to="nueva" className="MenuEnlaces">
                             Documentos
                         </Link>
-                        <Link to="nueva">
+                        <Link to="nueva" className="MenuEnlaces">
                             Referencias Comerciales
                         </Link>
-                        <Link to="nueva">
+                        <Link to="nueva" className="MenuEnlaces">
                             Referencias Bancarias
                         </Link>
-                        <Link to="nueva">
+                        <Link to="nueva" style={{ color: '#003462' }}>
                             Situacion financiera
                         </Link>
 
                     </div>
 
-                    <Row className="rowStyle">
-
-                        <Col sm={2}>
-                            <Label >Nacionalidad</Label>
-                            <Col sm={8}>
-
-                                <Input type="select" className="select" >
-                                    <option selected>ECUATORIANA</option>
-                                    <option>RUC</option>
-                                    <option>PASAPORTE</option>
-                                </Input>
-                            </Col>
-                        </Col>
-                        <Col sm={2}>
-                            <Label >Categoria cliente</Label>
-                            <Col sm={8}>
-
-                                <Input type="select" className="select" >
-                                    <option selected>DEUDOR</option>
-                                    <option>RUC</option>
-                                    <option>PASAPORTE</option>
-                                </Input>
-                            </Col>
-                        </Col>
-                        <Col sm={2}>
-                            <Label >Estado</Label>
-                            <Col sm={8}>
-
-                                <Input type="select" className="select" >
-                                    <option selected>ECUATORIANA</option>
-                                    <option>RUC</option>
-                                    <option>PASAPORTE</option>
-                                </Input>
-                            </Col>
-                        </Col>
-
-                        <Row >
+                    <FormGroup row className="rowStyle">
+                        <Row>
                             <Col sm={2}>
-                                <Label >Actividad Economica</Label>
+                                <Label className="labelInputsStyle">Nacionalidad</Label>
                                 <Col sm={8}>
 
-                                    <Input type="select" className="select" >
+                                    <Input type="select" className="select" style={{ border: '1px solid #003462' }}>
+                                        <option selected>ECUATORIANA</option>
+                                        <option>RUC</option>
+                                        <option>PASAPORTE</option>
+                                    </Input>
+                                </Col>
+                            </Col>
+                            <Col sm={2}>
+                                <Label className="labelInputsStyle">Categoria cliente</Label>
+                                <Col sm={8}>
+
+                                    <Input type="select" className="select" style={{ border: '1px solid #003462' }}>
+                                        <option selected>DEUDOR</option>
+                                        <option>RUC</option>
+                                        <option>PASAPORTE</option>
+                                    </Input>
+                                </Col>
+                            </Col>
+                            <Col sm={2}>
+                                <Label className="labelInputsStyle">Estado</Label>
+                                <Col sm={8}>
+
+                                    <Input type="select" className="select" style={{ border: '1px solid #003462' }}>
+                                        <option selected>ACTIVO</option>
+                                        <option>RUC</option>
+                                        <option>PASAPORTE</option>
+                                    </Input>
+                                </Col>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col sm={2}>
+                                <Label className="labelInputsStyle">Actividad Economica</Label>
+                                <Col sm={8}>
+
+                                    <Input type="select" className="select" style={{ border: '1px solid #003462' }}>
                                         <option selected>ARTESANIA</option>
                                         <option>RUC</option>
                                         <option>PASAPORTE</option>
@@ -149,72 +139,72 @@ const Clientesnaturales = () => {
                                 </Col>
                             </Col>
                             <Col sm={2}>
-                                <Label >Tipo de rol</Label>
+                                <Label className="labelInputsStyle">Tipo de rol</Label>
                                 <Col sm={8}>
 
-                                    <Input type="select" className="select" >
+                                    <Input type="select" className="select" style={{ border: '1px solid #003462' }}>
                                         <option selected>NO APLICA</option>
                                         <option>RUC</option>
                                         <option>PASAPORTE</option>
                                     </Input>
                                 </Col>
                             </Col>
-               
 
                         </Row>
+                    </FormGroup >
 
-                    </Row>
-                    <Row className="rowStyle">
 
-                        <Col sm={2}>
-                            <Label >Primer Nombre</Label>
-                            <Col sm={8}>
-                                
-                                <Input type="text" className="select" >
-
-                                </Input>
-                            </Col>
-                        </Col>
-                        <Col sm={2}>
-                            <Label >Segundo Nombre</Label>
-                            <Col sm={8}>
-
-                                <Input type="text" className="select" >
-                                    <option selected>CASTILLO</option>
-                                    <option>RUC</option>
-                                    <option>PASAPORTE</option>
-                                </Input>
-                            </Col>
-                        </Col>
-                        <Col sm={2}>
-                            <Label >Primer apellido</Label>
-                            <Col sm={8}>
-
-                                <Input type="text" className="select" >
-                                    <option selected>CASTILLO</option>
-                                    <option>RUC</option>
-                                    <option>PASAPORTE</option>
-                                </Input>
-                            </Col>
-
-                        </Col>
-                        <Col sm={2}>
-                            <Label >Segundo apellido</Label>
-                            <Col sm={8}>
-
-                                <Input type="text" className="select" >
-                                   
-                                </Input>
-                            </Col>
-
-                        </Col>
-
-                        <Row >
+                    <FormGroup row className="rowStyle">
+                        <Row>
                             <Col sm={2}>
-                                <Label >Sexo</Label>
+                                <Label className="labelInputsStyle" >Primer Nombre</Label>
                                 <Col sm={8}>
 
-                                    <Input type="select" className="select" >
+                                    <Input type="text" className="select" style={{ border: '1px solid #003462' }}>
+
+                                    </Input>
+                                </Col>
+                            </Col>
+                            <Col sm={2}>
+                                <Label className="labelInputsStyle">Segundo Nombre</Label>
+                                <Col sm={8}>
+
+                                    <Input type="text" className="select" style={{ border: '1px solid #003462' }}>
+                                        <option selected>CASTILLO</option>
+                                        <option>RUC</option>
+                                        <option>PASAPORTE</option>
+                                    </Input>
+                                </Col>
+                            </Col>
+                            <Col sm={2}>
+                                <Label className="labelInputsStyle">Primer apellido</Label>
+                                <Col sm={8}>
+
+                                    <Input type="text" className="select" style={{ border: '1px solid #003462' }}>
+                                        <option selected>CASTILLO</option>
+                                        <option>RUC</option>
+                                        <option>PASAPORTE</option>
+                                    </Input>
+                                </Col>
+
+                            </Col>
+                            <Col sm={2}>
+                                <Label className="labelInputsStyle">Segundo apellido</Label>
+                                <Col sm={8}>
+
+                                    <Input type="text" className="select" style={{ border: '1px solid #003462' }}>
+
+                                    </Input>
+                                </Col>
+
+                            </Col>
+                        </Row>
+                        <Row >
+                            <Col sm={2}>
+                                <Label className="labelInputsStyle">Sexo</Label>
+                                <Col sm={8}>
+
+                                    <Input type="select" className="select" style={{ border: '1px solid #003462' }}>
                                         <option selected>Masculino</option>
                                         <option>RUC</option>
                                         <option>PASAPORTE</option>
@@ -222,10 +212,10 @@ const Clientesnaturales = () => {
                                 </Col>
                             </Col>
                             <Col sm={2}>
-                                <Label >Profesion</Label>
+                                <Label className="labelInputsStyle">Profesion</Label>
                                 <Col sm={8}>
 
-                                    <Input type="select" className="select" >
+                                    <Input type="select" className="select" style={{ border: '1px solid #003462' }}>
                                         <option selected>PROFESOR</option>
                                         <option>RUC</option>
                                         <option>PASAPORTE</option>
@@ -233,10 +223,10 @@ const Clientesnaturales = () => {
                                 </Col>
                             </Col>
                             <Col sm={2}>
-                                <Label >Estado Civil</Label>
+                                <Label className="labelInputsStyle">Estado Civil</Label>
                                 <Col sm={8}>
 
-                                    <Input type="select" className="select" >
+                                    <Input type="select" className="select" style={{ border: '1px solid #003462' }}>
                                         <option selected>CASADO</option>
                                         <option>RUC</option>
                                         <option>PASAPORTE</option>
@@ -244,10 +234,10 @@ const Clientesnaturales = () => {
                                 </Col>
                             </Col>
                             <Col sm={2}>
-                                <Label >Situacion Laboral</Label>
+                                <Label className="labelInputsStyle">Situacion Laboral</Label>
                                 <Col sm={8}>
 
-                                    <Input type="select" className="select" >
+                                    <Input type="select" className="select" style={{ border: '1px solid #003462' }}>
                                         <option selected>EMPLEADO</option>
                                         <option>RUC</option>
                                         <option>PASAPORTE</option>
@@ -258,10 +248,10 @@ const Clientesnaturales = () => {
                         </Row>
                         <Row >
                             <Col sm={2}>
-                                <Label >Tipo de vivienda</Label>
+                                <Label className="labelInputsStyle">Tipo de vivienda</Label>
                                 <Col sm={8}>
 
-                                    <Input type="select" className="select" >
+                                    <Input type="select" className="select" style={{ border: '1px solid #003462' }}>
                                         <option selected>PROPIA</option>
                                         <option>RUC</option>
                                         <option>PASAPORTE</option>
@@ -269,28 +259,28 @@ const Clientesnaturales = () => {
                                 </Col>
                             </Col>
                             <Col sm={2}>
-                                <Label >Lugar de nacimiento</Label>
+                                <Label className="labelInputsStyle">Lugar de nacimiento</Label>
                                 <Col sm={8}>
 
-                                    <Input type="text" className="select" >
-                                        
-                                    </Input>
-                                </Col>
-                            </Col>
-                            <Col sm={2}>
-                                <Label >Numero de cargas</Label>
-                                <Col sm={8}>
-
-                                    <Input type="text" className="select" >
+                                    <Input type="text" className="select" style={{ border: '1px solid #003462' }}>
 
                                     </Input>
                                 </Col>
                             </Col>
                             <Col sm={2}>
-                                <Label >Fecha de nacimiento</Label>
+                                <Label className="labelInputsStyle">Numero de cargas</Label>
                                 <Col sm={8}>
 
-                                    <Input type="date" className="select" >
+                                    <Input type="text" className="select" style={{ border: '1px solid #003462' }}>
+
+                                    </Input>
+                                </Col>
+                            </Col>
+                            <Col sm={2}>
+                                <Label className="labelInputsStyle">Fecha de nacimiento</Label>
+                                <Col sm={8}>
+
+                                    <Input type="date" className="select" style={{ border: '1px solid #003462' }}>
 
                                     </Input>
                                 </Col>
@@ -299,37 +289,37 @@ const Clientesnaturales = () => {
                         </Row>
                         <Row >
                             <Col sm={2}>
-                                <Label >Empresa trabajo</Label>
+                                <Label className="labelInputsStyle">Empresa trabajo</Label>
                                 <Col sm={8}>
 
-                                    <Input type="text" className="select" >
+                                    <Input type="text" className="select" style={{ border: '1px solid #003462' }}>
 
                                     </Input>
                                 </Col>
                             </Col>
                             <Col sm={2}>
-                                <Label >Exp.pasaporte</Label>
+                                <Label className="labelInputsStyle">Exp.pasaporte</Label>
                                 <Col sm={8}>
 
-                                    <Input type="date" className="select" >
+                                    <Input type="date" className="select" style={{ border: '1px solid #003462' }}>
 
                                     </Input>
                                 </Col>
                             </Col>
                             <Col sm={2}>
-                                <Label >Inicio ingresos</Label>
+                                <Label className="labelInputsStyle">Inicio ingresos</Label>
                                 <Col sm={8}>
 
-                                    <Input type="date" className="select" >
+                                    <Input type="date" className="select" style={{ border: '1px solid #003462' }}>
 
                                     </Input>
                                 </Col>
                             </Col>
                             <Col sm={2}>
-                                <Label >Inicio residencia</Label>
+                                <Label className="labelInputsStyle">Inicio residencia</Label>
                                 <Col sm={8}>
 
-                                    <Input type="date" className="select" >
+                                    <Input type="date" className="select" style={{ border: '1px solid #003462' }}>
 
                                     </Input>
                                 </Col>
@@ -337,7 +327,7 @@ const Clientesnaturales = () => {
 
                         </Row>
 
-                    </Row>
+                    </FormGroup>
 
 
 
@@ -346,10 +336,10 @@ const Clientesnaturales = () => {
 
                 <div className="containerButtonStyleFooter">
                     <Link to="/clientes/vistaclientes/clientesnaturales">
-                        <Button className="buttonStyleFooter" color="success">Grabar</Button>
+                        <Button className="buttonStyleFooter"  >Grabar</Button>
                     </Link>
                     <Link to="/clientes/vistaclientes/clientesjuridicos">
-                        <Button className="buttonStyleFooter" color="danger">Cerrar</Button>
+                        <Button className="buttonStyleFooter" >Cerrar</Button>
                     </Link>
                 </div>
             </div >

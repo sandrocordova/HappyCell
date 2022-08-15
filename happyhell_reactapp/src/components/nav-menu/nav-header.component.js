@@ -7,28 +7,7 @@ import { faUserGear } from '@fortawesome/free-solid-svg-icons';
 import TecnofinApi from '../../services/tecnofin.service';
 
 const NavBarHeader = () => {
-    const [user, setUser] = useState(new User());
-
-    const defaultUser = () => {
-        setUser({
-            USUA_LOGIN: "edisaa", 
-            USUA_NOMBRE: "Edison Saavedraa", 
-            EMPR_IMAGEN: "https://i.pinimg.com/originals/29/47/9b/29479ba0435741580ca9f4a467be6207.png",
-            TIPE_DESCRIPCION: "Admin",
-            ZONA_DESCRIPCION: "Quito, Ecuador",
-            AGEN_DESCRIPCION: "0001 cam internacional km 23",
-            CETC_CODIGO_DESCRIPCION: "Centro de costos"
-        });
-    }
-
-    const handleGetUser = async (e) => {
-        const response = await TecnofinApi();
-        console.log(response);
-        setUser({...response});
-    };
-
-    useEffect(() => {
-      }, []);
+   
 
     return (
         <>

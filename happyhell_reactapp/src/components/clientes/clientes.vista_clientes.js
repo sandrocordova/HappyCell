@@ -10,56 +10,44 @@ const Clientesvista_clientes = () => {
         <div>
             <div className="headerClientesSub">
 
-                <Link to="/clientes">
-                    <Button className="buttonIcon" title="Clientes" size="large" variant="contained" alt="Clientes">
-                        <img className="imgIcon" src="https://cdn-icons.flaticon.com/png/128/3936/premium/3936751.png?token=exp=1659593203~hmac=4b7dd15d13b93caf41c2566c56231078" alt="Clientes" />
-
-                    </Button>
-
-                </Link>
-                <Label >
-                    Clientes
-                </Label>
-                <br />
-                <Label>
+                <Label style={{ color: '#c7f900' }}>
                     Mantenimiento de Clientes/Clientes
                 </Label>
             </div>
-
-            <div className="opcionesCuadradas">
+            <div className="containerSearch">
+                <Button className="buttonSearch" style={{ background: '#003462', color: "#ffffff" }}>Buscar</Button>
+            </div>
+            <div className="divTable">
                 <Form>
                     <Row>
 
                         <Col sm={3}>
                             <Label for="Identificacion">Identificacion</Label>
                             <Col sm={12}>
-                                <Input type="id" name="identificacion" id="identificacion" />
+                                <Input style={{ border: '1px solid #003462' }} type="id" name="identificacion" id="identificacion" />
                             </Col>
                         </Col>
                         <Col sm={3}>
                             <Label for="exampleEmail">Nombre</Label>
                             <Col sm={12}>
-                                <Input type="nombre" name="nombre" id="nombre" />
+                                <Input style={{ border: '1px solid #003462' }} type="nombre" name="nombre" id="nombre" />
                             </Col>
 
                         </Col>
-                        
-                        <Col sm={5}>
 
-                                <Button className="buttonSearch" color="secondary">Buscar</Button>
-                           
-                        </Col>
-                                
+
+
+
 
 
                     </Row>
 
-                    <div className='contenedor-btn-crear'>
-                        <Link to="nueva">
-                            <a>Crear</a>
+                    <div className='contenedorEstiloEnlaces'>
+                        <Link to="nueva" style={{color:'#c7f900'}}>
+                        <a >Crear</a>
                         </Link>
                     </div>
-                    <Table className="table" striped bordered hover>
+                    <Table className="table" style={{ border: '1px solid #003462' }} striped bordered hover>
                         <thead>
                             <tr>
                                 <th>
@@ -98,10 +86,10 @@ const Clientesvista_clientes = () => {
                 </Form>
                 <div className="containerButtonStyleFooter">
                     <Link to="/clientes/vistaclientes/clientesnaturales">
-                        <Button className="buttonStyleFooter" color="success">Seleccionar</Button>
+                        <Button className="buttonStyleFooter"  >Seleccionar</Button>
                     </Link>
                     <Link to="/clientes/vistaclientes/clientesjuridicos">
-                        <Button className="buttonStyleFooter" color="danger">Cerrar</Button>
+                        <Button className="buttonStyleFooter" >Cerrar</Button>
                     </Link>
                 </div>
 

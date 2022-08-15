@@ -16,7 +16,7 @@ const Navopciones = () => {
     }
 
     return (
-  
+
         <div className='nav-header'>
             {
                 menu.map(item => (
@@ -24,8 +24,8 @@ const Navopciones = () => {
                        <img className='image' src={item.empr_imagen}  />
                     </div>*/
                     <Link to="/">
-                        <div className="logo">
-                            <img src="http://www.happy.ec/img/logo3.png" />
+                        <div >
+                            <img  src="./../../img/logo3.png" />
                         </div>
                     </Link>
                 ))

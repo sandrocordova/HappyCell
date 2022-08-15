@@ -9,19 +9,18 @@ function App() {
 
     return (
 
+       
+            <div className="App">
+          
 
-        <div className="App">
-
-
-            <Navopciones></Navopciones>
+                <Navopciones></Navopciones>
                 <Navmenopc></Navmenopc>
-            
-            
 
 
+       
 
-        </div>
-
+            </div>
+      
 
     );
 }
