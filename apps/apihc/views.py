@@ -3,7 +3,6 @@ from rest_framework.response import Response # Manejo de Response HTTP
 from rest_framework.exceptions import AuthenticationFailed # Validación de Token (sin expirar)
 from rest_framework import status # Manejo de Status
 import jwt, datetime, base64 # Manejo del token
-from django.db.models import Q
 from .serializers import ClienteJuridicoSerializer, ClienteNaturalSerializer, ClienteSerializer, DireccionSerializer, EstadoCivilSerializer, NacionalidadSerializer, NivelInstruccionSerializer, ProfesionSerializer, SituacionLaboralSerializer, TelefonoSerializer, TipoClienteSerializer, TipoDocumentoSerializer, UsuarioSerializer, ViviendaSerializer, ActividadEconomicaSerializer # Serializadores
 from .models import Asesor, Banco, Canton, Ciudad, Cliente, ClienteAsesor, ClienteJuridico, ClienteNatural, CuentaBancariaCliente, Direccion, EstadoCivil, GrupoEconomico, Nacionalidad, NivelInstruccion, Observacion, Pais, Parroquia, Profesion, Provincia, Secuencia, Sexo, SituacionLaboral, Telefono, TipoCliente, TipoCuenta, TipoDireccion, TipoDocumento, TipoEmpresa, TipoObservacion, TipoProyecto, TipoRol, TipoTelefono, TipoVinculo, Usuario, Vinculo, Vivienda, Zona, ActividadEconomica # Modelos
 
@@ -227,8 +226,7 @@ class CLIENTESView(APIView):
                 log[logIndex] = validarC['log']
                 logIndex += 1
 
-            match ticl_codigo:
-                case 'N':
+            if ticl_codigo == 'N':
                     # Guardar CLIENTE NATURAL
                     validarCN = validarClienteNatural(detallesCliente)
                     if validarCN['status'] is False:
@@ -258,22 +256,24 @@ class CLIENTESView(APIView):
                     guardarN = guardarClienteNatural(detallesCliente)
                     log[logIndex] = guardarN['message']
                     logIndex += 1
-                case 'J':
-                    # Guardar CLIENTE JURIDICO
-                    validarCJ = validarClienteJuridico(detallesCliente)
-                    if validarCJ['status'] is False:
-                        return Response({"status": status.HTTP_400_BAD_REQUEST, "log": validarCJ['log']})
-                    else:
-                        log[logIndex] = validarCJ['log']
-                        logIndex += 1
+            elif ticl_codigo == 'J':
+                # Guardar CLIENTE JURIDICO
+                validarCJ = validarClienteJuridico(detallesCliente)
+                if validarCJ['status'] is False:
+                    return Response({"status": status.HTTP_400_BAD_REQUEST, "log": validarCJ['log']})
+                else:
+                    log[logIndex] = validarCJ['log']
+                    logIndex += 1
 
-                    guardar = guardarCliente(informacionCliente)
-                    log[logIndex] = guardar['message']
-                    logIndex += 1
-                    
-                    guardarJ = guardarClienteJuridico(detallesCliente)
-                    log[logIndex] = guardarJ['message']
-                    logIndex += 1
+                guardar = guardarCliente(informacionCliente)
+                log[logIndex] = guardar['message']
+                logIndex += 1
+                
+                guardarJ = guardarClienteJuridico(detallesCliente)
+                log[logIndex] = guardarJ['message']
+                logIndex += 1
+            else:
+                return Response({"status": status.HTTP_400_BAD_REQUEST, "log": "Tipo de Cliente no válido"})
 
             secuencia = Secuencia.objects.using('clientes').filter(SECU_TABLA = 'CLIENTE', EMPR_CODIGO = '8').update(SECU_VALOR_ACTUAL = clie_codigo + 1)
             log[logIndex] = f'Se actualizó Secuencia actual de -> {clie_codigo} a -> {clie_codigo + 1}'

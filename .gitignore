@@ -1,0 +1,6 @@
+
+apps/__pycache__/*
+apps/agencia/__pycache__/*
+apps/agencia/api/__pycache__/*
+apps/apihc/__pycache__/*
+HappyCell/__pycache__/*
