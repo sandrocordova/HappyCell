@@ -30,6 +30,12 @@ const Clientes = () => {
                     <img className="imgButton" src="https://cdn-icons-png.flaticon.com/128/3721/3721123.png" alt="Asesor" />
                 </Button>
                 </Link>
+                <Link to="/mensajeria/pruebas">
+                <Button className="buttonImages" title="Asesor" size="large" variant="contained" alt="Asesor">
+                    <p>Mensajería <br></br> Página de pruebas</p>
+                    <img className="imgButton" src="https://cdn-icons-png.flaticon.com/128/3721/3721123.png" alt="Asesor" />
+                </Button>
+                </Link>
 
             </div>
 
