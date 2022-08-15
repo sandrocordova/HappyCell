@@ -10,7 +10,7 @@ from apps.agencia.api.serializer import PostSerializer, UserNavSerializer, UserN
 def cliente_api_view(request):
     
     if request.method == 'GET':
-        consulta = Cliente.objects.using("clientes").raw("select CLIE_CODIGO, NACI_CODIGO, TICL_CODIGO, TIDO_CODIGO, ACTI_CODIGO, ASES_CODIGO, CLIE_IDENTIFICACION, CLIE_NOMBRE, CLIE_FECHA_CREACION, CLIE_NOMBRE_CORRESPONDENCIA, clie_estado, TISB_CODIGO, clie_tipo, CLIE_TIPO_ROL, CLIE_TIPO_PROYECTO, comodin, ASES, CLIE_FECHA_INACTIVACION, CLIE_FECHA_DESAFILIACION, sect_codigo, pais_codigo, prov_codigo, cant_codigo, parr_codigo from clientee")
+        consulta = Cliente.objects.using("clientes").raw("select CLIE_CODIGO, NACI_CODIGO, TICL_CODIGO, TIDO_CODIGO, ACTI_CODIGO, ASES_CODIGO, CLIE_IDENTIFICACION, CLIE_NOMBRE, CLIE_FECHA_CREACION, CLIE_NOMBRE_CORRESPONDENCIA, clie_estado, TISB_CODIGO, clie_tipo, CLIE_TIPO_ROL, CLIE_TIPO_PROYECTO, comodin, ASES, CLIE_FECHA_INACTIVACION, CLIE_FECHA_DESAFILIACION, sect_codigo, pais_codigo, prov_codigo, cant_codigo, parr_codigo from cliente")
         serializer_cliente = ClienteSerializer(consulta, many = True)
         print(serializer_cliente.data)
         return Response(serializer_cliente.data, status = status.HTTP_200_OK)
