@@ -17,6 +17,7 @@ import Clientesjuridicospage from './pages/Clientes.juridicos';
 import Direccionesvista2page from './pages/Direccionesvista2.page';
 import Direccionestelefonopage from './pages/Direccionestelefono.page';
 import Direccionestelefono2page from './pages/Direccionestelefono2.page';
+import PruebasPage from './pages/Mensajeria.pruebas';
 
 
 
@@ -36,6 +37,7 @@ root.render(
                 <Route path="mensajeria" element={<Mensajeriapage />} />
                 <Route path="mensajeria/ejecucion" element={<MensajeriaEjecucionPage />} />
                 <Route path="mensajeria/parametros" element={<MensajeriaParametrosPage />} />
+                <Route path="mensajeria/pruebas" element={<PruebasPage />} />
                 <Route path="mensajeria/plantillas" element={<MensajeriaPlantillasPage />} />
                 <Route path="mensajeria/plantillas/nueva" element={<MensajeriaPlantillasNuevaPage />} />
                 <Route path="clientes/vistaclientes/clientesnaturales" element={<Clientesnaturalespage />} />

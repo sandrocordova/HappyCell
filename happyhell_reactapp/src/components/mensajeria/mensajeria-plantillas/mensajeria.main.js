@@ -13,12 +13,9 @@ export default class FormMain extends React.Component {
         return (
             <body>
                 <div class="contenedor-br-3">
-                    <div class="contenedor-br-3-int">
-                            <Link to="/mensajeria">
-                                <a>Mensajería</a>
-                            </Link>/<Link to="/mensajeria/plantillas">
-                                <a>Mensajería Plantilla</a>
-                            </Link>
+                    <div class="headerClientesSub">
+                        <a>Mensajería</a>/
+                        <a>Mensajería Plantilla</a>
                     </div>
                 </div>
                 <div>

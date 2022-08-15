@@ -70,7 +70,7 @@ function CargarJson() {
                         </Col>
                         <Col sm={1}>
                             <Col sm={12}>
-                                <Button size='sm' color='primary'>Buscar</Button>{' '}
+                                <Button className='buttonSearch' size='sm' color='primary'>Buscar</Button>{' '}
                             </Col>
                         </Col>
                         <Col sm={2}></Col>
@@ -149,12 +149,12 @@ function CargarJson() {
                         </tbody>
                     </Table>
                 </div>
-                <div className='containerButonStyleFotter'>
+                <div className='containerButtonStyleFooter'>
                     <Link to="editar">
-                        <Button size='sm' className='butonStyleFotter' color='primary'>Seleccionar</Button>
+                        <Button size='sm' className='buttonStyleFooter' color='primary'>Seleccionar</Button>
                     </Link>
                     <Link to="/mensajeria/plantillas">
-                        <Button size='sm' className='butonStyleFotter' color='danger'>Cancelar</Button>
+                        <Button size='sm' className='buttonStyleFooter' color='danger'>Cancelar</Button>
                     </Link>
                 </div>
             </div>
