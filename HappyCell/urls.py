@@ -21,4 +21,5 @@ urlpatterns = [
     path('api/', include('apps.agencia.api.urls')),
     path('agencia/', include(('apps.agencia.urls', 'app_name'), namespace='agencia')),
     path('', menu, name="menu"),
+    path('api-cli/v1/', include('apps.apihc.urls')),
 ]

@@ -35,7 +35,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'apps.agencia',
+    'apps.apihc'
 ]
 
 MIDDLEWARE = [
@@ -89,7 +91,18 @@ DATABASES = {
 		'OPTIONS': {
             	'driver': 'ODBC Driver 17 for SQL Server',
         	},
-	}
+	},
+    'clientes': {
+		'ENGINE': 'sql_server.pyodbc',
+		'NAME': 'CLIENTES',
+	    'USER': 'sa',
+        'PASSWORD': 'EsanSql019283',
+       	'HOST': '192.168.88.117\WIN-OCIUP500OPT',
+        'PORT': '1433',
+		'OPTIONS': {
+            	'driver': 'ODBC Driver 17 for SQL Server',
+        	},
+    }
 }
 
 # Password validation
