@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'apps.agencia',
-    'apps.apihc'
+    'apps.apihc',
 ]
 
 MIDDLEWARE = [
