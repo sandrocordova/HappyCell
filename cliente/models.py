@@ -1,17 +1,29 @@
 from django.db import models
 
-class Usernav(models.Model):
-    usua_login = models.CharField(db_column='USUA_LOGIN', primary_key=True, max_length=40)  # Field name made lowercase.
-    usua_nombre = models.CharField(db_column='USUA_NOMBRE', max_length=40)  # Field name made lowercase.
-    empr_codigo = models.CharField(db_column='EMPR_CODIGO', max_length=40)  # Field name made lowercase.
-    empr_nombre = models.CharField(db_column='EMPR_NOMBRE', max_length=40)  # Field name made lowercase.
-    empr_imagen = models.CharField(db_column='EMPR_IMAGEN', max_length=40)  # Field name made lowercase.
-    empr_identificacion = models.CharField(db_column='EMPR_IDENTIFICACION', max_length=40)  # Field name made lowercase.
-    agen_codigo = models.CharField(db_column='AGEN_CODIGO', max_length=40)  # Field name made lowercase.
-    zona_codigo = models.CharField(db_column='ZONA_CODIGO', max_length=40)  # Field name made lowercase.
-    cetc_codigo = models.CharField(db_column='CETC_CODIGO', max_length=40)  # Field name made lowercase.
-    zona_descripcion = models.CharField(db_column='ZONA_DESCRIPCION', max_length=40)  # Field name made lowercase.
-    agen_descripcion = models.CharField(db_column='AGEN_DESCRIPCION', max_length=40)  # Field name made lowercase.
-    cetc_descripcion = models.CharField(db_column='CETC_DESCRIPCION', max_length=40)  # Field name made lowercase.
-    tipe_codigo = models.CharField(db_column='TIPE_CODIGO', max_length=40)  # Field name made lowercase.
-    tipe_descripcion = models.CharField(db_column='TIPE_DESCRIPCION', max_length=40)  # Field name made lowercase.
+
+class Cliente(models.Model):
+    CLIE_CODIGO	= models.PositiveIntegerField(primary_key = True)	
+    NACI_CODIGO	= models.PositiveIntegerField()
+    TICL_CODIGO	= models.CharField(max_length = 2)
+    TIDO_CODIGO	= models.CharField(max_length = 2)
+    ACTI_CODIGO	= models.PositiveIntegerField()
+    ASES_CODIGO	= models.PositiveIntegerField()
+    CLIE_IDENTIFICACION	= models.CharField(max_length =	20)
+    CLIE_NOMBRE	= models.CharField(max_length =	60, null = True)
+    CLIE_FECHA_CREACION	= models.DateTimeField(null = True)	
+    CLIE_NOMBRE_CORRESPONDENCIA	= models.CharField(max_length =	40)
+    clie_estado	= models.CharField(max_length =	1, null = True)
+    TISB_CODIGO	= models.PositiveIntegerField(null = True)	
+    clie_tipo = models.CharField(max_length = 1, null = True)
+    CLIE_CLAVE = models.CharField(max_length = 20, null = True)
+    CLIE_TIPO_ROL = models.CharField(max_length = 2, null = True)
+    CLIE_TIPO_PROYECTO = models.PositiveIntegerField(null = True)	
+    comodin	= models.PositiveIntegerField(null = True)	
+    ASES = models.PositiveIntegerField(null = True)	
+    CLIE_FECHA_INACTIVACION	= models.DateTimeField(null = True)	
+    CLIE_FECHA_DESAFILIACION = models.DateTimeField(null = True)	
+    sect_codigo	= models.CharField(max_length =	5, null = True)
+    pais_codigo	= models.CharField(max_length =	3, null = True)
+    prov_codigo	= models.CharField(max_length =	3, null = True)
+    cant_codigo	= models.CharField(max_length =	5, null = True)
+    parr_codigo	= models.CharField(max_length =	5, null = True)

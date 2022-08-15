@@ -2,10 +2,18 @@ from urllib import response
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from apps.agencia.models import Empresa, Usernav, Usernavdos, Usernavtres
-from apps.agencia.api.serializer import PostSerializer, UserNavSerializer, UserNavSerializerDos
+from apps.agencia.models import Empresa, Usernav, Usernavdos, Usernavtres, Cliente
+from apps.agencia.api.serializer import PostSerializer, UserNavSerializer, UserNavSerializerDos, ClienteSerializer
 
 
+@api_view(['GET'])
+def cliente_api_view(request):
+    
+    if request.method == 'GET':
+        consulta = Cliente.objects.raw("select CLIE_CODIGO, NACI_CODIGO, TICL_CODIGO, TIDO_CODIGO, ACTI_CODIGO, ASES_CODIGO, CLIE_IDENTIFICACION, CLIE_NOMBRE, CLIE_FECHA_CREACION, CLIE_NOMBRE_CORRESPONDENCIA, clie_estado, TISB_CODIGO, clie_tipo, CLIE_TIPO_ROL, CLIE_TIPO_PROYECTO from cliente")
+        serializer_cliente = ClienteSerializer(consulta, many = True)
+        return Response(serializer_cliente.data, status = status.HTTP_200_OK)
+    
 @api_view(['GET'])
 def usernav_api_view(request):
     

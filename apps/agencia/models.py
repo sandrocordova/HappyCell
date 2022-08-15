@@ -6,6 +6,32 @@ class Post(models.Model):
     tittle = models.CharField(max_length=100)
     content = models.CharField(max_length=200)
     
+class Cliente(models.Model):
+    CLIE_CODIGO	= models.PositiveIntegerField(primary_key = True)	
+    NACI_CODIGO	= models.PositiveIntegerField()
+    TICL_CODIGO	= models.CharField(max_length = 2)
+    TIDO_CODIGO	= models.CharField(max_length = 2)
+    ACTI_CODIGO	= models.PositiveIntegerField()
+    ASES_CODIGO	= models.PositiveIntegerField()
+    CLIE_IDENTIFICACION	= models.CharField(max_length =	20)
+    CLIE_NOMBRE	= models.CharField(max_length =	60, null = True)
+    CLIE_FECHA_CREACION	= models.DateTimeField(null = True)	
+    CLIE_NOMBRE_CORRESPONDENCIA	= models.CharField(max_length =	40)
+    clie_estado	= models.CharField(max_length =	1, null = True)
+    TISB_CODIGO	= models.PositiveIntegerField(null = True)	
+    clie_tipo = models.CharField(max_length = 1, null = True)
+    CLIE_CLAVE = models.CharField(max_length = 20, null = True)
+    CLIE_TIPO_ROL = models.CharField(max_length = 2, null = True)
+    CLIE_TIPO_PROYECTO = models.PositiveIntegerField(null = True)	
+    comodin	= models.PositiveIntegerField(null = True)	
+    ASES = models.PositiveIntegerField(null = True)	
+    CLIE_FECHA_INACTIVACION	= models.DateTimeField(null = True)	
+    CLIE_FECHA_DESAFILIACION = models.DateTimeField(null = True)	
+    sect_codigo	= models.CharField(max_length =	5, null = True)
+    pais_codigo	= models.CharField(max_length =	3, null = True)
+    prov_codigo	= models.CharField(max_length =	3, null = True)
+    cant_codigo	= models.CharField(max_length =	5, null = True)
+    parr_codigo	= models.CharField(max_length =	5, null = True)
             
 class Usernav(models.Model):
     usua_login = models.CharField(db_column='USUA_LOGIN', primary_key=True, max_length=40)  # Field name made lowercase.
