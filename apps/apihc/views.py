@@ -240,19 +240,23 @@ class CLIENTESView(APIView):
                     logIndex += 1
 
                     split_name = informacionCliente['CLIE_NOMBRE'].split()
-                    match len(split_name):
-                        case 2:
+                    if len(split_name) == 2:
                             detallesCliente['CLNA_NOMBRE1'] = split_name[0]
                             detallesCliente['CLNA_APELLIDO1'] = split_name[1]
-                        case 3:
+                    elif len(split_name) == 3:
                             detallesCliente['CLNA_NOMBRE1'] = split_name[0]
                             detallesCliente['CLNA_APELLIDO1'] = split_name[1]
                             detallesCliente['CLNA_APELLIDO2'] = split_name[2]
-                        case 4:
+                    elif len(split_name) == 4:
                             detallesCliente['CLNA_NOMBRE1'] = split_name[0]
                             detallesCliente['CLNA_NOMBRE2'] = split_name[1]
                             detallesCliente['CLNA_APELLIDO1'] = split_name[2]
                             detallesCliente['CLNA_APELLIDO2'] = split_name[3]
+                    elif len(split_name) == 5:
+                            detallesCliente['CLNA_NOMBRE1'] = split_name[0]
+                            detallesCliente['CLNA_NOMBRE2'] = split_name[1]
+                            detallesCliente['CLNA_APELLIDO1'] = split_name[3]
+                            detallesCliente['CLNA_APELLIDO2'] = split_name[4]
                     guardarN = guardarClienteNatural(detallesCliente)
                     log[logIndex] = guardarN['message']
                     logIndex += 1
