@@ -19,7 +19,8 @@ def cliente_api_view(request):
             print("ENtro al FOR_________")
             if cliente.TICL_CODIGO == "N":
                 cliente.TICL_CODIGO = "Natural"
-                print("SI")
+            else:
+                cliente.TICL_CODIGO = "Juridico"
         
         serializer_cliente = ClienteSerializer(clientes, many = True)
         print("Consulta a clientes")
