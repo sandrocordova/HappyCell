@@ -17,7 +17,7 @@ def cliente_api_view(request):
         return Response(serializer_cliente.data, status = status.HTTP_200_OK)
 
 #Catálogos
-def profesiones_api_views(APIView):
+class profesiones_api_views(APIView):
     def get(self, request):
         data = request.GET
         consulta = Profesiones.objects.using('clientes').all()
