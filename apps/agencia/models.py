@@ -12,7 +12,7 @@ class Profesiones(models.Model):
     prof_descripcion = models.CharField(max_length=40, null=False)
     
     class Meta:
-        db_table = "PROFESION"
+        db_table = "profesion"
     
 class Cliente(models.Model):
     CLIE_CODIGO	= models.PositiveIntegerField(db_column='CLIE_CODIGO', primary_key = True)	
