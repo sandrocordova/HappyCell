@@ -13,8 +13,10 @@ from apps.agencia.api.serializer import PostSerializer, UserNavSerializer, UserN
 def cliente_api_view(request):
     
     if request.method == 'GET':
-        clientes = Cliente.objects.using('clientes').all()[:20]
+        clientes = Cliente.objects.using('clientes').all()
+        print(clientes)
         for cliente in clientes:
+            print("ENtro al FOR_________")
             if cliente.TICL_CODIGO == "N":
                 cliente.TICL_CODIGO = "Natural"
             else:
