@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from apps.agencia.models import Empresa, Usernav, Usernavtres, Cliente
+from apps.agencia.models import Empresa, Usernav, Usernavtres, Cliente, Profesiones
 
 
 # Create your views here.
@@ -25,5 +25,11 @@ class UserNavSerializerDos(serializers.ModelSerializer):
 class ClienteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cliente
+        fields = '__all__'
+        
+        #Catalogos
+class ProfesionesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profesiones
         fields = '__all__'
         

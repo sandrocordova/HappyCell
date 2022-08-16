@@ -6,6 +6,14 @@ class Post(models.Model):
     tittle = models.CharField(max_length=100)
     content = models.CharField(max_length=200)
     
+#Catálogos
+class Profesiones(models.Model):
+    prof_codigo = models.PositiveIntegerField(primary_key = True)
+    prof_descripcion = models.CharField(max_length=40, null=False)
+    
+    class Meta:
+        db_table = "PROFESION"
+    
 class Cliente(models.Model):
     CLIE_CODIGO	= models.PositiveIntegerField(db_column='CLIE_CODIGO', primary_key = True)	
     NACI_CODIGO	= models.PositiveIntegerField(db_column='NACI_CODIGO')

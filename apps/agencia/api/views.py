@@ -2,8 +2,9 @@ from urllib import response
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from apps.agencia.models import Empresa, Usernav, Usernavdos, Usernavtres, Cliente
-from apps.agencia.api.serializer import PostSerializer, UserNavSerializer, UserNavSerializerDos, ClienteSerializer
+from apps.agencia.models import Empresa, Usernav, Usernavdos, Usernavtres, Cliente, Profesiones
+from apps.agencia.api.serializer import PostSerializer, UserNavSerializer, UserNavSerializerDos, ClienteSerializer, ProfesionesSerializer
+
 
 
 @api_view(['GET'])
@@ -15,6 +16,15 @@ def cliente_api_view(request):
         print("Consulta a clientes")
         return Response(serializer_cliente.data, status = status.HTTP_200_OK)
 
+#Catálogos
+def profesiones_api_views(APIView):
+    def get(self, request):
+        data = request.GET
+        consulta = Profesiones.objects.using('clientes').all()
+        ProfesionesSerializer = Profesiones(consulta, many = True)
+        print("Consulta a Profesiones")
+        return Response(ProfesionesSerializer.data, status = status.HTTP_200_OK)
+    
 @api_view(['GET'])
 def cliente_api_views(request):
     
