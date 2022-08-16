@@ -4,7 +4,7 @@ from rest_framework.views import APIView # Procesamiento de Views
 from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
-from apps.agencia.models import Empresa, Usernav, Usernavdos, Usernavtres
+from apps.agencia.models import Empresa, Usernav, Usernavdos, Usernavtres, Cliente
 from apps.agencia.models import Profesiones, Nacionalidad, ActiEconomica, TipoRol, Sexo, Vivienda, EstadoCivil, SituacionLaboral
 
 from apps.agencia.api.serializer import PostSerializer, UserNavSerializer, UserNavSerializerDos, ClienteSerializer, ProfesionesSerializer
