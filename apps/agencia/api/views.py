@@ -23,9 +23,9 @@ class profesiones_api_views(APIView):
     def get(self, request):
         data = request.GET
         consulta = Profesiones.objects.using('clientes').all()
-        ProfesionesSerializer = Profesiones(consulta)
+        profesionesSerializer = ProfesionesSerializer(consulta)
         print("Consulta a Profesiones")
-        return Response(ProfesionesSerializer.data, status = status.HTTP_200_OK)
+        return Response(profesionesSerializer.data, status = status.HTTP_200_OK)
     
 @api_view(['GET'])
 def cliente_api_views(request):
