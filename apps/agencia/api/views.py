@@ -16,7 +16,6 @@ def cliente_api_view(request):
         clientes = Cliente.objects.using('clientes').all()[4378:4450]
         print(clientes)
         for cliente in clientes:
-            print("ENtro al FOR_________")
             if cliente.TICL_CODIGO == "N":
                 cliente.TICL_CODIGO = "Natural"
             else:
