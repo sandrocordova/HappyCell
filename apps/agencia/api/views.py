@@ -13,7 +13,7 @@ from apps.agencia.api.serializer import PostSerializer, UserNavSerializer, UserN
 def cliente_api_view(request):
     
     if request.method == 'GET':
-        clientes = Cliente.objects.using('clientes').all()[:50]
+        clientes = Cliente.objects.using('clientes').all()[4378:4450]
         print(clientes)
         for cliente in clientes:
             print("ENtro al FOR_________")
