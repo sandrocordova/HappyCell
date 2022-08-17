@@ -57,6 +57,7 @@ const Navmenopc = () => {
 
                     </Link>
 
+<<<<<<< HEAD
 
                     <ul className="submenu">
 
@@ -76,6 +77,9 @@ const Navmenopc = () => {
             </ul>
 
         </div >
+=======
+                    <h1>Hola Mundo</h1>
+>>>>>>> 6fcb387e4b55b71d6910b727309e2180412b30de
 
 
     )
