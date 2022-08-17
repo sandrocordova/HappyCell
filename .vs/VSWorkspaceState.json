@@ -3,14 +3,14 @@
     "",
     "\\happyhell_reactapp",
     "\\happyhell_reactapp\\src",
+    "\\happyhell_reactapp\\src\\assets",
+    "\\happyhell_reactapp\\src\\assets\\images",
     "\\happyhell_reactapp\\src\\components",
-    "\\happyhell_reactapp\\src\\components\\clientes",
     "\\happyhell_reactapp\\src\\components\\mensajeria",
-    "\\happyhell_reactapp\\src\\components\\navmenuopc",
-    "\\happyhell_reactapp\\src\\contexts",
-    "\\happyhell_reactapp\\src\\hooks",
-    "\\happyhell_reactapp\\src\\img"
+    "\\happyhell_reactapp\\src\\components\\mensajeria\\mensajeria-ejecucion",
+    "\\happyhell_reactapp\\src\\components\\mensajeria\\mensajeria-plantillas",
+    "\\happyhell_reactapp\\src\\components\\navopciones"
   ],
-  "SelectedNode": "\\happyhell_reactapp\\src\\components\\clientes\\styles_clientes.css",
+  "SelectedNode": "\\happyhell_reactapp\\package.json",
   "PreviewInSolutionExplorer": false
 }

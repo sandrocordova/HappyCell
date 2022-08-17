@@ -24,7 +24,7 @@ const Navopciones = () => {
                        <img className='image' src={item.empr_imagen}  />
                     </div>*/
                     <Link to="/">
-                        <div >
+                        <div key={item.empr_imagen}>
                             <img  src="./../../img/logo3.png" />
                         </div>
                     </Link>
@@ -35,7 +35,7 @@ const Navopciones = () => {
             </div>
             {
                 menu.map(item => (
-                    <div className='location'>
+                    <div className='location' key={item.zona_codigo}>
                         Ciudad: {item.zona_descripcion}
                         <br />
                         Agencia: {item.agen_descripcion} - {item.cetc_descripcion}
@@ -45,7 +45,7 @@ const Navopciones = () => {
             }
             {
                 menu.map(item => (
-                    <div className='userSession'>
+                    <div className='userSession' key={item.empr_codigo}>
                         <FontAwesomeIcon icon={faUserGear} />
                         {item.usua_login}
                         <br />

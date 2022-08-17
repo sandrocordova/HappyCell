@@ -3,7 +3,8 @@ import './styles.css';
 import { Button, Form, Table, Label, Input, Col, Row, InputGroup, InputGroupAddon, InputGroupText, Container } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-function CargarJson() {
+function CargarJson()
+{
     const [opcs, setOpcs] = useState([]);
 
     const [plantillas, setPlantillas] = useState([]);

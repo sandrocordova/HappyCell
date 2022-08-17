@@ -25,7 +25,7 @@ const Navmenopc = () => {
         ref.current.scrollLeft += scrollOffset;
     };
     return (
-        <div class='navegacion'>
+        <div className='navegacion'>
             <ul className="containerul">
                 <li>
                     <Link to="/clientes">
