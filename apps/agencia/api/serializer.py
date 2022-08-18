@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from apps.agencia.models import Empresa, Usernav, Usernavtres, Cliente
+from apps.agencia.models import Empresa, Usernav, Usernavtres
 from apps.agencia.models import Profesiones, Nacionalidad, ActiEconomica, TipoRol, Sexo, Vivienda, EstadoCivil, SituacionLaboral
-
+from apps.cliente.models import Cliente
 
 # Create your views here.
 class PostSerializer(serializers.ModelSerializer):
