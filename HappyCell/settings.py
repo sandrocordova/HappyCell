@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'apps.agencia',
     'apps.apihc',
+    'apps.catalog',
 ]
 
 MIDDLEWARE = [
