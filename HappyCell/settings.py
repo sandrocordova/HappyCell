@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'apps.agencia',
     'apps.apihc',
     'apps.catalog',
+    'apps.cliente',
 ]
 
 MIDDLEWARE = [
