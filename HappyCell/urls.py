@@ -7,7 +7,7 @@ urlpatterns = [
     path('api/', include('apps.agencia.api.urls')),
     path('agencia/', include(('apps.agencia.urls', 'app_name'), namespace='agencia')),
     path('cliente/', include(('apps.cliente.urls', 'app_name'), namespace='cliente')),
-    path('cat/', include('apps.catalog.urls', 'app_name')),
+    path('cat/', include('apps.catalog.urls')),
     path('', menu, name="menu"),
     path('api-cli/v1/', include('apps.apihc.urls')),
 ]
