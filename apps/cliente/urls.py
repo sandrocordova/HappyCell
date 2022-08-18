@@ -1,9 +1,7 @@
-from django.contrib import admin
-from django.urls import path, include
-from apps.agencia.views import menu
+from django.urls import path
+from apps.cliente.views import cliente_api_view
 
 
 urlpatterns = [
-    path('', menu, name = 'menu'),
-    path('api/', include('apps.cliente.api.urls')),
+    path('view', cliente_api_view, name='api_cliente'),
 ]
