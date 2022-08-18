@@ -1,4 +1,4 @@
-from math import inf
+from datetime import datetime
 from rest_framework.views import APIView # Procesamiento de Views
 from rest_framework.response import Response # Manejo de Response HTTP
 from rest_framework.exceptions import AuthenticationFailed # Validación de Token (sin expirar)
@@ -255,6 +255,8 @@ class CLIENTESView(APIView):
                 log[logIndex] = f"El Cliente: {clie_identificacion} de tipo: {clienteChecking.TICL_CODIGO} ya está registrado, actualizando {actualizarC} campos de Cliente y {actualizarDC} campos de Cliente J. Pasando a Direcciones, Teléfonos, Observaciones y Asesores"
             logIndex += 1
         else:
+            now = datetime.now()
+            informacionCliente['CLIE_FECHA_CREACION'] = now
             informacionCliente['CLIE_TIPO_PROYECTO'] = 2
             informacionCliente['CLIE_CODIGO'] = clie_codigo
             detallesCliente['CLIE_CODIGO'] = clie_codigo
