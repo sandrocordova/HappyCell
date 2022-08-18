@@ -1,16 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\adminlte-3-react-main",
-    "\\adminlte-3-react-main\\src",
-    "\\happyhell_reactapp",
-    "\\happyhell_reactapp\\src",
-    "\\happyhell_reactapp\\src\\components",
-    "\\happyhell_reactapp\\src\\components\\mensajeria",
-    "\\happyhell_reactapp\\src\\components\\mensajeria\\mensajeria-ejecucion",
-    "\\happyhell_reactapp\\src\\components\\mensajeria\\mensajeria-plantillas",
-    "\\happyhell_reactapp\\src\\components\\navopciones"
+    "\\happycell_versionfinal\\src"
   ],
-  "SelectedNode": "\\adminlte-3-react-main\\src\\App.tsx",
+  "SelectedNode": "\\happycell_versionfinal",
   "PreviewInSolutionExplorer": false
 }
