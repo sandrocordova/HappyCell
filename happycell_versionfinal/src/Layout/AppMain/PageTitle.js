@@ -28,15 +28,15 @@ class PageTitle extends Component {
         <div className="page-title-wrapper">
           <div className="page-title-heading">
             <div className={cx("page-title-icon", {
-                "d-none": !enablePageTitleIcon,
-              })}>
+              "d-none": !enablePageTitleIcon,
+            })}>
               <i className={icon} />
             </div>
             <div>
               {heading}
               <div className={cx("page-title-subheading", {
-                  "d-none": !enablePageTitleSubheading,
-                })}>
+                "d-none": !enablePageTitleSubheading,
+              })}>
                 {subheading}
               </div>
             </div>
