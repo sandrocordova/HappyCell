@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework import status
 import json
 from rest_framework.response import Response
-from apps.catalog.models import Profesiones, Nacionalidad, ActiEconomica, TipoRol, Sexo, Vivienda, EstadoCivil, SituacionLaboral
+from apps.catalog.models import Profesion, Nacionalidad, ActividadEconomica, TipoRol, Sexo, Vivienda, EstadoCivil, SituacionLaboral
 from apps.catalog.serializer import ProfesionesSerializer, ProfesionesSerializer, NacionalidadSerializer, ActiEconomicaSerializer, TipoRolSerializer, SexoSerializer, ViviendaSerializer, EstadoCivilSerializer, SituacionLaboralCivilSerializer
 
 #Catálogos
@@ -15,7 +15,7 @@ class catalog_api_views(APIView):
             'message': "Response exitoso"
             }
         if 'profesion' in catalog_id:
-            consulta = Profesiones.objects.using('clientes').all()
+            consulta = Profesion.objects.using('clientes').all()
             profesionesSerializer = ProfesionesSerializer(consulta, many = True)
             catalog_list.append({'profesion':profesionesSerializer.data})
         if 'nacionalidad' in catalog_id:
@@ -23,7 +23,7 @@ class catalog_api_views(APIView):
             nacionalidadSerializer = NacionalidadSerializer(consulta, many = True)
             catalog_list.append({'nacionalidad':nacionalidadSerializer.data})
         if 'actividad_economica' in catalog_id:
-            consulta = ActiEconomica.objects.using('clientes').all()
+            consulta = ActividadEconomica.objects.using('clientes').all()
             actiEconomicaSerializer = ActiEconomicaSerializer(consulta, many = True)
             catalog_list.append({'actividad_economica':actiEconomicaSerializer.data})
         if 'tipo_rol' in catalog_id:
@@ -54,7 +54,7 @@ class catalog_api_views(APIView):
     
 class profesiones_api_views(APIView):
     def get(self, request):
-        consulta = Profesiones.objects.using('clientes').all()
+        consulta = Profesion.objects.using('clientes').all()
         profesionesSerializer = ProfesionesSerializer(consulta, many = True)
         return Response(profesionesSerializer.data, status = status.HTTP_200_OK)
     
@@ -66,7 +66,7 @@ class nacionalidad_api_views(APIView):
     
 class acti_economica_api_views(APIView):
     def get(self, request):
-        consulta = ActiEconomica.objects.using('clientes').all()
+        consulta = ActividadEconomica.objects.using('clientes').all()
         profesionesSerializer = ActiEconomicaSerializer(consulta, many = True)
         return Response(profesionesSerializer.data, status = status.HTTP_200_OK)
     

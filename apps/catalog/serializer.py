@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from apps.catalog.models import Profesiones, Nacionalidad, ActiEconomica, TipoRol, Sexo, Vivienda, EstadoCivil, SituacionLaboral
+from apps.catalog.models import Profesion, Nacionalidad, ActividadEconomica, TipoRol, Sexo, Vivienda, EstadoCivil, SituacionLaboral
 
         #Catalogos
 class ProfesionesSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Profesiones
+        model = Profesion
         fields = '__all__'
 
 class NacionalidadSerializer(serializers.ModelSerializer):
@@ -14,7 +14,7 @@ class NacionalidadSerializer(serializers.ModelSerializer):
 
 class ActiEconomicaSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ActiEconomica
+        model = ActividadEconomica
         fields = '__all__'
 
 class TipoRolSerializer(serializers.ModelSerializer):
