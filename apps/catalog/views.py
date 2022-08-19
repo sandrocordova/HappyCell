@@ -8,16 +8,20 @@ from apps.catalog.serializer import ProfesionesSerializer, ProfesionesSerializer
 #Catálogos
 class catalog_api_views(APIView):
     def get(self, request):
-        catalog_id = ['profesion', 'nacionalidad', 'actividad_economica', 'tipo_rol', 'sexo', 'vivienda', 'estado_civil', 'situacion_laboral']
+        #catalog_id = ['profesion', 'nacionalidad', 'actividad_economica', 'tipo_rol', 'sexo', 'vivienda', 'estado_civil', 'situacion_laboral']
+        catalog_id = ['profesion']
         catalog_list =[]
         json_response = {
             'status': True,
             'message': "Response exitoso"
             }
+        print("ESTÁ DENTRO")
         if 'profesion' in catalog_id:
             consulta = Profesiones.objects.using('clientes').all()
             profesionesSerializer = ProfesionesSerializer(consulta, many = True)
             catalog_list.append({'profesion':profesionesSerializer.data})
+            print(consulta)
+            print(catalog_list)
         if 'nacionalidad' in catalog_id:
             consulta = Nacionalidad.objects.using('clientes').all()
             nacionalidadSerializer = NacionalidadSerializer(consulta, many = True)
