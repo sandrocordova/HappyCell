@@ -1,14 +1,19 @@
 from rest_framework.views import APIView
 from rest_framework import status
+import json
 from rest_framework.response import Response
 from apps.catalog.models import Profesiones, Nacionalidad, ActiEconomica, TipoRol, Sexo, Vivienda, EstadoCivil, SituacionLaboral
 from apps.catalog.serializer import ProfesionesSerializer, ProfesionesSerializer, NacionalidadSerializer, ActiEconomicaSerializer, TipoRolSerializer, SexoSerializer, ViviendaSerializer, EstadoCivilSerializer, SituacionLaboralCivilSerializer
 
 #Catálogos
-class profesiones_api_views(APIView):
+class catalog_api_views(APIView):
     def get(self, request):
         catalog_id = ['profesion', 'nacionalidad', 'actividad_economica', 'tipo_rol', 'sexo', 'vivienda', 'estado_civil', 'situacion_laboral']
         catalog_list =[]
+        json_response = {
+            'status': True,
+            'message': "Response exitoso"
+            }
         if 'profesion' in catalog_id:
             consulta = Profesiones.objects.using('clientes').all()
             profesionesSerializer = ProfesionesSerializer(consulta, many = True)
@@ -41,7 +46,10 @@ class profesiones_api_views(APIView):
             consulta = SituacionLaboral.objects.using('clientes').all()
             situLaboralSerializer = SituacionLaboralCivilSerializer(consulta, many = True)
             catalog_list.append({'situacion_laboral':situLaboralSerializer.data})
-        return Response(profesionesSerializer.data, status = status.HTTP_200_OK)
+        
+        json_response['data']=json.dumps(catalog_list)
+        return Response(json_response)
+    
     
     
 class profesiones_api_views(APIView):
