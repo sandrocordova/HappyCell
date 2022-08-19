@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date, datetime
 from rest_framework.views import APIView # Procesamiento de Views
 from rest_framework.response import Response # Manejo de Response HTTP
 from rest_framework.exceptions import AuthenticationFailed # Validación de Token (sin expirar)
@@ -180,29 +180,14 @@ class CLIENTESView(APIView):
         else:
             direcciones = {}
 
-        if 'asesor' in data:
-            asesor = data['asesor']
-            nuevoAsesor = True
-            ases = validarAsesorExiste(asesor)
-            ases_codigo = ases['id']
-            if ases['result']:
-                nuevoAsesor = False
-                log[logIndex] = f"El asesor {ases['id']} ya está registrado"
-                logIndex += 1
-            else:
-                asesor['ASES_CODIGO'] = ases_codigo
-                asesor['TIAS_CODIGO'] = 1
-                asesor['TIBA_CODIGO'] = 1
-                asesor['EMPR_CODIGO'] = 8
-                log[logIndex] = f"El asesor {ases['id']} se registró"
-                logIndex += 1
-            asesorCliente = {
-                    'ASES_CODIGO': ases_codigo,
-                    'EMPR_CODIGO': 8
-                    }
+        if 'ASES_CODIGO' in informacionCliente:
+            ases_codigo = informacionCliente['ASES_CODIGO']
+            asesor = {
+                'ASES_CODIGO': ases_codigo
+            }
         else:
-            asesorCliente = None
-            nuevoAsesor = False
+            ases_codigo = None
+            asesor = None
 
         if 'observaciones' in data:
             observaciones = data['observaciones']
@@ -226,21 +211,10 @@ class CLIENTESView(APIView):
         clie_identificacion = informacionCliente['CLIE_IDENTIFICACION']
         # Fin Reservar
 
-        # Inicio Validar-Asesor
-        if nuevoAsesor:
-            validarAS = validarAsesor(asesor)
-            if validarAS['status'] is False:
-                return Response({"status": status.HTTP_400_BAD_REQUEST, "log": validarAS['log']})
-            log[logIndex] = validarAS['log']
-            logIndex += 1
-            guardarAS = guardarAsesor(asesor)
-            log[logIndex] = guardarAS['message']
-            logIndex += 1
-
-        informacionCliente['ASES_CODIGO'] = ases_codigo
-
         # Inicio Validar-Cliente
         clienteChecking = Cliente.objects.using('clientes').filter(CLIE_IDENTIFICACION = clie_identificacion).first()
+        today = date.today()
+        d1 = today.strftime("%Y-%m-%d")
 
         if clienteChecking:
             clie_codigo = clienteChecking.CLIE_CODIGO
@@ -255,10 +229,10 @@ class CLIENTESView(APIView):
                 log[logIndex] = f"El Cliente: {clie_identificacion} de tipo: {clienteChecking.TICL_CODIGO} ya está registrado, actualizando {actualizarC} campos de Cliente y {actualizarDC} campos de Cliente J. Pasando a Direcciones, Teléfonos, Observaciones y Asesores"
             logIndex += 1
         else:
-            now = datetime.now()
-            informacionCliente['CLIE_FECHA_CREACION'] = now
+            informacionCliente['CLIE_FECHA_CREACION'] = d1
             informacionCliente['CLIE_TIPO_PROYECTO'] = 2
             informacionCliente['CLIE_CODIGO'] = clie_codigo
+            informacionCliente['TISB_CODIGO'] = 1
             detallesCliente['CLIE_CODIGO'] = clie_codigo
             # Guardar CLIENTE
             validarC = validarCliente(informacionCliente)
@@ -384,11 +358,10 @@ class CLIENTESView(APIView):
                 Cliente.objects.using('clientes').filter(CLIE_IDENTIFICACION = clie_identificacion).update(ASES_CODIGO = ases_codigo)
         else:
             # Guardar Asesor
-            if asesorCliente:
-                asesorCliente['CLIE_CODIGO'] = clie_codigo
-                asesorCliente['EMPR_CODIGO'] = 8
-                asesorCliente['ASES_CODIGO'] = ases_codigo
-                guardarAC = guardarAsesorCliente(asesorCliente)
+            if asesor:
+                asesor['CLIE_CODIGO'] = clie_codigo
+                asesor['EMPR_CODIGO'] = 8
+                guardarAC = guardarAsesorCliente(asesor)
                 log[logIndex] = guardarAC['message']
                 logIndex += 1
             else:
@@ -465,6 +438,7 @@ class CLIENTESView(APIView):
         for vinculo in vinculos:
             vinc_identificacion = vinculo["VINC_IDENTIFICACION"]
             tivi_codigo = vinculo["TIVI_CODIGO"]
+            vinculo['VIN_FECHA_INGRESA'] = d1
             # Validar que el vínculo enviado no esté registrado para el Cliente
             vinculoExistente = Vinculo.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo, VINC_IDENTIFICACION = vinc_identificacion).first()
             if vinculoExistente is None:
