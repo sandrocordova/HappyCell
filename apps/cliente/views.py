@@ -29,7 +29,7 @@ class cliente_search(APIView):
             return Response(serializer_cliente.data, status = status.HTTP_200_OK)
         else :     
             print("NO ES CEDULA")
-            clienteChecking = Cliente.objects.using('clientes').filter(CLIE_NOMBRE__iexact = clienteData).all()
+            clienteChecking = Cliente.objects.using('clientes').filter(CLIE_NOMBRE__icontains = clienteData).all()
             print(clienteChecking)
             if clienteChecking:
                 print("Elementos encontrados: ")
