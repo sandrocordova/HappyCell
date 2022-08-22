@@ -29,13 +29,14 @@ class cliente_search(APIView):
             return Response(serializer_cliente.data, status = status.HTTP_200_OK)
         else :     
             print("NO ES CEDULA")
-            clienteChecking = Cliente.objects.using('clientes').filter(CLIE_NOMBRE = clienteData).all()
+            clienteChecking = Cliente.objects.using('clientes').filter(CLIE_NOMBRE = clienteData)
+            print(clienteChecking)
             if clienteChecking:
                 print(clienteChecking)
                 print("Elementos encontrados: "+len(clienteChecking))
                 serializer_cliente = ClienteSerializer(clienteChecking, many=True)
                 return Response(serializer_cliente.data, status = status.HTTP_200_OK)
-            return Response("Cliente no encontrado", status = status.HTTP_400_BAD_REQUEST)
+            return Response("Cliente no encontrado"+clienteChecking, status = status.HTTP_400_BAD_REQUEST)
         
 def cedula_is_ok(cedula):
     if cedula.isdigit():
