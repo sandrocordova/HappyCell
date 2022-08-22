@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from apps.cliente.models import Cliente
 from apps.cliente.serializer import ClienteSerializer
 
-class cliente(APIView):
+class cliente_search(APIView):
     def get(self, request):
         clientes = Cliente.objects.using('clientes').all()[4378:4450]
         for cliente in clientes:
@@ -21,7 +21,28 @@ class cliente(APIView):
         # Inicio Reservar información a manejar a partir del Request
         clienteData = request.data['data']
         print("MENSAJE RECIBIDO ------------------------"+clienteData)
+        if cedula_is_ok(clienteData):
+            print("Es cédula")
+            clienteChecking = Cliente.objects.using('clientes').filter(CLIE_IDENTIFICACION = clienteData).first()
+            print(clienteChecking.data)
+            serializer_cliente = ClienteSerializer(clienteChecking)
+            return Response(serializer_cliente.data, status = status.HTTP_200_OK)
+        else :     
+            print("NO ES CEDULA")
+            clienteChecking = Cliente.objects.using('clientes').filter(CLIE_NOMBRE = clienteData).all()
+            if clienteChecking:
+                print(clienteChecking.data)
+                print("Elementos encontrados: "+len(clienteChecking.data))
+                serializer_cliente = ClienteSerializer(clienteChecking, many=True)
+                return Response(serializer_cliente.data, status = status.HTTP_200_OK)
+            return Response("Cliente no encontrado", status = status.HTTP_400_BAD_REQUEST)
         
+def cedula_is_ok(cedula):
+    if cedula.isdigit():
+        if len(cedula)>=10:
+            return True
+        return False
+    return False
         
 @api_view(['GET'])
 def cliente_api_view(request):
