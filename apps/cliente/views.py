@@ -31,7 +31,7 @@ class cliente_search(APIView):
             print("NO ES CEDULA")
             clienteChecking = Cliente.objects.using('clientes').filter(CLIE_NOMBRE = clienteData).all()
             if clienteChecking:
-                print(clienteChecking.data)
+                print(clienteChecking)
                 print("Elementos encontrados: "+len(clienteChecking.data))
                 serializer_cliente = ClienteSerializer(clienteChecking, many=True)
                 return Response(serializer_cliente.data, status = status.HTTP_200_OK)
