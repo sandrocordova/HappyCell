@@ -1,13 +1,11 @@
 from rest_framework.views import APIView # Procesamiento de Views
-from rest_framework.decorators import api_view
-
-
 from rest_framework.response import Response # Manejo de Response HTTP
 from rest_framework.exceptions import AuthenticationFailed # Validación de Token (sin expirar)
 from rest_framework import status # Manejo de Status
 import jwt, datetime, base64 # Manejo del token
 from .serializers import ClienteJuridicoSerializer, ClienteNaturalSerializer, ClienteSerializer, DireccionSerializer, EstadoCivilSerializer, NacionalidadSerializer, NivelInstruccionSerializer, ProfesionSerializer, SituacionLaboralSerializer, TelefonoSerializer, TipoClienteSerializer, TipoDocumentoSerializer, UsuarioSerializer, ViviendaSerializer, ActividadEconomicaSerializer # Serializadores
-from .models import Asesor, Banco, Canton, Ciudad, Cliente, ClienteAsesor, ClienteJuridico, ClienteNatural, CuentaBancariaCliente, Direccion, EstadoCivil, GrupoEconomico, Nacionalidad, NivelInstruccion, Observacion, Pais, Parroquia, Profesion, Provincia, Secuencia, Sexo, SituacionLaboral, Telefono, TipoCliente, TipoCuenta, TipoDireccion, TipoDocumento, TipoEmpresa, TipoObservacion, TipoProyecto, TipoRol, TipoTelefono, TipoVinculo, Usuario, Vinculo, Vivienda, Zona, ActividadEconomica # Modelos
+from apps.catalog.models import Agencia, Banco, Ciudad, CuentaBalance, GrupoEconomico, Moneda, Nacionalidad, Pais, Periocidad, SubtipoEmpresa, TipoAgencia, TipoAsesor, TipoBanca, TipoCliente, TipoCuenta, TipoCuentaBalance, TipoDireccion, TipoDocumento, TipoEmpresa, TipoObservacion, TipoTelefono, VehiculoLegal, Zona, ActividadEconomica, Profesion, NivelInstruccion, Sexo, EstadoCivil, Vivienda, SituacionLaboral
+from .models import Asesor, BalanceCliente, Cliente, ClienteAsesor, ClienteJuridico, ClienteNatural, CuentaBancariaCliente, Direccion, Empresa, Observacion, Telefono, Usuario
 
 # Create your views here.
 class getToken(APIView):
