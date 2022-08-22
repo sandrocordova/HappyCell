@@ -24,7 +24,7 @@ class cliente_search(APIView):
         if cedula_is_ok(clienteData):
             print("Es cédula")
             clienteChecking = Cliente.objects.using('clientes').filter(CLIE_IDENTIFICACION = clienteData).first()
-            print(clienteChecking.data)
+            print(clienteChecking)
             serializer_cliente = ClienteSerializer(clienteChecking)
             return Response(serializer_cliente.data, status = status.HTTP_200_OK)
         else :     
