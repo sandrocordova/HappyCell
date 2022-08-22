@@ -20,7 +20,7 @@ class cliente_search(APIView):
     def post(self, request): # 
         # Inicio Reservar información a manejar a partir del Request
         clienteData = request.data['data']
-        print("MENSAJE RECIBIDO ------------------------"+request.data)
+        print("MENSAJE RECIBIDO ------------------------"+request)
         if cedula_is_ok(clienteData):
             print("Es cédula")
             clienteChecking = Cliente.objects.using('clientes').filter(CLIE_IDENTIFICACION = clienteData).first()
