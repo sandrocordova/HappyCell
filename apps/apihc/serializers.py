@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import Agencia, Asesor, BalanceCliente, Banco, Ciudad, Cliente, ClienteAsesor, ClienteJuridico, ClienteNatural, CuentaBalance, CuentaBancariaCliente, Direccion, Empresa, GrupoEconomico, Moneda, Nacionalidad, Observacion, Pais, Periocidad, SubtipoEmpresa, Telefono, TipoAgencia, TipoAsesor, TipoBanca, TipoCliente, TipoCuenta, TipoCuentaBalance, TipoDireccion, TipoDocumento, TipoEmpresa, TipoObservacion, TipoTelefono, Usuario, VehiculoLegal, Zona, ActividadEconomica, Profesion, NivelInstruccion, Sexo, EstadoCivil, Vivienda, SituacionLaboral
+from apps.catalog.models import Agencia, Banco, Ciudad, CuentaBalance, GrupoEconomico, Moneda, Nacionalidad, Pais, Periocidad, SubtipoEmpresa, TipoAgencia, TipoAsesor, TipoBanca, TipoCliente, TipoCuenta, TipoCuentaBalance, TipoDireccion, TipoDocumento, TipoEmpresa, TipoObservacion, TipoTelefono, VehiculoLegal, Zona, ActividadEconomica, Profesion, NivelInstruccion, Sexo, EstadoCivil, Vivienda, SituacionLaboral
+from .models import Asesor, BalanceCliente, Cliente, ClienteAsesor, ClienteJuridico, ClienteNatural, CuentaBancariaCliente, Direccion, Empresa, Observacion, Telefono, Usuario
 
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:

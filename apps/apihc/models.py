@@ -27,10 +27,10 @@ class Usuario(models.Model):
 class Empresa(models.Model):
     EMPR_CODIGO = models.CharField(primary_key = True, max_length = 10)
     EMP_EMPR_CODIGO = models.CharField(null = True, max_length = 10)
-    VELE_CODIGO = models.ForeignKey(VehiculoLegal, on_delete = cascade_delete, db_column = 'VELE_CODIGO')
-    TIEM_CODIGO = models.ForeignKey(TipoEmpresa, on_delete = cascade_delete, db_column = 'TIEM_CODIGO')
-    SUTE_CODIGO = models.ForeignKey(SubtipoEmpresa, on_delete = cascade_delete, db_column = 'SUTE_CODIGO')
-    MONE_CODIGO = models.ForeignKey(Moneda, on_delete = cascade_delete, db_column = 'MONE_CODIGO')
+    VELE_CODIGO = models.CharField(max_length = 3)
+    TIEM_CODIGO = models.PositiveIntegerField()
+    SUTE_CODIGO = models.PositiveIntegerField()
+    MONE_CODIGO = models.CharField(max_length = 3)
     EMPR_NOMBRE = models.CharField(max_length = 80)
     EMPR_IDENTIFICACION = models.CharField(max_length = 20)
     EMPR_FECHA_CONSTITUCION = models.DateTimeField()
@@ -39,8 +39,8 @@ class Empresa(models.Model):
     FECHA_ACTUAL = models.DateTimeField()
     FECHA_ANTERIOR = models.DateTimeField()
     FECHA_SIGUIENTE = models.DateTimeField()
-    GREM_CODIGO = models.ForeignKey(GrupoEconomico, on_delete = cascade_delete, db_column = 'GREM_CODIGO')
-    PERI_CODIGO = models.ForeignKey(Periocidad, on_delete = cascade_delete, db_column = 'PERI_CODIGO')
+    GREM_CODIGO = models.PositiveIntegerField()
+    PERI_CODIGO = models.PositiveIntegerField()
     FECHA_CIERRE = models.DateTimeField(null = True)
     EMPR_VIGENTE = models.CharField(max_length = 1)
     EMPR_PERIOCIDAD = models.PositiveIntegerField()
@@ -239,4 +239,18 @@ class Vinculo(models.Model):
         unique_together = ((
             "CLIE_CODIGO", 
             "VINC_CODIGO"
+            ))
+
+class BalanceCliente(models.Model):
+    CUBA_CUENTA = models.PositiveBigIntegerField()
+    CLIE_CODIGO = models.PositiveIntegerField()
+    BAEM_FECHA = models.DateTimeField(primary_key = True)
+    BAEM_VALOR = models.DecimalField(max_digits = 5, decimal_places = 4)
+
+    class Meta:
+        db_table = 'BALANCE_CLIENTE'
+        unique_together = ((
+            "CUBA_CUENTA", 
+            "CLIE_CODIGO", 
+            "BAEM_FECHA"
             ))

@@ -49,22 +49,22 @@ class Pais(models.Model):
 
 class VehiculoLegal(models.Model):
     VELE_CODIGO = models.CharField(primary_key = True, max_length = 3)
-    PAIS_CODIGO = models.ForeignKey(Pais, on_delete = cascade_delete, db_column = 'PAIS_CODIGO')
+    PAIS_CODIGO = models.CharField(max_length = 3)
     VELE_DESCRIPCION = models.CharField(max_length = 40)
 
     class Meta:
         db_table = 'VEHICULO_LEGAL'
 
 class TipoEmpresa(models.Model):
-    TIEM_CODIGO = models.AutoField(primary_key = True)
+    TIEM_CODIGO = models.PositiveIntegerField(primary_key = True)
     TIEM_DESCRIPCION = models.CharField(max_length = 40)
 
     class Meta:
         db_table = 'TIPO_EMPRESA'
 
 class SubtipoEmpresa(models.Model):
-    TIEM_CODIGO = models.ForeignKey(TipoEmpresa, on_delete = cascade_delete, db_column = 'TIEM_CODIGO')
-    SUTE_CODIGO = models.AutoField(primary_key = True)
+    TIEM_CODIGO = models.PositiveIntegerField()
+    SUTE_CODIGO = models.PositiveIntegerField(primary_key = True)
     SUTE_DESCRIPCION = models.CharField(max_length = 40)
 
     class Meta:
@@ -163,26 +163,12 @@ class TipoCuentaBalance(models.Model):
         db_table = 'TIPO_CUENTA_BALANCE'
 
 class CuentaBalance(models.Model):
-    CUBA_CUENTA = models.AutoField(primary_key = True)
-    TICB_CODIGO = models.ForeignKey(TipoCuentaBalance, on_delete = cascade_delete, db_column = 'TICB_CODIGO')
+    CUBA_CUENTA = models.PositiveBigIntegerField(primary_key = True)
+    TICB_CODIGO = models.PositiveIntegerField()
     CUBA_DESCRIPCION = models.CharField(max_length = 40)
 
     class Meta:
         db_table = 'CUENTA_BALANCE'
-
-class BalanceCliente(models.Model):
-    CUBA_CUENTA = models.ForeignKey(CuentaBalance, on_delete = cascade_delete, db_column = 'CUBA_CUENTA')
-    CLIE_CODIGO = models.ForeignKey(Cliente, on_delete = cascade_delete, db_column = 'CLIE_CODIGO')
-    BAEM_FECHA = models.DateTimeField(primary_key = True)
-    BAEM_VALOR = models.DecimalField(max_digits = 5, decimal_places = 4)
-
-    class Meta:
-        db_table = 'BALANCE_CLIENTE'
-        unique_together = ((
-            "CUBA_CUENTA", 
-            "CLIE_CODIGO", 
-            "BAEM_FECHA"
-            ))
 
 class TipoObservacion(models.Model):
     TIOC_CODIGO = models.AutoField(primary_key = True)
