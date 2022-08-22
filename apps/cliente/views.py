@@ -32,7 +32,7 @@ class cliente_search(APIView):
             clienteChecking = Cliente.objects.using('clientes').filter(CLIE_NOMBRE = clienteData).all()
             if clienteChecking:
                 print(clienteChecking)
-                print("Elementos encontrados: "+len(clienteChecking.data))
+                print("Elementos encontrados: "+len(clienteChecking))
                 serializer_cliente = ClienteSerializer(clienteChecking, many=True)
                 return Response(serializer_cliente.data, status = status.HTTP_200_OK)
             return Response("Cliente no encontrado", status = status.HTTP_400_BAD_REQUEST)
