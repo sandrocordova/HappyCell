@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 // import {
 //     useParams
 // } from "react-router-dom";
@@ -13,63 +13,65 @@ import {
     FormGroup,
     Label,
     Modal,
-    Form
+    Form,
+    Collapse
 } from "reactstrap";
 import { catalogo } from './data';
 import swal from 'sweetalert';
 import Loader from "react-loaders";
 import PageTitle from "../../Layout/AppMain/PageTitle";
 import ClientInfo from '../../components/ClientInfo';
+import { getCatalogos } from '../../Api/apicall_cliente';
 
 const Index = () => {
 
     /**
-     * TODO: crear la funcionalidad de obtener datos del cliente y asignarlos a los estados
-     * Important para asignar los valores por defecto en los inpus, utilizar: 
-     *      value={values.CLIE_NOMBRE} onChange={handleChange('CLIE_NOMBRE')}
-     * TODO: crear el metodo fecht a la a api
+     * TODO: crear el metodo fecht para actualizar datos
      */
     //let { id } = useParams();
 
     // state
+    const [profesionList, setProfesionList] = useState(null);
+    const [nacionalidadList, setNacionalidadList] = useState(null);
+    const [actividadEcList, setActividadEcList] = useState(null);
+    const [sexoList, setSexoList] = useState(null);
+    const [viviendaList, setViviendaList] = useState(null);
+    const [estadoCivilList, setEstadoCivilList] = useState(null);
+    const [sitLaboralList, setSitLaboralList] = useState(null);
+    const [isOpen, setIsOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     // const [error, setError] = useState(false);
-    //const [success, setSuccess] = useState(false); // el estado puede eliminarse y utilizar sweetalert en el fetch
     const [values, setValues] = useState({
-        NACI_CODIGO: '',
-        TICL_CODIGO: '',
-        TIDO_CODIGO: '',
-        ACTI_CODIGO: '',
-        ASES_CODIGO: '',
-        CLIE_NOMBRE: 'Jonnathan',
-        CLIE_FECHA_CREACION: '',
-        CLIE_NOMBRE_CORRESPONDENCIA: '',
-        clie_estado: '',
-        TISB_CODIGO: '',
-        clie_tipo: '',
-        CLIE_CLAVE: '',
-        CLIE_TIPO_ROL: '',
-        CLIE_TIPO_PROYECTO: '',
-        comodin: '',
-        ASES: '',
-        CLIE_FECHA_INACTIVACION: '',
-        CLIE_FECHA_DESAFILIACION: '',
-        sect_codigo: '',
-        pais_codigo: '',
-        prov_codigo: '',
-        cant_codigo: '',
-        parr_codigo: '',
+        nombreComercial: '',
+        nacionalidad: '',
+        categoriaCliente: '',
+        estado: '',
+        actividadEconomica: '',
+        tipoRol: '',
+        primerNombre: '',
+        segundoNombre: '',
+        primerApellido: '',
+        segundoApellido: '',
+        sexo: '',
+        profesion: '',
+        estadoCivil: '',
+        situacionLaboral: '',
+        tipoVivienda: '',
+        lugarNacimiento: '',
+        numeroCrgas: '',
+        fechaNacimiento: '',
+        empresaTrabajo: '',
+        expPadaporte: '',
+        inicioIngresos: '',
+        inicioResidencia: '',
     });
 
-    // const { TIDO_CODIGO, CLIE_NOMBRE } = values;
-
-    // console.log(TIDO_CODIGO)
-    // console.log(CLIE_NOMBRE)
-
+    // Funcion que escucha los cambios en los formularios
     const handleChange = name => event => {
         setValues({ ...values, [name]: event.target.value });
     }
 
+    // Funcion para actualizar datos del cliente en la API
     const clickSubmit = e => {
         e.preventDefault();
         //setValues({ ...values, error: false });
@@ -94,6 +96,26 @@ const Index = () => {
                 }
             });
     }
+
+    // Funcionalidad para obtener los datos de catalogos desde la API
+    const loadCatalogos = () => {
+        getCatalogos().then(res => {
+            res.data?.forEach(cat => {
+                if (cat.profesion) setProfesionList(cat.profesion)
+                if (cat.nacionalidad) setNacionalidadList(cat.nacionalidad)
+                if (cat.actividad_economica) setActividadEcList(cat.actividad_economica)
+                if (cat.sexo) setSexoList(cat.sexo)
+                if (cat.vivienda) setViviendaList(cat.vivienda)
+                if (cat.estado_civil) setEstadoCivilList(cat.estado_civil)
+                if (cat.situacion_laboral) setSitLaboralList(cat.situacion_laboral)
+            })
+        })
+    }
+
+    // Funcion inicializadora
+    useEffect(() => {
+        loadCatalogos();
+    }, []);
 
     return (
         <Fragment>
@@ -125,9 +147,9 @@ const Index = () => {
                                         <Col sm={8}>
                                             <Input type="select" id="nationality" name="nationality">
                                                 <option value="">Select</option>
-                                                {catalogo[1]?.nacionalidad?.map((data, i) => (
-                                                    <option key={i} value={data.naci_codigo}>
-                                                        {data.naci_descripcion}
+                                                {nacionalidadList?.map((data, i) => (
+                                                    <option key={i} value={data.NACI_CODIGO}>
+                                                        {data.NACI_DESCRIPCION}
                                                     </option>
                                                 ))}
                                             </Input>
@@ -140,11 +162,7 @@ const Index = () => {
                                         <Col sm={8}>
                                             <Input type="select" id="category" name="category">
                                                 <option value="">Select</option>
-                                                <option>Value 1</option>
-                                                <option>Value 2</option>
-                                                <option>Value 3</option>
-                                                <option>Value 4</option>
-                                                <option>Value 5</option>
+                                                {/* <option>Value 1</option> */}
                                             </Input>
                                         </Col>
                                     </FormGroup>
@@ -155,11 +173,11 @@ const Index = () => {
                                         <Col sm={8}>
                                             <Input type="select" id="state" name="state">
                                                 <option value="">Select</option>
-                                                {catalogo[5]?.estado_civil?.map((data, i) => (
+                                                {/* {catalogo[5]?.estado_civil?.map((data, i) => (
                                                     <option key={i} value={data.sci_codigo}>
                                                         {data.sci_descripcion}
                                                     </option>
-                                                ))}
+                                                ))} */}
                                             </Input>
                                         </Col>
                                     </FormGroup>
@@ -172,9 +190,9 @@ const Index = () => {
                                         <Col sm={8}>
                                             <Input type="select" id="economicActivity" name="economicActivity">
                                                 <option value="">Select</option>
-                                                {catalogo[2]?.actividad_economica?.map((data, i) => (
-                                                    <option key={i} value={data.acti_codigo}>
-                                                        {data.acti_descripcion}
+                                                {actividadEcList?.map((data, i) => (
+                                                    <option key={i} value={data.ACTI_CODIGO}>
+                                                        {data.ACTI_DESCRIPCION}
                                                     </option>
                                                 ))}
                                             </Input>
@@ -187,23 +205,69 @@ const Index = () => {
                                         <Col sm={8}>
                                             <Input type="select" id="rol" name="rol">
                                                 <option value="">Select</option>
-                                                <option>Value 1</option>
-                                                <option>Value 2</option>
-                                                <option>Value 3</option>
-                                                <option>Value 4</option>
-                                                <option>Value 5</option>
+                                                {/* <option>Value 1</option> */}
                                             </Input>
                                         </Col>
                                     </FormGroup>
                                 </Col>
                             </Row>
 
-                            <Row className='divider'>
+                            <Row>
+                                <Collapse isOpen={isOpen}>
+                                    <Card className='no-shadow border'>
+                                        <CardBody>
+                                            <Row>
+                                                <Col md={4} className="mb-2">
+                                                    <span className='fw-bold text-black-50 me-1'>Atraso promedio:</span>
+                                                    <span>123</span>
+                                                </Col>
+                                                <Col md={4} className="mb-2">
+                                                    <span className='fw-bold text-secondary me-1'>Atraso máximo:</span>
+                                                    <span>123</span>
+                                                </Col>
+                                                <Col md={4} className="mb-2">
+                                                    <span className='fw-bold text-secondary me-1'>N° de pagos totales:</span>
+                                                    <span>123</span>
+                                                </Col>
+                                            </Row>
+                                            <Row>
+                                                <Col md={4} className="mb-2">
+                                                    <span className='fw-bold text-secondary me-1'>Años de antiguedad:</span> <span>123</span>
+                                                </Col>
+                                            </Row>
+                                            <Row>
+                                                <Col md={4} className="mb-2">
+                                                    <span className='fw-bold text-secondary me-1'>N° de operaciones vigentes:</span> <span>123</span>
+                                                </Col>
+                                                <Col md={4} className="mb-2">
+                                                    <span className='fw-bold text-secondary me-1'>N° de operaciones canceladas:</span> <span>123</span>
+                                                </Col>
+                                                <Col md={4} className="mb-2">
+                                                    <span className='fw-bold text-secondary me-1'>Cupo utilizado:</span> <span>123</span>
+                                                </Col>
+                                            </Row>
+                                        </CardBody>
+                                    </Card>
+                                </Collapse>
+                                <Row className="d-flex flex-column justify-content-center align-items-center">
+                                    <div className="d-flex align-items-center">
+                                        <div className="mx-auto">
+                                            <Button outline className="mb-2 mt-2 me-2 btn-outline-2x btn-square" color="secondary" onClick={() => setIsOpen(!isOpen)}>
+                                                {isOpen ? "Ocultar información" : "Más Información"}
+                                            </Button>
+                                        </div>
+                                    </div>
+                                </Row>
+                            </Row>
+
+                            <Row className='divider'></Row>
+
+                            <Row >
                                 <Col md={3}>
                                     <FormGroup row>
                                         <Label for="firstName" sm={4}>Primer nombre:</Label>
                                         <Col sm={8}>
-                                            <Input type="text" name="firstName" id="firstName" value={values.CLIE_NOMBRE} onChange={handleChange('CLIE_NOMBRE')} />
+                                            <Input type="text" name="firstName" id="firstName" value={values.primerNombre} onChange={handleChange('primerNombre')} />
                                         </Col>
                                     </FormGroup>
                                 </Col>
@@ -211,7 +275,7 @@ const Index = () => {
                                     <FormGroup row>
                                         <Label for="secondName" sm={4}>Segundo nombre:</Label>
                                         <Col sm={8}>
-                                            <Input type="text" name="secondName" id="secondName" placeholder="with a placeholder" />
+                                            <Input type="text" name="secondName" id="secondName" value={values.segundoNombre} onChange={handleChange('segundoNombre')} />
                                         </Col>
                                     </FormGroup>
                                 </Col>
@@ -219,7 +283,7 @@ const Index = () => {
                                     <FormGroup row>
                                         <Label for="firtsName" sm={4}>Primer apellido:</Label>
                                         <Col sm={8}>
-                                            <Input type="text" name="firtsName" id="firtsName" placeholder="with a placeholder" />
+                                            <Input type="text" name="firtsName" id="firtsName" value={values.primerApellido} onChange={handleChange('primerApellido')} />
                                         </Col>
                                     </FormGroup>
                                 </Col>
@@ -227,7 +291,7 @@ const Index = () => {
                                     <FormGroup row>
                                         <Label for="secondSurname" sm={4}>Segundo apellido:</Label>
                                         <Col sm={8}>
-                                            <Input type="text" name="secondSurname" id="secondSurname" placeholder="with a placeholder" />
+                                            <Input type="text" name="secondSurname" id="secondSurname" value={values.segundoApellido} onChange={handleChange('segundoApellido')} />
                                         </Col>
                                     </FormGroup>
                                 </Col>
@@ -239,9 +303,9 @@ const Index = () => {
                                         <Col sm={8}>
                                             <Input type="select" id="sex" name="sex">
                                                 <option value="">Select</option>
-                                                {catalogo[3]?.sexo?.map((data, i) => (
-                                                    <option key={i} value={data.sexo_codigo}>
-                                                        {data.sexo_descripcion}
+                                                {sexoList?.map((data, i) => (
+                                                    <option key={i} value={data.SEXO_CODIGO}>
+                                                        {data.SEXO_DESCRIPCION}
                                                     </option>
                                                 ))}
                                             </Input>
@@ -254,9 +318,9 @@ const Index = () => {
                                         <Col sm={8}>
                                             <Input type="select" id="profession" name="profession">
                                                 <option value="">Select</option>
-                                                {catalogo[0]?.profesion?.map((data, i) => (
-                                                    <option key={i} value={data.prof_codigo}>
-                                                        {data.prof_descripcion}
+                                                {profesionList?.map((data, i) => (
+                                                    <option key={i} value={data.PROF_CODIGO}>
+                                                        {data.PROF_DESCRIPCION}
                                                     </option>
                                                 ))}
                                             </Input>
@@ -269,9 +333,9 @@ const Index = () => {
                                         <Col sm={8}>
                                             <Input type="select" id="maritalStatus" name="maritalStatus">
                                                 <option value="">Select</option>
-                                                {catalogo[5]?.estado_civil?.map((data, i) => (
-                                                    <option key={i} value={data.sci_codigo}>
-                                                        {data.sci_descripcion}
+                                                {estadoCivilList?.map((data, i) => (
+                                                    <option key={i} value={data.ESCI_CODIGO}>
+                                                        {data.ESCI_DESCRIPCION}
                                                     </option>
                                                 ))}
                                             </Input>
@@ -284,9 +348,9 @@ const Index = () => {
                                         <Col sm={8}>
                                             <Input type="select" id="employmentSituation" name="employmentSituation">
                                                 <option value="">Select</option>
-                                                {catalogo[6]?.situacion_laboral?.map((data, i) => (
-                                                    <option key={i} value={data.sitl_codigo}>
-                                                        {data.sitl_descripcion}
+                                                {sitLaboralList?.map((data, i) => (
+                                                    <option key={i} value={data.SITL_CODIGO}>
+                                                        {data.SITL_DESCRIPCION}
                                                     </option>
                                                 ))}
                                             </Input>
@@ -301,9 +365,9 @@ const Index = () => {
                                         <Col sm={8}>
                                             <Input type="select" id="typeHousing" name="typeHousing">
                                                 <option value="">Select</option>
-                                                {catalogo[4]?.vivienda?.map((data, i) => (
-                                                    <option key={i} value={data.vivi_codigo}>
-                                                        {data.vivi_descripcion}
+                                                {viviendaList?.map((data, i) => (
+                                                    <option key={i} value={data.VIVI_CODIGO}>
+                                                        {data.VIVI_DESCRIPCION}
                                                     </option>
                                                 ))}
                                             </Input>
@@ -314,7 +378,7 @@ const Index = () => {
                                     <FormGroup row>
                                         <Label for="placeBirth" sm={4}>Lugar de nacimiento:</Label>
                                         <Col sm={8}>
-                                            <Input type="text" name="placeBirth" id="placeBirth" placeholder="with a placeholder" />
+                                            <Input type="text" name="placeBirth" id="placeBirth" />
                                         </Col>
                                     </FormGroup>
                                 </Col>
@@ -322,7 +386,7 @@ const Index = () => {
                                     <FormGroup row>
                                         <Label for="numberLoads" sm={4}>Número de cargas:</Label>
                                         <Col sm={8}>
-                                            <Input type="text" name="numberLoads" id="numberLoads" placeholder="with a placeholder" />
+                                            <Input type="number" name="numberLoads" id="numberLoads" />
                                         </Col>
                                     </FormGroup>
                                 </Col>
@@ -330,7 +394,7 @@ const Index = () => {
                                     <FormGroup row>
                                         <Label for="dateBirth" sm={4}>Fecha nacimiento:</Label>
                                         <Col sm={8}>
-                                            <Input type="date" name="dateBirth" id="dateBirth" placeholder="with a placeholder" />
+                                            <Input type="date" name="dateBirth" id="dateBirth" />
                                         </Col>
                                     </FormGroup>
                                 </Col>
@@ -340,7 +404,7 @@ const Index = () => {
                                     <FormGroup row>
                                         <Label for="workCompany" sm={4}>Empresa trabajo:</Label>
                                         <Col sm={8}>
-                                            <Input type="text" name="workCompany" id="workCompany" placeholder="with a placeholder" />
+                                            <Input type="text" name="workCompany" id="workCompany" />
                                         </Col>
                                     </FormGroup>
                                 </Col>
@@ -348,7 +412,7 @@ const Index = () => {
                                     <FormGroup row>
                                         <Label for="passportExp" sm={4}>Exp. pasaporte:</Label>
                                         <Col sm={8}>
-                                            <Input type="date" name="passportExp" id="passportExp" placeholder="with a placeholder" />
+                                            <Input type="date" name="passportExp" id="passportExp" />
                                         </Col>
                                     </FormGroup>
                                 </Col>
@@ -356,7 +420,7 @@ const Index = () => {
                                     <FormGroup row>
                                         <Label for="homeRevenues" sm={4}>Inicio ingresos:</Label>
                                         <Col sm={8}>
-                                            <Input type="date" name="homeRevenues" id="homeRevenues" placeholder="with a placeholder" />
+                                            <Input type="date" name="homeRevenues" id="homeRevenues" />
                                         </Col>
                                     </FormGroup>
                                 </Col>
@@ -364,7 +428,7 @@ const Index = () => {
                                     <FormGroup row>
                                         <Label for="startResidency" sm={4}>Inicio recidencia:</Label>
                                         <Col sm={8}>
-                                            <Input type="date" name="startResidency" id="startResidency" placeholder="with a placeholder" />
+                                            <Input type="date" name="startResidency" id="startResidency" />
                                         </Col>
                                     </FormGroup>
                                 </Col>

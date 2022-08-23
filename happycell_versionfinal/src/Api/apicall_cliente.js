@@ -13,3 +13,16 @@ export const getClients = async (cedula, nombre) => {
         return error;
     }
 }
+
+export const getCatalogos = () => {
+    return fetch(
+        `${API}/cat/view`,
+        {
+            method: 'GET'
+        }
+    )
+        .then(response => {
+            return response.json()
+        })
+        .catch(err => console.log(err))
+}
