@@ -71,7 +71,7 @@ class cliente_search(APIView):
                     elif cliente.TIDO_CODIGO == "R":
                         cliente.TIDO_CODIGO = "Ruc"
                          
-                paginador = Paginator(clienteChecking, 10)
+                paginador = Paginator(clienteChecking, 1)
                 pagina = request.GET.get("page") or 1
                 clienteChecking = paginador.get_page(pagina)
                 pagina_actual = int(pagina)
