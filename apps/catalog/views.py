@@ -8,7 +8,7 @@ from apps.catalog.serializer import ProfesionesSerializer, ProfesionesSerializer
 #Catálogos
 class catalog_api_views(APIView):
     def get(self, request):
-        catalog_id = ['profesion', 'nacionalidad', 'actividad_economica', 'sexo', 'vivienda', 'estado_civil', 'situacion_laboral']
+        catalog_id = ['profesion', 'nacionalidad', 'actividad_economica', 'tipo_rol','sexo', 'vivienda', 'estado_civil', 'situacion_laboral']
         catalog_list =[]
         json_response = {
             'status': True,
