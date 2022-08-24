@@ -4,10 +4,9 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 from apps.apihc.functions import actualizarCliente, actualizarClienteJuridico, actualizarClienteNatural, guardarCliente, guardarClienteJuridico, guardarClienteNatural, validarCliente, validarClienteJuridico, validarClienteNatural
-from apps.apihc.models import ClienteJuridico, ClienteNatural, Secuencia
+from apps.apihc.models import ClienteJuridico, ClienteNatural, Secuencia, Direccion
 from apps.cliente.models import Cliente
-from authmsql.API.apihc.models import Direccion
-from authmsql.API.apihc.serializers import DireccionSerializer
+from apps.apihc.serializers import DireccionSerializer
 
 from apps.cliente.serializer import ClienteSerializer
 
