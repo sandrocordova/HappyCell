@@ -242,7 +242,7 @@ class TipoProyecto(models.Model):
         
 class TipoClase(models.Model):
     CLIE_TIPO = models.CharField(max_length = 2, primary_key = True)
-    DESC_TIPO = models.CharField(max_length =	50)
+    DESC_TIPO = models.CharField(max_length = 50, null = True)
 
     class Meta:
         db_table = 'TIPO_CLASE'

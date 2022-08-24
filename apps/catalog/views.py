@@ -8,7 +8,7 @@ from apps.catalog.serializer import TipoClaseSerializer, TipoProyectoSerializer,
 #Catálogos
 class catalog_api_views(APIView):
     def get(self, request):
-        catalog_id = ['tipo_proyecto','profesion', 'nacionalidad', 'actividad_economica', 'tipo_rol','sexo', 'vivienda', 'estado_civil', 'situacion_laboral']
+        catalog_id = ['tipo_clase','tipo_proyecto','profesion', 'nacionalidad', 'actividad_economica', 'tipo_rol','sexo', 'vivienda', 'estado_civil', 'situacion_laboral']
         catalog_list =[]
         json_response = {
             'status': True,
@@ -17,11 +17,11 @@ class catalog_api_views(APIView):
         if 'tipo_clase' in catalog_id:
             consulta = TipoClase.objects.using('clientes').all()
             profesionesSerializer = TipoClaseSerializer(consulta, many = True)
-            catalog_list.append({'profesion':profesionesSerializer.data})
+            catalog_list.append({'tipo_clase':profesionesSerializer.data})
         if 'tipo_proyecto' in catalog_id:
             consulta = TipoProyecto.objects.using('clientes').all()
             profesionesSerializer = TipoProyectoSerializer(consulta, many = True)
-            catalog_list.append({'profesion':profesionesSerializer.data})
+            catalog_list.append({'tipo_proyecto':profesionesSerializer.data})
         if 'profesion' in catalog_id:
             consulta = Profesion.objects.using('clientes').all()
             profesionesSerializer = ProfesionesSerializer(consulta, many = True)
