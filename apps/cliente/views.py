@@ -11,7 +11,7 @@ from apps.apihc.models import Direccion, Telefono
 from apps.apihc.serializers import DireccionSerializer, TelefonoSerializer
 
 from apps.cliente.serializer import ClienteSerializer
-
+from django.core.paginator import Paginator
 
 class direccion_search(APIView):
     def post(self, request):
