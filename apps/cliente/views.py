@@ -3,8 +3,21 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 from apps.cliente.models import Cliente
+from authmsql.API.apihc.models import Direccion
+from authmsql.API.apihc.serializers import DireccionSerializer
+
 from apps.cliente.serializer import ClienteSerializer
 
+class direccion_search(APIView):
+    def post(self, request): # 
+        # Inicio Reservar información a manejar a partir del Request
+        clienteId = request.data['clie_codigo']
+        clienteChecking = Direccion.objects.using('clientes').filter(CLIE_CODIGO = clienteId).all()
+        if clienteChecking:
+            serializer_cliente = DireccionSerializer(clienteChecking, many=True)
+            return Response(serializer_cliente.data, status = status.HTTP_200_OK)
+        return Response("Dirección de cliente no encontrado", status = status.HTTP_400_BAD_REQUEST)
+        
 class cliente_search(APIView):
     def get(self, request):
         clientes = Cliente.objects.using('clientes').all()[4378:4450]

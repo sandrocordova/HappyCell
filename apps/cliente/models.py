@@ -29,3 +29,4 @@ class Cliente(models.Model):
     
     class Meta:
         db_table = "cliente"
+        
