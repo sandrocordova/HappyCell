@@ -12,23 +12,21 @@ from apps.apihc.serializers import DireccionSerializer, TelefonoSerializer
 from apps.cliente.serializer import ClienteSerializer
 
 class direccion_search(APIView):
-    def post(self, request): # 
-        # Inicio Reservar información a manejar a partir del Request
+    def post(self, request):
         clienteId = request.data['clie_codigo']
-        clienteChecking = Direccion.objects.using('clientes').filter(CLIE_CODIGO = clienteId).all()
-        if clienteChecking:
-            serializer_cliente = DireccionSerializer(clienteChecking, many=True)
+        direccionRetornada = Direccion.objects.using('clientes').filter(CLIE_CODIGO = clienteId).all()
+        if direccionRetornada:
+            serializer_cliente = DireccionSerializer(direccionRetornada, many=True)
             return Response(serializer_cliente.data, status = status.HTTP_200_OK)
         return Response("Dirección de cliente no encontrado", status = status.HTTP_400_BAD_REQUEST)
         
 class telefono_search(APIView):
-    def post(self, request): # 
-        # Inicio Reservar información a manejar a partir del Request
+    def post(self, request):
         clienteId = request.data['clie_codigo']
-        clienteId = request.data['dir']
-        clienteChecking = Telefono.objects.using('clientes').filter(CLIE_CODIGO = clienteId).all()
-        if clienteChecking:
-            serializer_cliente = TelefonoSerializer(clienteChecking, many=True)
+        direccionId = request.data['dire_codigo']
+        telefonoRetornado = Telefono.objects.using('clientes').filter(DIRE_CODIGO = direccionId, CLIE_CODIGO = clienteId).all()
+        if telefonoRetornado:
+            serializer_cliente = TelefonoSerializer(telefonoRetornado, many=True)
             return Response(serializer_cliente.data, status = status.HTTP_200_OK)
         return Response("Dirección de cliente no encontrado", status = status.HTTP_400_BAD_REQUEST)
         
@@ -44,8 +42,7 @@ class cliente_search(APIView):
         serializer_cliente = ClienteSerializer(clientes, many = True)
         return Response(serializer_cliente.data, status = status.HTTP_200_OK)
     
-    def post(self, request): # 
-        # Inicio Reservar información a manejar a partir del Request
+    def post(self, request):
         clienteData = request.data['data']
         if cedula_is_ok(clienteData):
             clienteChecking = Cliente.objects.using('clientes').filter(CLIE_IDENTIFICACION = clienteData).first()
