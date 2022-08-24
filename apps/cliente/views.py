@@ -1,4 +1,5 @@
 import datetime
+from urllib import response
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework import status
@@ -8,7 +9,6 @@ from apps.apihc.models import ClienteJuridico, ClienteNatural, Secuencia, Direcc
 from apps.cliente.models import Cliente
 from apps.apihc.models import Direccion, Telefono
 from apps.apihc.serializers import DireccionSerializer, TelefonoSerializer
-from django.core.paginator import Paginator
 
 from apps.cliente.serializer import ClienteSerializer
 
@@ -113,10 +113,10 @@ def cliente_api_view(request):
                 cliente.TICL_CODIGO = "Natural"
             else:
                 cliente.TICL_CODIGO = "Juridico"
-
-        serializer_cliente = ClienteSerializer(clientes, many=True)
-        return Response(serializer_cliente.data, status=status.HTTP_200_OK)
-
+        
+        serializer_cliente = ClienteSerializer(clientes, many = True)
+        return Response(serializer_cliente.data, status = status.HTTP_200_OK)
+    
 
 class ClienteView(APIView):
     def post(self, request):
@@ -200,4 +200,4 @@ class ClienteView(APIView):
             tipo = 'Jurídico'
         cambiosC = actualizarCliente(informacionCliente, clienteChecking)
 
-        return Response({"status": 200, "message": f"Se actualizaron {cambiosC} datos de Cliente {clie_codigo} y {cambiosCD} datos de Cliente {tipo}"}, status=status.HTTP_200_OK)
+        return Response({"status": 200, "message": f"Se actualizaron {cambiosC} datos de Cliente {clie_codigo} y {cambiosCD} datos de Cliente {tipo}"}, status = status.HTTP_200_OK)

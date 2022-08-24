@@ -10,4 +10,5 @@ urlpatterns = [
     path('cat/', include('apps.catalog.urls')),
     path('api/', include('apps.agencia.api.urls')),
     path('api-cli/v1/', include('apps.apihc.urls')),
+    path('api-dir/v1/', include('apps.direccion.urls')),
 ]
