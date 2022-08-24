@@ -57,7 +57,6 @@ class DireccionView(APIView):
                 return Response({"status": 400, "message": validarD['message']}, status = status.HTTP_400_BAD_REQUEST)
             actualizarD = actualizarDireccion(direccion, direccionChecking)
             if actualizarD > 0:
-                return Response(actualizarD)
                 success += 1
 
         return Response({"status": 200, "message": f"Se actualizaron {success} de {len(direcciones)} Direcciones del Cliente {clie_codigo}"}, status = status.HTTP_200_OK)
