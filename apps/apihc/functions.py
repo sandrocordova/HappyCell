@@ -1,143 +1,116 @@
 from .choices import ERRCLI_CODES
-from apps.catalog.models import Agencia, Banco, Ciudad, CuentaBalance, GrupoEconomico, Moneda, Nacionalidad, Pais, Periocidad, SubtipoEmpresa, TipoAgencia, TipoAsesor, TipoBanca, TipoCliente, TipoCuenta, TipoCuentaBalance, TipoDireccion, TipoDocumento, TipoEmpresa, TipoObservacion, TipoTelefono, VehiculoLegal, Zona, ActividadEconomica, Profesion, NivelInstruccion, Sexo, EstadoCivil, Vivienda, SituacionLaboral
+from apps.catalog.models import Agencia, Banco, Canton, Ciudad, CuentaBalance, GrupoEconomico, Moneda, Nacionalidad, Pais, Parroquia, Periocidad, SubtipoEmpresa, TipoAgencia, TipoAsesor, TipoBanca, TipoCliente, TipoCuenta, TipoCuentaBalance, TipoDireccion, TipoDocumento, TipoEmpresa, TipoObservacion, TipoRol, TipoTelefono, VehiculoLegal, Zona, ActividadEconomica, Profesion, NivelInstruccion, Sexo, EstadoCivil, Vivienda, SituacionLaboral
 from .models import Asesor, BalanceCliente, Cliente, ClienteAsesor, ClienteJuridico, ClienteNatural, CuentaBancariaCliente, Direccion, Empresa, Observacion, Telefono, Usuario
 
 def validarCliente(data):
     success = True
     log = {}
-
+    indexLog = 0
 
     nacionalidad = Nacionalidad.objects.using('clientes').filter(NACI_CODIGO = data['NACI_CODIGO']).first()
     if nacionalidad is None:
         nacionalidaderrorCodes = ERRCLI_CODES(data['NACI_CODIGO'], "Nacionalidad", "")
-        log.update({nacionalidaderrorCodes['ERRCLI_001']})         
+        log[indexLog] = nacionalidaderrorCodes['ERRCLI001']
+        indexLog += 1    
         success = False
 
     tipoCliente = TipoCliente.objects.using('clientes').filter(TICL_CODIGO = data['TICL_CODIGO']).first()
     if tipoCliente is None:
-        tipoClienteerrorCodes = ERRCLI_CODES(data['TICL_CODIGO'], "TipoCliente", "")
-        log.update({tipoClienteerrorCodes['ERRCLI_001']}) 
+        tipoClienteerrorCodes = ERRCLI_CODES(data['TICL_CODIGO'], "Tipo Cliente", "")
+        log[indexLog] = tipoClienteerrorCodes['ERRCLI001']
+        indexLog += 1    
         success = False
 
     tipoDocument = TipoDocumento.objects.using('clientes').filter(TIDO_CODIGO = data['TIDO_CODIGO']).first()
     if tipoDocument is None:
-        tipoDocumenterrorCodes = ERRCLI_CODES(data['TIDO_CODIGO'], "TipoDocumento", "")
-        log.update({tipoDocumenterrorCodes['ERRCLI_001']}) 
+        tipoDocumenterrorCodes = ERRCLI_CODES(data['TIDO_CODIGO'], "Tipo Documento", "")
+        log[indexLog] = tipoDocumenterrorCodes['ERRCLI001']
+        indexLog += 1    
         success = False
 
     actividadEconomica = ActividadEconomica.objects.using('clientes').filter(ACTI_CODIGO = data['ACTI_CODIGO']).first()
     if actividadEconomica is None:
-        actividadEconomicaerrorCodes = ERRCLI_CODES(data['ACTI_CODIGO'], "ActividadEconomica", "")
-        log.update({actividadEconomicaerrorCodes['ERRCLI_001']}) 
+        actividadEconomicaerrorCodes = ERRCLI_CODES(data['ACTI_CODIGO'], "Actividad Economica", "")
+        log[indexLog] = actividadEconomicaerrorCodes['ERRCLI001']
+        indexLog += 1    
         success = False
 
     asesor = Asesor.objects.using('clientes').filter(ASES_CODIGO = data['ASES_CODIGO']).first()
     if asesor is None:
         asesorerrorCodes = ERRCLI_CODES(data['ASES_CODIGO'], "Asesor", "")
-        log.update({asesorerrorCodes['ERRCLI_001']})         
+        log[indexLog] = asesorerrorCodes['ERRCLI001']
+        indexLog += 1    
         success = False
 
     tipoRol = TipoRol.objects.using('clientes').filter(TIRO_CODIGO = data['CLIE_TIPO_ROL']).first()
     if tipoRol is None:
-        tipoRolerrorCodes = ERRCLI_CODES(data['CLIE_TIPO_ROL'], "TipoRol", "")
-        log.update({tipoRolerrorCodes['ERRCLI_001']}) 
+        tipoRolerrorCodes = ERRCLI_CODES(data['CLIE_TIPO_ROL'], "Tipo Rol", "")
+        log[indexLog] = tipoRolerrorCodes['ERRCLI001']
+        indexLog += 1    
         success = False
 
     return {
         'status': success, 
-        'log': {
-            'ERRCLI_001': log
-            } 
+        'log': log
         }
 
 def validarClienteNatural(data):
     success = True
     log = {}
     indexLog = 0
-    log[indexLog] = "==================================================================="
-    indexLog += 1
-
 
     profesion = Profesion.objects.using('clientes').filter(PROF_CODIGO = data['PROF_CODIGO']).first()
-    if profesion:
-        log[indexLog] = f"Profesion válido: {data['PROF_CODIGO']}, DESCRIPCIÓN: {profesion.PROF_DESCRIPCION}"
-        indexLog += 1
-    else:
-        log[indexLog] = f"Profesion no válido: {data['PROF_CODIGO']}. Revisar ficha técnica"
-        indexLog += 1
+    if profesion is None:
+        profesionerrorCodes = ERRCLI_CODES(data['PROF_CODIGO'], "Profesion", "")
+        log[indexLog] = profesionerrorCodes['ERRCLI001']
+        indexLog += 1   
         success = False
-
     nivelInstruccion = NivelInstruccion.objects.using('clientes').filter(NIIN_CODIGO = data['NIIN_CODIGO']).first()
-    if nivelInstruccion:
-        log[indexLog] = f"Nivel de Instruccion válido: {data['NIIN_CODIGO']}, DESCRIPCIÓN: {nivelInstruccion.NIIN_DESCRIPCION}"
-        indexLog += 1
-    else:
-        log[indexLog] = f"Nivel de Instruccion no válido: {data['NIIN_CODIGO']}. Revisar ficha técnica"
-        indexLog += 1
+    if nivelInstruccion is None:
+        nivelInstruccionerrorCodes = ERRCLI_CODES(data['NIIN_CODIGO'], "Nivel Instruccion", "")
+        log[indexLog] = nivelInstruccionerrorCodes['ERRCLI001']
+        indexLog += 1   
         success = False
-
     sexo = Sexo.objects.using('clientes').filter(SEXO_CODIGO = data['SEXO_CODIGO']).first()
-    if sexo:
-        log[indexLog] = f"Sexo válido: {data['SEXO_CODIGO']}, DESCRIPCIÓN: {sexo.SEXO_DESCRIPCION}"
-        indexLog += 1
-    else:
-        log[indexLog] = f"Sexo no válido: {data['SEXO_CODIGO']}. Revisar ficha técnica"
-        indexLog += 1
+    if sexo is None:
+        sexoerrorCodes = ERRCLI_CODES(data['SEXO_CODIGO'], "Sexo", "")
+        log[indexLog] = sexoerrorCodes['ERRCLI001']
+        indexLog += 1   
         success = False
-
     estadoCivil = EstadoCivil.objects.using('clientes').filter(ESCI_CODIGO = data['ESCI_CODIGO']).first()
-    if estadoCivil:
-        log[indexLog] = f"Estado Civil válido: {data['ESCI_CODIGO']}, DESCRIPCIÓN: {estadoCivil.ESCI_DESCRIPCION}"
-        indexLog += 1
-    else:
-        log[indexLog] = f"Estado Civil no válido: {data['ESCI_CODIGO']}. Revisar ficha técnica"
-        indexLog += 1
+    if estadoCivil is None:
+        estadoCivilerrorCodes = ERRCLI_CODES(data['ESCI_CODIGO'], "Estado Civil", "")
+        log[indexLog] = estadoCivilerrorCodes['ERRCLI001']
+        indexLog += 1   
         success = False
-
     tipoVivienda = Vivienda.objects.using('clientes').filter(VIVI_CODIGO = data['CLIE_TIPO_VIVIENDA']).first()
-    if tipoVivienda:
-        log[indexLog] = f"Vivienda válido: {data['CLIE_TIPO_VIVIENDA']}, DESCRIPCIÓN: {tipoVivienda.VIVI_DESCRIPCION}"
-        indexLog += 1
-    else:
-        log[indexLog] = f"Vivienda no válido: {data['CLIE_TIPO_VIVIENDA']}. Revisar ficha técnica"
-        indexLog += 1
+    if tipoVivienda is None:
+        tipoViviendaerrorCodes = ERRCLI_CODES(data['CLIE_TIPO_VIVIENDA'], "Vivienda", "")
+        log[indexLog] = tipoViviendaerrorCodes['ERRCLI001']
+        indexLog += 1   
         success = False
-
     situacionLaboral = SituacionLaboral.objects.using('clientes').filter(SITL_CODIGO = data['CLIE_SITUACION_LABORAL']).first()
-    if situacionLaboral:
-        log[indexLog] = f"Situación Laboral válido: {data['CLIE_SITUACION_LABORAL']}, DESCRIPCIÓN: {situacionLaboral.SITL_DESCRIPCION}"
-        indexLog += 1
-    else:
-        log[indexLog] = f"Situación Laboral no válido: {data['CLIE_SITUACION_LABORAL']}. Revisar ficha técnica"
-        indexLog += 1
+    if situacionLaboral is None:
+        situacionLaboralerrorCodes = ERRCLI_CODES(data['CLIE_SITUACION_LABORAL'], "Situacion Laboral", "")
+        log[indexLog] = situacionLaboralerrorCodes['ERRCLI001']
+        indexLog += 1   
         success = False
-
     return {'status': success, 'log': log }
 
 def validarClienteJuridico(data):
     success = True
-    log = {}
     indexLog = 0
-    log[indexLog] = "==================================================================="
-    indexLog += 1
-
+    log = {}
 
     tipoEmpresa = TipoEmpresa.objects.using('clientes').filter(TIEM_CODIGO = data['TIEM_CODIGO']).first()
-    if tipoEmpresa:
-        log[indexLog] = f"Profesion válido: {data['TIEM_CODIGO']}, DESCRIPCIÓN: {tipoEmpresa.TIEM_DESCRIPCION}"
-        indexLog += 1
-    else:
-        log[indexLog] = f"Profesion no válido: {data['TIEM_CODIGO']}. Revisar ficha técnica"
-        indexLog += 1
+    if tipoEmpresa is None:
+        tipoEmpresaerrorCodes = ERRCLI_CODES(data['TIEM_CODIGO'], "Tipo Empresa", "")
+        log[indexLog] = tipoEmpresaerrorCodes['ERRCLI001']
         success = False
-
     grupoEconomico = GrupoEconomico.objects.using('clientes').filter(GREC_CODIGO = data['GREC_CODIGO']).first()
-    if grupoEconomico:
-        log[indexLog] = f"Nivel de Instruccion válido: {data['GREC_CODIGO']}, DESCRIPCIÓN: {grupoEconomico.GREC__DESCRIPCION}"
-        indexLog += 1
-    else:
-        log[indexLog] = f"Nivel de Instruccion no válido: {data['GREC_CODIGO']}. Revisar ficha técnica"
-        indexLog += 1
+    if grupoEconomico is None:
+        grupoEconomicoerrorCodes = ERRCLI_CODES(data['GREC_CODIGO'], "Grupo Economico", "")
+        log[indexLog] = tipoEmpresaerrorCodes['ERRCLI001']
         success = False
     
     return {'status': success, 'log': log }
@@ -403,6 +376,8 @@ def actualizarCliente(data, cliente):
     if cliente.TIDO_CODIGO != data['TIDO_CODIGO']:
         Cliente.objects.using('clientes').filter(CLIE_CODIGO = cliente.CLIE_CODIGO).update(TIDO_CODIGO = data['TIDO_CODIGO'])
         cambios += 1
+        Cliente.objects.using('clientes').filter(CLIE_CODIGO = cliente.CLIE_CODIGO).update(CLIE_IDENTIFICACION = data['CLIE_IDENTIFICACION'])
+        cambios += 1
     if cliente.ACTI_CODIGO != data['ACTI_CODIGO']:
         Cliente.objects.using('clientes').filter(CLIE_CODIGO = cliente.CLIE_CODIGO).update(ACTI_CODIGO = data['ACTI_CODIGO'])
         cambios += 1
@@ -462,3 +437,10 @@ def actualizarClienteJuridico(data, cliente):
         cambios += 1
 
     return cambios
+        
+def cedula_is_ok(cedula):
+    if cedula.isdigit():
+        if len(cedula)>=10:
+            return True
+        return False
+    return False

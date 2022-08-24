@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from apps.cliente.models import Cliente
-from apps.apihc.models import Direccion, Telefono
+from authmsql.API.apihc.models import Direccion
 
 class ClienteSerializer(serializers.ModelSerializer):
     class Meta:
