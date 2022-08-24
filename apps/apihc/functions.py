@@ -110,7 +110,7 @@ def validarClienteJuridico(data):
     grupoEconomico = GrupoEconomico.objects.using('clientes').filter(GREC_CODIGO = data['GREC_CODIGO']).first()
     if grupoEconomico is None:
         grupoEconomicoerrorCodes = ERRCLI_CODES(data['GREC_CODIGO'], "Grupo Economico", "")
-        log[indexLog] = tipoEmpresaerrorCodes['ERRCLI001']
+        log[indexLog] = grupoEconomicoerrorCodes['ERRCLI001']
         success = False
     
     return {'status': success, 'log': log }
@@ -119,17 +119,11 @@ def validarDireccion(data):
     success = True
     log = {}
     indexLog = 0
-    log[indexLog] = "==================================================================="
-    indexLog += 1
-
 
     parroquia = Parroquia.objects.using('clientes').filter(PARR_CODIGO = data['parr_codigo']).first()
     if parroquia:
         canton = Parroquia.objects.using('clientes').filter(PARR_CODIGO = data['parr_codigo'], CANT_CODIGO = data['cant_codigo']).first()
-        if canton:
-            log[indexLog] = f"Parroquia y Cantón válidos: {data['parr_codigo']}"
-            indexLog += 1
-        else:
+        if canton is None:
             log[indexLog] = f"Cantón no válido: {data['cant_codigo']} para la Parroquia: {parroquia.PARR_CODIGO}. Revisar ficha técnica"
             indexLog += 1
             success = False
@@ -141,10 +135,7 @@ def validarDireccion(data):
     canton = Canton.objects.using('clientes').filter(CANT_CODIGO = data['cant_codigo']).first()
     if canton:
         provincia = Canton.objects.using('clientes').filter(PROV_CODIGO = data['prov_codigo'], CANT_CODIGO = data['cant_codigo']).first()
-        if provincia:
-            log[indexLog] = f"Cantón válido: {data['cant_codigo']}, DESCRIPCIÓN: {canton.CANT_NOMBRE}"
-            indexLog += 1
-        else:
+        if provincia is None:
             log[indexLog] = f"Provincia no válida: {data['prov_codigo']} para el Cantón: {canton.CANT_CODIGO}. Revisar ficha técnica"
             indexLog += 1
             success = False
@@ -153,26 +144,54 @@ def validarDireccion(data):
         indexLog += 1
         success = False
 
-    return {'status': success, 'log': log }
+    tipo = TipoDireccion.objects.using('clientes').filter(TIDE_CODIGO = data['TIDE_CODIGO']).first()
+    if tipo is None:
+        log[indexLog] = f"Tipo de Dirección no válido: {data['TIDE_CODIGO']}. Revisar ficha técnica"
+        indexLog += 1
+        success = False
+
+    return {'status': success, 'message': log }
 
 def validarTelefono(data):
     success = True
     log = {}
     indexLog = 0
-    log[indexLog] = "==================================================================="
-    indexLog += 1
+    telefono = data['TELE_NUMERO']
 
-
-    tipo = TipoTelefono.objects.using('clientes').filter(TITE_CODIGO = data['TITE_CODIGO']).first()
-    if tipo:
-        log[indexLog] = f"Tipo de Teléfono válido: {data['TITE_CODIGO']}, DESCRIPCIÓN: {tipo.TITE_DESCRIPCION}"
-        indexLog += 1
+    if telefono.isdigit():
+        if len(telefono) < 10:
+            log[indexLog] = f"Teléfono no válido: {data['TELE_NUMERO']}. Revisar ficha técnica"
+            indexLog += 1
+            success = False
     else:
-        log[indexLog] = f"Tipo de Teléfono no válido: {data['TITE_CODIGO']}. Revisar ficha técnica"
+        log[indexLog] = f"Teléfono no válido: {data['TELE_NUMERO']}. Revisar ficha técnica"
         indexLog += 1
         success = False
 
-    return {'status': success, 'log': log }
+    tipo = TipoTelefono.objects.using('clientes').filter(TITE_CODIGO = data['TITE_CODIGO']).first()
+    if tipo is None:
+        log[indexLog] = f"Tipo de Teléfono no existe: {data['TITE_CODIGO']}. Revisar ficha técnica"
+        indexLog += 1
+        success = False
+
+    direccion = Direccion.objects.using('clientes').filter(DIRE_CODIGO = data['DIRE_CODIGO'], CLIE_CODIGO = data['CLIE_CODIGO']).first()
+    if direccion is None:
+        log[indexLog] = f"DIRE_CODIGO {data['DIRE_CODIGO']} no corresponde a Cliente: {data['CLIE_CODIGO']}. Revisar ficha técnica"
+        indexLog += 1
+        success = False
+
+    tipoD = TipoDireccion.objects.using('clientes').filter(TIDE_CODIGO = data['TIDE_CODIGO']).first()
+    if tipoD is None:
+        log[indexLog] = f"Tipo de Dirección no existe: {data['TIDE_CODIGO']}. Revisar ficha técnica"
+        indexLog += 1
+        success = False
+    elif tipoD.TIDE_CODIGO == 2:
+        log[indexLog] = f"Tipo de Dirección no válido: {data['TIDE_CODIGO']}. Revisar ficha técnica"
+        indexLog += 1
+        success = False
+    
+
+    return {'status': success, 'message': log }
 
 def validarAsesor(data):
     success = True
@@ -437,7 +456,35 @@ def actualizarClienteJuridico(data, cliente):
         cambios += 1
 
     return cambios
+
+def actualizarDireccion(data, direccion):
+    cambios = 0
+
+    if direccion.DIRE_DESCRIPCION != data['DIRE_DESCRIPCION']:
+        Direccion.objects.using('clientes').filter(CLIE_CODIGO = data['CLIE_CODIGO'], DIRE_CODIGO = data['DIRE_CODIGO']).update(DIRE_DESCRIPCION = data['DIRE_DESCRIPCION'])
+        cambios += 1
+    if direccion.prov_codigo != data['prov_codigo']:
+        Direccion.objects.using('clientes').filter(CLIE_CODIGO = data['CLIE_CODIGO'], DIRE_CODIGO = data['DIRE_CODIGO']).update(prov_codigo = data['prov_codigo'])
+        cambios += 1
+    if direccion.cant_codigo != data['cant_codigo']:
+        Direccion.objects.using('clientes').filter(CLIE_CODIGO = data['CLIE_CODIGO'], DIRE_CODIGO = data['DIRE_CODIGO']).update(cant_codigo = data['cant_codigo'])
+        cambios += 1
+    if direccion.parr_codigo != data['parr_codigo']:
+        Direccion.objects.using('clientes').filter(CLIE_CODIGO = data['CLIE_CODIGO'], DIRE_CODIGO = data['DIRE_CODIGO']).update(parr_codigo = data['parr_codigo'])
+        cambios += 1
+
+    return cambios
+
+def actualizarTelefono(data, telefono):
+    cambios = 0
+
+    if telefono.TELE_NUMERO != data['TELE_NUMERO']:
+        Telefono.objects.using('clientes').filter(CLIE_CODIGO = data['CLIE_CODIGO'], DIRE_CODIGO = data['DIRE_CODIGO'], TELE_CODIGO = data['TELE_CODIGO']).update(TELE_NUMERO = data['TELE_NUMERO'])
+        cambios += 1
         
+    return cambios
+
+
 def cedula_is_ok(cedula):
     if cedula.isdigit():
         if len(cedula)>=10:

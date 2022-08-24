@@ -1,4 +1,5 @@
 import datetime
+from urllib import response
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework import status
@@ -7,7 +8,7 @@ from apps.apihc.functions import actualizarCliente, actualizarClienteJuridico, a
 from apps.apihc.models import ClienteJuridico, ClienteNatural, Secuencia, Direccion
 from apps.cliente.models import Cliente
 from apps.apihc.models import Direccion, Telefono
-from apps.apihc.serializers import DireccionSerializer, TelefonoSerializer
+from apps.apihc.serializers import ClienteJuridicoSerializer, ClienteNaturalSerializer, DireccionSerializer, TelefonoSerializer
 
 from apps.cliente.serializer import ClienteSerializer
 
@@ -78,7 +79,6 @@ def cliente_api_view(request):
         
         serializer_cliente = ClienteSerializer(clientes, many = True)
         return Response(serializer_cliente.data, status = status.HTTP_200_OK)
-    
 
 class ClienteView(APIView):
     def post(self, request):
@@ -155,3 +155,24 @@ class ClienteView(APIView):
         cambiosC = actualizarCliente(informacionCliente, clienteChecking)
 
         return Response({"status": 200, "message": f"Se actualizaron {cambiosC} datos de Cliente {clie_codigo} y {cambiosCD} datos de Cliente {tipo}"}, status = status.HTTP_200_OK)
+
+    def get(self, request):
+        data = request.GET
+        clie_codigo = data['codigo']
+
+        cliente = Cliente.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
+
+        if cliente is None:
+            return Response({"status": 204, "message": f"Cliente no existe con el CLIE_CODIGO: {clie_codigo}"}, status = status.HTTP_204_NO_CONTENT)
+        
+        clienteSerializado = ClienteSerializer(cliente)
+        ticl_codigo = cliente.TICL_CODIGO
+        if ticl_codigo == 'N':
+            detalle = ClienteNatural.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
+            detalleSerializado = ClienteNaturalSerializer(detalle)
+
+        if ticl_codigo == 'J':
+            detalle = ClienteJuridico.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
+            detalleSerializado = ClienteJuridicoSerializer(detalle)
+
+        return Response({"status": 200, "data": {'cliente': clienteSerializado.data, 'detalle': detalleSerializado.data}}, status = status.HTTP_200_OK)
