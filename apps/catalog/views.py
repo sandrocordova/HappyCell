@@ -2,18 +2,26 @@ from rest_framework.views import APIView
 from rest_framework import status
 import json
 from rest_framework.response import Response
-from apps.catalog.models import Profesion, Nacionalidad, ActividadEconomica, TipoRol, Sexo, Vivienda, EstadoCivil, SituacionLaboral
-from apps.catalog.serializer import ProfesionesSerializer, ProfesionesSerializer, NacionalidadSerializer, ActiEconomicaSerializer, TipoRolSerializer, SexoSerializer, ViviendaSerializer, EstadoCivilSerializer, SituacionLaboralCivilSerializer
+from apps.catalog.models import TipoClase, TipoProyecto, Profesion, Nacionalidad, ActividadEconomica, TipoRol, Sexo, Vivienda, EstadoCivil, SituacionLaboral
+from apps.catalog.serializer import TipoClaseSerializer, TipoProyectoSerializer, ProfesionesSerializer, ProfesionesSerializer, NacionalidadSerializer, ActiEconomicaSerializer, TipoRolSerializer, SexoSerializer, ViviendaSerializer, EstadoCivilSerializer, SituacionLaboralCivilSerializer
 
 #Catálogos
 class catalog_api_views(APIView):
     def get(self, request):
-        catalog_id = ['profesion', 'nacionalidad', 'actividad_economica', 'tipo_rol','sexo', 'vivienda', 'estado_civil', 'situacion_laboral']
+        catalog_id = ['tipo_proyecto','profesion', 'nacionalidad', 'actividad_economica', 'tipo_rol','sexo', 'vivienda', 'estado_civil', 'situacion_laboral']
         catalog_list =[]
         json_response = {
             'status': True,
             'message': "Response exitoso"
             }
+        if 'tipo_clase' in catalog_id:
+            consulta = TipoClase.objects.using('clientes').all()
+            profesionesSerializer = TipoClaseSerializer(consulta, many = True)
+            catalog_list.append({'profesion':profesionesSerializer.data})
+        if 'tipo_proyecto' in catalog_id:
+            consulta = TipoProyecto.objects.using('clientes').all()
+            profesionesSerializer = TipoProyectoSerializer(consulta, many = True)
+            catalog_list.append({'profesion':profesionesSerializer.data})
         if 'profesion' in catalog_id:
             consulta = Profesion.objects.using('clientes').all()
             profesionesSerializer = ProfesionesSerializer(consulta, many = True)

@@ -19,8 +19,7 @@ class direccion_search(APIView):
         direccionRetornada = Direccion.objects.using(
             'clientes').filter(CLIE_CODIGO=clienteId).all()
         if direccionRetornada:
-            serializer_cliente = DireccionSerializer(
-                direccionRetornada, many=True)
+            serializer_cliente = DireccionSerializer(direccionRetornada, many=True)
             return Response(serializer_cliente.data, status=status.HTTP_200_OK)
         return Response("El cliente no tiene direcciones registradas", status=status.HTTP_400_BAD_REQUEST)
 
@@ -32,8 +31,7 @@ class telefono_search(APIView):
         telefonoRetornado = Telefono.objects.using('clientes').filter(
             DIRE_CODIGO=direccionId, CLIE_CODIGO=clienteId).all()
         if telefonoRetornado:
-            serializer_cliente = TelefonoSerializer(
-                telefonoRetornado, many=True)
+            serializer_cliente = TelefonoSerializer(telefonoRetornado, many=True)
             return Response(serializer_cliente.data, status=status.HTTP_200_OK)
         return Response("La dirección del cliente no tiene un teléfono relacionado", status=status.HTTP_400_BAD_REQUEST)
 
@@ -41,9 +39,18 @@ class telefono_search(APIView):
 class cliente_search(APIView):
     def get(self, request):
         clientes = Cliente.objects.using('clientes').all()[4378:4450]
+        
         for cliente in clientes:
+            catalog_list =[]
+            json_response = {
+            'codigo': "N",
+            'significado': "Natural"
+            }
             if cliente.TICL_CODIGO == "N":
-                cliente.TICL_CODIGO = "Natural"
+                
+                catalog_list.append(cliente.TICL_CODIGO)
+                catalog_list.append("Natural")
+                cliente.TICL_CODIGO = json_response
             else:
                 cliente.TICL_CODIGO = "Juridico"
 
@@ -60,8 +67,11 @@ class cliente_search(APIView):
             clienteChecking = Cliente.objects.using('clientes').filter(CLIE_NOMBRE__icontains=clienteData).all()
             if clienteChecking:
                 for cliente in clienteChecking:
+                    catalog_list =[]
                     if cliente.TICL_CODIGO == "N":
-                        cliente.TICL_CODIGO = "Natural"
+                        catalog_list.append(cliente.TICL_CODIGO)
+                        catalog_list.append("Natural")
+                        cliente.TICL_CODIGO = catalog_list
                     else:
                         cliente.TICL_CODIGO = "Juridico"
                     if cliente.TIDO_CODIGO == "C":

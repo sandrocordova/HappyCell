@@ -239,6 +239,13 @@ class TipoProyecto(models.Model):
 
     class Meta:
         db_table = 'CLIE_TIPO_PROYECTO'
+        
+class TipoClase(models.Model):
+    CLIE_TIPO = models.CharField(max_length = 2, primary_key = True)
+    DESC_TIPO = models.CharField(max_length =	50)
+
+    class Meta:
+        db_table = 'TIPO_CLASE'
 
 class TipoRol(models.Model):
     TIRO_CODIGO = models.CharField(max_length = 2, primary_key = True)
