@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import Select from "react-select";
 // import {
 //     useParams
 // } from "react-router-dom";
@@ -68,7 +69,15 @@ const Index = () => {
 
     // Funcion que escucha los cambios en los formularios
     const handleChange = name => event => {
-        setValues({ ...values, [name]: event.target.value });
+        console.log(name)
+        console.log(event.target.value)
+        //setValues({ ...values, [name]: event.target.value });
+    }
+
+    const handleSelectChange = name => event => {
+        console.log(name)
+        console.log(event.value)
+        //setValues({ ...values, [name]: event.value });
     }
 
     // Funcion para actualizar datos del cliente en la API
@@ -99,7 +108,7 @@ const Index = () => {
 
     // Funcionalidad para obtener los datos de catalogos desde la API
     const loadCatalogos = () => {
-        getCatalogos().then(res => {
+        /* getCatalogos().then(res => {
             res.data?.forEach(cat => {
                 if (cat.profesion) setProfesionList(cat.profesion)
                 if (cat.nacionalidad) setNacionalidadList(cat.nacionalidad)
@@ -109,6 +118,18 @@ const Index = () => {
                 if (cat.estado_civil) setEstadoCivilList(cat.estado_civil)
                 if (cat.situacion_laboral) setSitLaboralList(cat.situacion_laboral)
             })
+        }) */
+        /* 
+        ! Eliminar el siguiente forEach, es solo para trabajar con mock. Utilizar la funcion de arriba
+        */
+        catalogo?.forEach(cat => {
+            if (cat.profesion) setProfesionList(cat.profesion)
+            if (cat.nacionalidad) setNacionalidadList(cat.nacionalidad)
+            if (cat.actividad_economica) setActividadEcList(cat.actividad_economica)
+            if (cat.sexo) setSexoList(cat.sexo)
+            if (cat.vivienda) setViviendaList(cat.vivienda)
+            if (cat.estado_civil) setEstadoCivilList(cat.estado_civil)
+            if (cat.situacion_laboral) setSitLaboralList(cat.situacion_laboral)
         })
     }
 
@@ -145,14 +166,10 @@ const Index = () => {
                                     <FormGroup row>
                                         <Label for="nationality" sm={4}>Nacionalidad</Label>
                                         <Col sm={8}>
-                                            <Input type="select" id="nationality" name="nationality">
-                                                <option value="">Select</option>
-                                                {nacionalidadList?.map((data, i) => (
-                                                    <option key={i} value={data.NACI_CODIGO}>
-                                                        {data.NACI_DESCRIPCION}
-                                                    </option>
-                                                ))}
-                                            </Input>
+                                            <Select
+                                                options={nacionalidadList?.map(item => ({ value: item.NACI_CODIGO, label: item.NACI_DESCRIPCION }))}
+                                                onChange={handleSelectChange("nacionalidad")}
+                                            />
                                         </Col>
                                     </FormGroup>
                                 </Col>
@@ -188,14 +205,10 @@ const Index = () => {
                                     <FormGroup row>
                                         <Label for="economicActivity" sm={4}>Actividad Económica:</Label>
                                         <Col sm={8}>
-                                            <Input type="select" id="economicActivity" name="economicActivity">
-                                                <option value="">Select</option>
-                                                {actividadEcList?.map((data, i) => (
-                                                    <option key={i} value={data.ACTI_CODIGO}>
-                                                        {data.ACTI_DESCRIPCION}
-                                                    </option>
-                                                ))}
-                                            </Input>
+                                            <Select
+                                                options={actividadEcList?.map(item => ({ value: item.ACTI_CODIGO, label: item.ACTI_DESCRIPCION }))}
+                                                onChange={handleSelectChange("actividadEconomica")}
+                                            />
                                         </Col>
                                     </FormGroup>
                                 </Col>
@@ -212,52 +225,64 @@ const Index = () => {
                                 </Col>
                             </Row>
 
-                            <Row>
-                                <Collapse isOpen={isOpen}>
-                                    <Card className='no-shadow border'>
-                                        <CardBody>
-                                            <Row>
-                                                <Col md={4} className="mb-2">
-                                                    <span className='fw-bold text-black-50 me-1'>Atraso promedio:</span>
-                                                    <span>123</span>
-                                                </Col>
-                                                <Col md={4} className="mb-2">
-                                                    <span className='fw-bold text-secondary me-1'>Atraso máximo:</span>
-                                                    <span>123</span>
-                                                </Col>
-                                                <Col md={4} className="mb-2">
-                                                    <span className='fw-bold text-secondary me-1'>N° de pagos totales:</span>
-                                                    <span>123</span>
-                                                </Col>
-                                            </Row>
-                                            <Row>
-                                                <Col md={4} className="mb-2">
-                                                    <span className='fw-bold text-secondary me-1'>Años de antiguedad:</span> <span>123</span>
-                                                </Col>
-                                            </Row>
-                                            <Row>
-                                                <Col md={4} className="mb-2">
-                                                    <span className='fw-bold text-secondary me-1'>N° de operaciones vigentes:</span> <span>123</span>
-                                                </Col>
-                                                <Col md={4} className="mb-2">
-                                                    <span className='fw-bold text-secondary me-1'>N° de operaciones canceladas:</span> <span>123</span>
-                                                </Col>
-                                                <Col md={4} className="mb-2">
-                                                    <span className='fw-bold text-secondary me-1'>Cupo utilizado:</span> <span>123</span>
-                                                </Col>
-                                            </Row>
-                                        </CardBody>
-                                    </Card>
-                                </Collapse>
-                                <Row className="d-flex flex-column justify-content-center align-items-center">
+                            <div className="d-flex align-items-center">
+                                <div className="mx-auto">
+                                    <Button outline className="mb-2 me-2 btn-icon btn-pill" color="link" onClick={() => setIsOpen(!isOpen)}>
+                                        {isOpen
+                                            ? <><i className="pe-7s-angle-down btn-icon-wrapper"> </i>Ocultar información</>
+                                            : <><i className="pe-7s-angle-right btn-icon-wrapper"> </i>Más Información</>}
+                                    </Button>
+                                </div>
+                            </div>
+
+                            <Row className="d-flex flex-column justify-content-center align-items-center">
+                                <Col sm={4}>
                                     <div className="d-flex align-items-center">
                                         <div className="mx-auto">
-                                            <Button outline className="mb-2 mt-2 me-2 btn-outline-2x btn-square" color="secondary" onClick={() => setIsOpen(!isOpen)}>
-                                                {isOpen ? "Ocultar información" : "Más Información"}
-                                            </Button>
+                                            <Collapse isOpen={isOpen}>
+                                                <Card className='no-shadow border'>
+                                                    <CardBody>
+                                                        <Row>
+                                                            <Col md={12} className="mb-2 d-flex justify-content-between">
+                                                                <span className='fw-bold text-black-50 me-1'>Atraso promedio:</span>
+                                                                <span>123</span>
+                                                            </Col>
+                                                            <Col md={12} className="mb-2 d-flex justify-content-between">
+                                                                <span className='fw-bold text-black-50 me-1'>Atraso máximo:</span>
+                                                                <span>123</span>
+                                                            </Col>
+                                                            <Col md={12} className="mb-2 d-flex justify-content-between">
+                                                                <span className='fw-bold text-black-50 me-1'>N° de pagos totales:</span>
+                                                                <span>123</span>
+                                                            </Col>
+                                                            <Col md={12} className="mb-2 d-flex justify-content-between">
+                                                                <span className='fw-bold text-black-50 me-1'>Años de antiguedad:</span> <span>123</span>
+                                                            </Col>
+                                                            <Col md={12} className="mb-2 d-flex justify-content-between">
+                                                                <span className='fw-bold text-black-50 me-1'>N° de operaciones vigentes:</span> <span>123</span>
+                                                            </Col>
+                                                            <Col md={12} className="mb-2 d-flex justify-content-between">
+                                                                <span className='fw-bold text-black-50 me-1'>N° de operaciones canceladas:</span> <span>123</span>
+                                                            </Col>
+                                                            <Col md={12} className="mb-2 d-flex justify-content-between">
+                                                                <span className='fw-bold text-black-50 me-1'>Cupo utilizado:</span> <span>123</span>
+                                                            </Col>
+                                                            <Col md={12} className="mb-2 d-flex justify-content-between">
+                                                                <span className='fw-bold text-black-50 me-1'>Cupo utilizado:</span> <span>123</span>
+                                                            </Col>
+                                                        </Row>
+                                                        <Row>
+                                                            <Button outline className="mb-2 me-2 btn-icon btn-pill" color="link" onClick={() => setIsOpen(!isOpen)}>
+                                                                <i className="pe-7s-angle-up btn-icon-wrapper"> </i>
+                                                                Ocultar información
+                                                            </Button>
+                                                        </Row>
+                                                    </CardBody>
+                                                </Card>
+                                            </Collapse>
                                         </div>
                                     </div>
-                                </Row>
+                                </Col>
                             </Row>
 
                             <Row className='divider'></Row>
@@ -301,14 +326,10 @@ const Index = () => {
                                     <FormGroup row>
                                         <Label for="sex" sm={4}>Sexo:</Label>
                                         <Col sm={8}>
-                                            <Input type="select" id="sex" name="sex">
-                                                <option value="">Select</option>
-                                                {sexoList?.map((data, i) => (
-                                                    <option key={i} value={data.SEXO_CODIGO}>
-                                                        {data.SEXO_DESCRIPCION}
-                                                    </option>
-                                                ))}
-                                            </Input>
+                                            <Select
+                                                options={sexoList?.map(item => ({ value: item.SEXO_CODIGO, label: item.SEXO_DESCRIPCION }))}
+                                                onChange={handleSelectChange("sexo")}
+                                            />
                                         </Col>
                                     </FormGroup>
                                 </Col>
@@ -316,14 +337,10 @@ const Index = () => {
                                     <FormGroup row>
                                         <Label for="profession" sm={4}>Profesion:</Label>
                                         <Col sm={8}>
-                                            <Input type="select" id="profession" name="profession">
-                                                <option value="">Select</option>
-                                                {profesionList?.map((data, i) => (
-                                                    <option key={i} value={data.PROF_CODIGO}>
-                                                        {data.PROF_DESCRIPCION}
-                                                    </option>
-                                                ))}
-                                            </Input>
+                                            <Select
+                                                options={profesionList?.map(item => ({ value: item.PROF_CODIGO, label: item.PROF_DESCRIPCION }))}
+                                                onChange={handleSelectChange("profesion")}
+                                            />
                                         </Col>
                                     </FormGroup>
                                 </Col>
@@ -331,14 +348,10 @@ const Index = () => {
                                     <FormGroup row>
                                         <Label for="maritalStatus" sm={4}>Estado civil:</Label>
                                         <Col sm={8}>
-                                            <Input type="select" id="maritalStatus" name="maritalStatus">
-                                                <option value="">Select</option>
-                                                {estadoCivilList?.map((data, i) => (
-                                                    <option key={i} value={data.ESCI_CODIGO}>
-                                                        {data.ESCI_DESCRIPCION}
-                                                    </option>
-                                                ))}
-                                            </Input>
+                                            <Select
+                                                options={estadoCivilList?.map(item => ({ value: item.ESCI_CODIGO, label: item.ESCI_DESCRIPCION }))}
+                                                onChange={handleSelectChange("estadoCivil")}
+                                            />
                                         </Col>
                                     </FormGroup>
                                 </Col>
@@ -346,14 +359,10 @@ const Index = () => {
                                     <FormGroup row>
                                         <Label for="employmentSituation" sm={4}>Situación laboral:</Label>
                                         <Col sm={8}>
-                                            <Input type="select" id="employmentSituation" name="employmentSituation">
-                                                <option value="">Select</option>
-                                                {sitLaboralList?.map((data, i) => (
-                                                    <option key={i} value={data.SITL_CODIGO}>
-                                                        {data.SITL_DESCRIPCION}
-                                                    </option>
-                                                ))}
-                                            </Input>
+                                            <Select
+                                                options={sitLaboralList?.map(item => ({ value: item.SITL_CODIGO, label: item.SITL_DESCRIPCION }))}
+                                                onChange={handleSelectChange("situacionLaboral")}
+                                            />
                                         </Col>
                                     </FormGroup>
                                 </Col>
@@ -363,14 +372,10 @@ const Index = () => {
                                     <FormGroup row>
                                         <Label for="typeHousing" sm={4}>Tipo de vivienda:</Label>
                                         <Col sm={8}>
-                                            <Input type="select" id="typeHousing" name="typeHousing">
-                                                <option value="">Select</option>
-                                                {viviendaList?.map((data, i) => (
-                                                    <option key={i} value={data.VIVI_CODIGO}>
-                                                        {data.VIVI_DESCRIPCION}
-                                                    </option>
-                                                ))}
-                                            </Input>
+                                            <Select
+                                                options={viviendaList?.map(item => ({ value: item.VIVI_CODIGO, label: item.VIVI_DESCRIPCION }))}
+                                                onChange={handleSelectChange("tipoVivienda")}
+                                            />
                                         </Col>
                                     </FormGroup>
                                 </Col>
