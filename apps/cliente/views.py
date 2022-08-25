@@ -8,7 +8,7 @@ from apps.apihc.functions import actualizarCliente, actualizarClienteJuridico, a
 from apps.apihc.models import ClienteJuridico, ClienteNatural, Secuencia, Direccion
 from apps.cliente.models import Cliente
 from apps.apihc.models import Direccion, Telefono
-from apps.apihc.serializers import DireccionSerializer, TelefonoSerializer
+from apps.apihc.serializers import DireccionSerializer, TelefonoSerializer, ClienteNaturalSerializer, ClienteJuridicoSerializer
 
 from apps.cliente.serializer import ClienteSerializer
 from django.core.paginator import Paginator
