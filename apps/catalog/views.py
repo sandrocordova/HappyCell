@@ -2,18 +2,22 @@ from rest_framework.views import APIView
 from rest_framework import status
 import json
 from rest_framework.response import Response
-from apps.catalog.models import TipoClase, TipoProyecto, Profesion, Nacionalidad, ActividadEconomica, TipoRol, Sexo, Vivienda, EstadoCivil, SituacionLaboral
-from apps.catalog.serializer import TipoClaseSerializer, TipoProyectoSerializer, ProfesionesSerializer, ProfesionesSerializer, NacionalidadSerializer, ActiEconomicaSerializer, TipoRolSerializer, SexoSerializer, ViviendaSerializer, EstadoCivilSerializer, SituacionLaboralCivilSerializer
+from apps.catalog.models import TipoEmpresa, TipoClase, TipoProyecto, Profesion, Nacionalidad, ActividadEconomica, TipoRol, Sexo, Vivienda, EstadoCivil, SituacionLaboral
+from apps.catalog.serializer import TipoEmpresaSerializer, TipoClaseSerializer, TipoProyectoSerializer, ProfesionesSerializer, ProfesionesSerializer, NacionalidadSerializer, ActiEconomicaSerializer, TipoRolSerializer, SexoSerializer, ViviendaSerializer, EstadoCivilSerializer, SituacionLaboralCivilSerializer
 
 #Catálogos
 class catalog_api_views(APIView):
     def get(self, request):
-        catalog_id = ['tipo_clase','tipo_proyecto','profesion', 'nacionalidad', 'actividad_economica', 'tipo_rol','sexo', 'vivienda', 'estado_civil', 'situacion_laboral']
+        catalog_id = ['tipo_empresa','tipo_clase','tipo_proyecto','profesion', 'nacionalidad', 'actividad_economica', 'tipo_rol','sexo', 'vivienda', 'estado_civil', 'situacion_laboral']
         catalog_list =[]
         json_response = {
             'status': True,
             'message': "Response exitoso"
             }
+        if 'tipo_empresa' in catalog_id:
+            consulta = TipoEmpresa.objects.using('clientes').all()
+            profesionesSerializer = TipoEmpresaSerializer(consulta, many = True)
+            catalog_list.append({'tipo_empresa':profesionesSerializer.data})
         if 'tipo_clase' in catalog_id:
             consulta = TipoClase.objects.using('clientes').all()
             profesionesSerializer = TipoClaseSerializer(consulta, many = True)

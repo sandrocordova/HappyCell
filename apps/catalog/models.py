@@ -18,7 +18,7 @@ class TipoCliente(models.Model):
         db_table = "TIPO_CLIENTE"
 
 class TipoDocumento(models.Model):
-    TICL_CODIGO = models.PositiveIntegerField()
+    TICL_CODIGO = models.CharField(max_length = 2)
     TIDO_CODIGO = models.CharField(max_length = 2, primary_key = True)
     TIDO_DESCRIPCION = models.CharField(max_length = 40)
 
