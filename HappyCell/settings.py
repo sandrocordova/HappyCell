@@ -40,6 +40,10 @@ INSTALLED_APPS = [
     'apps.apihc',
     'apps.catalog',
     'apps.cliente',
+    'app.direccion',
+    'apps.vinculo',
+    'apps.observacion',
+    'apps.cuenta'
 ]
 
 MIDDLEWARE = [

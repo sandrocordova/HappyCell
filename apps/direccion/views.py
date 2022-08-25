@@ -1,10 +1,8 @@
 from rest_framework.views import APIView # Procesamiento de Views
 from rest_framework.response import Response # Manejo de Response HTTP
-from rest_framework.exceptions import AuthenticationFailed # Validación de Token (sin expirar)
 from rest_framework import status
 from apps.apihc.functions import actualizarDireccion, actualizarTelefono, guardarDireccion, guardarTelefono, validarDireccion, validarTelefono
 from apps.apihc.models import Cliente, Direccion, Telefono # Manejo de Status
-from apps.catalog.models import Agencia, Banco, Ciudad, CuentaBalance, GrupoEconomico, Moneda, Nacionalidad, Pais, Periocidad, SubtipoEmpresa, TipoAgencia, TipoAsesor, TipoBanca, TipoCliente, TipoCuenta, TipoCuentaBalance, TipoDireccion, TipoDocumento, TipoEmpresa, TipoObservacion, TipoTelefono, VehiculoLegal, Zona, ActividadEconomica, Profesion, NivelInstruccion, Sexo, EstadoCivil, Vivienda, SituacionLaboral
 
 class DireccionView(APIView):
     def post(self, request):
@@ -33,9 +31,9 @@ class DireccionView(APIView):
                 guardarD = guardarDireccion(direccion)
                 # Validar que el número enviado no esté registrado para el Cliente
             else:
-                return Response({"status": 409, "message": f"La dirección {dire_descripcion} ya existe"}, status = status.HTTP_409_CONFLICT)
+                return Response({"status": 400, "message": f"La dirección {dire_descripcion} ya existe"}, status = status.HTTP_400_BAD_REQUEST)
         
-        return Response({"status": 200, "message": f"Se agregó la dirección al cliente {clie_codigo}"}, status = status.HTTP_200_OK)
+        return Response({"status": 200, "message": f"Se agregaron las direcciones al cliente {clie_codigo}"}, status = status.HTTP_200_OK)
 
     def put(self, request):
         data = request.data
@@ -87,7 +85,7 @@ class TelefonoView(APIView):
             else:
                 return Response({"status": 409, "message": f"El teléfono {tele_numero} ya existe"}, status = status.HTTP_409_CONFLICT)
 
-        return Response({"status": 200, "message": f"Se agregó el teléfono al cliente {clie_codigo}"}, status = status.HTTP_200_OK)
+        return Response({"status": 200, "message": f"Se agregaron los teléfonos al cliente {clie_codigo}"}, status = status.HTTP_200_OK)
 
     def put(self, request):
         data = request.data

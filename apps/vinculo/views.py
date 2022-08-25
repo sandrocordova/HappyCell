@@ -1,0 +1,69 @@
+import datetime
+from rest_framework.views import APIView # Procesamiento de Views
+from rest_framework.response import Response # Manejo de Response HTTP
+from rest_framework import status # Manejo de Status
+from apps.apihc.functions import actualizarVinculo, guardarVinculo, validarVinculo
+from apps.apihc.models import Cliente, Vinculo
+
+class VinculoView(APIView):
+    def post(self, request):
+        data = request.data
+        clie_codigo = data['CLIE_CODIGO']
+        vinculos = data['vinculos']
+        today = datetime.datetime.now()
+        vin_fecha_creacion = today.strftime("%Y-%m-%d %H:%M:%S")
+
+        clienteChecking = Cliente.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
+        if clienteChecking is None:
+            return Response({"status": 400, "message": f"Cliente no existe con el CLIE_CODIGO: {clie_codigo}"}, status = status.HTTP_400_BAD_REQUEST)
+        
+        for vinculo in vinculos:
+            vinc_identificacion = vinculo["VINC_IDENTIFICACION"]
+            vinculo['VIN_FECHA_INGRESA'] = vin_fecha_creacion
+            # Validar que el vínculo enviado no esté registrado para el Cliente
+            vinculoExistente = Vinculo.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo, VINC_IDENTIFICACION = vinc_identificacion).first()
+            if vinculoExistente is None:
+                vinculo['VINC_CODIGO'] = 1
+                vinc_codigo = Vinculo.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).order_by('-VINC_CODIGO').first()
+                if vinc_codigo:
+                    vinculo['VINC_CODIGO'] = vinc_codigo.VINC_CODIGO + 1
+                vinculo['CLIE_CODIGO'] = clie_codigo
+                vinculo['VIN_ESTADO'] = "A"
+                vinculo['CIUDAD_CODIGO'] = 223
+
+                varlidarV = validarVinculo(vinculo)
+                if varlidarV['status'] is False:
+                    return Response({"status": 400, "message": varlidarV['message']}, status = status.HTTP_400_BAD_REQUEST)
+
+                guardarVinculo(vinculo)
+            else:
+                return Response({"status": 409, "message": f"Algunos de los vínculos del cliente {clie_codigo} ya existe"}, status = status.HTTP_409_CONFLICT)
+
+        return Response({"status": 200, "message": f"Se agregaron los vínculos al cliente {clie_codigo}"}, status = status.HTTP_200_OK)
+
+
+        #Fin Validar-Cliente
+
+    def put(self, request):
+        data = request.data
+        clie_codigo = data['CLIE_CODIGO']
+        vinculos = data['vinculos']        
+        clienteChecking = Cliente.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
+        success = 0
+
+        if clienteChecking is None:
+            return Response({"status": 400, "message": f"Cliente no existe con el CLIE_CODIGO: {clie_codigo}"}, status = status.HTTP_400_BAD_REQUEST)
+        
+        for vinculo in vinculos:
+            vinculo['CLIE_CODIGO'] = clie_codigo
+            vinculoChecking = Vinculo.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo, VINC_CODIGO = vinculo['VINC_CODIGO']).first()
+            if vinculoChecking is None:
+                return Response({"status": 400, "message": f"Vinculo no existe con el VINC_CODIGO: {vinculo['VINC_CODIGO']} para el Cliente {clie_codigo}"}, status = status.HTTP_400_BAD_REQUEST)
+            validarV = validarVinculo(vinculo)
+            if validarV['status'] is False:
+                return Response({"status": 400, "message": validarV['message']}, status = status.HTTP_400_BAD_REQUEST)
+            actualizarV = actualizarVinculo(vinculo, vinculoChecking)
+            if actualizarV > 0:
+                success += 1
+
+        return Response({"status": 200, "message": f"Se actualizaron {success} de {len(vinculos)} Vínculos del Cliente {clie_codigo}"}, status = status.HTTP_200_OK)
