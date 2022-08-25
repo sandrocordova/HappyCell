@@ -11,4 +11,7 @@ urlpatterns = [
     path('api/', include('apps.agencia.api.urls')),
     path('api-cli/v1/', include('apps.apihc.urls')),
     path('api-dir/v1/', include('apps.direccion.urls')),
+    path('api-obs/v1/', include('apps.observacion.urls')),
+    path('api-vin/v1/', include('apps.vinculo.urls')),
+    path('api-cue/v1/', include('apps.cuenta.urls')),
 ]

@@ -3,10 +3,10 @@ from rest_framework.response import Response # Manejo de Response HTTP
 from rest_framework.exceptions import AuthenticationFailed # Validación de Token (sin expirar)
 from rest_framework import status # Manejo de Status
 import jwt, datetime, base64
-from .functions import actualizarCliente, actualizarClienteJuridico, actualizarClienteNatural, cedula_is_ok, guardarAsesorCliente, validarAsesorExiste, validarCliente, validarClienteNatural, validarClienteJuridico, validarDireccion, validarTelefono, validarAsesor, validarObservacion, validarCuenta, validarVinculo, guardarCliente, guardarClienteNatural, guardarClienteJuridico, guardarDireccion, guardarTelefono, guardarAsesor, guardarObservacion, guardarCuentaBancaria, guardarVinculo # Manejo del token
-from .serializers import ClienteJuridicoSerializer, ClienteNaturalSerializer, ClienteSerializer, DireccionSerializer, EstadoCivilSerializer, NacionalidadSerializer, NivelInstruccionSerializer, ProfesionSerializer, SituacionLaboralSerializer, TelefonoSerializer, TipoClienteSerializer, UsuarioSerializer, ViviendaSerializer, ActividadEconomicaSerializer # Serializadores
-from apps.catalog.models import Agencia, Banco, Ciudad, CuentaBalance, GrupoEconomico, Moneda, Nacionalidad, Pais, Periocidad, SubtipoEmpresa, TipoAgencia, TipoAsesor, TipoBanca, TipoCliente, TipoCuenta, TipoCuentaBalance, TipoDireccion, TipoDocumento, TipoEmpresa, TipoObservacion, TipoTelefono, VehiculoLegal, Zona, ActividadEconomica, Profesion, NivelInstruccion, Sexo, EstadoCivil, Vivienda, SituacionLaboral
-from .models import Asesor, BalanceCliente, Cliente, ClienteAsesor, ClienteJuridico, ClienteNatural, CuentaBancariaCliente, Direccion, Empresa, Observacion, Telefono, Usuario, Secuencia, Vinculo
+from .functions import actualizarCliente, actualizarClienteJuridico, actualizarClienteNatural, guardarAsesorCliente, validarCliente, validarClienteNatural, validarClienteJuridico, validarDireccion, validarTelefono, validarObservacion, validarCuenta, validarVinculo, guardarCliente, guardarClienteNatural, guardarClienteJuridico, guardarDireccion, guardarTelefono, guardarObservacion, guardarCuentaBancaria, guardarVinculo # Manejo del token
+from .serializers import ClienteJuridicoSerializer, ClienteNaturalSerializer, ClienteSerializer, DireccionSerializer, EstadoCivilSerializer, NacionalidadSerializer, NivelInstruccionSerializer, ProfesionSerializer, SituacionLaboralSerializer, TelefonoSerializer, UsuarioSerializer, ViviendaSerializer, ActividadEconomicaSerializer # Serializadores
+from apps.catalog.models import Banco, Nacionalidad,  ActividadEconomica, Profesion, NivelInstruccion, EstadoCivil, Vivienda, SituacionLaboral
+from .models import  Cliente, ClienteAsesor, ClienteJuridico, ClienteNatural, CuentaBancariaCliente, Direccion, Observacion, Telefono, Usuario, Secuencia, Vinculo
 
 # Create your views here.
 class getToken(APIView):

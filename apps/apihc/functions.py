@@ -1,6 +1,6 @@
 from .choices import ERRCLI_CODES
-from apps.catalog.models import Agencia, Banco, Canton, Ciudad, CuentaBalance, GrupoEconomico, Moneda, Nacionalidad, Pais, Parroquia, Periocidad, SubtipoEmpresa, TipoAgencia, TipoAsesor, TipoBanca, TipoCliente, TipoCuenta, TipoCuentaBalance, TipoDireccion, TipoDocumento, TipoEmpresa, TipoObservacion, TipoRol, TipoTelefono, VehiculoLegal, Zona, ActividadEconomica, Profesion, NivelInstruccion, Sexo, EstadoCivil, Vivienda, SituacionLaboral
-from .models import Asesor, BalanceCliente, Cliente, ClienteAsesor, ClienteJuridico, ClienteNatural, CuentaBancariaCliente, Direccion, Empresa, Observacion, Telefono, Usuario
+from apps.catalog.models import Agencia, Banco, Canton, Ciudad, CuentaBalance, GrupoEconomico, Nacionalidad, Parroquia, TipoAgencia, TipoAsesor, TipoBanca, TipoCliente, TipoCuenta, TipoCuentaBalance, TipoDireccion, TipoDocumento, TipoEmpresa, TipoObservacion, TipoRol, TipoTelefono, TipoVinculo, Zona, ActividadEconomica, Profesion, NivelInstruccion, Sexo, EstadoCivil, Vivienda, SituacionLaboral
+from .models import Asesor, BalanceCliente, Cliente, ClienteAsesor, ClienteJuridico, ClienteNatural, CuentaBancariaCliente, Direccion, Empresa, Observacion, Telefono, Usuario, Vinculo
 
 def validarCliente(data):
     success = True
@@ -51,7 +51,7 @@ def validarCliente(data):
 
     return {
         'status': success, 
-        'log': log
+        'message': log
         }
 
 def validarClienteNatural(data):
@@ -95,7 +95,7 @@ def validarClienteNatural(data):
         log[indexLog] = situacionLaboralerrorCodes['ERRCLI001']
         indexLog += 1   
         success = False
-    return {'status': success, 'log': log }
+    return {'status': success, 'message': log }
 
 def validarClienteJuridico(data):
     success = True
@@ -113,7 +113,7 @@ def validarClienteJuridico(data):
         log[indexLog] = grupoEconomicoerrorCodes['ERRCLI001']
         success = False
     
-    return {'status': success, 'log': log }
+    return {'status': success, 'message': log }
 
 def validarDireccion(data):
     success = True
@@ -230,7 +230,7 @@ def validarAsesor(data):
         indexLog += 1
         success = False
 
-    return {'status': success, 'log': log }
+    return {'status': success, 'message': log }
 
 def validarAsesorExiste(data):
     result = False
@@ -247,13 +247,23 @@ def validarAsesorExiste(data):
         'id': id
         }
 
+def validarClienteAsesor(data):
+    success = True
+    log = {}
+    indexLog = 0
+
+    asesor = Asesor.objects.using('clientes').filter(ASES_CODIGO = data, EMPR_CODIGO = 8).first()
+    if asesor is None:
+        log[indexLog] = f"Asesor no existe: {data}. Revisar ficha técnica"
+        indexLog += 1
+        success = False
+
+    return {'status': success, 'message': log }
+
 def validarObservacion(data):
     success = True
     log = {}
     indexLog = 0
-    log[indexLog] = "==================================================================="
-    indexLog += 1
-
 
     tipo = TipoObservacion.objects.using('clientes').filter(TIOC_CODIGO = data['TIOC_CODIGO']).first()
     if tipo:
@@ -264,7 +274,7 @@ def validarObservacion(data):
         indexLog += 1
         success = False
 
-    return {'status': success, 'log': log }
+    return {'status': success, 'message': log }
 
 def validarCuenta(data):
     success = True
@@ -292,52 +302,44 @@ def validarCuenta(data):
         indexLog += 1
         success = False
 
-    return {'status': success, 'log': log }
+    return {'status': success, 'message': log }
 
 def validarVinculo(data):
     success = True
     log = {}
     indexLog = 0
-    log[indexLog] = "==================================================================="
-    indexLog += 1
 
     tipo = TipoVinculo.objects.using('clientes').filter(TIVI_CODIGO = data['TIVI_CODIGO'], TICL_CODIGO = data['TICL_CODIGO']).first()
-    if tipo:
-        log[indexLog] = f"Tipo de Vínculo válido: {data['TIVI_CODIGO']}, DESCRIPCIÓN: {tipo.TIVI_DESCRIPCION}"
-        indexLog += 1
-    else:
+    if tipo is None:
         log[indexLog] = f"Tipo de Vínculo no válido o no corresponde con el Tipo de Cliente: {data['TIVI_CODIGO']}. Revisar ficha técnica"
         indexLog += 1
-        success = False
+        success = False 
 
     nacionalidad = Nacionalidad.objects.using('clientes').filter(NACI_CODIGO = data['NACI_CODIGO']).first()
-    if nacionalidad:
-        log[indexLog] = f"Nacionalidad válido: {data['NACI_CODIGO']}, DESCRIPCIÓN: {nacionalidad.NACI_DESCRIPCION}"
-        indexLog += 1
-    else:
+    if nacionalidad is None:
         log[indexLog] = f"Nacionalidad no válido: {data['NACI_CODIGO']}. Revisar ficha técnica"
         indexLog += 1
         success = False
 
     profesion = Profesion.objects.using('clientes').filter(PROF_CODIGO = data['PROF_CODIGO']).first()
-    if profesion:
-        log[indexLog] = f"Profesion válido: {data['PROF_CODIGO']}, DESCRIPCIÓN: {profesion.PROF_DESCRIPCION}"
-        indexLog += 1
-    else:
+    if profesion is None:
         log[indexLog] = f"Profesion no válido: {data['PROF_CODIGO']}. Revisar ficha técnica"
         indexLog += 1
         success = False
 
     estadoCivil = EstadoCivil.objects.using('clientes').filter(ESCI_CODIGO = data['esci_codigo']).first()
-    if estadoCivil:
-        log[indexLog] = f"Estado Civil válido: {data['esci_codigo']}, DESCRIPCIÓN: {estadoCivil.ESCI_DESCRIPCION}"
-        indexLog += 1
-    else:
+    if estadoCivil is None:
         log[indexLog] = f"Estado Civil no válido: {data['esci_codigo']}. Revisar ficha técnica"
         indexLog += 1
         success = False
 
-    return {'status': success, 'log': log }
+    ciudad = Ciudad.objects.using('clientes').filter(CIUD_CODIGO = data['CIUD_CODIGO']).first()
+    if ciudad is None:
+        log[indexLog] = f"Ciudad no válida: {data['CIUD_CODIGO']}. Revisar ficha técnica"
+        indexLog += 1
+        success = False
+
+    return {'status': success, 'message': log }
 
 def guardarCliente(data):
     clienteSave = Cliente(**data)
@@ -480,6 +482,42 @@ def actualizarTelefono(data, telefono):
 
     if telefono.TELE_NUMERO != data['TELE_NUMERO']:
         Telefono.objects.using('clientes').filter(CLIE_CODIGO = data['CLIE_CODIGO'], DIRE_CODIGO = data['DIRE_CODIGO'], TELE_CODIGO = data['TELE_CODIGO']).update(TELE_NUMERO = data['TELE_NUMERO'])
+        cambios += 1
+        
+    return cambios
+
+def actualizarVinculo(data, vinculo):
+    cambios = 0
+
+    if vinculo.TIVI_CODIGO != data['TIVI_CODIGO']:
+        Vinculo.objects.using('clientes').filter(CLIE_CODIGO = data['CLIE_CODIGO'], VINC_CODIGO = data['VINC_CODIGO']).update(TIVI_CODIGO = data['TIVI_CODIGO'])
+        cambios += 1
+    if vinculo.VINC_IDENTIFICACION != data['VINC_IDENTIFICACION']:
+        Vinculo.objects.using('clientes').filter(CLIE_CODIGO = data['CLIE_CODIGO'], VINC_CODIGO = data['VINC_CODIGO']).update(VINC_IDENTIFICACION = data['VINC_IDENTIFICACION'])
+        cambios += 1
+    if vinculo.VINC_NOMBRE != data['VINC_NOMBRE']:
+        Vinculo.objects.using('clientes').filter(CLIE_CODIGO = data['CLIE_CODIGO'], VINC_CODIGO = data['VINC_CODIGO']).update(VINC_NOMBRE = data['VINC_NOMBRE'])
+        cambios += 1
+    if vinculo.VINC_DIRECCION != data['VINC_DIRECCION']:
+        Vinculo.objects.using('clientes').filter(CLIE_CODIGO = data['CLIE_CODIGO'], VINC_CODIGO = data['VINC_CODIGO']).update(VINC_DIRECCION = data['VINC_DIRECCION'])
+        cambios += 1
+    if vinculo.VINC_TELEFONO != data['VINC_TELEFONO']:
+        Vinculo.objects.using('clientes').filter(CLIE_CODIGO = data['CLIE_CODIGO'], VINC_CODIGO = data['VINC_CODIGO']).update(VINC_TELEFONO = data['VINC_TELEFONO'])
+        cambios += 1
+    if vinculo.NACI_CODIGO != data['NACI_CODIGO']:
+        Vinculo.objects.using('clientes').filter(CLIE_CODIGO = data['CLIE_CODIGO'], VINC_CODIGO = data['VINC_CODIGO']).update(NACI_CODIGO = data['NACI_CODIGO'])
+        cambios += 1
+    if vinculo.PROF_CODIGO != data['PROF_CODIGO']:
+        Vinculo.objects.using('clientes').filter(CLIE_CODIGO = data['CLIE_CODIGO'], VINC_CODIGO = data['VINC_CODIGO']).update(PROF_CODIGO = data['PROF_CODIGO'])
+        cambios += 1
+    if vinculo.CIUD_CODIGO != data['CIUD_CODIGO']:
+        Vinculo.objects.using('clientes').filter(CLIE_CODIGO = data['CLIE_CODIGO'], VINC_CODIGO = data['VINC_CODIGO']).update(CIUD_CODIGO = data['CIUD_CODIGO'])
+        cambios += 1
+    if vinculo.VINC_CARGO != data['VINC_CARGO']:
+        Vinculo.objects.using('clientes').filter(CLIE_CODIGO = data['CLIE_CODIGO'], VINC_CODIGO = data['VINC_CODIGO']).update(VINC_CARGO = data['VINC_CARGO'])
+        cambios += 1
+    if vinculo.esci_codigo != data['esci_codigo']:
+        Vinculo.objects.using('clientes').filter(CLIE_CODIGO = data['CLIE_CODIGO'], VINC_CODIGO = data['VINC_CODIGO']).update(esci_codigo = data['esci_codigo'])
         cambios += 1
         
     return cambios

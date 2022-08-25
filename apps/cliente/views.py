@@ -1,11 +1,10 @@
 import datetime
-from urllib import response
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
-from apps.apihc.functions import actualizarCliente, actualizarClienteJuridico, actualizarClienteNatural, guardarCliente, guardarClienteJuridico, guardarClienteNatural, validarCliente, validarClienteJuridico, validarClienteNatural
-from apps.apihc.models import ClienteJuridico, ClienteNatural, Secuencia, Direccion
+from apps.apihc.functions import actualizarCliente, actualizarClienteJuridico, actualizarClienteNatural, guardarAsesorCliente, guardarCliente, guardarClienteJuridico, guardarClienteNatural, validarCliente, validarClienteAsesor, validarClienteJuridico, validarClienteNatural
+from apps.apihc.models import ClienteAsesor, ClienteJuridico, ClienteNatural, Secuencia, Direccion
 from apps.cliente.models import Cliente
 from apps.catalog.models import TipoDocumento
 from apps.catalog.serializer import TipoDocumentoSerializer
@@ -237,3 +236,49 @@ class ClienteView(APIView):
             detalleSerializado = ClienteJuridicoSerializer(detalle)
 
         return Response({"status": 200, "data": {'cliente': clienteSerializado.data, 'detalle': detalleSerializado.data}}, status = status.HTTP_200_OK)
+
+class ClienteAsesorView(APIView):
+    def post(self, request):
+        data = request.data
+        clie_codigo = data['CLIE_CODIGO']
+        asesor = data['asesor']
+        ases_codigo = asesor['ASES_CODIGO']
+
+        cliente = Cliente.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
+
+        if cliente is None:
+            return Response({"status": 204, "message": f"Cliente no existe con el CLIE_CODIGO: {clie_codigo}"}, status = status.HTTP_204_NO_CONTENT)
+        
+        asesorClienteExiste = ClienteAsesor.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
+        if asesorClienteExiste is None:
+            validarCA = validarClienteAsesor(ases_codigo)
+            if validarCA['status'] is False:
+                return Response({"status": 400, "message": validarCA['message']}, status = status.HTTP_400_BAD_REQUEST)
+            asesor['CLIE_CODIGO'] = clie_codigo
+            asesor['EMPR_CODIGO'] = 8
+            guardarAsesorCliente(asesor)
+        else:
+            return Response({"status": 409, "message": f"El cliente {clie_codigo} ya tiene un asesor registrado"}, status = status.HTTP_409_CONFLICT)
+
+        return Response({"status": 200, "message": f"Se agrego el asesor {ases_codigo} al cliente {clie_codigo}"}, status = status.HTTP_200_OK)
+
+    def put(self, request):
+        data = request.data
+        clie_codigo = data['CLIE_CODIGO']
+        asesor = data['asesor']
+        
+        cliente = Cliente.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
+
+        if cliente is None:
+            return Response({"status": 204, "message": f"Cliente no existe con el CLIE_CODIGO: {clie_codigo}"}, status = status.HTTP_204_NO_CONTENT)
+        
+        asesorClienteExiste = ClienteAsesor.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
+        if asesorClienteExiste != None:
+            validarCA = validarClienteAsesor(asesor)
+            if validarCA['status'] is False:
+                return Response({"status": 400, "message": validarCA['message']}, status = status.HTTP_400_BAD_REQUEST)
+            ClienteAsesor.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).update(ASES_CODIGO = asesor)
+        else:
+            return Response({"status": 409, "message": f"El cliente {clie_codigo} no tiene un asesor registrado"}, status = status.HTTP_409_CONFLICT)
+
+        return Response({"status": 200, "message": f"Se actualizó el asesor {asesor} al cliente {clie_codigo}"}, status = status.HTTP_200_OK)
