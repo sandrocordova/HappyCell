@@ -127,20 +127,17 @@ def cliente_api_view(request):
         serializer_cliente = ClienteSerializer(clientes, many = True)
         return Response(serializer_cliente.data, status = status.HTTP_200_OK)
     
-
 class ClienteView(APIView):
     def post(self, request):
         data = request.data
         informacionCliente = data['cliente']
         detalleCliente = data['detalle']
 
-        secuencia = Secuencia.objects.using('clientes').filter(
-            SECU_TABLA='CLIENTE', EMPR_CODIGO='8').first()
+        secuencia = Secuencia.objects.using('clientes').filter(SECU_TABLA = 'CLIENTE', EMPR_CODIGO = '8').first()
         clie_codigo = secuencia.SECU_VALOR_ACTUAL
         ticl_codigo = informacionCliente['TICL_CODIGO']
         clie_identificacion = informacionCliente['CLIE_IDENTIFICACION']
-        clienteChecking = Cliente.objects.using('clientes').filter(
-            CLIE_IDENTIFICACION=clie_identificacion).first()
+        clienteChecking = Cliente.objects.using('clientes').filter(CLIE_IDENTIFICACION = clie_identificacion).first()
         today = datetime.datetime.now()
         clie_fecha_creacion = today.strftime("%Y-%m-%d %H:%M:%S")
         informacionCliente['CLIE_FECHA_CREACION'] = clie_fecha_creacion
@@ -148,31 +145,30 @@ class ClienteView(APIView):
         detalleCliente['CLIE_CODIGO'] = clie_codigo
 
         if clienteChecking:
-            return Response({"status": 409, "message": f"CLIENTE ya existe con la CLAVE IDENTIFICACIÓN: {clie_identificacion}"}, status=status.HTTP_409_CONFLICT)
+            return Response({"status": 409, "message": f"CLIENTE ya existe con la CLAVE IDENTIFICACIÓN: {clie_identificacion}"}, status = status.HTTP_409_CONFLICT)
         if cedula_is_ok(clie_identificacion) is False:
-            return Response({"status": 400, "message": f"CLAVE IDENTIFICACIÓN: {clie_identificacion} INCORRECTA"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"status": 400, "message": f"CLAVE IDENTIFICACIÓN: {clie_identificacion} INCORRECTA"}, status = status.HTTP_400_BAD_REQUEST)
 
         validarC = validarCliente(informacionCliente)
         if validarC['status'] is False:
-            return Response({"status": 400, "message": validarC['log'][0]}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"status": 400, "message": validarC['message']}, status = status.HTTP_400_BAD_REQUEST)
 
         if ticl_codigo == 'N':
             validarCN = validarClienteNatural(detalleCliente)
             if validarCN['status'] is False:
-                return Response({"status": 400, "message": validarCN['log'][0]}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({"status": 400, "message": validarCN['message']}, status = status.HTTP_400_BAD_REQUEST)
             guardarClienteNatural(detalleCliente)
         if ticl_codigo == 'J':
             validarCJ = validarClienteJuridico(detalleCliente)
             if validarCJ['status'] is False:
-                return Response({"status": 400, "message": validarCJ['log'][0]}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({"status": 400, "message": validarCJ['message']}, status = status.HTTP_400_BAD_REQUEST)
             guardarClienteJuridico(detalleCliente)
 
         guardarCliente(informacionCliente)
 
-        secuencia = Secuencia.objects.using('clientes').filter(
-            SECU_TABLA='CLIENTE', EMPR_CODIGO='8').update(SECU_VALOR_ACTUAL=clie_codigo + 1)
+        secuencia = Secuencia.objects.using('clientes').filter(SECU_TABLA = 'CLIENTE', EMPR_CODIGO = '8').update(SECU_VALOR_ACTUAL = clie_codigo + 1)
 
-        return Response({"status": 200, "message": f"Se agregó al cliente {ticl_codigo} {clie_identificacion} con el CLIE_CODIGO: {clie_codigo}"}, status=status.HTTP_200_OK)
+        return Response({"status": 200, "message": f"Se agregó al cliente {ticl_codigo} {clie_identificacion} con el CLIE_CODIGO: {clie_codigo}"}, status = status.HTTP_200_OK)
 
     def put(self, request):
         data = request.data
@@ -181,33 +177,49 @@ class ClienteView(APIView):
 
         clie_codigo = informacionCliente['CLIE_CODIGO']
         ticl_codigo = informacionCliente['TICL_CODIGO']
-        clienteChecking = Cliente.objects.using(
-            'clientes').filter(CLIE_CODIGO=clie_codigo).first()
+        clienteChecking = Cliente.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
 
         if clienteChecking is None:
-            return Response({"status": 400, "message": f"Cliente no existe con el CLIE_CODIGO: {clie_codigo}"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"status": 400, "message": f"Cliente no existe con el CLIE_CODIGO: {clie_codigo}"}, status = status.HTTP_400_BAD_REQUEST)
 
         validarC = validarCliente(informacionCliente)
         if validarC['status'] is False:
-            return Response({"status": 400, "message": validarC['log'][0]}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"status": 400, "message": validarC['message']}, status = status.HTTP_400_BAD_REQUEST)
         if ticl_codigo == 'N':
-            detalleCliente = ClienteNatural.objects.using(
-                'clientes').filter(CLIE_CODIGO=clie_codigo).first()
+            detalleCliente = ClienteNatural.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
             validarCN = validarClienteNatural(detalleSCliente)
             if validarCN['status'] is False:
-                return Response({"status": 400, "message": validarCN['log'][0]}, status=status.HTTP_400_BAD_REQUEST)
-            cambiosCD = actualizarClienteNatural(
-                detalleSCliente, detalleCliente)
+                return Response({"status": 400, "message": validarCN['message']}, status = status.HTTP_400_BAD_REQUEST)
+            cambiosCD = actualizarClienteNatural(detalleSCliente, detalleCliente)
             tipo = 'Natural'
         if ticl_codigo == 'J':
-            detalleCliente = ClienteJuridico.objects.using(
-                'clientes').filter(CLIE_CODIGO=clie_codigo).first()
+            detalleCliente = ClienteJuridico.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
             validarCJ = validarClienteJuridico(detalleSCliente)
             if validarCJ['status'] is False:
-                return Response({"status": 400, "message": validarCJ['log'][0]}, status=status.HTTP_400_BAD_REQUEST)
-            cambiosCD = actualizarClienteJuridico(
-                detalleSCliente, detalleCliente)
+                return Response({"status": 400, "message": validarCJ['message']}, status = status.HTTP_400_BAD_REQUEST)
+            cambiosCD = actualizarClienteJuridico(detalleSCliente, detalleCliente)
             tipo = 'Jurídico'
         cambiosC = actualizarCliente(informacionCliente, clienteChecking)
 
         return Response({"status": 200, "message": f"Se actualizaron {cambiosC} datos de Cliente {clie_codigo} y {cambiosCD} datos de Cliente {tipo}"}, status = status.HTTP_200_OK)
+
+    def get(self, request):
+        data = request.GET
+        clie_codigo = data['codigo']
+
+        cliente = Cliente.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
+
+        if cliente is None:
+            return Response({"status": 204, "message": f"Cliente no existe con el CLIE_CODIGO: {clie_codigo}"}, status = status.HTTP_204_NO_CONTENT)
+        
+        clienteSerializado = ClienteSerializer(cliente)
+        ticl_codigo = cliente.TICL_CODIGO
+        if ticl_codigo == 'N':
+            detalle = ClienteNatural.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
+            detalleSerializado = ClienteNaturalSerializer(detalle)
+
+        if ticl_codigo == 'J':
+            detalle = ClienteJuridico.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
+            detalleSerializado = ClienteJuridicoSerializer(detalle)
+
+        return Response({"status": 200, "data": {'cliente': clienteSerializado.data, 'detalle': detalleSerializado.data}}, status = status.HTTP_200_OK)
