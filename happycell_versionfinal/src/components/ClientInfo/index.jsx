@@ -10,7 +10,7 @@ import {
     Label,
 } from "reactstrap";
 
-const Index = ({ clientCode, typeClient, typeIdentification, identification, nameClient, children, onChange }) => {
+const Index = ({ clientCode, typeClient, typeIdentification, identification, nameClient, children, onChange, type = "Info" }) => {
     return (
         <Card className='bg-transparent'>
             <CardBody>
@@ -26,7 +26,7 @@ const Index = ({ clientCode, typeClient, typeIdentification, identification, nam
                             <Label for="clientTipe">Tipo:</Label>
                             <Select
                                 defaultValue={{ value: "clie", label: typeClient }}
-                                options={{ value: "clie", label: typeClient }}
+                                options={[{ value: "clie", label: typeClient }]}
                             />
                         </FormGroup>
                     </Col>
@@ -35,7 +35,7 @@ const Index = ({ clientCode, typeClient, typeIdentification, identification, nam
                             <Label for="typeIdentification">Tipo de identificación:</Label>
                             <Select
                                 defaultValue={{ value: "ident", label: typeIdentification }}
-                                options={{ value: "ident", label: typeIdentification }}
+                                options={[{ value: "ident", label: typeIdentification }]}
                             />
                         </FormGroup>
                     </Col>
@@ -48,7 +48,10 @@ const Index = ({ clientCode, typeClient, typeIdentification, identification, nam
                     <Col md={3}>
                         <FormGroup>
                             <Label for="clientName">Nombre:</Label>
-                            <Input type="text" name="clientName" id="clientName" value={nameClient} onChange={onChange("CLIE_NOMBRE_CORRESPONDENCIA")} />
+                            {type === "Info"
+                                ? <Input type="text" name="clientName" id="clientName" value={nameClient} disabled />
+                                : <Input type="text" name="clientName" id="clientName" value={nameClient} onChange={onChange("CLIE_NOMBRE_CORRESPONDENCIA")} />}
+
                         </FormGroup>
                     </Col>
                 </Row>

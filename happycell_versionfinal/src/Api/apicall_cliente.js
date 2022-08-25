@@ -95,6 +95,96 @@ export const updateClienteNatural = async (clientCodigo, values) => {
         });
         return await response.json();
     } catch (err) {
-        console.error(err);
+        console.log(err);
+    }
+}
+
+/* 
+    Funcion para actializar un cliente Juridico
+    * Se deve de enviar el token de autenticacion para validar al usuario
+    TODO: implementar el token en el header del fetch. Utilizar Authorization: <tipo> <credenciales>
+*/
+export const updateClienteJuridico = async (clientCodigo, values) => {
+    const {
+        CLIE_NOMBRE_CORRESPONDENCIA,
+        NACI_CODIGO,
+        CLIE_NOMBRE,
+        TIDO_CODIGO,
+        ACTI_CODIGO,
+        CLIE_TIPO_PROYECTO,
+        TIEM_CODIGO,
+        CLJU_RAZON_SOCIAL,
+        CLJU_NOMBRE_PUBLICITARIO } = values
+
+    const data = {
+        cliente: {
+            CLIE_CODIGO: clientCodigo,
+            NACI_CODIGO,
+            ACTI_CODIGO,
+            CLIE_NOMBRE_CORRESPONDENCIA,
+            TIDO_CODIGO,
+            CLIE_TIPO_PROYECTO
+        },
+        detalle: {
+            CLIE_NOMBRE,
+            TIEM_CODIGO,
+            CLJU_RAZON_SOCIAL,
+            CLJU_NOMBRE_PUBLICITARIO
+        }
+    }
+    try {
+        const response = await fetch(`${API}/cliente/cliente`, {
+            method: 'PUT',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        return await response.json();
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+/* 
+    Funcion para actializar un cliente Juridico
+    * Se deve de enviar el token de autenticacion para validar al usuario
+    TODO: implementar el token en el header del fetch. Utilizar Authorization: <tipo> <credenciales>
+*/
+export const updateTelefono = async (data) => {
+    try {
+        const response = await fetch(`${API}/api-dir/v1/telefono`, {
+            method: 'PUT',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        return await response.json();
+    } catch (err) {
+        console.log(err);
+    }
+}
+/* 
+    Funcion para actializar un cliente Juridico
+    * Se deve de enviar el token de autenticacion para validar al usuario
+    TODO: implementar el token en el header del fetch. Utilizar Authorization: <tipo> <credenciales>
+*/
+export const updateDirecciones = async (data) => {
+    console.log(data)
+    try {
+        const response = await fetch(`${API}/api-dir/v1/direccion`, {
+            method: 'PUT',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        return await response.json();
+    } catch (err) {
+        console.log(err);
     }
 }

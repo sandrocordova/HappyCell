@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import PageTitle from "../../Layout/AppMain/PageTitle";
+import Select from "react-select";
 import {
     Row,
     Col,
@@ -16,12 +17,45 @@ import {
 import swal from 'sweetalert';
 import Loader from "react-loaders";
 import ClientInfo from '../../components/ClientInfo';
+import { updateTelefono } from '../../Api/apicall_cliente';
 
 const Index = () => {
 
-    // state
+    // estados de utilidad
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
+    // estado para guardar los datos del formulario
+    // ! los datos por defecto deben de ser remplazados, y extraerlos de la busqueda
+    const [values, setValues] = useState({
+        TELE_CODIGO: 1,
+        TITE_CODIGO: 1,
+        TIDE_CODIGO: 1,
+        DIRE_CODIGO: 3,
+        TELE_NUMERO: ""
+    });
+    /**
+     * Estado para almacenar los datos del cliente
+     * * El estado debe de guardar los datos que vienen de la busqueda o simplemente utilizar axios
+     * TODO: obtener los datos de la busqueda por axios
+     */
+    const [client, setClient] = useState({
+        CLIE_CODIGO: 4578,
+        CLIE_IDENTIFICACION: "2367894621",
+        CLIE_NOMBRE_CORRESPONDENCIA: "Ratter Bee",
+    });
 
+    // Funcion que escucha los cambios en los formularios de los imputs tipo texto y date
+    const handleChange = name => event => {
+        setValues({ ...values, [name]: event.target.value });
+    }
+
+    // TODO: implementar el handle select en el tipo de telefono
+    // Funcion que escucha los cambios en los formularios de los selects
+    const handleSelectChange = name => event => {
+        setValues({ ...values, [name]: event.value });
+    }
+
+    // Funcion para actualizar datos del cliente en la API
     const clickSubmit = e => {
         e.preventDefault();
         swal({
@@ -33,13 +67,30 @@ const Index = () => {
         })
             .then((value) => {
                 if (value) {
+                    setError(false)
                     setLoading(true)
-                    setTimeout(function () {
-                        setLoading(false)
-                        swal("Actualización completada con éxito!", {
-                            icon: "success",
-                        });
-                    }, 2000);
+                    const datos = { CLIE_CODIGO: client.CLIE_CODIGO, telefonos: [values] }
+                    updateTelefono(datos)
+                        .then(data => {
+                            setLoading(false)
+                            if (data.status === 400 || data.status === 409) {
+                                swal(data.message, {
+                                    icon: "error",
+                                });
+                            } else if (data.status === 200) {
+                                swal(data.message, {
+                                    icon: "success",
+                                });
+                            } else {
+                                swal("Lo sentimos, hubo un error inesperado. Intente de nuevo.", {
+                                    icon: "error",
+                                });
+                            }
+                        }).catch(() => {
+                            swal("Lo sentimos, hubo un error inesperado. Intente de nuevo.", {
+                                icon: "error",
+                            });
+                        })
                 }
             });
     }
@@ -58,7 +109,7 @@ const Index = () => {
 
             <Container fluid>
 
-                <ClientInfo clientCode={"0978374"} typeClient={"NATURAL"} typeIdentification={"CEDULA"} identification={"1111111112"} nameClient={"ojdflakdflaksdflkasf"}>
+                <ClientInfo clientCode={client?.CLIE_CODIGO} typeClient={"NATURAL"} typeIdentification={"CEDULA"} identification={client?.CLIE_IDENTIFICACION} nameClient={client?.CLIE_NOMBRE_CORRESPONDENCIA} className='bg-primary' onChange={handleChange} type={"Info"}>
                     <Row>
                         <Col md={2}>
                             <FormGroup>
@@ -89,9 +140,10 @@ const Index = () => {
                                     <FormGroup row>
                                         <Label for="phoneType" sm={4}>Tipo teléfono:</Label>
                                         <Col sm={8}>
-                                            <Input type="select" id="phoneType" name="phoneType">
-                                                <option value="">Select</option>
-                                            </Input>
+                                            <Select
+                                                defaultValue={{ value: 2, label: "CELULAR" }}
+                                                options={[{ value: 2, label: "CELULAR" }]}
+                                            />
                                         </Col>
                                     </FormGroup>
                                 </Col>
@@ -101,7 +153,7 @@ const Index = () => {
                                     <FormGroup row>
                                         <Label for="phone" sm={4}>Número de teléfono:</Label>
                                         <Col sm={8}>
-                                            <Input type="text" id="phone" name="phone" />
+                                            <Input type="text" id="phone" name="phone" onChange={handleChange("TELE_NUMERO")} />
                                         </Col>
                                     </FormGroup>
                                 </Col>

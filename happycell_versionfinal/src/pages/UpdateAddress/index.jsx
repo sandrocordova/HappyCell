@@ -1,5 +1,6 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import PageTitle from "../../Layout/AppMain/PageTitle";
+import Select from "react-select";
 import {
     Row,
     Col,
@@ -16,12 +17,50 @@ import {
 import swal from 'sweetalert';
 import Loader from "react-loaders";
 import ClientInfo from '../../components/ClientInfo';
+import { getCatalogos, updateDirecciones } from '../../Api/apicall_cliente';
 
 const Index = () => {
 
-    // state
+    // estados de las listas
+    const [tipoDireccion, setTipoDireccion] = useState(null);
+    const [provinciaList, setProvinciaList] = useState(null);
+    const [cantonLista, setCantonLista] = useState(null);
+    const [parroquiaList, setParroquiaList] = useState(null);
+    // estados de utilidad
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
+    // estado para guardar los datos del formulario
+    // ! los datos por defecto deben de ser remplazados, y extraerlos de la busqueda
+    const [values, setValues] = useState({
+        DIRE_CODIGO: 3,
+        TIDE_CODIGO: 5,
+        DIRE_DESCRIPCION: "Jesús García 55",
+        prov_codigo: 1,
+        cant_codigo: 1,
+        parr_codigo: 10
+    });
+    /**
+     * Estado para almacenar los datos del cliente
+     * * El estado debe de guardar los datos que vienen de la busqueda o simplemente utilizar axios
+     * TODO: obtener los datos de la busqueda por axios
+     */
+    const [client, setClient] = useState({
+        CLIE_CODIGO: 4578,
+        CLIE_IDENTIFICACION: "2367894621",
+        CLIE_NOMBRE_CORRESPONDENCIA: "Ratter Bee",
+    });
 
+    // Funcion que escucha los cambios en los formularios de los imputs tipo texto y date
+    const handleChange = name => event => {
+        setValues({ ...values, [name]: event.target.value });
+    }
+
+    // Funcion que escucha los cambios en los formularios de los selects
+    const handleSelectChange = name => event => {
+        setValues({ ...values, [name]: event.value });
+    }
+
+    // Funcion para actualizar datos del cliente en la API
     const clickSubmit = e => {
         e.preventDefault();
         swal({
@@ -33,16 +72,54 @@ const Index = () => {
         })
             .then((value) => {
                 if (value) {
+                    setError(false)
                     setLoading(true)
-                    setTimeout(function () {
-                        setLoading(false)
-                        swal("Actualización completada con éxito!", {
-                            icon: "success",
-                        });
-                    }, 2000);
+                    const datos = { CLIE_CODIGO: client.CLIE_CODIGO, direcciones: [values] }
+                    updateDirecciones(datos)
+                        .then(data => {
+                            setLoading(false)
+                            if (data.status === 400 || data.status === 409) {
+                                swal(data.message, {
+                                    icon: "error",
+                                });
+                            } else if (data.status === 200) {
+                                swal(data.message, {
+                                    icon: "success",
+                                });
+                            } else {
+                                swal("Lo sentimos, hubo un error inesperado. Intente de nuevo.", {
+                                    icon: "error",
+                                });
+                            }
+                        }).catch(() => {
+                            swal("Lo sentimos, hubo un error inesperado. Intente de nuevo.", {
+                                icon: "error",
+                            });
+                        })
                 }
             });
     }
+
+    // Funcionalidad para obtener los datos de catalogos desde la API
+    const loadCatalogos = () => {
+        getCatalogos().then(res => {
+            if (res.error) {
+                setError(res.error)
+            } else {
+                res?.data?.forEach(cat => {
+                    if (cat.zona) setProvinciaList(cat.zona)
+                    if (cat.ciudad) setCantonLista(cat.ciudad)
+                    if (cat.tipo_direccion) setTipoDireccion(cat.tipo_direccion)
+                })
+            }
+        })
+    }
+
+    // Funcion inicializadora
+    useEffect(() => {
+        loadCatalogos();
+    }, []);
+
 
     return (
         <Fragment>
@@ -58,7 +135,8 @@ const Index = () => {
 
             <Container fluid>
 
-                <ClientInfo clientCode={"0978374"} typeClient={"NATURAL"} typeIdentification={"CEDULA"} identification={"1111111112"} nameClient={"ojdflakdflaksdflkasf"}>
+                <ClientInfo clientCode={client?.CLIE_CODIGO} typeClient={"NATURAL"} typeIdentification={"CEDULA"} identification={client?.CLIE_IDENTIFICACION} nameClient={client?.CLIE_NOMBRE_CORRESPONDENCIA} className='bg-primary' onChange={handleChange} type={"Info"}>
+
                     <Row>
                         <Col md={2}>
                             <FormGroup>
@@ -77,9 +155,10 @@ const Index = () => {
                                     <FormGroup row>
                                         <Label for="adressType" sm={4}>Tipo de dirección:</Label>
                                         <Col sm={4}>
-                                            <Input type="select" id="adressType" name="adressType">
-                                                <option value="">Select</option>
-                                            </Input>
+                                            <Select
+                                                options={tipoDireccion?.map(item => ({ value: item.TIDE_CODIGO, label: item.TIDE_DESCRIPCION }))}
+                                                onChange={handleSelectChange("TIDE_CODIGO")}
+                                            />
                                         </Col>
                                     </FormGroup>
                                 </Col>
@@ -87,11 +166,25 @@ const Index = () => {
                             <Row className="d-flex flex-column justify-content-center align-items-center">
                                 <Col md={8}>
                                     <FormGroup row>
-                                        <Label for="city" sm={4}>Ciudad:</Label>
+                                        <Label for="city" sm={4}>Provincia:</Label>
                                         <Col sm={4}>
-                                            <Input type="select" id="city" name="city">
-                                                <option value="">Select</option>
-                                            </Input>
+                                            <Select
+                                                options={provinciaList?.map(item => ({ value: item.ZONA_CODIGO, label: item.ZONA_DESCRIPCION }))}
+                                                onChange={handleSelectChange("prov_codigo")}
+                                            />
+                                        </Col>
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+                            <Row className="d-flex flex-column justify-content-center align-items-center">
+                                <Col md={8}>
+                                    <FormGroup row>
+                                        <Label for="city" sm={4}>Cantón:</Label>
+                                        <Col sm={4}>
+                                            <Select
+                                                options={cantonLista?.map(item => ({ value: item.CIUD_CODIGO, label: item.CIUD_NOMBRE }))}
+                                                onChange={handleSelectChange("cant_codigo")}
+                                            />
                                         </Col>
                                     </FormGroup>
                                 </Col>
@@ -101,7 +194,7 @@ const Index = () => {
                                     <FormGroup row>
                                         <Label for="adress" sm={4}>Dirección:</Label>
                                         <Col sm={8}>
-                                            <Input type="text" id="adress" name="adress" />
+                                            <Input type="text" id="adress" name="adress" value={values?.DIRE_DESCRIPCION} onChange={handleChange("DIRE_DESCRIPCION")} />
                                         </Col>
                                     </FormGroup>
                                 </Col>

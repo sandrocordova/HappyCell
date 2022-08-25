@@ -12,13 +12,13 @@ import {
     Label,
     Modal,
     Form,
-    Collapse,
     Alert
 } from "reactstrap";
 import swal from 'sweetalert';
 import Loader from "react-loaders";
 import PageTitle from "../../Layout/AppMain/PageTitle";
 import ClientInfo from '../../components/ClientInfo';
+import ClientMoreInfo from '../../components/ClientMoreInfo';
 import { getCatalogos, updateClienteNatural } from '../../Api/apicall_cliente';
 
 /* import { catalogo } from './data';
@@ -112,7 +112,6 @@ const Index = () => {
                     updateClienteNatural(client.CLIE_CODIGO, values)
                         .then(data => {
                             setLoading(false)
-                            console.log(data)
                             if (data.status === 400 || data.status === 409) {
                                 swal(data.message, {
                                     icon: "error",
@@ -268,77 +267,7 @@ const Index = () => {
                                 <Col sm={6}>
                                     <div className="d-flex align-items-center">
                                         <div className="mx-auto">
-                                            <Collapse isOpen={isOpen}>
-                                                <Card className='no-shadow border'>
-                                                    <CardBody>
-                                                        <Row>
-                                                            <Col md={12} className="mb-2 d-flex justify-content-between">
-                                                                <span className='fw-bold text-black-50 me-1'>Atraso promedio:</span>
-                                                                <span>123</span>
-                                                            </Col>
-                                                            <Col md={12} className="mb-2 d-flex justify-content-between">
-                                                                <span className='fw-bold text-black-50 me-1'>Atraso máximo:</span>
-                                                                <span>123</span>
-                                                            </Col>
-                                                            <Col md={12} className="mb-2 d-flex justify-content-between">
-                                                                <span className='fw-bold text-black-50 me-1'>N° de pagos totales:</span>
-                                                                <span>123</span>
-                                                            </Col>
-                                                            <Col md={12} className="mb-2 d-flex justify-content-between">
-                                                                <span className='fw-bold text-black-50 me-1'>Años de antiguedad:</span> <span>123</span>
-                                                            </Col>
-                                                            <Col md={12} className="mb-2 d-flex justify-content-between">
-                                                                <span className='fw-bold text-black-50 me-1'>N° de operaciones vigentes:</span> <span>123</span>
-                                                            </Col>
-                                                            <Col md={12} className="mb-2 d-flex justify-content-between">
-                                                                <span className='fw-bold text-black-50 me-1'>N° de operaciones canceladas:</span> <span>123</span>
-                                                            </Col>
-                                                            <Col md={12} className="mb-2 d-flex justify-content-between">
-                                                                <span className='fw-bold text-black-50 me-1'>Cupo utilizado:</span> <span>123</span>
-                                                            </Col>
-                                                            <Col md={12} className="mb-2 d-flex justify-content-between">
-                                                                <span className='fw-bold text-black-50 me-1'>Primer atraso:</span> <span>123</span>
-                                                            </Col>
-                                                            <Col md={12} className="mb-2 d-flex justify-content-between">
-                                                                <span className='fw-bold text-black-50 me-1'>Segundo atraso:</span> <span>123</span>
-                                                            </Col>
-                                                            <Col md={12} className="mb-2 d-flex justify-content-between">
-                                                                <span className='fw-bold text-black-50 me-1'>Tercer atraso:</span> <span>123</span>
-                                                            </Col>
-                                                            <Col md={12} className="mb-2 d-flex justify-content-between">
-                                                                <span className='fw-bold text-black-50 me-1'>Atraso promedio:</span> <span>123</span>
-                                                            </Col>
-                                                            <Col md={12} className="mb-2 d-flex justify-content-between">
-                                                                <span className='fw-bold text-black-50 me-1'>N° meses de la última cancelación:</span> <span>123</span>
-                                                            </Col>
-                                                            <Col md={12} className="mb-2 d-flex justify-content-between">
-                                                                <span className='fw-bold text-black-50 me-1'>N° de operaciones vigentes:</span> <span>123</span>
-                                                            </Col>
-                                                            <Col md={12} className="mb-2 d-flex justify-content-between">
-                                                                <span className='fw-bold text-black-50 me-1'>N° de operaciones canceladas:</span> <span>123</span>
-                                                            </Col>
-                                                            <Col md={12} className="mb-2 d-flex justify-content-between">
-                                                                <span className='fw-bold text-black-50 me-1'>N° de operaciones castigadas:</span> <span>123</span>
-                                                            </Col>
-                                                            <Col md={12} className="mb-2 d-flex justify-content-between">
-                                                                <span className='fw-bold text-black-50 me-1'>N° de operaciones anuladas:</span> <span>123</span>
-                                                            </Col>
-                                                            <Col md={12} className="mb-2 d-flex justify-content-between">
-                                                                <span className='fw-bold text-black-50 me-1'>N° de operaciones no anuladas:</span> <span>123</span>
-                                                            </Col>
-                                                            <Col md={12} className="mb-2 d-flex justify-content-between">
-                                                                <span className='fw-bold text-black-50 me-1'>N° de operaciones vencidas:</span> <span>123</span>
-                                                            </Col>
-                                                        </Row>
-                                                        <Row>
-                                                            <Button outline className="mb-2 me-2 btn-icon btn-pill" color="link" onClick={() => setIsOpen(!isOpen)}>
-                                                                <i className="pe-7s-angle-up btn-icon-wrapper"> </i>
-                                                                Ocultar información
-                                                            </Button>
-                                                        </Row>
-                                                    </CardBody>
-                                                </Card>
-                                            </Collapse>
+                                            <ClientMoreInfo isOpen={isOpen} setIsOpen={setIsOpen} />
                                         </div>
                                     </div>
                                 </Col>
