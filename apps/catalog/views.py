@@ -2,10 +2,10 @@ from rest_framework.views import APIView
 from rest_framework import status
 import json
 from rest_framework.response import Response
-from apps.catalog.models import CiudadCat, ZonaCat, PaisCat
+from apps.catalog.models import CiudadCat, ZonaCat, PaisCat, TipoTelefono
 from apps.catalog.models import TipoDireccion, TipoEmpresa, TipoClase, TipoProyecto, Profesion, Nacionalidad, ActividadEconomica, TipoRol, Sexo, Vivienda, EstadoCivil, SituacionLaboral
 from apps.catalog.serializer import TipoDireccionSerializer, TipoEmpresaSerializer, TipoClaseSerializer, TipoProyectoSerializer, ProfesionesSerializer, ProfesionesSerializer, NacionalidadSerializer, ActiEconomicaSerializer, TipoRolSerializer, SexoSerializer, ViviendaSerializer, EstadoCivilSerializer, SituacionLaboralCivilSerializer
-from apps.catalog.serializer import CiudadSerializerCat, ZonaSerializerCat, PaisSerializerCat
+from apps.catalog.serializer import CiudadSerializerCat, ZonaSerializerCat, PaisSerializerCat, TipoTelefonoSerializer
 
 #Catálogos
 class catalog_api_views(APIView):
@@ -16,6 +16,10 @@ class catalog_api_views(APIView):
             'status': True,
             'message': "Response exitoso"
             }
+        if 'tipo_telefono' in catalog_id:
+            consulta = TipoTelefono.objects.using('clientes').all()
+            profesionesSerializer = TipoTelefonoSerializer(consulta, many = True)
+            catalog_list.append({'tipo_telefono':profesionesSerializer.data})
         if 'pais' in catalog_id:
             consulta = PaisCat.objects.using('clientes').all()
             profesionesSerializer = PaisSerializerCat(consulta, many = True)

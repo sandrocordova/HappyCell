@@ -212,10 +212,6 @@ class ClienteJuridicoSerializer(serializers.ModelSerializer):
         model = ClienteJuridico
         fields = '__all__'
 
-class TipoTelefonoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = TipoTelefono
-        fields = '__all__'
 
 class TelefonoSerializer(serializers.ModelSerializer):
     class Meta:
