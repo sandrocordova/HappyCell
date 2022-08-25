@@ -2,13 +2,19 @@ from rest_framework.views import APIView # Procesamiento de Views
 from rest_framework.response import Response # Manejo de Response HTTP
 from rest_framework import status # Manejo de Status
 from apps.apihc.functions import guardarObservacion, validarObservacion
-from apps.apihc.models import Observacion
+from apps.apihc.models import Cliente, Observacion
 
 class ObservacionClienteView(APIView):
     def post(self, request):
         data = request.data
         clie_codigo = data['CLIE_CODIGO']
         observaciones = data['observaciones']
+        
+        clienteChecking = Cliente.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
+
+        if clienteChecking is None:
+            return Response({"status": 400, "message": f"Cliente no existe con el CLIE_CODIGO: {clie_codigo}"}, status = status.HTTP_400_BAD_REQUEST)
+          
         for observacion in observaciones:
             tioc_codigo = observacion['TIOC_CODIGO']
             observacion['CLIE_CODIGO'] = clie_codigo
@@ -32,6 +38,12 @@ class ObservacionClienteView(APIView):
         data = request.data
         clie_codigo = data['CLIE_CODIGO']
         observaciones = data['observaciones']
+        
+        clienteChecking = Cliente.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
+
+        if clienteChecking is None:
+            return Response({"status": 400, "message": f"Cliente no existe con el CLIE_CODIGO: {clie_codigo}"}, status = status.HTTP_400_BAD_REQUEST)
+          
         for observacion in observaciones:
             tioc_codigo = observacion['TIOC_CODIGO']
             validarO = validarObservacion(observacion)
