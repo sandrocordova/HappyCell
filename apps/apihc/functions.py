@@ -266,10 +266,7 @@ def validarObservacion(data):
     indexLog = 0
 
     tipo = TipoObservacion.objects.using('clientes').filter(TIOC_CODIGO = data['TIOC_CODIGO']).first()
-    if tipo:
-        log[indexLog] = f"Tipo de Observacion válido: {data['TIOC_CODIGO']}, DESCRIPCIÓN: {tipo.TIOC_DESCRI}"
-        indexLog += 1
-    else:
+    if tipo is None:
         log[indexLog] = f"Tipo de Observacion no válido: {data['TIOC_CODIGO']}. Revisar ficha técnica"
         indexLog += 1
         success = False
@@ -280,24 +277,15 @@ def validarCuenta(data):
     success = True
     log = {}
     indexLog = 0
-    log[indexLog] = "==================================================================="
-    indexLog += 1
-
 
     tipo = TipoCuenta.objects.using('clientes').filter(TICU_CODIGO = data['TICU_CODIGO']).first()
-    if tipo:
-        log[indexLog] = f"Tipo de Cuenta válido: {data['TICU_CODIGO']}, DESCRIPCIÓN: {tipo.TICU_DESCRIPCION}"
-        indexLog += 1
-    else:
+    if tipo is None:
         log[indexLog] = f"Tipo de Cuenta no válido: {data['TICU_CODIGO']}. Revisar ficha técnica"
         indexLog += 1
         success = False
 
     banco = Banco.objects.using('clientes').filter(BANC_CODIGO = data['BANC_CODIGO']).first()
-    if banco:
-        log[indexLog] = f"Banco válido: {data['BANC_CODIGO']}, DESCRIPCIÓN: {banco.BANC_DESCRIPCION}"
-        indexLog += 1
-    else:
+    if banco is None: 
         log[indexLog] = f"Banco no válido: {data['BANC_CODIGO']}. Revisar ficha técnica"
         indexLog += 1
         success = False
@@ -522,6 +510,17 @@ def actualizarVinculo(data, vinculo):
         
     return cambios
 
+def actualizarCuenta(data, cuenta):
+    cambios = 0
+
+    if cuenta.BANC_CODIGO != data['BANC_CODIGO']:
+        CuentaBancariaCliente.objects.using('clientes').filter(CLIE_CODIGO = data['CLIE_CODIGO'], CUBC_CODIGO = data['CUBC_CODIGO']).update(BANC_CODIGO = data['BANC_CODIGO'])
+        cambios += 1
+    if cuenta.CUBC_CUENTA != data['CUBC_CUENTA']:
+        CuentaBancariaCliente.objects.using('clientes').filter(CLIE_CODIGO = data['CLIE_CODIGO'], CUBC_CODIGO = data['CUBC_CODIGO']).update(CUBC_CUENTA = data['CUBC_CUENTA'])
+        cambios += 1
+        
+    return cambios
 
 def cedula_is_ok(cedula):
     if cedula.isdigit():
