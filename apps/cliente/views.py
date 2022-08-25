@@ -7,6 +7,8 @@ from rest_framework.response import Response
 from apps.apihc.functions import actualizarCliente, actualizarClienteJuridico, actualizarClienteNatural, guardarCliente, guardarClienteJuridico, guardarClienteNatural, validarCliente, validarClienteJuridico, validarClienteNatural
 from apps.apihc.models import ClienteJuridico, ClienteNatural, Secuencia, Direccion
 from apps.cliente.models import Cliente
+from apps.catalog.models import TipoDocumento
+from apps.catalog.serializer import TipoDocumentoSerializer
 from apps.apihc.models import Direccion, Telefono
 from apps.apihc.serializers import DireccionSerializer, TelefonoSerializer, ClienteNaturalSerializer, ClienteJuridicoSerializer
 
@@ -38,16 +40,25 @@ class telefono_search(APIView):
 
 class cliente_search(APIView):
     def get(self, request):
-        clientes = Cliente.objects.using('clientes').all()[4378:4450]
+        clientes = Cliente.objects.using('clientes').all()[4449:4450]
         
+        consulta = TipoDocumento.objects.using('clientes').all()
+        profesionesSerializer = TipoDocumentoSerializer(consulta, many = True)
+        
+        print(profesionesSerializer.data[2])
+        print(profesionesSerializer.data[2]["TIDO_CODIGO"])
+        print("----------------------")
+        print()
+            
         for cliente in clientes:
             catalog_list =[]
             json_response = {
             'codigo': "N",
             'significado': "Natural"
             }
+            
+            
             if cliente.TICL_CODIGO == "N":
-                
                 catalog_list.append(cliente.TICL_CODIGO)
                 catalog_list.append("Natural")
                 cliente.TICL_CODIGO = json_response
@@ -81,7 +92,7 @@ class cliente_search(APIView):
                     elif cliente.TIDO_CODIGO == "R":
                         cliente.TIDO_CODIGO = "Ruc"
                          
-                paginador = Paginator(clienteChecking, 1)
+                paginador = Paginator(clienteChecking, 10)
                 pagina = request.GET.get("page") or 1
                 clienteChecking = paginador.get_page(pagina)
                 pagina_actual = int(pagina)
