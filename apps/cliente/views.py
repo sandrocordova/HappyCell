@@ -239,13 +239,19 @@ class ClienteAsesorView(APIView):
         data = request.data
         clie_codigo = data['CLIE_CODIGO']
         asesor = data['asesor']
-        ases_codigo = data['ASES_CODIGO']
+        ases_codigo = asesor['ASES_CODIGO']
+
+        cliente = Cliente.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
+
+        if cliente is None:
+            return Response({"status": 204, "message": f"Cliente no existe con el CLIE_CODIGO: {clie_codigo}"}, status = status.HTTP_204_NO_CONTENT)
         
         asesorClienteExiste = ClienteAsesor.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
-        if asesorClienteExiste != None:
+        if asesorClienteExiste is None:
             validarCA = validarClienteAsesor(ases_codigo)
             if validarCA['status'] is False:
                 return Response({"status": 400, "message": validarCA['message']}, status = status.HTTP_400_BAD_REQUEST)
+            asesor['CLIE_CODIGO'] = clie_codigo
             asesor['EMPR_CODIGO'] = 8
             guardarAsesorCliente(asesor)
         else:
@@ -258,6 +264,11 @@ class ClienteAsesorView(APIView):
         clie_codigo = data['CLIE_CODIGO']
         asesor = data['asesor']
         
+        cliente = Cliente.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
+
+        if cliente is None:
+            return Response({"status": 204, "message": f"Cliente no existe con el CLIE_CODIGO: {clie_codigo}"}, status = status.HTTP_204_NO_CONTENT)
+        
         asesorClienteExiste = ClienteAsesor.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
         if asesorClienteExiste != None:
             validarCA = validarClienteAsesor(asesor)
@@ -265,6 +276,6 @@ class ClienteAsesorView(APIView):
                 return Response({"status": 400, "message": validarCA['message']}, status = status.HTTP_400_BAD_REQUEST)
             ClienteAsesor.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).update(ASES_CODIGO = asesor)
         else:
-            return Response({"status": 409, "message": f"El cliente {clie_codigo} ya tiene un asesor registrado"}, status = status.HTTP_409_CONFLICT)
+            return Response({"status": 409, "message": f"El cliente {clie_codigo} no tiene un asesor registrado"}, status = status.HTTP_409_CONFLICT)
 
         return Response({"status": 200, "message": f"Se actualizó el asesor {asesor} al cliente {clie_codigo}"}, status = status.HTTP_200_OK)
