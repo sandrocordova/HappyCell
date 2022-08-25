@@ -61,7 +61,7 @@ class cliente_search(APIView):
             if cliente.TICL_CODIGO == "N":
                 catalog_list.append(cliente.TICL_CODIGO)
                 catalog_list.append("Natural")
-                cliente.TICL_CODIGO = json_response
+                #cliente.TICL_CODIGO = json_response
             else:
                 cliente.TICL_CODIGO = "Juridico"
 
