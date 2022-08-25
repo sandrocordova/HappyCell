@@ -9,6 +9,7 @@ class VinculoView(APIView):
     def post(self, request):
         data = request.data
         clie_codigo = data['CLIE_CODIGO']
+        ticl_codigo = data['TICL_CODIGO']
         vinculos = data['vinculos']
         today = datetime.datetime.now()
         vin_fecha_creacion = today.strftime("%Y-%m-%d %H:%M:%S")
@@ -24,12 +25,13 @@ class VinculoView(APIView):
             vinculoExistente = Vinculo.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo, VINC_IDENTIFICACION = vinc_identificacion).first()
             if vinculoExistente is None:
                 vinculo['VINC_CODIGO'] = 1
+                vinculo['TICL_CODIGO'] = ticl_codigo
                 vinc_codigo = Vinculo.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).order_by('-VINC_CODIGO').first()
                 if vinc_codigo:
                     vinculo['VINC_CODIGO'] = vinc_codigo.VINC_CODIGO + 1
                 vinculo['CLIE_CODIGO'] = clie_codigo
                 vinculo['VIN_ESTADO'] = "A"
-                vinculo['CIUDAD_CODIGO'] = 223
+                # vinculo['CIUD_CODIGO'] = 223
 
                 varlidarV = validarVinculo(vinculo)
                 if varlidarV['status'] is False:
@@ -47,7 +49,8 @@ class VinculoView(APIView):
     def put(self, request):
         data = request.data
         clie_codigo = data['CLIE_CODIGO']
-        vinculos = data['vinculos']        
+        vinculos = data['vinculos']      
+        ticl_codigo = data['TICL_CODIGO']  
         clienteChecking = Cliente.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
         success = 0
 
@@ -56,6 +59,7 @@ class VinculoView(APIView):
         
         for vinculo in vinculos:
             vinculo['CLIE_CODIGO'] = clie_codigo
+            vinculo['TICL_CODIGO'] = ticl_codigo
             vinculoChecking = Vinculo.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo, VINC_CODIGO = vinculo['VINC_CODIGO']).first()
             if vinculoChecking is None:
                 return Response({"status": 400, "message": f"Vinculo no existe con el VINC_CODIGO: {vinculo['VINC_CODIGO']} para el Cliente {clie_codigo}"}, status = status.HTTP_400_BAD_REQUEST)
