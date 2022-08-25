@@ -40,7 +40,7 @@ class telefono_search(APIView):
 
 class cliente_search(APIView):
     def get(self, request):
-        clientes = Cliente.objects.using('clientes').all()[4449:4450]
+        clientes = Cliente.objects.using('clientes').all()[:1]
         
         consulta = TipoDocumento.objects.using('clientes').all()
         profesionesSerializer = TipoDocumentoSerializer(consulta, many = True)
