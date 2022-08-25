@@ -2,18 +2,36 @@ from rest_framework.views import APIView
 from rest_framework import status
 import json
 from rest_framework.response import Response
-from apps.catalog.models import TipoEmpresa, TipoClase, TipoProyecto, Profesion, Nacionalidad, ActividadEconomica, TipoRol, Sexo, Vivienda, EstadoCivil, SituacionLaboral
-from apps.catalog.serializer import TipoEmpresaSerializer, TipoClaseSerializer, TipoProyectoSerializer, ProfesionesSerializer, ProfesionesSerializer, NacionalidadSerializer, ActiEconomicaSerializer, TipoRolSerializer, SexoSerializer, ViviendaSerializer, EstadoCivilSerializer, SituacionLaboralCivilSerializer
+from apps.catalog.models import CiudadCat, ZonaCat, PaisCat
+from apps.catalog.models import TipoDireccion, TipoEmpresa, TipoClase, TipoProyecto, Profesion, Nacionalidad, ActividadEconomica, TipoRol, Sexo, Vivienda, EstadoCivil, SituacionLaboral
+from apps.catalog.serializer import TipoDireccionSerializer, TipoEmpresaSerializer, TipoClaseSerializer, TipoProyectoSerializer, ProfesionesSerializer, ProfesionesSerializer, NacionalidadSerializer, ActiEconomicaSerializer, TipoRolSerializer, SexoSerializer, ViviendaSerializer, EstadoCivilSerializer, SituacionLaboralCivilSerializer
+from apps.catalog.serializer import CiudadSerializerCat, ZonaSerializerCat, PaisSerializerCat
 
 #Catálogos
 class catalog_api_views(APIView):
     def get(self, request):
-        catalog_id = ['tipo_empresa','tipo_clase','tipo_proyecto','profesion', 'nacionalidad', 'actividad_economica', 'tipo_rol','sexo', 'vivienda', 'estado_civil', 'situacion_laboral']
+        catalog_id = ['pais','zona','ciudad','tipo_direccion','tipo_empresa','tipo_clase','tipo_proyecto','profesion', 'nacionalidad', 'actividad_economica', 'tipo_rol','sexo', 'vivienda', 'estado_civil', 'situacion_laboral']
         catalog_list =[]
         json_response = {
             'status': True,
             'message': "Response exitoso"
             }
+        if 'pais' in catalog_id:
+            consulta = PaisCat.objects.using('clientes').all()
+            profesionesSerializer = PaisSerializerCat(consulta, many = True)
+            catalog_list.append({'pais':profesionesSerializer.data})
+        if 'zona' in catalog_id:
+            consulta = ZonaCat.objects.using('clientes').all()
+            profesionesSerializer = ZonaSerializerCat(consulta, many = True)
+            catalog_list.append({'zona':profesionesSerializer.data})
+        if 'ciudad' in catalog_id:
+            consulta = CiudadCat.objects.using('clientes').all()
+            profesionesSerializer = CiudadSerializerCat(consulta, many = True)
+            catalog_list.append({'ciudad':profesionesSerializer.data})
+        if 'tipo_direccion' in catalog_id:
+            consulta = TipoDireccion.objects.using('clientes').all()
+            profesionesSerializer = TipoDireccionSerializer(consulta, many = True)
+            catalog_list.append({'tipo_direccion':profesionesSerializer.data})
         if 'tipo_empresa' in catalog_id:
             consulta = TipoEmpresa.objects.using('clientes').all()
             profesionesSerializer = TipoEmpresaSerializer(consulta, many = True)
