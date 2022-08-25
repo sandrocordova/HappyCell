@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import PageTitle from "../../Layout/AppMain/PageTitle";
 import {
     Row,
@@ -21,6 +21,23 @@ const Index = () => {
 
     // state
     const [loading, setLoading] = useState(false);
+    const [values, setValues] = useState({
+        nombreComercial: '',
+        nacionalidad: '',
+        nombreCliente: '',
+        estado: '',
+        actividadEconomica: '',
+        categoriaCliente: '',
+        tipoRol: '',
+        tipoEmpresa: '',
+        razonSocial: '',
+        nombrePublicitario: '',
+        capitalSuscrito: '',
+        capitalPagado: '',
+        reservaLegal: '',
+        grupoEconomico: '',
+        fechaReformaEstatutos: '',
+    });
 
     const clickSubmit = e => {
         e.preventDefault();

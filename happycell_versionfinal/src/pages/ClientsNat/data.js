@@ -1,3 +1,31 @@
+export const clientNatural = {
+    "CLIE_CODIGO": 4578,
+    "NACI_CODIGO": 1,
+    "TICL_CODIGO": "['N', 'Natural']",
+    "TIDO_CODIGO": "C",
+    "ACTI_CODIGO": 390,
+    "ASES_CODIGO": null,
+    "CLIE_IDENTIFICACION": "0101244408",
+    "CLIE_NOMBRE": "TENECELA ORDOÑEZ LUIS HUMBERTO",
+    "CLIE_FECHA_CREACION": "2015-01-23T13:57:09.873000Z",
+    "CLIE_NOMBRE_CORRESPONDENCIA": "-",
+    "clie_estado": null,
+    "TISB_CODIGO": 0,
+    "clie_tipo": "C",
+    "CLIE_CLAVE": null,
+    "CLIE_TIPO_ROL": "D",
+    "CLIE_TIPO_PROYECTO": 1,
+    "comodin": null,
+    "ASES": null,
+    "CLIE_FECHA_INACTIVACION": null,
+    "CLIE_FECHA_DESAFILIACION": null,
+    "sect_codigo": null,
+    "pais_codigo": null,
+    "prov_codigo": null,
+    "cant_codigo": null,
+    "parr_codigo": null
+}
+
 export const catalogo = [
     {
         "profesion": [

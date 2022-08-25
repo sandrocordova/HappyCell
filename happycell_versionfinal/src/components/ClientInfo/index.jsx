@@ -9,7 +9,7 @@ import {
     Label,
 } from "reactstrap";
 
-const Index = ({ clientCode, typeClient, typeIdentification, identification, nameClient, children }) => {
+const Index = ({ clientCode, typeClient, typeIdentification, identification, nameClient, children, onChange }) => {
     return (
         <Card className='bg-transparent'>
             <CardBody>
@@ -45,7 +45,7 @@ const Index = ({ clientCode, typeClient, typeIdentification, identification, nam
                     <Col md={3}>
                         <FormGroup>
                             <Label for="clientName">Nombre:</Label>
-                            <Input type="text" name="clientName" id="clientName" value={nameClient} disabled />
+                            <Input type="text" name="clientName" id="clientName" value={nameClient} onChange={onChange("CLIE_NOMBRE_CORRESPONDENCIA")} />
                         </FormGroup>
                     </Col>
                 </Row>
