@@ -1,4 +1,5 @@
 import React from 'react';
+import Select from "react-select";
 import {
     Row,
     Col,
@@ -23,17 +24,19 @@ const Index = ({ clientCode, typeClient, typeIdentification, identification, nam
                     <Col md={2}>
                         <FormGroup>
                             <Label for="clientTipe">Tipo:</Label>
-                            <Input type="select" id="clientTipe" name="clientTipe" defaultValue={"DEFAULT"}>
-                                <option value="SELECT" selected>{typeClient}</option>
-                            </Input>
+                            <Select
+                                defaultValue={{ value: "clie", label: typeClient }}
+                                options={{ value: "clie", label: typeClient }}
+                            />
                         </FormGroup>
                     </Col>
                     <Col md={3}>
                         <FormGroup>
                             <Label for="typeIdentification">Tipo de identificación:</Label>
-                            <Input type="select" id="typeIdentification" name="typeIdentification">
-                                <option value="">{typeIdentification}</option>
-                            </Input>
+                            <Select
+                                defaultValue={{ value: "ident", label: typeIdentification }}
+                                options={{ value: "ident", label: typeIdentification }}
+                            />
                         </FormGroup>
                     </Col>
                     <Col md={2}>

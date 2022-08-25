@@ -1,8 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Select from "react-select";
-// import {
-//     useParams
-// } from "react-router-dom";
 import {
     Row,
     Col,
@@ -29,12 +26,10 @@ import { clientNatural } from './data'; */
 
 const Index = () => {
 
-    /**
-     * TODO: crear el metodo fecht para actualizar datos
-     */
-    //let { id } = useParams();
-
-    // state
+    // statados para almacenar las listas de los catalogos
+    const [tipoRolList, setTipoRolList] = useState(null);
+    const [tipoProyectoList, setTipoProyectoList] = useState(null);
+    const [tipoClaseList, setTipoClaseList] = useState(null);
     const [profesionList, setProfesionList] = useState(null);
     const [nacionalidadList, setNacionalidadList] = useState(null);
     const [actividadEcList, setActividadEcList] = useState(null);
@@ -42,14 +37,17 @@ const Index = () => {
     const [viviendaList, setViviendaList] = useState(null);
     const [estadoCivilList, setEstadoCivilList] = useState(null);
     const [sitLaboralList, setSitLaboralList] = useState(null);
+    // estados de utilidad
     const [isOpen, setIsOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
+    // estado para guardar los datos del formulario
     const [values, setValues] = useState({
         NACI_CODIGO: '',
         ACTI_CODIGO: '',
         CLIE_NOMBRE_CORRESPONDENCIA: "Ratter Bee",
-        clie_estado: '',
+        TIDO_CODIGO: '',
+        CLIE_TIPO_PROYECTO: '',
 
         SEXO_CODIGO: '',
         PROF_CODIGO: '',
@@ -68,27 +66,26 @@ const Index = () => {
         CLNA_EMPRESA_TRABAJA: '',
         CLNA_INICIO_INGRESOS: '',
     });
+    /**
+     * Estado para almacenar los datos del cliente
+     * * El estado debe de guardar los datos que vienen de la busqueda o simplemente utilizar axios
+     * TODO: obtener los datos de la busqueda por axios
+     */
     const [client, setClient] = useState({
         CLIE_CODIGO: 4578,
         CLIE_IDENTIFICACION: "2367894621",
 
         "TICL_CODIGO": "N",
-        "TIDO_CODIGO": "C",
-
         "ASES_CODIGO": 1,
         "CLIE_NOMBRE": "CLEAN BANDIT",
         "TISB_CODIGO": 0,
         "clie_tipo": "C",
         "CLIE_TIPO_ROL": "D",
-        "CLIE_TIPO_PROYECTO": 1,
-
         NIIN_CODIGO: 1,
-
         "CLIE_CLAVE": "",
-
     });
 
-    // Funcion que escucha los cambios en los formularios de los imputs tipo texto
+    // Funcion que escucha los cambios en los formularios de los imputs tipo texto y date
     const handleChange = name => event => {
         setValues({ ...values, [name]: event.target.value });
     }
@@ -112,11 +109,26 @@ const Index = () => {
                 if (value) {
                     setError(false)
                     setLoading(true)
-                    updateClienteNatural(values)
+                    updateClienteNatural(client.CLIE_CODIGO, values)
                         .then(data => {
                             setLoading(false)
-                            swal("Actualización completada con éxito!", {
-                                icon: "success",
+                            console.log(data)
+                            if (data.status === 400 || data.status === 409) {
+                                swal(data.message, {
+                                    icon: "error",
+                                });
+                            } else if (data.status === 200) {
+                                swal(data.message, {
+                                    icon: "success",
+                                });
+                            } else {
+                                swal("Lo sentimos, hubo un error inesperado. Intente de nuevo.", {
+                                    icon: "error",
+                                });
+                            }
+                        }).catch(() => {
+                            swal("Lo sentimos, hubo un error inesperado. Intente de nuevo.", {
+                                icon: "error",
                             });
                         })
                 }
@@ -137,22 +149,12 @@ const Index = () => {
                     if (cat.vivienda) setViviendaList(cat.vivienda)
                     if (cat.estado_civil) setEstadoCivilList(cat.estado_civil)
                     if (cat.situacion_laboral) setSitLaboralList(cat.situacion_laboral)
+                    if (cat.tipo_clase) setTipoClaseList(cat.tipo_clase)
+                    if (cat.tipo_proyecto) setTipoProyectoList(cat.tipo_proyecto)
+                    if (cat.tipo_rol) setTipoRolList(cat.tipo_rol)
                 })
             }
         })
-
-        /* 
-        ! Eliminar el siguiente forEach, es solo para trabajar con mock. Utilizar la funcion de arriba
-        */
-        /* catalogo?.forEach(cat => {
-            if (cat.profesion) setProfesionList(cat.profesion)
-            if (cat.nacionalidad) setNacionalidadList(cat.nacionalidad)
-            if (cat.actividad_economica) setActividadEcList(cat.actividad_economica)
-            if (cat.sexo) setSexoList(cat.sexo)
-            if (cat.vivienda) setViviendaList(cat.vivienda)
-            if (cat.estado_civil) setEstadoCivilList(cat.estado_civil)
-            if (cat.situacion_laboral) setSitLaboralList(cat.situacion_laboral)
-        }) */
     }
 
     // Funcion inicializadora
@@ -160,6 +162,7 @@ const Index = () => {
         loadCatalogos();
     }, []);
 
+    // funcion que retorna la alerta de error
     const showAlert = () => (
         <Alert color="danger">
             {error}
@@ -196,7 +199,6 @@ const Index = () => {
                                     <FormGroup row>
                                         <Label for="nationality" sm={4}>Nacionalidad</Label>
                                         <Col sm={8}>
-                                            {/* filtrarPorCodigo(client?.NACI_CODIGO, nacionalidadList) */}
                                             <Select
                                                 defaultValue={{ value: 2, label: "Colombiana" }}
                                                 options={nacionalidadList?.map(item => ({ value: item.NACI_CODIGO, label: item.NACI_DESCRIPCION }))}
@@ -209,8 +211,10 @@ const Index = () => {
                                     <FormGroup row>
                                         <Label for="category" sm={4}>Categoría cliente:</Label>
                                         <Col sm={8}>
-                                            <Input type="select" id="category" name="category">
-                                            </Input>
+                                            <Select
+                                                options={tipoProyectoList?.map(item => ({ value: item.COD_TIPO_PROYECTO, label: item.DESC_TIPO_PROYECTO }))}
+                                                onChange={handleSelectChange("CLIE_TIPO_PROYECTO")}
+                                            />
                                         </Col>
                                     </FormGroup>
                                 </Col>
@@ -218,13 +222,10 @@ const Index = () => {
                                     <FormGroup row>
                                         <Label for="state" sm={4}>Estado:</Label>
                                         <Col sm={8}>
-                                            <Input type="select" id="state" name="state">
-                                                <Select
-                                                    defaultValue={{ value: 2, label: "Colombiana" }}
-                                                    options={nacionalidadList?.map(item => ({ value: item.NACI_CODIGO, label: item.NACI_DESCRIPCION }))}
-                                                    onChange={handleSelectChange("clie_estado")}
-                                                />
-                                            </Input>
+                                            <Select
+                                                options={tipoClaseList?.map(item => ({ value: item.CLIE_TIPO, label: item.DESC_TIPO }))}
+                                                onChange={handleSelectChange("TIDO_CODIGO")}
+                                            />
                                         </Col>
                                     </FormGroup>
                                 </Col>
@@ -245,8 +246,9 @@ const Index = () => {
                                     <FormGroup row>
                                         <Label for="rol" sm={4}>Tipo rol:</Label>
                                         <Col sm={8}>
-                                            <Input type="select" id="rol" name="rol">
-                                            </Input>
+                                            <Select
+                                                options={tipoRolList?.map(item => ({ value: item.TIRO_CODIGO, label: item.TIROL_DESCRIPCION }))}
+                                            />
                                         </Col>
                                     </FormGroup>
                                 </Col>

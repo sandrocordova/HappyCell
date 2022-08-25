@@ -14,6 +14,9 @@ export const getClients = async (cedula, nombre) => {
     }
 }
 
+/* 
+    Funcion para obtener los catalogos de la API
+*/
 export const getCatalogos = async () => {
     try {
         const response = await fetch(`${API}/cat/view`);
@@ -24,21 +27,18 @@ export const getCatalogos = async () => {
     }
 }
 
-export const updateClienteNatural = (values) => {
-    // return fetch(
-    //     `${API}/cat/view`,
-    //     {
-    //         method: 'GET'
-    //     }
-    // )
-    //     .then(response => {
-    //         return response.json()
-    //     })
-    //     .catch(err => console.log(err))
-    const { NACI_CODIGO,
+/* 
+    Funcion para actializar un cliente Natural
+    * Se deve de enviar el token de autenticacion para validar al usuario
+    TODO: implementar el token en el header del fetch. Utilizar Authorization: <tipo> <credenciales>
+*/
+export const updateClienteNatural = async (clientCodigo, values) => {
+    const {
+        TIDO_CODIGO,
+        CLIE_TIPO_PROYECTO,
+        NACI_CODIGO,
         ACTI_CODIGO,
         CLIE_NOMBRE_CORRESPONDENCIA,
-        clie_estado,
         SEXO_CODIGO,
         PROF_CODIGO,
         ESCI_CODIGO,
@@ -58,10 +58,12 @@ export const updateClienteNatural = (values) => {
 
     const data = {
         cliente: {
+            CLIE_CODIGO: clientCodigo,
             NACI_CODIGO,
             ACTI_CODIGO,
             CLIE_NOMBRE_CORRESPONDENCIA,
-            clie_estado,
+            TIDO_CODIGO,
+            CLIE_TIPO_PROYECTO
         },
         detalle: {
             SEXO_CODIGO,
@@ -82,6 +84,17 @@ export const updateClienteNatural = (values) => {
             CLNA_INICIO_INGRESOS,
         }
     }
-    console.log(data)
-    //return true
+    try {
+        const response = await fetch(`${API}/cliente/cliente`, {
+            method: 'PUT',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        return await response.json();
+    } catch (err) {
+        console.error(err);
+    }
 }
