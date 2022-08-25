@@ -92,7 +92,7 @@ class cliente_search(APIView):
                     elif cliente.TIDO_CODIGO == "R":
                         cliente.TIDO_CODIGO = "Ruc"
                          
-                paginador = Paginator(clienteChecking, 10)
+                paginador = Paginator(clienteChecking, 1)
                 pagina = request.GET.get("page") or 1
                 clienteChecking = paginador.get_page(pagina)
                 pagina_actual = int(pagina)
@@ -103,7 +103,7 @@ class cliente_search(APIView):
                     'status': True,
                     'message': "Response exitoso",
                     "pagina_actual": pagina_actual,
-                    "paginas": pagina_total,
+                    "paginas": clienteChecking.paginator.num_pages,
                     "cliente": serializer_cliente.data
                 }
                 return Response(json_response, status=status.HTTP_200_OK)
