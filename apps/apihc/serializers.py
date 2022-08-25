@@ -33,6 +33,18 @@ class PaisSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pais
         fields = '__all__'
+        
+class ZonaSerializer(serializers.ModelSerializer):
+    PAIS_CODIGO = PaisSerializer(read_only = True)
+    class Meta:
+        model = Zona
+        fields = '__all__'
+
+
+class CiudadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ciudad
+        fields = '__all__'
 
 class VehiculoLegalSerializer(serializers.ModelSerializer):
     PAIS_CODIGO = PaisSerializer(read_only = True)
@@ -72,17 +84,7 @@ class EmpresaSerializer(serializers.ModelSerializer):
         model = Empresa
         fields = '__all__'
 
-class ZonaSerializer(serializers.ModelSerializer):
-    PAIS_CODIGO = PaisSerializer(read_only = True)
-    class Meta:
-        model = Zona
-        fields = '__all__'
 
-class CiudadSerializer(serializers.ModelSerializer):
-    ZONA_CODIGO = ZonaSerializer(read_only = True)
-    class Meta:
-        model = Ciudad
-        fields = '__all__'
 
 class TipoBancaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -164,10 +166,6 @@ class ObservacionSerializer(serializers.ModelSerializer):
         model = Observacion
         fields = '__all__'
 
-class TipoDireccionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = TipoDireccion
-        fields = '__all__'
 
 class DireccionSerializer(serializers.ModelSerializer):
     class Meta:

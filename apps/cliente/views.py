@@ -44,7 +44,10 @@ class cliente_search(APIView):
         consulta = TipoDocumento.objects.using('clientes').all()
         profesionesSerializer = TipoDocumentoSerializer(consulta, many = True)
         
-        print(profesionesSerializer.data[2])
+        print(consulta[:])
+        print(consulta[0])
+        print(consulta[1])
+        print(consulta[2])
         print(profesionesSerializer.data[2]["TIDO_CODIGO"])
         print("----------------------")
         print()

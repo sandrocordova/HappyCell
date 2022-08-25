@@ -40,12 +40,7 @@ class TipoAsesor(models.Model):
     class Meta:
         db_table = 'TIPO_ASESOR'
 
-class Pais(models.Model):
-    PAIS_CODIGO = models.CharField(max_length = 3, primary_key = True)
-    PAIS_DESCRIPCION = models.CharField(max_length = 40)
 
-    class Meta:
-        db_table = 'PAIS'
 
 class VehiculoLegal(models.Model):
     VELE_CODIGO = models.CharField(primary_key = True, max_length = 3)
@@ -92,7 +87,21 @@ class GrupoEconomico(models.Model):
 
     class Meta:
         db_table = "GRUPO_ECONOMICO"
+        
+class Pais(models.Model):
+    PAIS_CODIGO = models.PositiveIntegerField(primary_key = True)
+    PAIS_DESCRIPCION = models.CharField(max_length = 40)
 
+    class Meta:
+        db_table = 'PAIS'
+        
+class PaisCat(models.Model):
+    PAIS_CODIGO = models.PositiveIntegerField(primary_key = True)
+    PAIS_DESCRIPCION = models.CharField(max_length = 40)
+
+    class Meta:
+        db_table = 'pais'
+        
 class Zona(models.Model):
     ZONA_CODIGO = models.PositiveIntegerField(primary_key = True)
     PAIS_CODIGO = models.PositiveIntegerField()
@@ -100,6 +109,14 @@ class Zona(models.Model):
 
     class Meta:
         db_table = 'ZONA'
+        
+class ZonaCat(models.Model):
+    ZONA_CODIGO = models.PositiveIntegerField(primary_key = True)
+    PAIS_CODIGO = models.PositiveIntegerField()
+    ZONA_DESCRIPCION = models.CharField(max_length = 40)
+
+    class Meta:
+        db_table = 'zona'
 
 class Ciudad(models.Model):
     ZONA_CODIGO = models.ForeignKey(Zona, on_delete = cascade_delete, db_column = 'ZONA_CODIGO')
@@ -108,6 +125,14 @@ class Ciudad(models.Model):
 
     class Meta:
         db_table = 'CIUDAD'
+        
+class CiudadCat(models.Model):
+    ZONA_CODIGO = models.PositiveIntegerField()
+    CIUD_CODIGO = models.AutoField(primary_key = True)
+    CIUD_NOMBRE = models.CharField(max_length = 50)
+
+    class Meta:
+        db_table = 'ciudad'
 
 class TipoBanca(models.Model):
     TIBA_CODIGO = models.PositiveIntegerField(primary_key = True)

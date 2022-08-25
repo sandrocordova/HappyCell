@@ -1,7 +1,29 @@
 from rest_framework import serializers
 from apps.catalog.models import TipoDocumento, TipoEmpresa, TipoClase, TipoProyecto, Profesion, Nacionalidad, ActividadEconomica, TipoRol, Sexo, Vivienda, EstadoCivil, SituacionLaboral
+from apps.catalog.models import TipoDireccion, CiudadCat, ZonaCat, PaisCat
 
         #Catalogos
+class TipoDireccionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TipoDireccion
+        fields = '__all__'
+        
+class PaisSerializerCat(serializers.ModelSerializer):
+    class Meta:
+        model = PaisCat
+        fields = '__all__'
+        
+class ZonaSerializerCat(serializers.ModelSerializer):
+    class Meta:
+        model = ZonaCat
+        fields = '__all__'
+
+
+class CiudadSerializerCat(serializers.ModelSerializer):
+    class Meta:
+        model = CiudadCat
+        fields = '__all__'
+        
 class TipoDocumentoSerializer(serializers.ModelSerializer):
     class Meta:
         model = TipoDocumento
