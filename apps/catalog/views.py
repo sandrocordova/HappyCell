@@ -27,6 +27,9 @@ class catalog_api_views(APIView):
             catalog_list.append({'canton':profesionesSerializer.data})
         if 'parroquia' in catalog_id:
             consulta = Parroquia.objects.using('clientes').all()
+            for parroquia in consulta:
+                parroquia.PROV_CODIGO = int(parroquia.PROV_CODIGO)
+                parroquia.CANT_CODIGO = int(parroquia.CANT_CODIGO)
             profesionesSerializer = ParroquiaSerializer(consulta, many = True)
             catalog_list.append({'parroquia':profesionesSerializer.data})
         if 'tipo_telefono' in catalog_id:
