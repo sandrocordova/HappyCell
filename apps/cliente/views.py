@@ -48,33 +48,31 @@ class cliente_search(APIView):
     def post(self, request):
         clienteData = request.data['data']
         if cedula_is_ok(clienteData):
-            clienteChecking = Cliente.objects.using('clientes').filter(CLIE_IDENTIFICACION=clienteData).first()
-            serializer_cliente = ClienteSerializer(clienteChecking)
-            return Response(serializer_cliente.data, status=status.HTTP_200_OK)
-        else:
-            clienteChecking = Cliente.objects.using('clientes').filter(CLIE_NOMBRE__icontains=clienteData).all()
-            if clienteChecking:
-                for cliente in clienteChecking:
-                    catalog_list =[]
-                    if cliente.TICL_CODIGO == "N":
-                        catalog_list.append(cliente.TICL_CODIGO)
-                        catalog_list.append("Natural")
-                        cliente.TICL_CODIGO = catalog_list
-                    else:
-                        cliente.TICL_CODIGO = "Juridico"
-                    if cliente.TIDO_CODIGO == "C":
-                        cliente.TIDO_CODIGO = "Cédula"
-                    elif cliente.TIDO_CODIGO == "P":
-                        cliente.TIDO_CODIGO = "Pasaporte"
-                    elif cliente.TIDO_CODIGO == "R":
-                        cliente.TIDO_CODIGO = "Ruc"
-                         
+            clienteChecking = Cliente.objects.using('clientes').filter(CLIE_IDENTIFICACION__contains=clienteData).first()
+            if serializer_cliente:
                 paginador = Paginator(clienteChecking, 1)
                 pagina = request.GET.get("page") or 1
                 clienteChecking = paginador.get_page(pagina)
-                pagina_actual = int(pagina)
-                pagina_total = list(range(1, clienteChecking.paginator.num_pages+1))
-                
+                pagina_actual = int(pagina)                
+                serializer_cliente = ClienteSerializer(clienteChecking, many=True)
+                json_response = {
+                    'status': True,
+                    'message': "Response exitoso",
+                    "pagina_actual": pagina_actual,
+                    "paginas": clienteChecking.paginator.num_pages,
+                    "cliente": serializer_cliente.data
+                }
+                return Response(serializer_cliente.data, status=status.HTTP_200_OK)
+            return Response("No se encontró un cliente con dicha Cédula, RUC o Pasaporte", status=status.HTTP_404_NOT_FOUND)
+        
+        
+        elif str_is_ok(clienteData):  
+            clienteChecking = Cliente.objects.using('clientes').filter(CLIE_NOMBRE__icontains=clienteData).all()
+            if clienteChecking:
+                paginador = Paginator(clienteChecking, 1)
+                pagina = request.GET.get("page") or 1
+                clienteChecking = paginador.get_page(pagina)
+                pagina_actual = int(pagina)                
                 serializer_cliente = ClienteSerializer(clienteChecking, many=True)
                 json_response = {
                     'status': True,
@@ -84,22 +82,21 @@ class cliente_search(APIView):
                     "cliente": serializer_cliente.data
                 }
                 return Response(json_response, status=status.HTTP_200_OK)
-            elif 2+2 == 0:
-                clienteChecking = Cliente.objects.using('clientes').filter(CLIE_IDENTIFICACION__contains=clienteData).all()
-                if clienteChecking:
-                    serializer_cliente = ClienteSerializer(clienteChecking, many=True)
-                    return Response(serializer_cliente.data, status=status.HTTP_200_OK)
-                
-            return Response("Cliente no encontrado", status=status.HTTP_400_BAD_REQUEST)
+            return Response("No se encontró un cliente con nombre: "+clienteData, status=status.HTTP_404_NOT_FOUND)              
+        return Response("Información insuficiente para buscar un cliente", status=status.HTTP_400_BAD_REQUEST)
 
 
 def cedula_is_ok(cedula):
     if cedula.isdigit():
-        if len(cedula) >= 10:
+        if len(cedula) >= 5:
             return True
         return False
     return False
 
+def str_is_ok(cedula):
+    if len(cedula) >= 3:
+        return True
+    return False    
 
 @api_view(['GET'])
 def cliente_api_view(request):
