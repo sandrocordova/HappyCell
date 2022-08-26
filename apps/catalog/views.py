@@ -4,10 +4,10 @@ import json
 from rest_framework.response import Response
 from apps.catalog.models import CiudadCat, ZonaCat, PaisCat, TipoTelefono, Provincia, Canton, Parroquia, TipoVinculo, TipoObservacion, Profesion
 from apps.catalog.models import TipoDireccion, TipoEmpresa, TipoClase, TipoProyecto, Profesion, Nacionalidad, ActividadEconomica, TipoRol, Sexo, Vivienda, EstadoCivil, SituacionLaboral
-from apps.catalog.serializer import TipoDireccionSerializer, TipoEmpresaSerializer, TipoClaseSerializer, TipoProyectoSerializer, ProfesionesSerializer, ProfesionesSerializer, NacionalidadSerializer, ActiEconomicaSerializer, TipoRolSerializer, SexoSerializer, ViviendaSerializer, EstadoCivilSerializer, SituacionLaboralCivilSerializer
+from apps.catalog.serializer import TipoDireccionSerializer, TipoEmpresaSerializer, TipoClaseSerializer, TipoProyectoSerializer, ProfesionesSerializer, NacionalidadSerializer, ActiEconomicaSerializer, TipoRolSerializer, SexoSerializer, ViviendaSerializer, EstadoCivilSerializer, SituacionLaboralCivilSerializer
 from apps.catalog.serializer import CiudadSerializerCat, ZonaSerializerCat, PaisSerializerCat, TipoTelefonoSerializer, ProvinciaSerializer
 from apps.catalog.serializer import ProvinciaSerializer, CantonSerializer, ParroquiaSerializer, TipoVinculoSerializer, TipoObservacionSerializer
-from apps.catalog.serializer import ProfesionesSerializer
+
 
 #Catálogos
 class catalog_api_views(APIView):
@@ -18,10 +18,6 @@ class catalog_api_views(APIView):
             'status': True,
             'message': "Response exitoso"
             }
-        if 'profesion' in catalog_id:
-            consulta = Profesion.objects.using('clientes').all()
-            profesionesSerializer = ProfesionSerializer(consulta, many = True)
-            catalog_list.append({'profesion':profesionesSerializer.data})
         if 'tipo_observacion_cliente' in catalog_id:
             consulta = TipoObservacion.objects.using('clientes').all()
             profesionesSerializer = TipoObservacionSerializer(consulta, many = True)
