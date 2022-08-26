@@ -12,7 +12,8 @@ import {
     FormGroup,
     Label,
     Modal,
-    Form
+    Form,
+    Alert
 } from "reactstrap";
 import swal from 'sweetalert';
 import Loader from "react-loaders";
@@ -49,6 +50,10 @@ const Index = () => {
         CLIE_IDENTIFICACION: "2367894621",
         CLIE_NOMBRE_CORRESPONDENCIA: "Ratter Bee",
     });
+    // estados para realizar filtros en los selects
+    const [diereSel, setDiereSel] = useState("");
+    const [cantonFilter, setCantonFilter] = useState(null);
+    const [parroquiaFilter, setParroquiaFilter] = useState(null);
 
     // Funcion que escucha los cambios en los formularios de los imputs tipo texto y date
     const handleChange = name => event => {
@@ -57,6 +62,9 @@ const Index = () => {
 
     // Funcion que escucha los cambios en los formularios de los selects
     const handleSelectChange = name => event => {
+        if (name === "TIDE_CODIGO") setDiereSel(event.label)
+        if (name === "prov_codigo") setCantonFilter(cantonLista?.filter(item => item.PROV_CODIGO === event.value))
+        if (name === "cant_codigo") setParroquiaFilter(parroquiaList?.filter(item => item.CANT_CODIGO === event.value))
         setValues({ ...values, [name]: event.value });
     }
 
@@ -107,8 +115,9 @@ const Index = () => {
                 setError(res.error)
             } else {
                 res?.data?.forEach(cat => {
-                    if (cat.zona) setProvinciaList(cat.zona)
-                    if (cat.ciudad) setCantonLista(cat.ciudad)
+                    if (cat.provincia) setProvinciaList(cat.provincia)
+                    if (cat.canton) setCantonLista(cat.canton)
+                    if (cat.parroquia) setParroquiaList(cat.parroquia)
                     if (cat.tipo_direccion) setTipoDireccion(cat.tipo_direccion)
                 })
             }
@@ -120,6 +129,12 @@ const Index = () => {
         loadCatalogos();
     }, []);
 
+    // funcion que retorna la alerta de error
+    const showAlert = () => (
+        <Alert color="danger">
+            {error}
+        </Alert>
+    )
 
     return (
         <Fragment>
@@ -134,6 +149,8 @@ const Index = () => {
             />
 
             <Container fluid>
+
+                {error && showAlert()}
 
                 <ClientInfo clientCode={client?.CLIE_CODIGO} typeClient={"NATURAL"} typeIdentification={"CEDULA"} identification={client?.CLIE_IDENTIFICACION} nameClient={client?.CLIE_NOMBRE_CORRESPONDENCIA} className='bg-primary' onChange={handleChange} type={"Info"}>
 
@@ -154,36 +171,10 @@ const Index = () => {
                                 <Col md={8}>
                                     <FormGroup row>
                                         <Label for="adressType" sm={4}>Tipo de dirección:</Label>
-                                        <Col sm={4}>
+                                        <Col sm={6}>
                                             <Select
                                                 options={tipoDireccion?.map(item => ({ value: item.TIDE_CODIGO, label: item.TIDE_DESCRIPCION }))}
                                                 onChange={handleSelectChange("TIDE_CODIGO")}
-                                            />
-                                        </Col>
-                                    </FormGroup>
-                                </Col>
-                            </Row>
-                            <Row className="d-flex flex-column justify-content-center align-items-center">
-                                <Col md={8}>
-                                    <FormGroup row>
-                                        <Label for="city" sm={4}>Provincia:</Label>
-                                        <Col sm={4}>
-                                            <Select
-                                                options={provinciaList?.map(item => ({ value: item.ZONA_CODIGO, label: item.ZONA_DESCRIPCION }))}
-                                                onChange={handleSelectChange("prov_codigo")}
-                                            />
-                                        </Col>
-                                    </FormGroup>
-                                </Col>
-                            </Row>
-                            <Row className="d-flex flex-column justify-content-center align-items-center">
-                                <Col md={8}>
-                                    <FormGroup row>
-                                        <Label for="city" sm={4}>Cantón:</Label>
-                                        <Col sm={4}>
-                                            <Select
-                                                options={cantonLista?.map(item => ({ value: item.CIUD_CODIGO, label: item.CIUD_NOMBRE }))}
-                                                onChange={handleSelectChange("cant_codigo")}
                                             />
                                         </Col>
                                     </FormGroup>
@@ -199,6 +190,47 @@ const Index = () => {
                                     </FormGroup>
                                 </Col>
                             </Row>
+                            {diereSel !== "CORREO ELECTRONICO" && <>
+                                <Row className="d-flex flex-column justify-content-center align-items-center">
+                                    <Col md={8}>
+                                        <FormGroup row>
+                                            <Label for="city" sm={4}>Provincia:</Label>
+                                            <Col sm={6}>
+                                                <Select
+                                                    options={provinciaList?.map(item => ({ value: item.PROV_CODIGO, label: item.PROV_NOMBRE }))}
+                                                    onChange={handleSelectChange("prov_codigo")}
+                                                />
+                                            </Col>
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                                <Row className="d-flex flex-column justify-content-center align-items-center">
+                                    <Col md={8}>
+                                        <FormGroup row>
+                                            <Label for="city" sm={4}>Cantón:</Label>
+                                            <Col sm={6}>
+                                                <Select
+                                                    options={cantonFilter?.map(item => ({ value: item.CANT_CODIGO, label: item.CANT_NOMBRE }))}
+                                                    onChange={handleSelectChange("cant_codigo")}
+                                                />
+                                            </Col>
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                                <Row className="d-flex flex-column justify-content-center align-items-center">
+                                    <Col md={8}>
+                                        <FormGroup row>
+                                            <Label for="city" sm={4}>Parroquia:</Label>
+                                            <Col sm={6}>
+                                                <Select
+                                                    options={parroquiaFilter?.map(item => ({ value: item.PARR_CODIGO, label: item.PARR_NOMBRE }))}
+                                                    onChange={handleSelectChange("parr_codigo")}
+                                                />
+                                            </Col>
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                            </>}
                             <Row className="d-flex flex-column justify-content-center align-items-center">
                                 <div className="d-flex align-items-center">
                                     <div className="mx-auto">

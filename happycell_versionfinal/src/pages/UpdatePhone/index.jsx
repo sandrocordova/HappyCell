@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import PageTitle from "../../Layout/AppMain/PageTitle";
 import Select from "react-select";
 import {
@@ -12,15 +12,18 @@ import {
     FormGroup,
     Label,
     Modal,
-    Form
+    Form,
+    Alert
 } from "reactstrap";
 import swal from 'sweetalert';
 import Loader from "react-loaders";
 import ClientInfo from '../../components/ClientInfo';
-import { updateTelefono } from '../../Api/apicall_cliente';
+import { getCatalogos, updateTelefono } from '../../Api/apicall_cliente';
 
 const Index = () => {
 
+    // estados de las listas
+    const [tipoTelefonoList, setTipoTelefonoList] = useState(null);
     // estados de utilidad
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
@@ -95,6 +98,31 @@ const Index = () => {
             });
     }
 
+    // Funcionalidad para obtener los datos de catalogos desde la API
+    const loadCatalogos = () => {
+        getCatalogos().then(res => {
+            if (res.error) {
+                setError(res.error)
+            } else {
+                res?.data?.forEach(cat => {
+                    if (cat.tipo_telefono) setTipoTelefonoList(cat.tipo_telefono)
+                })
+            }
+        })
+    }
+
+    // Funcion inicializadora
+    useEffect(() => {
+        loadCatalogos();
+    }, []);
+
+    // funcion que retorna la alerta de error
+    const showAlert = () => (
+        <Alert color="danger">
+            {error}
+        </Alert>
+    )
+
     return (
         <Fragment>
 
@@ -109,6 +137,8 @@ const Index = () => {
 
             <Container fluid>
 
+                {error && showAlert()}
+
                 <ClientInfo clientCode={client?.CLIE_CODIGO} typeClient={"NATURAL"} typeIdentification={"CEDULA"} identification={client?.CLIE_IDENTIFICACION} nameClient={client?.CLIE_NOMBRE_CORRESPONDENCIA} className='bg-primary' onChange={handleChange} type={"Info"}>
                     <Row>
                         <Col md={2}>
@@ -119,8 +149,8 @@ const Index = () => {
                         </Col>
                         <Col md={2}>
                             <FormGroup>
-                                <Label for="city">Ciudad:</Label>
-                                <Input type="text" name="city" id="city" value={"QUITO"} disabled />
+                                <Label for="city">Tipo de direccion:</Label>
+                                <Input type="text" name="city" id="city" value={""} disabled />
                             </FormGroup>
                         </Col>
                         <Col md={8}>
@@ -141,8 +171,8 @@ const Index = () => {
                                         <Label for="phoneType" sm={4}>Tipo teléfono:</Label>
                                         <Col sm={8}>
                                             <Select
-                                                defaultValue={{ value: 2, label: "CELULAR" }}
-                                                options={[{ value: 2, label: "CELULAR" }]}
+                                                options={tipoTelefonoList?.map(item => ({ value: item.TITE_CODIGO, label: item.TITE_DESCRIPCION }))}
+                                                onChange={handleSelectChange("TIDE_CODIGO")}
                                             />
                                         </Col>
                                     </FormGroup>

@@ -84,6 +84,7 @@ export const updateClienteNatural = async (clientCodigo, values) => {
             CLNA_INICIO_INGRESOS,
         }
     }
+
     try {
         const response = await fetch(`${API}/cliente/cliente`, {
             method: 'PUT',
@@ -168,14 +169,53 @@ export const updateTelefono = async (data) => {
     }
 }
 /* 
-    Funcion para actializar un cliente Juridico
+    Funcion para actializar una direccion
     * Se deve de enviar el token de autenticacion para validar al usuario
     TODO: implementar el token en el header del fetch. Utilizar Authorization: <tipo> <credenciales>
 */
 export const updateDirecciones = async (data) => {
-    console.log(data)
     try {
         const response = await fetch(`${API}/api-dir/v1/direccion`, {
+            method: 'PUT',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        return await response.json();
+    } catch (err) {
+        console.log(err);
+    }
+}
+/* 
+    Funcion para actializar una observacion
+    * Se deve de enviar el token de autenticacion para validar al usuario
+    TODO: implementar el token en el header del fetch. Utilizar Authorization: <tipo> <credenciales>
+*/
+export const updateObservacion = async (data) => {
+    try {
+        const response = await fetch(`${API}/api-obs/v1/observacion`, {
+            method: 'PUT',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        return await response.json();
+    } catch (err) {
+        console.log(err);
+    }
+}
+/* 
+    Funcion para actializar un vinculos
+    * Se deve de enviar el token de autenticacion para validar al usuario
+    TODO: implementar el token en el header del fetch. Utilizar Authorization: <tipo> <credenciales>
+*/
+export const updateVinculos = async (data) => {
+    try {
+        const response = await fetch(`${API}/api-vin/v1/vinculo`, {
             method: 'PUT',
             headers: {
                 Accept: 'application/json',
