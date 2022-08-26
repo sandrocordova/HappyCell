@@ -4,38 +4,13 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 from apps.apihc.functions import actualizarCliente, actualizarClienteJuridico, actualizarClienteNatural, guardarAsesorCliente, guardarCliente, guardarClienteJuridico, guardarClienteNatural, validarCliente, validarClienteAsesor, validarClienteJuridico, validarClienteNatural
-from apps.apihc.models import ClienteAsesor, ClienteJuridico, ClienteNatural, Secuencia, Direccion
+from apps.apihc.models import ClienteAsesor, ClienteJuridico, ClienteNatural, Secuencia
+from apps.apihc.serializers import ClienteNaturalSerializer, ClienteJuridicoSerializer
 from apps.cliente.models import Cliente
 from apps.catalog.models import TipoDocumento
 from apps.catalog.serializer import TipoDocumentoSerializer
-from apps.apihc.models import Direccion, Telefono
-from apps.apihc.serializers import DireccionSerializer, TelefonoSerializer, ClienteNaturalSerializer, ClienteJuridicoSerializer
-
 from apps.cliente.serializer import ClienteSerializer
 from django.core.paginator import Paginator
-
-class direccion_search(APIView):
-    def post(self, request):
-        clienteId = request.data['clie_codigo']
-        direccionRetornada = Direccion.objects.using(
-            'clientes').filter(CLIE_CODIGO=clienteId).all()
-        if direccionRetornada:
-            serializer_cliente = DireccionSerializer(direccionRetornada, many=True)
-            return Response(serializer_cliente.data, status=status.HTTP_200_OK)
-        return Response("El cliente no tiene direcciones registradas", status=status.HTTP_400_BAD_REQUEST)
-
-
-class telefono_search(APIView):
-    def post(self, request):
-        clienteId = request.data['clie_codigo']
-        direccionId = request.data['dire_codigo']
-        telefonoRetornado = Telefono.objects.using('clientes').filter(
-            DIRE_CODIGO=direccionId, CLIE_CODIGO=clienteId).all()
-        if telefonoRetornado:
-            serializer_cliente = TelefonoSerializer(telefonoRetornado, many=True)
-            return Response(serializer_cliente.data, status=status.HTTP_200_OK)
-        return Response("La dirección del cliente no tiene un teléfono relacionado", status=status.HTTP_400_BAD_REQUEST)
-
 
 class cliente_search(APIView):
     def get(self, request):

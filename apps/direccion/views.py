@@ -3,7 +3,29 @@ from rest_framework.response import Response # Manejo de Response HTTP
 from rest_framework import status
 from apps.apihc.functions import actualizarDireccion, actualizarTelefono, guardarDireccion, guardarTelefono, validarDireccion, validarTelefono
 from apps.apihc.models import Cliente, Direccion, Telefono # Manejo de Status
+from apps.apihc.serializers import DireccionSerializer, TelefonoSerializer
 
+class direccionSearch(APIView):
+    def post(self, request):
+        clienteId = request.data['clie_codigo']
+        direccionRetornada = Direccion.objects.using(
+            'clientes').filter(CLIE_CODIGO=clienteId).all()
+        if direccionRetornada:
+            serializer_cliente = DireccionSerializer(direccionRetornada, many=True)
+            return Response(serializer_cliente.data, status=status.HTTP_200_OK)
+        return Response("El cliente no tiene direcciones registradas", status=status.HTTP_400_BAD_REQUEST)
+
+class telefonoSearch(APIView):
+    def post(self, request):
+        clienteId = request.data['clie_codigo']
+        direccionId = request.data['dire_codigo']
+        telefonoRetornado = Telefono.objects.using('clientes').filter(
+            DIRE_CODIGO=direccionId, CLIE_CODIGO=clienteId).all()
+        if telefonoRetornado:
+            serializer_cliente = TelefonoSerializer(telefonoRetornado, many=True)
+            return Response(serializer_cliente.data, status=status.HTTP_200_OK)
+        return Response("La dirección del cliente no tiene un teléfono relacionado", status=status.HTTP_400_BAD_REQUEST)
+    
 class DireccionView(APIView):
     def post(self, request):
         data = request.data
