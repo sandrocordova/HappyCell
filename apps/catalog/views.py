@@ -2,20 +2,24 @@ from rest_framework.views import APIView
 from rest_framework import status
 import json
 from rest_framework.response import Response
-from apps.catalog.models import CiudadCat, ZonaCat, PaisCat, TipoTelefono
+from apps.catalog.models import CiudadCat, ZonaCat, PaisCat, TipoTelefono, Provincia
 from apps.catalog.models import TipoDireccion, TipoEmpresa, TipoClase, TipoProyecto, Profesion, Nacionalidad, ActividadEconomica, TipoRol, Sexo, Vivienda, EstadoCivil, SituacionLaboral
 from apps.catalog.serializer import TipoDireccionSerializer, TipoEmpresaSerializer, TipoClaseSerializer, TipoProyectoSerializer, ProfesionesSerializer, ProfesionesSerializer, NacionalidadSerializer, ActiEconomicaSerializer, TipoRolSerializer, SexoSerializer, ViviendaSerializer, EstadoCivilSerializer, SituacionLaboralCivilSerializer
-from apps.catalog.serializer import CiudadSerializerCat, ZonaSerializerCat, PaisSerializerCat, TipoTelefonoSerializer
+from apps.catalog.serializer import CiudadSerializerCat, ZonaSerializerCat, PaisSerializerCat, TipoTelefonoSerializer, ProvinciaSerializer
 
 #Catálogos
 class catalog_api_views(APIView):
     def get(self, request):
-        catalog_id = ['tipo_telefono','pais','zona','ciudad','tipo_direccion','tipo_empresa','tipo_clase','tipo_proyecto','profesion', 'nacionalidad', 'actividad_economica', 'tipo_rol','sexo', 'vivienda', 'estado_civil', 'situacion_laboral']
+        catalog_id = ['provincia','tipo_telefono','pais','zona','ciudad','tipo_direccion','tipo_empresa','tipo_clase','tipo_proyecto','profesion', 'nacionalidad', 'actividad_economica', 'tipo_rol','sexo', 'vivienda', 'estado_civil', 'situacion_laboral']
         catalog_list =[]
         json_response = {
             'status': True,
             'message': "Response exitoso"
             }
+        if 'provincia' in catalog_id:
+            consulta = Provincia.objects.using('clientes').all()
+            profesionesSerializer = ProvinciaSerializer(consulta, many = True)
+            catalog_list.append({'provincia':profesionesSerializer.data})
         if 'tipo_telefono' in catalog_id:
             consulta = TipoTelefono.objects.using('clientes').all()
             profesionesSerializer = TipoTelefonoSerializer(consulta, many = True)
