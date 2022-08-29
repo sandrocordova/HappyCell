@@ -36,7 +36,7 @@ const Index = ({ match }) => {
                         <Route path={`${match.url}/update-obser`} component={UpdateObservation} />
                         <Route path={`${match.url}/update-bond`} component={UpdateFamilyBond} />
                     </div>
-                    <AppFooter />
+                    {/* <AppFooter /> */}
                 </div>
             </div>
         </Fragment>

@@ -3,17 +3,17 @@ import React, { Suspense, lazy, Fragment } from "react";
 import Loader from "react-loaders";
 import Dashboard from "../../pages/Dashboard";
 import { ToastContainer } from "react-toastify";
-import Clients from "../../pages/Clients";
-const UserPages = lazy(() => import("../../DemoPages/UserPages"));
-const Applications = lazy(() => import("../../DemoPages/Applications"));
-const Dashboards = lazy(() => import("../../DemoPages/Dashboards"));
+const Clients = lazy(() => import("../../pages/Clients"));
+// const UserPages = lazy(() => import("../../DemoPages/UserPages"));
+// const Applications = lazy(() => import("../../DemoPages/Applications"));
+// const Dashboards = lazy(() => import("../../DemoPages/Dashboards"));
 
-const Widgets = lazy(() => import("../../DemoPages/Widgets"));
-const Elements = lazy(() => import("../../DemoPages/Elements"));
-const Components = lazy(() => import("../../DemoPages/Components"));
-const Charts = lazy(() => import("../../DemoPages/Charts"));
-const Forms = lazy(() => import("../../DemoPages/Forms"));
-const Tables = lazy(() => import("../../DemoPages/Tables"));
+// const Widgets = lazy(() => import("../../DemoPages/Widgets"));
+// const Elements = lazy(() => import("../../DemoPages/Elements"));
+// const Components = lazy(() => import("../../DemoPages/Components"));
+// const Charts = lazy(() => import("../../DemoPages/Charts"));
+// const Forms = lazy(() => import("../../DemoPages/Forms"));
+// const Tables = lazy(() => import("../../DemoPages/Tables"));
 
 
 const AppMain = () => {
@@ -41,7 +41,7 @@ const AppMain = () => {
                 <div className="loader-container">
                     <div className="loader-container-inner">
                         <div className="text-center">
-                            <Loader type="ball-grid-cy"/>
+                            <Loader type="ball-grid-cy" />
                         </div>
                         <h6 className="mt-3">
                             Please wait while we load all the Dashboards examples
@@ -50,14 +50,14 @@ const AppMain = () => {
                     </div>
                 </div>
             }>
-                <Route path="/dashboard" component={Dashboard}/>
+                <Route path="/dashboard" component={Dashboard} />
             </Suspense>
 
 
             <Route exact path="/" render={() => (
-                <Redirect to="/dashboard"/>
-            )}/>
-            <ToastContainer/>
+                <Redirect to="/dashboard" />
+            )} />
+            <ToastContainer />
         </Fragment>
     )
 };
