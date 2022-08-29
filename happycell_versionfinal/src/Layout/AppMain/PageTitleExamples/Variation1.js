@@ -21,13 +21,13 @@ export default class TitleComponent1 extends Component {
   }
 
   notify22 = () =>
-    (this.toastId = toast("You can add whatever element in this section.", {
-      transition: Slide,
-      closeButton: true,
-      autoClose: 5000,
-      position: "bottom-center",
-      type: "default",
-    }));
+  (this.toastId = toast("You can add whatever element in this section.", {
+    transition: Slide,
+    closeButton: true,
+    autoClose: 5000,
+    position: "bottom-center",
+    type: "default",
+  }));
 
   render() {
     return (

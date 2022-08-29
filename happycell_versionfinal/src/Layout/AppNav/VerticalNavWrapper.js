@@ -1,49 +1,42 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
 import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import MetisMenu from "react-metismenu";
-import { setEnableMobileMenu } from "../../reducers/ThemeOptions";
+import { setEnableMobileMenu } from '../../features/themeOptions/themeOptions';
 import {
     DashboardNav,
     ClientNav,
     DirNav,
 } from "./NavItems";
 
-class Nav extends Component {
-    state = {};
+const Nav = () => {
 
-    toggleMobileSidebar = () => {
-        let { enableMobileMenu, setEnableMobileMenu } = this.props;
-        setEnableMobileMenu(!enableMobileMenu);
+    const enableMobileMenu = useSelector((state) => state.themeOptions.enableMobileMenu)
+
+    const dispatch = useDispatch()
+
+    const toggleMobileSidebar = () => {
+        dispatch(setEnableMobileMenu(!enableMobileMenu))
     };
 
-    render() {
-        return (
-            <Fragment>
-                <h5 className="app-sidebar__heading">Menu</h5>
-                <MetisMenu content={DashboardNav} onSelected={this.toggleMobileSidebar} activeLinkFromLocation
-                    className="vertical-nav-menu" iconNamePrefix="" classNameStateIcon="pe-7s-angle-down" />
+    return (
+        <Fragment>
+            <h5 className="app-sidebar__heading">Menu</h5>
+            <MetisMenu content={DashboardNav} onSelected={toggleMobileSidebar} activeLinkFromLocation
+                className="vertical-nav-menu" iconNamePrefix="" classNameStateIcon="pe-7s-angle-down" />
 
-                <h5 className="app-sidebar__heading">Clientes</h5>
-                <MetisMenu content={ClientNav} onSelected={this.toggleMobileSidebar} activeLinkFromLocation
-                    className="vertical-nav-menu" iconNamePrefix="" classNameStateIcon="pe-7s-angle-down" />
+            <h5 className="app-sidebar__heading">Clientes</h5>
+            <MetisMenu content={ClientNav} onSelected={toggleMobileSidebar} activeLinkFromLocation
+                className="vertical-nav-menu" iconNamePrefix="" classNameStateIcon="pe-7s-angle-down" />
 
-                <h5 className="app-sidebar__heading">Direcciones</h5>
-                <MetisMenu content={DirNav} onSelected={this.toggleMobileSidebar} activeLinkFromLocation
-                    className="vertical-nav-menu" iconNamePrefix="" classNameStateIcon="pe-7s-angle-down" />
-            </Fragment>
-        );
-    }
-
-    isPathActive(path) {
-        return this.props.location.pathname.startsWith(path);
-    }
+            <h5 className="app-sidebar__heading">Direcciones</h5>
+            <MetisMenu content={DirNav} onSelected={toggleMobileSidebar} activeLinkFromLocation
+                className="vertical-nav-menu" iconNamePrefix="" classNameStateIcon="pe-7s-angle-down" />
+        </Fragment>
+    );
 }
-const mapStateToProps = (state) => ({
-    enableMobileMenu: state.ThemeOptions.enableMobileMenu,
-});
 
-const mapDispatchToProps = (dispatch) => ({
-    setEnableMobileMenu: (enable) => dispatch(setEnableMobileMenu(enable)),
-});
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Nav));
+// isPathActive(path) {
+//     return this.props.location.pathname.startsWith(path);
+// }
+export default withRouter(Nav);
