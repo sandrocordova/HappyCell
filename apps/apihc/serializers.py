@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from apps.catalog.models import Agencia, Banco, Ciudad, CuentaBalance, GrupoEconomico, Moneda, Nacionalidad, Pais, Periocidad, SubtipoEmpresa, TipoAgencia, TipoAsesor, TipoBanca, TipoCliente, TipoCuenta, TipoCuentaBalance, TipoDireccion, TipoDocumento, TipoEmpresa, TipoObservacion, TipoTelefono, VehiculoLegal, Zona, ActividadEconomica, Profesion, NivelInstruccion, Sexo, EstadoCivil, Vivienda, SituacionLaboral
-from .models import Asesor, BalanceCliente, Cliente, ClienteAsesor, ClienteJuridico, ClienteNatural, CuentaBancariaCliente, Direccion, Empresa, Observacion, Telefono, Usuario
+from .models import Vinculo, Asesor, BalanceCliente, Cliente, ClienteAsesor, ClienteJuridico, ClienteNatural, CuentaBancariaCliente, Direccion, Empresa, Observacion, Telefono, Usuario, Vinculo
 from apps.catalog.serializer import TipoEmpresaSerializer
 
 class UsuarioSerializer(serializers.ModelSerializer):
@@ -84,11 +84,14 @@ class EmpresaSerializer(serializers.ModelSerializer):
         model = Empresa
         fields = '__all__'
 
-
-
 class TipoBancaSerializer(serializers.ModelSerializer):
     class Meta:
         model = TipoBanca
+        fields = '__all__'
+        
+class VinculoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Vinculo
         fields = '__all__'
 
 class TipoAgenciaSerializer(serializers.ModelSerializer):

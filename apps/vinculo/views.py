@@ -1,9 +1,13 @@
+from ast import Index
+from asyncio.windows_events import NULL
 import datetime
+from multiprocessing.sharedctypes import Value
 from rest_framework.views import APIView # Procesamiento de Views
 from rest_framework.response import Response # Manejo de Response HTTP
 from rest_framework import status # Manejo de Status
 from apps.apihc.functions import actualizarVinculo, guardarVinculo, validarVinculo
 from apps.apihc.models import Cliente, Vinculo
+from apps.apihc.serializers import VinculoSerializer
 
 class VinculoView(APIView):
     def post(self, request):
@@ -71,3 +75,41 @@ class VinculoView(APIView):
                 success += 1
 
         return Response({"status": 200, "message": f"Se actualizaron {success} de {len(vinculos)} Vínculos del Cliente {clie_codigo}"}, status = status.HTTP_200_OK)
+
+
+class vinculoSearch(APIView):
+    def post(self, request):
+        clienteId = request.data['clie_codigo']
+        vinculosRetornados = Vinculo.objects.using('clientes').filter(CLIE_CODIGO=clienteId).all()
+        vinculos = []
+        if vinculosRetornados:
+            for vinculo in vinculosRetornados:
+                if not vinculos:
+                    vinculos.append(vinculo)
+                    print("AGREGO ")
+                else:
+                #elif (list_contains(vinculos,vinculo.VINC_CODIGO, vinculo.TIVI_CODIGO)):
+                    flag = True
+                    for item in vinculos:
+                        if int(item.TIVI_CODIGO) == int(vinculo.TIVI_CODIGO):
+                            flag = False
+                            if int(vinculo.VINC_CODIGO) >= int(item.VINC_CODIGO):
+                                vinculos.remove(item)
+                                vinculos.append(vinculo)
+                                break
+                    if flag: vinculos.append(vinculo)
+                    
+                    
+            serializer_cliente = VinculoSerializer(vinculos, many=True)
+            return Response(serializer_cliente.data)
+        return Response("El cliente no tiene vinculos registrados", status=status.HTTP_400_BAD_REQUEST)
+
+def list_contains(arreglo,clienteCod, vinculoCod):
+    flag = False
+    for item in arreglo:
+        if int(item.TIVI_CODIGO) == int(vinculoCod):
+            if int(clienteCod) >= int(item.VINC_CODIGO):
+                return True
+            else: flag = True
+    if flag: return False
+    else: return True

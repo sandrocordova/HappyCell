@@ -19,6 +19,8 @@ class cliente_search(APIView):
         consulta = TipoDocumento.objects.using('clientes').all()
         profesionesSerializer = TipoDocumentoSerializer(consulta, many = True)
         
+        print(consulta)
+        print("---------------------------------------------")
         print(consulta[:])
         print(consulta[0])
         print(consulta[1])
@@ -69,7 +71,7 @@ class cliente_search(APIView):
         elif str_is_ok(clienteData):  
             clienteChecking = Cliente.objects.using('clientes').filter(CLIE_NOMBRE__icontains=clienteData).all()
             if clienteChecking:
-                paginador = Paginator(clienteChecking, 1)
+                paginador = Paginator(clienteChecking, 10)
                 pagina = request.GET.get("page") or 1
                 clienteChecking = paginador.get_page(pagina)
                 pagina_actual = int(pagina)                

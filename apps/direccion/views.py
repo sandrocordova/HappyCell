@@ -1,3 +1,8 @@
+from ast import Break, Delete, Index, Or, Return
+from asyncio.windows_events import NULL
+import json
+from os import remove
+from queue import Empty
 from rest_framework.views import APIView # Procesamiento de Views
 from rest_framework.response import Response # Manejo de Response HTTP
 from rest_framework import status
@@ -8,13 +13,22 @@ from apps.apihc.serializers import DireccionSerializer, TelefonoSerializer
 class direccionSearch(APIView):
     def post(self, request):
         clienteId = request.data['clie_codigo']
-        direccionRetornada = Direccion.objects.using(
-            'clientes').filter(CLIE_CODIGO=clienteId).all()
+        direccionRetornada = Direccion.objects.using('clientes').filter(CLIE_CODIGO=clienteId).all()
+        direcciones = []
         if direccionRetornada:
-            serializer_cliente = DireccionSerializer(direccionRetornada, many=True)
-            return Response(serializer_cliente.data, status=status.HTTP_200_OK)
+            for direccion in direccionRetornada:
+                if not direcciones or not list_contains(direcciones,direccion.TIDE_CODIGO):
+                    direcciones.append(direccion)
+            serializer_cliente = DireccionSerializer(direcciones, many=True)
+            return Response(serializer_cliente.data)
         return Response("El cliente no tiene direcciones registradas", status=status.HTTP_400_BAD_REQUEST)
 
+def list_contains(arreglo,objeto):
+    for item in arreglo:        
+        if item.TIDE_CODIGO == objeto:
+            return True
+    return False
+        
 class telefonoSearch(APIView):
     def post(self, request):
         clienteId = request.data['clie_codigo']
