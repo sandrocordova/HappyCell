@@ -86,30 +86,15 @@ class vinculoSearch(APIView):
             for vinculo in vinculosRetornados:
                 if not vinculos:
                     vinculos.append(vinculo)
-                    print("AGREGO ")
                 else:
-                #elif (list_contains(vinculos,vinculo.VINC_CODIGO, vinculo.TIVI_CODIGO)):
                     flag = True
-                    for item in vinculos:
+                    for index, item in enumerate(vinculos):
                         if int(item.TIVI_CODIGO) == int(vinculo.TIVI_CODIGO):
                             flag = False
                             if int(vinculo.VINC_CODIGO) >= int(item.VINC_CODIGO):
-                                vinculos.remove(item)
-                                vinculos.append(vinculo)
+                                vinculos[index]=vinculo
                                 break
                     if flag: vinculos.append(vinculo)
-                    
-                    
             serializer_cliente = VinculoSerializer(vinculos, many=True)
             return Response(serializer_cliente.data)
         return Response("El cliente no tiene vinculos registrados", status=status.HTTP_400_BAD_REQUEST)
-
-def list_contains(arreglo,clienteCod, vinculoCod):
-    flag = False
-    for item in arreglo:
-        if int(item.TIVI_CODIGO) == int(vinculoCod):
-            if int(clienteCod) >= int(item.VINC_CODIGO):
-                return True
-            else: flag = True
-    if flag: return False
-    else: return True
