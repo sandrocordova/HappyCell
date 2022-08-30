@@ -44,7 +44,7 @@ function Dashboard() {
                         </div>
 
                     </div>
-                    <AppFooter />
+                    {/* <AppFooter /> */}
                 </div>
             </div>
         </Fragment>

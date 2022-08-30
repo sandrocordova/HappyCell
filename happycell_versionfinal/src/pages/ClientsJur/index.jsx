@@ -12,59 +12,42 @@ import {
     Label,
     Modal,
     Form,
-    Alert
+    Alert,
 } from "reactstrap";
+import PageTitle from "../../Layout/AppMain/PageTitle";
 import swal from 'sweetalert';
 import Loader from "react-loaders";
-import PageTitle from "../../Layout/AppMain/PageTitle";
 import ClientInfo from '../../components/ClientInfo';
 import ClientMoreInfo from '../../components/ClientMoreInfo';
-import { getCatalogos, updateClienteNatural } from '../../Api/apicall_cliente';
-
-/* import { catalogo } from './data';
-import { clientNatural } from './data'; */
+import { getCatalogos, updateClienteJuridico } from '../../Api/apicall_cliente';
 
 const Index = () => {
 
     // statados para almacenar las listas de los catalogos
-    const [tipoRolList, setTipoRolList] = useState(null);
-    const [tipoProyectoList, setTipoProyectoList] = useState(null);
-    const [tipoClaseList, setTipoClaseList] = useState(null);
-    const [profesionList, setProfesionList] = useState(null);
     const [nacionalidadList, setNacionalidadList] = useState(null);
+    const [tipoClaseList, setTipoClaseList] = useState(null);
     const [actividadEcList, setActividadEcList] = useState(null);
-    const [sexoList, setSexoList] = useState(null);
-    const [viviendaList, setViviendaList] = useState(null);
-    const [estadoCivilList, setEstadoCivilList] = useState(null);
-    const [sitLaboralList, setSitLaboralList] = useState(null);
+    const [tipoProyectoList, setTipoProyectoList] = useState(null);
+    const [tipoRolList, setTipoRolList] = useState(null);
+    const [tipoEmpresa, setTipoEmpresa] = useState(null);
     // estados de utilidad
-    const [isOpen, setIsOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
     // estado para guardar los datos del formulario
     const [values, setValues] = useState({
-        NACI_CODIGO: '',
-        ACTI_CODIGO: '',
         CLIE_NOMBRE_CORRESPONDENCIA: "Ratter Bee",
+
+        NACI_CODIGO: '',
+        CLIE_NOMBRE: '',
         TIDO_CODIGO: '',
+        ACTI_CODIGO: '',
         CLIE_TIPO_PROYECTO: '',
 
-        SEXO_CODIGO: '',
-        PROF_CODIGO: '',
-        ESCI_CODIGO: '',
-        CLNA_NOMBRE1: 'Jonnathan',
-        CLNA_NOMBRE2: 'Damian',
-        CLNA_APELLIDO1: 'Espinoza',
-        CLNA_APELLIDO2: 'Erraez',
-        CLNA_FECHA_NACIMIENTO: '',
-        CLNA_LUGAR_NACIMIENTO: '',
-        CLIE_TIPO_VIVIENDA: '',
-        CLIE_SITUACION_LABORAL: '',
-        CLNA_EXPIRA_PASAPORTE: '',
-        CLNA_INICIO_RESIDENCIA: '',
-        CLNA_NUM_CARGAS: '',
-        CLNA_EMPRESA_TRABAJA: '',
-        CLNA_INICIO_INGRESOS: '',
+        TIEM_CODIGO: '',
+        CLJU_RAZON_SOCIAL: '',
+        CLJU_NOMBRE_PUBLICITARIO: ''
+
     });
     /**
      * Estado para almacenar los datos del cliente
@@ -109,7 +92,7 @@ const Index = () => {
                 if (value) {
                     setError(false)
                     setLoading(true)
-                    updateClienteNatural(client.CLIE_CODIGO, values)
+                    updateClienteJuridico(client.CLIE_CODIGO, values)
                         .then(data => {
                             setLoading(false)
                             if (data.status === 400 || data.status === 409) {
@@ -141,13 +124,8 @@ const Index = () => {
                 setError(res.error)
             } else {
                 res?.data?.forEach(cat => {
-                    if (cat.profesion) setProfesionList(cat.profesion)
                     if (cat.nacionalidad) setNacionalidadList(cat.nacionalidad)
                     if (cat.actividad_economica) setActividadEcList(cat.actividad_economica)
-                    if (cat.sexo) setSexoList(cat.sexo)
-                    if (cat.vivienda) setViviendaList(cat.vivienda)
-                    if (cat.estado_civil) setEstadoCivilList(cat.estado_civil)
-                    if (cat.situacion_laboral) setSitLaboralList(cat.situacion_laboral)
                     if (cat.tipo_clase) setTipoClaseList(cat.tipo_clase)
                     if (cat.tipo_proyecto) setTipoProyectoList(cat.tipo_proyecto)
                     if (cat.tipo_rol) setTipoRolList(cat.tipo_rol)
@@ -176,7 +154,7 @@ const Index = () => {
             </Modal>
 
             <PageTitle
-                heading="Mantenimiento de Cliente Natural"
+                heading="Mantenimiento de Cliente Jurídico"
                 icon="lnr-user icon-gradient bg-tempting-azure"
             />
 
@@ -185,10 +163,6 @@ const Index = () => {
                 {error && showAlert()}
 
                 <ClientInfo clientCode={client?.CLIE_CODIGO} typeClient={"NATURAL"} typeIdentification={"CEDULA"} identification={client?.CLIE_IDENTIFICACION} nameClient={values?.CLIE_NOMBRE_CORRESPONDENCIA} className='bg-primary' onChange={handleChange} />
-
-                {/* <div className="card no-shadow rm-border bg-transparent widget-chart text-start mb-1">
-                    Opciones
-                </div> */}
 
                 <Card className="mt-4 mb-4">
                     <CardBody>
@@ -208,12 +182,9 @@ const Index = () => {
                                 </Col>
                                 <Col md={4}>
                                     <FormGroup row>
-                                        <Label for="category" sm={4}>Categoría cliente:</Label>
+                                        <Label for="name" sm={4}>Nombre:</Label>
                                         <Col sm={8}>
-                                            <Select
-                                                options={tipoProyectoList?.map(item => ({ value: item.COD_TIPO_PROYECTO, label: item.DESC_TIPO_PROYECTO }))}
-                                                onChange={handleSelectChange("CLIE_TIPO_PROYECTO")}
-                                            />
+                                            <Input type="text" name="name" id="name" onChange={handleChange("CLIE_NOMBRE")} />
                                         </Col>
                                     </FormGroup>
                                 </Col>
@@ -237,6 +208,17 @@ const Index = () => {
                                             <Select
                                                 options={actividadEcList?.map(item => ({ value: item.ACTI_CODIGO, label: item.ACTI_DESCRIPCION }))}
                                                 onChange={handleSelectChange("ACTI_CODIGO")}
+                                            />
+                                        </Col>
+                                    </FormGroup>
+                                </Col>
+                                <Col md={4}>
+                                    <FormGroup row>
+                                        <Label for="categoryClient" sm={4}>Categoría cliente:</Label>
+                                        <Col sm={8}>
+                                            <Select
+                                                options={tipoProyectoList?.map(item => ({ value: item.COD_TIPO_PROYECTO, label: item.DESC_TIPO_PROYECTO }))}
+                                                onChange={handleSelectChange("CLIE_TIPO_PROYECTO")}
                                             />
                                         </Col>
                                     </FormGroup>
@@ -275,153 +257,79 @@ const Index = () => {
 
                             <Row className='divider'></Row>
 
-                            <Row >
-                                <Col md={3}>
+                            <Row>
+                                <Col md={4}>
                                     <FormGroup row>
-                                        <Label for="firstName" sm={4}>Primer nombre:</Label>
+                                        <Label for="typeCompany" sm={4}>Tipo empresa:</Label>
                                         <Col sm={8}>
-                                            <Input type="text" name="firstName" id="firstName" value={values.CLNA_NOMBRE1} onChange={handleChange('CLNA_NOMBRE1')} />
+                                            <Input type="select" id="typeCompany" name="typeCompany">
+                                                <option value="">Select</option>
+                                                {/* {catalogo[2]?.actividad_economica?.map((data, i) => (
+                                                <option key={i} value={data.acti_codigo}>
+                                                    {data.acti_descripcion}
+                                                </option>
+                                            ))} */}
+                                            </Input>
                                         </Col>
                                     </FormGroup>
                                 </Col>
-                                <Col md={3}>
+                                <Col md={4}>
                                     <FormGroup row>
-                                        <Label for="secondName" sm={4}>Segundo nombre:</Label>
+                                        <Label for="businessName" sm={4}>Razón social:</Label>
                                         <Col sm={8}>
-                                            <Input type="text" name="secondName" id="secondName" value={values.CLNA_NOMBRE2} onChange={handleChange('CLNA_NOMBRE2')} />
+                                            <Input type="text" name="businessName" id="businessName" />
                                         </Col>
                                     </FormGroup>
                                 </Col>
-                                <Col md={3}>
+                                <Col md={4}>
                                     <FormGroup row>
-                                        <Label for="firtsName" sm={4}>Primer apellido:</Label>
+                                        <Label for="advertisingName" sm={4}>Nombre publicitario:</Label>
                                         <Col sm={8}>
-                                            <Input type="text" name="firtsName" id="firtsName" value={values.CLNA_APELLIDO1} onChange={handleChange('CLNA_APELLIDO1')} />
-                                        </Col>
-                                    </FormGroup>
-                                </Col>
-                                <Col md={3}>
-                                    <FormGroup row>
-                                        <Label for="secondSurname" sm={4}>Segundo apellido:</Label>
-                                        <Col sm={8}>
-                                            <Input type="text" name="secondSurname" id="secondSurname" value={values.CLNA_APELLIDO2} onChange={handleChange('CLNA_APELLIDO2')} />
+                                            <Input type="text" name="advertisingName" id="advertisingName" />
                                         </Col>
                                     </FormGroup>
                                 </Col>
                             </Row>
                             <Row>
-                                <Col md={3}>
+                                <Col md={4}>
                                     <FormGroup row>
-                                        <Label for="sex" sm={4}>Sexo:</Label>
+                                        <Label for="subscribedCapital" sm={4}>Capital suscrito:</Label>
                                         <Col sm={8}>
-                                            <Select
-                                                options={sexoList?.map(item => ({ value: item.SEXO_CODIGO, label: item.SEXO_DESCRIPCION }))}
-                                                onChange={handleSelectChange("SEXO_CODIGO")}
-                                            />
+                                            <Input type="text" name="subscribedCapital" id="subscribedCapital" />
                                         </Col>
                                     </FormGroup>
                                 </Col>
-                                <Col md={3}>
+                                <Col md={4}>
                                     <FormGroup row>
-                                        <Label for="profession" sm={4}>Profesion:</Label>
+                                        <Label for="paidCapital" sm={4}>Capital pagado:</Label>
                                         <Col sm={8}>
-                                            <Select
-                                                options={profesionList?.map(item => ({ value: item.PROF_CODIGO, label: item.PROF_DESCRIPCION }))}
-                                                onChange={handleSelectChange("PROF_CODIGO")}
-                                            />
+                                            <Input type="text" name="paidCapital" id="paidCapital" />
                                         </Col>
                                     </FormGroup>
                                 </Col>
-                                <Col md={3}>
+                                <Col md={4}>
                                     <FormGroup row>
-                                        <Label for="maritalStatus" sm={4}>Estado civil:</Label>
+                                        <Label for="reservaLegal" sm={4}>Reserva legal:</Label>
                                         <Col sm={8}>
-                                            <Select
-                                                options={estadoCivilList?.map(item => ({ value: item.ESCI_CODIGO, label: item.ESCI_DESCRIPCION }))}
-                                                onChange={handleSelectChange("ESCI_CODIGO")}
-                                            />
-                                        </Col>
-                                    </FormGroup>
-                                </Col>
-                                <Col md={3}>
-                                    <FormGroup row>
-                                        <Label for="employmentSituation" sm={4}>Situación laboral:</Label>
-                                        <Col sm={8}>
-                                            <Select
-                                                options={sitLaboralList?.map(item => ({ value: item.SITL_CODIGO, label: item.SITL_DESCRIPCION }))}
-                                                onChange={handleSelectChange("CLIE_SITUACION_LABORAL")}
-                                            />
+                                            <Input type="text" name="reservaLegal" id="reservaLegal" />
                                         </Col>
                                     </FormGroup>
                                 </Col>
                             </Row>
                             <Row>
-                                <Col md={3}>
+                                <Col md={4}>
                                     <FormGroup row>
-                                        <Label for="typeHousing" sm={4}>Tipo de vivienda:</Label>
+                                        <Label for="economicGroup" sm={4}>Grupo económico:</Label>
                                         <Col sm={8}>
-                                            <Select
-                                                options={viviendaList?.map(item => ({ value: item.VIVI_CODIGO, label: item.VIVI_DESCRIPCION }))}
-                                                onChange={handleSelectChange("CLIE_TIPO_VIVIENDA")}
-                                            />
+                                            <Input type="text" name="economicGroup" id="economicGroup" />
                                         </Col>
                                     </FormGroup>
                                 </Col>
-                                <Col md={3}>
+                                <Col md={5}>
                                     <FormGroup row>
-                                        <Label for="placeBirth" sm={4}>Lugar de nacimiento:</Label>
-                                        <Col sm={8}>
-                                            <Input type="text" name="placeBirth" id="placeBirth" onChange={handleChange('CLNA_LUGAR_NACIMIENTO')} />
-                                        </Col>
-                                    </FormGroup>
-                                </Col>
-                                <Col md={3}>
-                                    <FormGroup row>
-                                        <Label for="numberLoads" sm={4}>Número de cargas:</Label>
-                                        <Col sm={8}>
-                                            <Input type="number" name="numberLoads" id="numberLoads" onChange={handleChange("CLNA_NUM_CARGAS")} min={0} />
-                                        </Col>
-                                    </FormGroup>
-                                </Col>
-                                <Col md={3}>
-                                    <FormGroup row>
-                                        <Label for="dateBirth" sm={4}>Fecha nacimiento:</Label>
-                                        <Col sm={8}>
-                                            <Input type="date" name="dateBirth" id="dateBirth" onChange={handleChange('CLNA_FECHA_NACIMIENTO')} />
-                                        </Col>
-                                    </FormGroup>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col md={3}>
-                                    <FormGroup row>
-                                        <Label for="workCompany" sm={4}>Empresa trabajo:</Label>
-                                        <Col sm={8}>
-                                            <Input type="text" name="workCompany" id="workCompany" onChange={handleChange("CLNA_EMPRESA_TRABAJA")} />
-                                        </Col>
-                                    </FormGroup>
-                                </Col>
-                                <Col md={3}>
-                                    <FormGroup row>
-                                        <Label for="passportExp" sm={4}>Exp. pasaporte:</Label>
-                                        <Col sm={8}>
-                                            <Input type="date" name="passportExp" id="passportExp" onChange={handleChange("CLNA_EXPIRA_PASAPORTE")} />
-                                        </Col>
-                                    </FormGroup>
-                                </Col>
-                                <Col md={3}>
-                                    <FormGroup row>
-                                        <Label for="homeRevenues" sm={4}>Inicio ingresos:</Label>
-                                        <Col sm={8}>
-                                            <Input type="date" name="homeRevenues" id="homeRevenues" onChange={handleChange("CLNA_INICIO_INGRESOS")} />
-                                        </Col>
-                                    </FormGroup>
-                                </Col>
-                                <Col md={3}>
-                                    <FormGroup row>
-                                        <Label for="startResidency" sm={4}>Inicio recidencia:</Label>
-                                        <Col sm={8}>
-                                            <Input type="date" name="startResidency" id="startResidency" onChange={handleChange("CLNA_INICIO_RESIDENCIA")} />
+                                        <Label for="statutesDate" sm={6}>Fecha reforma estatutos:</Label>
+                                        <Col sm={6}>
+                                            <Input type="date" name="statutesDate" id="statutesDate" />
                                         </Col>
                                     </FormGroup>
                                 </Col>
