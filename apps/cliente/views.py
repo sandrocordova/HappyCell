@@ -50,9 +50,9 @@ class cliente_search(APIView):
     def post(self, request):
         clienteData = request.data['data']
         if cedula_is_ok(clienteData):
-            clienteChecking = Cliente.objects.using('clientes').filter(CLIE_IDENTIFICACION__contains=clienteData).first()
-            if serializer_cliente:
-                paginador = Paginator(clienteChecking, 1)
+            clienteChecking = Cliente.objects.using('clientes').filter(CLIE_IDENTIFICACION__contains=clienteData).all()
+            if clienteChecking:
+                paginador = Paginator(clienteChecking, 10)
                 pagina = request.GET.get("page") or 1
                 clienteChecking = paginador.get_page(pagina)
                 pagina_actual = int(pagina)                
@@ -64,7 +64,7 @@ class cliente_search(APIView):
                     "paginas": clienteChecking.paginator.num_pages,
                     "cliente": serializer_cliente.data
                 }
-                return Response(serializer_cliente.data, status=status.HTTP_200_OK)
+                return Response(json_response, status=status.HTTP_200_OK)
             return Response("No se encontró un cliente con dicha Cédula, RUC o Pasaporte", status=status.HTTP_404_NOT_FOUND)
         
         
