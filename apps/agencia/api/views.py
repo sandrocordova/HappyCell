@@ -6,11 +6,13 @@ from apps.agencia.api.serializer import PostSerializer, UserNavSerializer, UserN
   
 @api_view(['GET'])
 def usernav_api_view(request):
-    
+    #OFICIAL
     if request.method == 'GET':
         consulta = Usernav.objects.raw("SELECT u.USUA_LOGIN, u.USUA_NOMBRE, ua.EMPR_CODIGO, e.EMPR_NOMBRE, e.EMPR_IMAGEN, e.EMPR_IDENTIFICACION, ucd.AGEN_CODIGO, ucd.ZONA_CODIGO, ucd.CETC_CODIGO, z.ZONA_DESCRIPCION, a.AGEN_DESCRIPCION, cdc.CETC_DESCRIPCION, ms.TIPE_CODIGO, tp.TIPE_DESCRIPCION from  usuario u inner join usuario_empresa ua on u.USUA_CODIGO=ua.USUA_CODIGO  inner join EMPRESA e on ua.EMPR_CODIGO=e.EMPR_CODIGO inner join USUARIO_CENTRO_DE_COSTO ucd on u.USUA_CODIGO=ucd.USUA_CODIGO inner join zona z on ucd.ZONA_CODIGO=z.ZONA_CODIGO inner join agencia a on ucd.AGEN_CODIGO = a.AGEN_CODIGO inner join CENTRO_DE_COSTO cdc on ucd.CETC_CODIGO = cdc.CETC_CODIGO inner join usuario_modulo ms on u.USUA_CODIGO = ms.usua_codigo inner join tipo_perfil tp on ms.TIPE_CODIGO = tp.TIPE_CODIGO where u.USUA_login='ADMINISTRADOR' and ms.MOSI_CODIGO= 1")
-        serializer_empresas = UserNavSerializer(consulta, many = True)
-        return Response(serializer_empresas.data, status = status.HTTP_200_OK)
+        if consulta:
+            serializer_empresas = UserNavSerializer(consulta, many = True)
+            return Response(serializer_empresas.data, status = status.HTTP_200_OK)
+        return Response({"status":"400","message":"Usuario no encontrado"})
     
 @api_view(['GET'])
 def nav_infor_api_view(request):
