@@ -9,15 +9,15 @@ export const DashboardNav = [
 export const ClientNav = [
     {
         icon: "pe-7s-edit",
-        label: "Buscar Cliente",
-        to: "#/clients/searchclient",
+        label: "Clientes",
+        to: "#/clients",
     }
 ]
 
 export const DirNav = [
     {
         icon: "pe-7s-edit",
-        label: "Buscar Direccion",
-        to: "#/directions/searchdirection",
+        label: "Direcciones",
+        to: "#/directions",
     }
 ]

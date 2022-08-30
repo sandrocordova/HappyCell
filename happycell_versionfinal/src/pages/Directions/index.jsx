@@ -1,7 +1,8 @@
 
 import React, { Component, Fragment } from "react";
+import {Button } from "reactstrap";
 //import {Mantenimiento} from "../../components/Clientes"
-import { Button } from "reactstrap";
+
 
 
 // Layout
@@ -10,7 +11,7 @@ import AppHeader from "../../Layout/AppHeader/";
 import AppSidebar from "../../Layout/AppSidebar/";
 import AppFooter from "../../Layout/AppFooter/";
 
-import DataTableFixedHeader from "../../components/Clientes/FixedHeader"
+import DataTableFixedHeader  from "../../components/Direcciones/FixedHeader"
 
 // Theme Options
 
@@ -28,18 +29,14 @@ const Index = ({ match }) => {
                         <div className="app-page-title">
                             <div className="page-title-wrapper">
                                 <div className="page-title-heading">
-                                    Mantenimiento Clientes
-
+                                    Direcciones
                                 </div>
                             </div>
                             {/* <Mantenimiento/>*/}
 
                         </div>
-
                         <div>
-
-                            <DataTableFixedHeader />
-
+                            <DataTableFixedHeader/>
                         </div>
                         <div style={{ textAlign: "right" }}>
                             <Button className="mb-2 me-2" color="success">
@@ -49,6 +46,7 @@ const Index = ({ match }) => {
                                 Cerrar
                             </Button>
                         </div>
+
                     </div>
                     <AppFooter />
                 </div>

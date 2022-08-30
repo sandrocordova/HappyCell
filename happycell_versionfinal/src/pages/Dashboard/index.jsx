@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
-
+import DataTableFixedHeader from "../../components/Direcciones/FixedHeader"
 // DASHBOARDS
+import { Button } from "reactstrap";
 
 
 
@@ -21,9 +22,27 @@ function Dashboard() {
                 <AppSidebar />
                 <div className="app-main__outer">
                     <div className="app-main__inner">
-                        <h1>
-                            hola mundo
-                        </h1>
+                        <div className="app-page-title">
+                            <div className="page-title-wrapper">
+                                <div className="page-title-heading">
+                                   Direcciones
+                                </div>
+                            </div>
+                            {/* <Mantenimiento/>*/}
+
+                        </div>
+                        <div>
+                            <DataTableFixedHeader />
+                        </div>
+                        <div style={{ textAlign: "right" }}>
+                            <Button className="mb-2 me-2" color="success">
+                                Seleccionar
+                            </Button>
+                            <Button className="mb-2 me-2" color="danger">
+                                Cerrar
+                            </Button>
+                        </div>
+
                     </div>
                     <AppFooter />
                 </div>
