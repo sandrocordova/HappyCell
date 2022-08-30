@@ -3,9 +3,11 @@ import React, { Component, Fragment } from "react";
 //import {Mantenimiento} from "../../components/Clientes"
 import { Button } from "reactstrap";
 
+// Clients
+import SearchClient from '../SearchClient';
+import ClientsNat from '../ClientsNat';
 
 // Layout
-
 import AppHeader from "../../Layout/AppHeader/";
 import AppSidebar from "../../Layout/AppSidebar/";
 import AppFooter from "../../Layout/AppFooter/";
@@ -13,7 +15,6 @@ import AppFooter from "../../Layout/AppFooter/";
 import DataTableFixedHeader from "../../components/Clientes/FixedHeader"
 
 // Theme Options
-
 import ThemeOptions from "../../Layout/ThemeOptions/";
 
 const Index = ({ match }) => {
@@ -25,32 +26,10 @@ const Index = ({ match }) => {
                 <AppSidebar />
                 <div className="app-main__outer">
                     <div className="app-main__inner">
-                        <div className="app-page-title">
-                            <div className="page-title-wrapper">
-                                <div className="page-title-heading">
-                                    Mantenimiento Clientes
-
-                                </div>
-                            </div>
-                            {/* <Mantenimiento/>*/}
-
-                        </div>
-
-                        <div>
-
-                            <DataTableFixedHeader />
-
-                        </div>
-                        <div style={{ textAlign: "right" }}>
-                            <Button className="mb-2 me-2" color="success">
-                                Seleccionar
-                            </Button>
-                            <Button className="mb-2 me-2" color="danger">
-                                Cerrar
-                            </Button>
-                        </div>
+                        <Route path={`${match.url}/searchclient`} component={SearchClient} />
+                        <Route path={`${match.url}/clientsnat/:id`} component={ClientsNat} />
                     </div>
-                    <AppFooter />
+                    {/* <AppFooter /> */}
                 </div>
             </div>
         </Fragment>
