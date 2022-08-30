@@ -97,4 +97,4 @@ class vinculoSearch(APIView):
                     if flag: vinculos.append(vinculo)
             serializer_cliente = VinculoSerializer(vinculos, many=True)
             return Response(serializer_cliente.data)
-        return Response("El cliente no tiene vinculos registrados", status=status.HTTP_400_BAD_REQUEST)
+        return Response({"status":"400","message":"El cliente no tiene vinculos registrados"})

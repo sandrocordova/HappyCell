@@ -14,43 +14,14 @@ from django.core.paginator import Paginator
 
 class cliente_search(APIView):
     def get(self, request):
-        clientes = Cliente.objects.using('clientes').all()[:1]
-        
-        consulta = TipoDocumento.objects.using('clientes').all()
-        profesionesSerializer = TipoDocumentoSerializer(consulta, many = True)
-        
-        print(consulta)
-        print("---------------------------------------------")
-        print(consulta[:])
-        print(consulta[0])
-        print(consulta[1])
-        print(consulta[2])
-        print(profesionesSerializer.data[2]["TIDO_CODIGO"])
-        print("----------------------")
-        print()
-            
-        for cliente in clientes:
-            catalog_list =[]
-            json_response = {
-            'codigo': "N",
-            'significado': "Natural"
-            }
-            
-            
-            if cliente.TICL_CODIGO == "N":
-                catalog_list.append(cliente.TICL_CODIGO)
-                catalog_list.append("Natural")
-                #cliente.TICL_CODIGO = json_response
-            else:
-                cliente.TICL_CODIGO = "Juridico"
-
+        clientes = Cliente.objects.using('clientes').all()[:3]
         serializer_cliente = ClienteSerializer(clientes, many=True)
         return Response(serializer_cliente.data, status=status.HTTP_200_OK)
 
     def post(self, request):
         clienteData = request.data['data']
-        if cedula_is_ok(clienteData):
-            clienteChecking = Cliente.objects.using('clientes').filter(CLIE_IDENTIFICACION__contains=clienteData).all()
+        if clienteData and clienteData.isdigit():
+            clienteChecking = Cliente.objects.using('clientes').filter(CLIE_IDENTIFICACION__startswith=clienteData).all()
             if clienteChecking:
                 paginador = Paginator(clienteChecking, 10)
                 pagina = request.GET.get("page") or 1
@@ -65,10 +36,9 @@ class cliente_search(APIView):
                     "cliente": serializer_cliente.data
                 }
                 return Response(json_response, status=status.HTTP_200_OK)
-            return Response("No se encontró un cliente con dicha Cédula, RUC o Pasaporte", status=status.HTTP_404_NOT_FOUND)
+            return Response({"status":"400","message":"No se encontró un cliente con dicha Cédula, RUC o Pasaporte"})
         
-        
-        elif str_is_ok(clienteData):  
+        elif clienteData and len(clienteData) >= 1:  
             clienteChecking = Cliente.objects.using('clientes').filter(CLIE_NOMBRE__icontains=clienteData).all()
             if clienteChecking:
                 paginador = Paginator(clienteChecking, 10)
@@ -84,21 +54,9 @@ class cliente_search(APIView):
                     "cliente": serializer_cliente.data
                 }
                 return Response(json_response, status=status.HTTP_200_OK)
-            return Response("No se encontró un cliente con nombre: "+clienteData, status=status.HTTP_404_NOT_FOUND)              
-        return Response("Información insuficiente para buscar un cliente", status=status.HTTP_400_BAD_REQUEST)
+            return Response({"status":"400","message":"No se encontró un cliente con nombre: "+clienteData})
+        return Response({"status":"400","message":"Información insuficiente para buscar un cliente"})
 
-
-def cedula_is_ok(cedula):
-    if cedula.isdigit():
-        if len(cedula) >= 5:
-            return True
-        return False
-    return False
-
-def str_is_ok(cedula):
-    if len(cedula) >= 3:
-        return True
-    return False    
 
 @api_view(['GET'])
 def cliente_api_view(request):
