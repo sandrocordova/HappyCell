@@ -25,7 +25,7 @@ function Dashboard() {
                             hola mundo
                         </h1>
                     </div>
-                    <AppFooter />
+                    {/* <AppFooter /> */}
                 </div>
             </div>
         </Fragment>

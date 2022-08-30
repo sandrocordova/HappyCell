@@ -34,7 +34,7 @@ const Clientesnaturales = () => {
             <div className="headerClientesSub">
 
 
-                <Label style={{color:"#c7f900"}}>
+                <Label style={{ color: "#c7f900" }}>
                     Mantenimiento de Clientes/Clientes/ClientesNaturales
                 </Label>
             </div>
@@ -46,7 +46,7 @@ const Clientesnaturales = () => {
                         <Col sm={4}>
 
                             <Input type="text" name="codigoCliente" placeholder={validacion2.CLIE_CODIGO} id="codigoCliente" style={{ border: '1px solid #003462' }} />
-                             
+
                         </Col>
                     </Col>
                     <Col sm={2}>
@@ -72,7 +72,7 @@ const Clientesnaturales = () => {
                     <Col sm={3}>
                         <Label for="exampleEmail" style={{ color: "#c7f900" }} className="labelInputsStyle">Identificacion</Label>
                         <Col sm={8}>
-                            <Input type="text" name="Identificacion"  id="identificacion" style={{ border: '1px solid #003462' }} />
+                            <Input type="text" name="Identificacion" id="identificacion" style={{ border: '1px solid #003462' }} />
                         </Col>
 
                     </Col>
@@ -80,11 +80,11 @@ const Clientesnaturales = () => {
                     <Col sm={3}>
                         <Label for="exampleEmail " style={{ color: "#c7f900" }} className="labelInputsStyle">Nombre</Label>
                         <Col sm={8}>
-                            <Input type="text" name="Identificacion"  id="identificacion" style={{ border: '1px solid #003462' }} />
+                            <Input type="text" name="Identificacion" id="identificacion" style={{ border: '1px solid #003462' }} />
                         </Col>
 
                     </Col>
-                   
+
 
 
 
@@ -116,9 +116,9 @@ const Clientesnaturales = () => {
             </div>
             <div className="divFormClientes">
                 <Form className="formSize">
-                  
 
-                   
+
+
 
                     <FormGroup row className="rowStyle">
                         <Row>
