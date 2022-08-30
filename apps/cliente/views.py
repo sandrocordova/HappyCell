@@ -58,6 +58,13 @@ class cliente_search(APIView):
         return Response({"status":"400","message":"Información insuficiente para buscar un cliente"})
 
 
+def cedula_is_ok(cedula):
+    if cedula.isdigit():
+        if len(cedula) >= 5:
+            return True
+        return False
+    return False
+ 
 @api_view(['GET'])
 def cliente_api_view(request):
 
