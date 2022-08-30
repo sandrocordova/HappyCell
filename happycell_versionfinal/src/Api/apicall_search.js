@@ -11,9 +11,7 @@ export const searchClient = async (text, page) => {
             },
             body: JSON.stringify(mySearch)
         });
-        console.log(res);
         const data = await res.json();
-      
         return data;
     } catch (error) {
         return error;
