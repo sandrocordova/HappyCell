@@ -12,6 +12,35 @@ from apps.catalog.serializer import TipoDocumentoSerializer
 from apps.cliente.serializer import ClienteSerializer
 from django.core.paginator import Paginator
 
+class cliente_detalle(APIView):
+    def post(self, request):
+        clienteCod = request.data['CLIE_CODIGO']
+        clienteTipo = request.data['TICL_CODIGO']
+        
+        if clienteTipo == "N":
+            clienteChecking = ClienteNatural.objects.using('clientes').filter(CLIE_CODIGO=clienteCod).first()
+            if clienteChecking:             
+                serializer_cliente = ClienteNaturalSerializer(clienteChecking)
+                json_response = {
+                    'status': "200",
+                    'message': "Response exitoso Natural",
+                    "cliente": serializer_cliente.data
+                }
+                return Response(json_response, status=status.HTTP_200_OK)
+            return Response({"status":"400","message":"No se encontró un cliente natural con dicho código"})
+        
+        if clienteTipo == "J":
+            clienteChecking = ClienteJuridico.objects.using('clientes').filter(CLIE_CODIGO=clienteCod).first()
+            if clienteChecking:             
+                serializer_cliente = ClienteJuridicoSerializer(clienteChecking)
+                json_response = {
+                    'status': "200",
+                    'message': "Response exitoso Juridico",
+                    "cliente": serializer_cliente.data
+                }
+                return Response(json_response, status=status.HTTP_200_OK)
+            return Response({"status":"400","message":"No se encontró un cliente Juridico con dicho código"})
+            
 class cliente_search(APIView):
     def get(self, request):
         clientes = Cliente.objects.using('clientes').all()[:3]
