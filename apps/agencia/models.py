@@ -6,7 +6,7 @@ class Post(models.Model):
     tittle = models.CharField(max_length=100)
     content = models.CharField(max_length=200)
     
-class Usernav(models.Model):
+class UsuarioInfo(models.Model):
     usua_login = models.CharField(db_column='USUA_LOGIN', primary_key=True, max_length=40)  # Field name made lowercase.
     usua_nombre = models.CharField(db_column='USUA_NOMBRE', max_length=40)  # Field name made lowercase.
     empr_codigo = models.CharField(db_column='EMPR_CODIGO', max_length=40)  # Field name made lowercase.
@@ -22,7 +22,7 @@ class Usernav(models.Model):
     tipe_codigo = models.CharField(db_column='TIPE_CODIGO', max_length=40)  # Field name made lowercase.
     tipe_descripcion = models.CharField(db_column='TIPE_DESCRIPCION', max_length=40)  # Field name made lowercase.
     
-class Usernavtres(models.Model):
+class UsuarioMenu(models.Model):
     usua_login = models.CharField(db_column='USUA_LOGIN', max_length=200)  # Field name made lowercase.
     tipe_codigo = models.IntegerField(db_column='tipe_codigo')  # Field name made lowercase.
     tipe_descripcion = models.CharField(db_column='TIPE_DESCRIPCION', max_length=200)  # Field name made lowercase.
