@@ -4,20 +4,34 @@ import json
 from rest_framework.response import Response
 from apps.catalog.models import CiudadCat, ZonaCat, PaisCat, TipoTelefono, Provincia, Canton, Parroquia, TipoVinculo, TipoObservacion, Profesion
 from apps.catalog.models import TipoDireccion, TipoEmpresa, TipoClase, TipoProyecto, Profesion, Nacionalidad, ActividadEconomica, TipoRol, Sexo, Vivienda, EstadoCivil, SituacionLaboral
+from apps.catalog.models import TipoCliente, GrupoEconomico, TipoDocumento
 from apps.catalog.serializer import TipoDireccionSerializer, TipoEmpresaSerializer, TipoClaseSerializer, TipoProyectoSerializer, ProfesionesSerializer, NacionalidadSerializer, ActiEconomicaSerializer, TipoRolSerializer, SexoSerializer, ViviendaSerializer, EstadoCivilSerializer, SituacionLaboralCivilSerializer
 from apps.catalog.serializer import CiudadSerializerCat, ZonaSerializerCat, PaisSerializerCat, TipoTelefonoSerializer, ProvinciaSerializer
 from apps.catalog.serializer import ProvinciaSerializer, CantonSerializer, ParroquiaSerializer, TipoVinculoSerializer, TipoObservacionSerializer
+from apps.catalog.serializer import TipoClienteSerializer, GrupoEconomicoSerializer, TipoDocumentoSerializer
 
 
 #Catálogos
 class catalog_api_views(APIView):
     def get(self, request):
-        catalog_id = ['profesion','tipo_observacion_cliente','tipo_vinculo','provincia','canton','parroquia','tipo_telefono','pais','zona','ciudad','tipo_direccion','tipo_empresa','tipo_clase','tipo_proyecto','profesion', 'nacionalidad', 'actividad_economica', 'tipo_rol','sexo', 'vivienda', 'estado_civil', 'situacion_laboral']
+        catalog_id = ['tipo_documento','grupo_economico','tipo_cliente','profesion','tipo_observacion_cliente','tipo_vinculo','provincia','canton','parroquia','tipo_telefono','pais','zona','ciudad','tipo_direccion','tipo_empresa','tipo_clase','tipo_proyecto','profesion', 'nacionalidad', 'actividad_economica', 'tipo_rol','sexo', 'vivienda', 'estado_civil', 'situacion_laboral']
         catalog_list =[]
         json_response = {
             'status': True,
             'message': "Response exitoso"
             }
+        if 'tipo_documento' in catalog_id:
+            consulta = TipoDocumento.objects.using('clientes').all()
+            profesionesSerializer = TipoDocumentoSerializer(consulta, many = True)
+            catalog_list.append({'tipo_documento':profesionesSerializer.data})
+        if 'grupo_economico' in catalog_id:
+            consulta = GrupoEconomico.objects.using('clientes').all()
+            profesionesSerializer = GrupoEconomicoSerializer(consulta, many = True)
+            catalog_list.append({'grupo_economico':profesionesSerializer.data})
+        if 'tipo_cliente' in catalog_id:
+            consulta = TipoCliente.objects.using('clientes').all()
+            profesionesSerializer = TipoClienteSerializer(consulta, many = True)
+            catalog_list.append({'tipo_cliente':profesionesSerializer.data})
         if 'tipo_observacion_cliente' in catalog_id:
             consulta = TipoObservacion.objects.using('clientes').all()
             profesionesSerializer = TipoObservacionSerializer(consulta, many = True)

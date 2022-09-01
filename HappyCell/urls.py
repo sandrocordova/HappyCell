@@ -14,4 +14,5 @@ urlpatterns = [
     path('api-obs/v1/', include('apps.observacion.urls')),
     path('api-vin/v1/', include('apps.vinculo.urls')),
     path('api-cue/v1/', include('apps.cuenta.urls')),
+    path('api-login/v1/', include('apps.usuario.urls')),
 ]

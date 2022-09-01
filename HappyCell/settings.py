@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'apps.direccion',
     'apps.vinculo',
     'apps.observacion',
-    'apps.cuenta'
+    'apps.cuenta',
+    'apps.usuario'
 ]
 
 MIDDLEWARE = [
