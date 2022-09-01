@@ -21,3 +21,33 @@ export const DirNav = [
         to: "#/directions",
     }
 ]
+
+export const TelNav = [
+    {
+        icon: "pe-7s-edit",
+        label: "Telefonos",
+        to: "#/telefonos",
+    }
+]
+
+export const AseNav = [
+    {
+        icon: "pe-7s-edit",
+        label: "Asesores",
+        to: "#/asesor",
+    }
+]
+export const ObsNav = [
+    {
+        icon: "pe-7s-edit",
+        label: "Observaciones",
+        to: "#/observaciones",
+    }
+]
+export const VinNav = [
+    {
+        icon: "pe-7s-edit",
+        label: "Vinculos",
+        to: "#/vinculos",
+    }
+]

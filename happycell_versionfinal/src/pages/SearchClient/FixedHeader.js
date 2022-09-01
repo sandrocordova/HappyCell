@@ -16,7 +16,7 @@ const FixedHeader = () => {
     const [texto, setTexto] = useState(null); /*Input de la busqueda*/
     const { cliente } = postResult || [];
     console.log(cliente);
-    var arrayEnviar = [];
+
     const paginasOpciones = {
         rowsPerPageText: 'Filas por Pagina',
         rangeSeparatorText: 'de',
@@ -59,13 +59,6 @@ const FixedHeader = () => {
 
     console.log(texto);
     console.log(postResult);
-    const [selectedData, setSelectedData] = React.useState();
-
-    const handleChange = (state) => {
-        setSelectedData(state.selectedRows);
-        console.log(selectedData);
-        console.log("hola mundo");
-    };
 
 
 
@@ -99,7 +92,7 @@ const FixedHeader = () => {
                                             selectableRows
                                             fixedHeader
                                             paginationTotalRows={1}
-                                            onSelectedRowsChange={handleChange}
+
                                             fixedHeaderScrollHeight="400px"
                                         />
                                     </CardBody>

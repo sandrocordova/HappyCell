@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-import { Row, Col, Card, CardBody, Button } from "reactstrap";
+import { Row, Col, Card, CardBody, Button ,Label,Input} from "reactstrap";
 
 import DataTable from 'react-data-table-component';
 
@@ -76,17 +76,87 @@ const FixedHeader = () => {
                 <CSSTransition component="div" classNames="TabsAnimation" appear={true}
                     timeout={1500} enter={false} exit={false}>
                     <div>
-                        <Search pagina={1} texto={texto} setTexto={setTexto} setPostResult={setPostResult} />
-                        <div style={{ textAlign: "right" }}>
 
-                            <br />
-                            {/*<Button className="mb-2 me-2" color="info">*/}
-                            {/*    Crear Cliente*/}
-                            {/*</Button>*/}
+                        <Row>
+
+                            <Col sm={2}>
+
+                                <Label for="exampleEmail">Tipo de cliente</Label>
+                                <Input type="email" name="email" id="exampleEmail" />
+
+                            </Col>
+
+                            <Col sm={2}>
+                                <Label for="exampleEmail">Codigo cliente</Label>
+                                <Input type="email" name="email" id="exampleEmail" />
+                            </Col>
+                            <Col sm={2}>
+                                <Label for="exampleEmail">Tipo de identificacion</Label>
+                                <Input type="email" name="email" id="exampleEmail" />
+
+                            </Col>
+                            <Col sm={2}>
 
 
-                        </div>
-                       
+                                <Label for="exampleEmail">Identificacion</Label>
+                                <Input type="email" name="email" id="exampleEmail" />
+
+
+                            </Col>
+
+                            <Col sm={4}>
+
+
+                                <Label for="exampleEmail">Nombre</Label>
+                                <Input type="email" name="email" id="exampleEmail" />
+
+
+                            </Col>
+
+
+
+
+                        </Row>
+
+                        <Row>
+
+                            <Col sm={1}>
+
+                                <Label for="exampleEmail">Secuencia</Label>
+                                <Input type="email" name="email" id="exampleEmail" />
+
+                            </Col>
+
+                            <Col sm={2}>
+                                <Label for="exampleEmail">Ciudad</Label>
+                                <Input type="email" name="email" id="exampleEmail" />
+                            </Col>
+                            <Col sm={6}>
+                                <Label for="exampleEmail">Direccion</Label>
+                                <Input type="email" name="email" id="exampleEmail" />
+
+                            </Col>
+ 
+
+
+
+                        </Row>
+                        <Row>
+
+                            <Col sm={1}>
+
+                                <Label for="exampleEmail">Secuencia</Label>
+                                <Input type="email" name="email" id="exampleEmail" />
+
+                            </Col>
+
+
+
+
+
+
+                        </Row>
+                        <br />
 
                         <Row>
                             <Col md="12">

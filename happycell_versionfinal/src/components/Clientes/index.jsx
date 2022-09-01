@@ -5,9 +5,9 @@ import {
     Row,
     Col,
     Container,
-
+    Button
 } from "reactstrap";
-
+import { BrowserRouter, Router, Route } from 'react-router-dom';
 
 // Layout
 
@@ -37,7 +37,11 @@ const Mantenimiento = () => {
                             <div className="card mb-3 widget-content bg-night-fade">
                                 <div className="widget-content-wrapper text-white">
                                     <div className="widget-content-left">
-                                        <div className="widget-heading">Clientes</div>
+                                        <div className="widget-heading">
+                                           
+                                                <Button color="primary"> Clientes </Button>
+                                          
+                                        </div>
 
                                     </div>
 
