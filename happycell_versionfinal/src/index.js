@@ -9,16 +9,19 @@ import "./assets/base.scss";
 import App from "./App";
 
 import { Provider } from "react-redux";
-import { store } from './redux/store';
+import { store, persistor } from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const rootElement = document.getElementById("root");
 
 const renderApp = (Component) => {
   ReactDOM.render(
     <Provider store={store}>
-      <HashRouter>
-        <Component />
-      </HashRouter>
+      <PersistGate loading='null' persistor={persistor}>
+        <HashRouter>
+          <Component />
+        </HashRouter>
+      </PersistGate>
     </Provider>,
     rootElement
   );

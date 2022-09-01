@@ -1,11 +1,13 @@
 
 import React, { Component, Fragment } from "react";
+import { Route } from 'react-router-dom';
 //import {Mantenimiento} from "../../components/Clientes"
 import { Button } from "reactstrap";
 
 // Clients
 import SearchClient from '../SearchClient';
 import ClientsNat from '../ClientsNat';
+import ClientsJur from '../ClientsJur';
 
 // Layout
 import AppHeader from "../../Layout/AppHeader/";
@@ -14,13 +16,10 @@ import AppFooter from "../../Layout/AppFooter/";
 
 import DataTableFixedHeader from "../../components/Clientes/FixedHeader"
 
-// Theme Options
-import ThemeOptions from "../../Layout/ThemeOptions/";
 
 const Index = ({ match }) => {
     return (
         <Fragment>
-            <ThemeOptions />
             <AppHeader />
             <div className="app-main">
                 <AppSidebar />
@@ -28,6 +27,7 @@ const Index = ({ match }) => {
                     <div className="app-main__inner">
                         <Route path={`${match.url}/searchclient`} component={SearchClient} />
                         <Route path={`${match.url}/clientsnat/:id`} component={ClientsNat} />
+                        <Route path={`${match.url}/clientsjur/:id`} component={ClientsJur} />
                     </div>
                     {/* <AppFooter /> */}
                 </div>
