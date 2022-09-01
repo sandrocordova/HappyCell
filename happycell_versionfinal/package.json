@@ -121,7 +121,6 @@
     "redux": "^4.1.2",
     "redux-form": "^8.3.8",
     "redux-logger": "^3.0.6",
-    "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1",
     "sass": "^1.48.0",
     "slick-carousel": "^1.8.1",
