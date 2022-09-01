@@ -53,7 +53,7 @@ class cliente_search(APIView):
                     return Response(json_response, status = status.HTTP_200_OK)
                 else: return Response({"status":"400","message":"El usuario no tiene acceso a menús"})
             else: return Response({"status":"400","message":"Rol de usuario no encontrado"})
-        else: return Response(auth)
+        else: return Response({"status": status.HTTP_401_UNAUTHORIZED, "message": "Token inválido!"})
 
 def obtener_hijos(opmeDescripcion, menuHijos):
     hijosReturn = []

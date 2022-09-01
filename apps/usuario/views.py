@@ -13,11 +13,11 @@ from django.shortcuts import render
 class getToken(APIView):
     def post(self, request):
         headers = request.headers
-        if 'Basic' not in headers:
-            raise AuthenticationFailed('Envía un token!')
+        if 'User' not in headers:
+            raise AuthenticationFailed('¡Envía un Usuario!')
             
-        basicTokenEncrypt = headers['Basic']
-        passwordEncrypt = headers['password']
+        basicTokenEncrypt = headers['User']
+        passwordEncrypt = headers['Password']
         usua_login = base64.b64decode(basicTokenEncrypt)
         usua_login = usua_login.decode()
         password_login = base64.b64decode(passwordEncrypt)
@@ -42,9 +42,8 @@ class getToken(APIView):
         response = Response()
 
         response.data = {
-            'jwt': token,
-            'User': usua_login,
-            'Pass': password_login,
+            'jwt': token
+            #'User': usua_login
         }
 
         return response
@@ -63,7 +62,7 @@ class validate(APIView):
         try:
             payload = jwt.decode(token, 'tfhc-pc-pydj-bkd-mssql', algorithms = ['HS256'])
         except jwt.ExpiredSignatureError:
-            raise AuthenticationFailed('Token exporó!')
+            raise AuthenticationFailed('Token expiró!')
 
         usuario = Usuario.objects.filter(USUA_LOGIN=payload['id']).first()
         if usuario is None:
