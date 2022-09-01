@@ -1,19 +1,11 @@
 import { Route, Redirect } from "react-router-dom";
 import React, { Suspense, lazy, Fragment } from "react";
 import Loader from "react-loaders";
-import Dashboard from "../../pages/Dashboard";
 import { ToastContainer } from "react-toastify";
-import Clients from "../../pages/Clients";
-const UserPages = lazy(() => import("../../DemoPages/UserPages"));
-const Applications = lazy(() => import("../../DemoPages/Applications"));
-const Dashboards = lazy(() => import("../../DemoPages/Dashboards"));
 
-const Widgets = lazy(() => import("../../DemoPages/Widgets"));
-const Elements = lazy(() => import("../../DemoPages/Elements"));
-const Components = lazy(() => import("../../DemoPages/Components"));
-const Charts = lazy(() => import("../../DemoPages/Charts"));
-const Forms = lazy(() => import("../../DemoPages/Forms"));
-const Tables = lazy(() => import("../../DemoPages/Tables"));
+const Dashboard = lazy(() => import("../../pages/Dashboard"));
+const Clients = lazy(() => import("../../pages/Clients"));
+const Directions = lazy(() => import("../../pages/Directions"));
 
 const AppMain = () => {
 
@@ -51,6 +43,7 @@ const AppMain = () => {
             }>
                 <Route path="/directions" component={Directions} />
             </Suspense>
+            {/*Dashboard*/}
             <Suspense fallback={
                 <div className="loader-container">
                     <div className="loader-container-inner">
