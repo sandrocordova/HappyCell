@@ -134,7 +134,7 @@ class Direccion(models.Model):
     
     class Meta:
         db_table = 'DIRECCION'
-        unique_together = (("CLIE_CODIGO", "DIRE_CODIGO"))
+        unique_together = (("CLIE_CODIGO", "DIRE_CODIGO", "TIDE_CODIGO"))
 
 class ClienteNatural(models.Model):
     CLIE_CODIGO	= models.PositiveIntegerField(primary_key = True)
@@ -242,10 +242,10 @@ class Vinculo(models.Model):
             ))
 
 class BalanceCliente(models.Model):
-    CUBA_CUENTA = models.PositiveBigIntegerField()
-    CLIE_CODIGO = models.PositiveIntegerField()
+    CUBA_CUENTA = models.CharField(max_length = 40)
+    CLIE_CODIGO = models.PositiveIntegerField(max_length = 10)
     BAEM_FECHA = models.DateTimeField(primary_key = True)
-    BAEM_VALOR = models.DecimalField(max_digits = 5, decimal_places = 4)
+    BAEM_VALOR = models.DecimalField(max_digits = 18, decimal_places = 4)
 
     class Meta:
         db_table = 'BALANCE_CLIENTE'

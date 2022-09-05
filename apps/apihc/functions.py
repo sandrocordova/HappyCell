@@ -158,12 +158,7 @@ def validarTelefono(data):
     indexLog = 0
     telefono = data['TELE_NUMERO']
 
-    if telefono.isdigit():
-        if len(telefono) < 10:
-            log[indexLog] = f"Teléfono no válido: {data['TELE_NUMERO']}. Revisar ficha técnica"
-            indexLog += 1
-            success = False
-    else:
+    if len(telefono) < 10:
         log[indexLog] = f"Teléfono no válido: {data['TELE_NUMERO']}. Revisar ficha técnica"
         indexLog += 1
         success = False
@@ -171,12 +166,6 @@ def validarTelefono(data):
     tipo = TipoTelefono.objects.using('clientes').filter(TITE_CODIGO = data['TITE_CODIGO']).first()
     if tipo is None:
         log[indexLog] = f"Tipo de Teléfono no existe: {data['TITE_CODIGO']}. Revisar ficha técnica"
-        indexLog += 1
-        success = False
-
-    direccion = Direccion.objects.using('clientes').filter(DIRE_CODIGO = data['DIRE_CODIGO'], CLIE_CODIGO = data['CLIE_CODIGO']).first()
-    if direccion is None:
-        log[indexLog] = f"DIRE_CODIGO {data['DIRE_CODIGO']} no corresponde a Cliente: {data['CLIE_CODIGO']}. Revisar ficha técnica"
         indexLog += 1
         success = False
 
@@ -329,6 +318,19 @@ def validarVinculo(data):
 
     return {'status': success, 'message': log }
 
+def validarBalance(data):
+    success = True
+    log = {}
+    indexLog = 0
+
+    cuenta = CuentaBalance.objects.using('clientes').filter(CUBA_CUENTA = data['CUBA_CUENTA']).first()
+    if cuenta is None:
+        log[indexLog] = f"Cuenta Balance no válida: {data['CUBA_CUENTA']}. Revisar ficha técnica"
+        indexLog += 1
+        success = False 
+
+    return {'status': success, 'message': log }
+
 def guardarCliente(data):
     clienteSave = Cliente(**data)
     clienteSave.save(using = 'clientes', force_insert = True)
@@ -378,6 +380,11 @@ def guardarVinculo(data):
     vinculoSave = Vinculo(**data)
     vinculoSave.save(using = 'clientes', force_insert = True)
     return {'success': True, 'message':f"Vínculo de Cliente guardado con el VINC_CODIGO: {data['VINC_CODIGO']}"}
+
+def guardarBalance(data):
+    balanceSave = BalanceCliente(**data)
+    balanceSave.save(using = 'clientes', force_insert = True)
+    return {'success': True, 'message':f"Balance de Cliente guardado con la fecha: {data['BAEM_FECHA']}"}
 
 def actualizarCliente(data, cliente):
     cambios = 0

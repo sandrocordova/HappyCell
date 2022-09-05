@@ -60,3 +60,30 @@ class CuentaBancariaView(APIView):
                 return Response({"status": 400, "message": f"La cuenta {cubc_codigo} no existe para el cliente {clie_codigo}"}, status = status.HTTP_400_BAD_REQUEST)
        
         return Response({"status": 200, "message": f"Se actualizaron las cuentas al cliente {clie_codigo}"}, status = status.HTTP_200_OK)
+
+class BalanceCuenta(APIView):
+    def post(self, request):
+        data = request.data
+        clie_codigo = data['CLIE_CODIGO']
+        balances = data['cuentas']
+        
+        clienteChecking = Cliente.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
+
+        if clienteChecking is None:
+            return Response({"status": 400, "message": f"Cliente no existe con el CLIE_CODIGO: {clie_codigo}"}, status = status.HTTP_400_BAD_REQUEST)
+          
+
+        return Response({}, status = status.HTTP_200_OK)
+
+    def put(self, request):
+        data = request.data
+        clie_codigo = data['CLIE_CODIGO']
+        balances = data['cuentas']
+        
+        clienteChecking = Cliente.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
+
+        if clienteChecking is None:
+            return Response({"status": 400, "message": f"Cliente no existe con el CLIE_CODIGO: {clie_codigo}"}, status = status.HTTP_400_BAD_REQUEST)
+          
+
+        return Response({}, status = status.HTTP_200_OK)

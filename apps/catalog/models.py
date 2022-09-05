@@ -188,7 +188,7 @@ class TipoCuentaBalance(models.Model):
         db_table = 'TIPO_CUENTA_BALANCE'
 
 class CuentaBalance(models.Model):
-    CUBA_CUENTA = models.PositiveBigIntegerField(primary_key = True)
+    CUBA_CUENTA = models.PositiveIntegerField(primary_key = True)
     TICB_CODIGO = models.PositiveIntegerField()
     CUBA_DESCRIPCION = models.CharField(max_length = 40)
 
@@ -274,7 +274,7 @@ class TipoClase(models.Model):
 
 class TipoRol(models.Model):
     TIRO_CODIGO = models.CharField(max_length = 2, primary_key = True)
-    TIROL_DESCRIPCION = models.CharField(max_length = 50)
+    TIROL_DESCRIPCIÒN = models.CharField(max_length = 50)
 
     class Meta:
         db_table = 'TIPO_ROL'
