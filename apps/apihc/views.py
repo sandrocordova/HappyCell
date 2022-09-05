@@ -3,7 +3,7 @@ from rest_framework.response import Response # Manejo de Response HTTP
 from rest_framework.exceptions import AuthenticationFailed # Validación de Token (sin expirar)
 from rest_framework import status # Manejo de Status
 import jwt, datetime, base64
-from .functions import actualizarCliente, actualizarClienteJuridico, actualizarClienteNatural, guardarAsesorCliente, validarCliente, validarClienteNatural, validarClienteJuridico, validarDireccion, validarTelefono, validarObservacion, validarCuenta, validarVinculo, guardarCliente, guardarClienteNatural, guardarClienteJuridico, guardarDireccion, guardarTelefono, guardarObservacion, guardarCuentaBancaria, guardarVinculo # Manejo del token
+from .functions import actualizarCliente, actualizarClienteJuridico, actualizarClienteNatural, guardarAsesorCliente, guardarBalance, validarBalance, validarCliente, validarClienteNatural, validarClienteJuridico, validarDireccion, validarTelefono, validarObservacion, validarCuenta, validarVinculo, guardarCliente, guardarClienteNatural, guardarClienteJuridico, guardarDireccion, guardarTelefono, guardarObservacion, guardarCuentaBancaria, guardarVinculo # Manejo del token
 from .serializers import ClienteJuridicoSerializer, ClienteNaturalSerializer, ClienteSerializer, DireccionSerializer, EstadoCivilSerializer, NacionalidadSerializer, NivelInstruccionSerializer, ProfesionSerializer, SituacionLaboralSerializer, TelefonoSerializer, UsuarioSerializer, ViviendaSerializer, ActividadEconomicaSerializer # Serializadores
 from apps.catalog.models import Banco, Nacionalidad,  ActividadEconomica, Profesion, NivelInstruccion, EstadoCivil, Vivienda, SituacionLaboral
 from .models import  Cliente, ClienteAsesor, ClienteJuridico, ClienteNatural, CuentaBancariaCliente, Direccion, Observacion, Telefono, Usuario, Secuencia, Vinculo
@@ -98,60 +98,55 @@ class CLIENTESView(APIView):
     def get(self, request):
         auth = authenticate(request)
         if auth['status'] != 200:
-            return Response(auth)
+            return Response({"status": 401, "message": auth['message'], "data": None}, status = status.HTTP_401_UNAUTHORIZED)
 
         data = request.GET
-        cedula = data['cedula']
-
-        direcciones = {}
+        clie_identificacion = data['identificacion']
         
-        cliente = Cliente.objects.using('clientes').filter(CLIE_IDENTIFICACION = cedula).first()
+        cliente = Cliente.objects.using('clientes').filter(CLIE_IDENTIFICACION = clie_identificacion).first()
         clie_codigo = cliente.CLIE_CODIGO
         clienteSerializer = ClienteSerializer(cliente)
-        clienteDirecciones = Direccion.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).all()
-        for clienteDireccion in clienteDirecciones:
-            telefonos = {}
-            clienteDireccionSerializer = DireccionSerializer(clienteDireccion)
-            clienteDireccionTelefonos = Telefono.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo, DIRE_CODIGO = clienteDireccion.DIRE_CODIGO).all()
-            for clienteDireccionTelefono in clienteDireccionTelefonos:
-                clienteTelefonoSerializer = TelefonoSerializer(clienteDireccionTelefono)
-                telefonos[int(clienteDireccionTelefono.TELE_CODIGO)] = clienteTelefonoSerializer.data
-            direcciones[int(clienteDireccion.DIRE_CODIGO)] = clienteDireccionSerializer.data
-            direcciones[int(clienteDireccion.DIRE_CODIGO)]['telefonos'] = telefonos
+        # clienteDirecciones = Direccion.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).all()
+        # for clienteDireccion in clienteDirecciones:
+        #     telefonos = {}
+        #     clienteDireccionSerializer = DireccionSerializer(clienteDireccion)
+        #     clienteDireccionTelefonos = Telefono.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo, DIRE_CODIGO = clienteDireccion.DIRE_CODIGO).all()
+        #     for clienteDireccionTelefono in clienteDireccionTelefonos:
+        #         clienteTelefonoSerializer = TelefonoSerializer(clienteDireccionTelefono)
+        #         telefonos[int(clienteDireccionTelefono.TELE_CODIGO)] = clienteTelefonoSerializer.data
+        #     direcciones[int(clienteDireccion.DIRE_CODIGO)] = clienteDireccionSerializer.data
+        #     direcciones[int(clienteDireccion.DIRE_CODIGO)]['telefonos'] = telefonos
 
-        clienteDireccionSerializer = DireccionSerializer(clienteDireccion)
-        clienteTelefono = Telefono.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
-        clienteTelefonoSerializer = TelefonoSerializer(clienteTelefono)
+        # clienteDireccionSerializer = DireccionSerializer(clienteDireccion)
+        # clienteTelefono = Telefono.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
+        # clienteTelefonoSerializer = TelefonoSerializer(clienteTelefono)
         if cliente is None:
-            return Response({"status": status.HTTP_200_OK, "message": "Cliente no encotrado"})
+            return Response({"status": 204, "message": "Cliente no encotrado", "data": None}, status = status.HTTP_204_NO_CONTENT)
         
         if cliente.TICL_CODIGO == "N":
-            cliente_detail = ClienteNatural.objects.using('clientes').filter(CLIE_CODIGO = cliente.CLIE_CODIGO).first()
+            cliente_detail = ClienteNatural.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
             clienteDetaillSerialize = ClienteNaturalSerializer(cliente_detail)
-        if cliente.TICL_CODIGO == "J":
-            cliente_detail = ClienteJuridico.objects.using('clientes').filter(CLIE_CODIGO = cliente.CLIE_CODIGO).first()
+        elif cliente.TICL_CODIGO == "J":
+            cliente_detail = ClienteJuridico.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).first()
             clienteDetaillSerialize = ClienteJuridicoSerializer(cliente_detail)
+        else:
+            return Response({"status": 400, "message": "Tipo de Cliente inválido", "data": None}, status = status.HTTP_400_BAD_REQUEST)
+
 
         clienteDict = clienteSerializer.data
-        clienteDict['NACI_CODIGO'] = NacionalidadSerializer(Nacionalidad.objects.using('clientes').filter(NACI_CODIGO = clienteDict['NACI_CODIGO']).first()).data
-        clienteDict['ACTI_CODIGO'] = ActividadEconomicaSerializer(ActividadEconomica.objects.using('clientes').filter(ACTI_CODIGO = clienteDict['ACTI_CODIGO']).first()).data
         clienteDetailDict = clienteDetaillSerialize.data
-        clienteDetailDict['PROF_CODIGO'] = ProfesionSerializer(Profesion.objects.using('clientes').filter(PROF_CODIGO = clienteDetailDict['PROF_CODIGO']).first()).data
-        clienteDetailDict['NIIN_CODIGO'] = NivelInstruccionSerializer(NivelInstruccion.objects.using('clientes').filter(NIIN_CODIGO = clienteDetailDict['NIIN_CODIGO']).first()).data
-        clienteDetailDict['ESCI_CODIGO'] = EstadoCivilSerializer(EstadoCivil.objects.using('clientes').filter(ESCI_CODIGO = clienteDetailDict['ESCI_CODIGO']).first()).data
-        clienteDetailDict['CLIE_TIPO_VIVIENDA'] = ViviendaSerializer(Vivienda.objects.using('clientes').filter(VIVI_CODIGO = clienteDetailDict['CLIE_TIPO_VIVIENDA']).first()).data
-        clienteDetailDict['CLIE_SITUACION_LABORAL'] = SituacionLaboralSerializer(SituacionLaboral.objects.using('clientes').filter(SITL_CODIGO = clienteDetailDict['CLIE_SITUACION_LABORAL']).first()).data
 
         clienteData = clienteDict
         clienteData['detalle'] = clienteDetailDict
-        clienteData['direcciones'] = direcciones
 
         return Response(
             {
-                "status": True, 
+                "status": 200, 
                 "message": "Exitoso", 
                 "data": clienteData
-            })
+            },
+            status = status.HTTP_200_OK
+         )
 
     def post(self, request): # Guardar Cliente:
         # Inicio Autenticar
@@ -168,12 +163,12 @@ class CLIENTESView(APIView):
         if 'cliente' in data:
             informacionCliente = data['cliente']
         else:
-            informacionCliente = {}
+            return Response({"status": 400, "message": "Se esperaba la información del cliente."}, status = status.HTTP_400_BAD_REQUEST)
 
         if 'detalle' in data:
             detallesCliente = data['detalle']
         else:
-            detallesCliente = {}
+            return Response({"status": 400, "message": "Se esperaba la información del cliente."}, status = status.HTTP_400_BAD_REQUEST)
 
         if 'direcciones' in data:
             direcciones = data['direcciones']
@@ -186,8 +181,8 @@ class CLIENTESView(APIView):
                 'ASES_CODIGO': ases_codigo
             }
         else:
-            ases_codigo = None
-            asesor = None
+            return Response({"status": 400, "message": "Se esperaba el asesor del cliente."}, status = status.HTTP_400_BAD_REQUEST)
+
 
         if 'observaciones' in data:
             observaciones = data['observaciones']
@@ -204,6 +199,11 @@ class CLIENTESView(APIView):
         else:
             vinculos = {}
 
+        if 'balances' in data:
+            balances = data['balances']
+        else:
+            balances = []
+
         # Inicio Reservar información a manejar del Cliente a partir del REQUEST
         secuencia = Secuencia.objects.using('clientes').filter(SECU_TABLA = 'CLIENTE', EMPR_CODIGO = '8').first()
         clie_codigo = secuencia.SECU_VALOR_ACTUAL
@@ -213,8 +213,8 @@ class CLIENTESView(APIView):
 
         # Inicio Validar-Cliente
         clienteChecking = Cliente.objects.using('clientes').filter(CLIE_IDENTIFICACION = clie_identificacion).first()
-        today = datetime.date.today()
-        d1 = today.strftime("%Y-%m-%d")
+        today = datetime.datetime.now()
+        clie_fecha_creacion = today.strftime("%Y-%m-%d %H:%M:%S")
 
         if clienteChecking:
             clie_codigo = clienteChecking.CLIE_CODIGO
@@ -229,51 +229,56 @@ class CLIENTESView(APIView):
                 log[logIndex] = f"El Cliente: {clie_identificacion} de tipo: {clienteChecking.TICL_CODIGO} ya está registrado, actualizando {actualizarC} campos de Cliente y {actualizarDC} campos de Cliente J. Pasando a Direcciones, Teléfonos, Observaciones y Asesores"
             logIndex += 1
         else:
-            informacionCliente['CLIE_FECHA_CREACION'] = d1
-            informacionCliente['CLIE_TIPO_PROYECTO'] = 2
+            informacionCliente['CLIE_FECHA_CREACION'] = clie_fecha_creacion
             informacionCliente['CLIE_CODIGO'] = clie_codigo
             informacionCliente['TISB_CODIGO'] = 1
             detallesCliente['CLIE_CODIGO'] = clie_codigo
             # Guardar CLIENTE
             validarC = validarCliente(informacionCliente)
             if validarC['status'] is False:
-                return Response({"status": status.HTTP_400_BAD_REQUEST, "log": validarC['log']})
+                return Response({"status": 400, "message": validarC['message']}, status = status.HTTP_400_BAD_REQUEST)
             else:
                 for direccion in direcciones:
                     validarD = validarDireccion(direccion)
                     if validarD['status'] is False:
-                        return Response({"status": status.HTTP_400_BAD_REQUEST, "log": validarD['log']})
+                        return Response({"status": 400, "message": validarD['message']}, status = status.HTTP_400_BAD_REQUEST)
                     else:
                         if 'telefonos' in direccion:
                             telefonos = direccion['telefonos']
                         else:
                             telefonos = {}
                         for telefono in telefonos:
+                            telefono['TIDE_CODIGO'] = direccion['TIDE_CODIGO']
                             validarT = validarTelefono(telefono)
                             if validarT['status'] is False:
-                                return Response({"status": status.HTTP_400_BAD_REQUEST, "log": validarT['log']})
+                                return Response({"status": 400, "message": validarT['message']}, status = status.HTTP_400_BAD_REQUEST)
                 
                 for observacion in observaciones:
                     validarO = validarObservacion(observacion)
                     if validarO['status'] is False:
-                        return Response({"status": status.HTTP_400_BAD_REQUEST, "log": validarO['log']})
+                        return Response({"status": 400, "message": validarO['message']}, status = status.HTTP_400_BAD_REQUEST)
                 
                 for cuenta in cuentas:
                     validarCB = validarCuenta(cuenta)
                     if validarCB['status'] is False:
-                        return Response({"status": status.HTTP_400_BAD_REQUEST, "log": validarCB['log']})
+                        return Response({"status": 400, "message": validarCB['message']}, status = status.HTTP_400_BAD_REQUEST)
                 
                 for vinculo in vinculos:
                     vinculo['TICL_CODIGO'] = ticl_codigo
                     validarV = validarVinculo(vinculo)
                     if validarV['status'] is False:
-                        return Response({"status": status.HTTP_400_BAD_REQUEST, "log": validarV['log']})
+                        return Response({"status": 400, "message": validarV['message']}, status = status.HTTP_400_BAD_REQUEST)
+
+                for balance in balances:
+                    validarB = validarBalance(balance)
+                    if validarB['status'] is False:
+                        return Response({"status": 400, "message": validarB['message']}, status = status.HTTP_400_BAD_REQUEST)
 
             if ticl_codigo == 'N':
                     # Guardar CLIENTE NATURAL
                     validarCN = validarClienteNatural(detallesCliente)
                     if validarCN['status'] is False:
-                        return Response({"status": status.HTTP_400_BAD_REQUEST, "log": validarCN['log']})
+                        return Response({"status": 400, "message": validarCN['message']}, status = status.HTTP_400_BAD_REQUEST)
                     
                     guardarC = guardarCliente(informacionCliente)
                     log[logIndex] = guardarC['message']
@@ -286,7 +291,7 @@ class CLIENTESView(APIView):
                 # Guardar CLIENTE JURIDICO
                 validarCJ = validarClienteJuridico(detallesCliente)
                 if validarCJ['status'] is False:
-                    return Response({"status": status.HTTP_400_BAD_REQUEST, "log": validarCJ['log']})
+                    return Response({"status": 400, "message": validarCJ['message']}, status = status.HTTP_400_BAD_REQUEST)
 
                 guardar = guardarCliente(informacionCliente)
                 log[logIndex] = guardar['message']
@@ -296,7 +301,7 @@ class CLIENTESView(APIView):
                 log[logIndex] = guardarJ['message']
                 logIndex += 1
             else:
-                return Response({"status": status.HTTP_400_BAD_REQUEST, "log": "Tipo de Cliente no válido"})
+                return Response({"status": 400, "message": "Tipo de Cliente no válido"}, status = status.HTTP_400_BAD_REQUEST)
 
             secuencia = Secuencia.objects.using('clientes').filter(SECU_TABLA = 'CLIENTE', EMPR_CODIGO = '8').update(SECU_VALOR_ACTUAL = clie_codigo + 1)
             log[logIndex] = f'Se actualizó Secuencia actual de -> {clie_codigo} a -> {clie_codigo + 1}'
@@ -312,7 +317,7 @@ class CLIENTESView(APIView):
             direccionExistente = Direccion.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo, DIRE_DESCRIPCION = dire_descripcion).first()
             if direccionExistente is None:
                 direccion['DIRE_CODIGO'] = 1
-                dire_codigo = Direccion.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).order_by('-DIRE_CODIGO').first()
+                dire_codigo = Direccion.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo, TIDE_CODIGO = direccion['TIDE_CODIGO']).order_by('-DIRE_CODIGO').first()
                 if dire_codigo:
                     direccion['DIRE_CODIGO'] = dire_codigo.DIRE_CODIGO + 1
                 direccion['CLIE_CODIGO'] = clie_codigo
@@ -333,11 +338,11 @@ class CLIENTESView(APIView):
                 telefonoExistente = Telefono.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo, TELE_NUMERO = tele_numero).first()
                 if telefonoExistente is None:
                     telefono['TELE_CODIGO'] = 1
-                    tele_codigo = Telefono.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo).order_by('-TELE_CODIGO').first()
+                    telefono['DIRE_CODIGO'] = direccion['DIRE_CODIGO']
+                    tele_codigo = Telefono.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo, DIRE_CODIGO = telefono['DIRE_CODIGO']).order_by('-TELE_CODIGO').first()
                     if tele_codigo:
                         telefono['TELE_CODIGO'] = tele_codigo.TELE_CODIGO + 1
                     telefono['TIDE_CODIGO'] = direccion['TIDE_CODIGO']
-                    telefono['DIRE_CODIGO'] = direccion['DIRE_CODIGO']
                     telefono['CLIE_CODIGO'] = clie_codigo
 
                     guardarT = guardarTelefono(telefono)
@@ -420,10 +425,17 @@ class CLIENTESView(APIView):
                 log[logIndex] = f"La Cuenta Bancaria: {cubc_cuenta} ya existe para el Cliente: {clie_codigo}"
                 logIndex += 1
 
+        for balance in balances:
+            balance['CLIE_CODIGO'] = clie_codigo
+            balance['BAEM_FECHA'] = clie_fecha_creacion
+            guardarB = guardarBalance(balance)
+            log[logIndex] = guardarB['message']
+            logIndex += 1
+
         for vinculo in vinculos:
             vinc_identificacion = vinculo["VINC_IDENTIFICACION"]
             tivi_codigo = vinculo["TIVI_CODIGO"]
-            vinculo['VIN_FECHA_INGRESA'] = d1
+            vinculo['VIN_FECHA_INGRESA'] = clie_fecha_creacion
             # Validar que el vínculo enviado no esté registrado para el Cliente
             vinculoExistente = Vinculo.objects.using('clientes').filter(CLIE_CODIGO = clie_codigo, VINC_IDENTIFICACION = vinc_identificacion).first()
             if vinculoExistente is None:
@@ -442,4 +454,4 @@ class CLIENTESView(APIView):
                 logIndex += 1
 
         #Fin Validar-Cliente
-        return Response({"status": status.HTTP_200_OK, "log": log})
+        return Response({"status": status.HTTP_200_OK, "log": log}, status = status.HTTP_200_OK)
