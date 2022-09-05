@@ -274,7 +274,7 @@ class TipoClase(models.Model):
 
 class TipoRol(models.Model):
     TIRO_CODIGO = models.CharField(max_length = 2, primary_key = True)
-    TIROL_DESCRIPCIÒN = models.CharField(max_length = 50)
+    TIROL_DESCRIPCION = models.CharField(max_length = 50)
 
     class Meta:
         db_table = 'TIPO_ROL'
