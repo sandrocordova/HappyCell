@@ -9,11 +9,21 @@ from rest_framework import status
 from apps.apihc.functions import actualizarDireccion, actualizarTelefono, guardarDireccion, guardarTelefono, validarDireccion, validarTelefono
 from apps.apihc.models import Cliente, Direccion, Telefono # Manejo de Status
 from apps.apihc.serializers import DireccionSerializer, TelefonoSerializer
+from apps.catalog.models import TipoDireccion
+from apps.catalog.serializer import TipoDireccionSerializer
 
 class direccionSearch(APIView):
     def post(self, request):
         clienteId = request.data['clie_codigo']
         direccionRetornada = Direccion.objects.using('clientes').filter(CLIE_CODIGO=clienteId).all()
+        
+        consulta = TipoDireccion.objects.using('clientes').all()
+        profesionesSerializer = TipoDireccionSerializer(consulta, many = True)
+        post2 =  Direccion.objects.using('clientes').filter(CLIE_CODIGO=clienteId).values_list("DIRE_DESCRIPCION").union(TipoDireccion.objects.using('clientes').all().values_list("TIDE_DESCRIPCION"))
+        #post2 =  Direccion.objects.using('clientes').filter(CLIE_CODIGO=clienteId).filter(DIRE_DESCRIPCION=TipoDireccion.objects.using('clientes').all().values_list("TIDE_DESCRIPCION"))
+        #post2 =  Direccion.objects.using('clientes').filter(CLIE_CODIGO=clienteId).annotate(ejemplo = TipoDireccion.objects.using('clientes').all().values_list("TIDE_DESCRIPCION"))
+        print(post2)
+        print("----------------------")
         direcciones = []
         if direccionRetornada:
             for direccion in direccionRetornada:
@@ -21,6 +31,7 @@ class direccionSearch(APIView):
                     direcciones.append(direccion)
             serializer_cliente = DireccionSerializer(direcciones, many=True)
             return Response(serializer_cliente.data)
+        
         return Response("El cliente no tiene direcciones registradas", status=status.HTTP_400_BAD_REQUEST)
 
 def list_contains(arreglo,objeto):
