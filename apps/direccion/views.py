@@ -16,23 +16,23 @@ class direccionSearch(APIView):
     def post(self, request):
         clienteId = request.data['clie_codigo']
         direccionRetornada = Direccion.objects.using('clientes').filter(CLIE_CODIGO=clienteId).all()
-        
-        consulta = TipoDireccion.objects.using('clientes').all()
-        profesionesSerializer = TipoDireccionSerializer(consulta, many = True)
-        post2 =  Direccion.objects.using('clientes').filter(CLIE_CODIGO=clienteId).values_list("DIRE_DESCRIPCION").union(TipoDireccion.objects.using('clientes').all().values_list("TIDE_DESCRIPCION"))
-        #post2 =  Direccion.objects.using('clientes').filter(CLIE_CODIGO=clienteId).filter(DIRE_DESCRIPCION=TipoDireccion.objects.using('clientes').all().values_list("TIDE_DESCRIPCION"))
-        #post2 =  Direccion.objects.using('clientes').filter(CLIE_CODIGO=clienteId).annotate(ejemplo = TipoDireccion.objects.using('clientes').all().values_list("TIDE_DESCRIPCION"))
-        print(post2)
-        print("----------------------")
         direcciones = []
         if direccionRetornada:
             for direccion in direccionRetornada:
-                if not direcciones or not list_contains(direcciones,direccion.TIDE_CODIGO):
+                if not direcciones:
                     direcciones.append(direccion)
+                else: 
+                    flag = True
+                    for index, item in enumerate(direcciones):
+                        if int(item.TIDE_CODIGO) == int(direccion.TIDE_CODIGO):
+                            flag = False
+                            if int(direccion.DIRE_CODIGO) >= int(item.DIRE_CODIGO):
+                                direcciones[index]=direccion
+                                break
+                    if flag: direcciones.append(direccion)
             serializer_cliente = DireccionSerializer(direcciones, many=True)
-            return Response(serializer_cliente.data)
-        
-        return Response("El cliente no tiene direcciones registradas", status=status.HTTP_400_BAD_REQUEST)
+            return Response({"status":status.HTTP_200_OK, "data":serializer_cliente.data})
+        return Response({"status":status.HTTP_400_BAD_REQUEST,"message":"El cliente no tiene direcciones registradas"})
 
 def list_contains(arreglo,objeto):
     for item in arreglo:        
@@ -44,8 +44,7 @@ class telefonoSearch(APIView):
     def post(self, request):
         clienteId = request.data['clie_codigo']
         direccionId = request.data['dire_codigo']
-        telefonoRetornado = Telefono.objects.using('clientes').filter(
-            DIRE_CODIGO=direccionId, CLIE_CODIGO=clienteId).all()
+        telefonoRetornado = Telefono.objects.using('clientes').filter(DIRE_CODIGO=direccionId, CLIE_CODIGO=clienteId).all()
         if telefonoRetornado:
             serializer_cliente = TelefonoSerializer(telefonoRetornado, many=True)
             return Response(serializer_cliente.data, status=status.HTTP_200_OK)
