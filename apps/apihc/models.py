@@ -97,18 +97,6 @@ class Cliente(models.Model):
     prov_codigo	= models.CharField(max_length =	3, null = True)
     cant_codigo	= models.CharField(max_length =	5, null = True)
     parr_codigo	= models.CharField(max_length =	5, null = True)
-    CLIE_PRIMER_ATRASO = models.PositiveIntegerField()
-    CLIE_SEGUNDO_ATRASO = models.PositiveIntegerField()
-    CLIE_ATRASO_PROMEDIO = models.PositiveIntegerField()
-    CLIE_PAGOS_TOTALES = models.PositiveIntegerField()
-    CLIE_ANTIGUEDAD = models.PositiveIntegerField()
-    CLIE_CUPO_UTILIZADO = models.PositiveIntegerField()
-    CLIE_CUPO_ASIGNADO = models.PositiveIntegerField()
-    CLIE_ATRASO_MAXIMO = models.PositiveIntegerField()
-    CLIE_OPER_VIGENTES = models.PositiveIntegerField()
-    CLIE_OPER_ANULADAS = models.PositiveIntegerField()
-    CLIE_OPER_NOANULADAS = models.PositiveIntegerField()
-    CLIE_OPER_CASTIGADAS = models.PositiveIntegerField()
 
     class Meta:
         db_table = "CLIENTE"

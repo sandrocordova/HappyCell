@@ -40,6 +40,7 @@ class Cliente(models.Model):
     CLIE_OPER_ANULADAS = models.PositiveIntegerField()
     CLIE_OPER_NOANULADAS = models.PositiveIntegerField()
     CLIE_OPER_CASTIGADAS = models.PositiveIntegerField()
+    CLIE_MESES_ULTIMA_CANCELACION = models.PositiveIntegerField()
     
     class Meta:
         db_table = "cliente"

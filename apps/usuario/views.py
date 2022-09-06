@@ -16,9 +16,9 @@ class getToken(APIView):
     def post(self, request):
         headers = request.headers
         if 'User' not in headers:
-            raise AuthenticationFailed('¡Envía un Usuario!')
+            raise AuthenticationFailed({'status': status.HTTP_400_BAD_REQUEST,'message':'¡Envía un Usuario!'})
         if 'Password' not in headers:
-            raise AuthenticationFailed('¡Envía una Contraseña!')
+            raise AuthenticationFailed({'status': status.HTTP_400_BAD_REQUEST,'message':'¡Envía una Contraseña!'})
             
         basicTokenEncrypt = headers['User']
         passwordEncrypt = headers['Password']
@@ -30,10 +30,10 @@ class getToken(APIView):
         usuario = Usuario.objects.filter(USUA_LOGIN=usua_login).first()
 
         if usuario is None:
-            raise AuthenticationFailed('Usuario no encontrado')
+            raise AuthenticationFailed({'status': status.HTTP_400_BAD_REQUEST,'message':'Usuario no encontrado'})
         
         if not usuario.USUA_CLAVE.__eq__(password_login):
-            raise AuthenticationFailed('Contraseña incorrecta')
+            raise AuthenticationFailed({'status': status.HTTP_400_BAD_REQUEST,'message':'Contraseña incorrecta'})
         
         payload = {
             'id': usuario.USUA_LOGIN,
@@ -82,9 +82,8 @@ class getToken(APIView):
                 response.data = {
                         'jwt': token,
                         'status': status.HTTP_200_OK,
-                        'message': "Response exitoso",
+                        'message': "Respuesta exitosa",
                         'data': json_response
-                        #'User': usua_login
                     }
                 return response
             else: message =  "El usuario no tiene acceso a menús"
@@ -92,9 +91,8 @@ class getToken(APIView):
 
         response.data = {
             'jwt': token,
-            'status': status.HTTP_400_BAD_REQUEST,
+            'status': status.HTTP_200_OK,
             'message': message
-            #'User': usua_login
         }
 
         return response
